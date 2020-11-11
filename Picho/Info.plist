@@ -49,6 +49,10 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Reading data just for a test.</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Writing data just for a test.</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
