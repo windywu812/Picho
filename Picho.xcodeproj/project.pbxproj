@@ -27,11 +27,29 @@
 		23FEBA10255BDB48001EA146 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA0F255BDB48001EA146 /* CoreDataService.swift */; };
 		23FEBA13255BDB50001EA146 /* HealtKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA12255BDB50001EA146 /* HealtKitService.swift */; };
 		23FEBA16255BDB55001EA146 /* UserDefaultService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA15255BDB55001EA146 /* UserDefaultService.swift */; };
+		23FEBA1D255BDBB4001EA146 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA1C255BDBB4001EA146 /* UIView+Extensions.swift */; };
+		23FEBA21255BDBBB001EA146 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA20255BDBBB001EA146 /* Date+Extensions.swift */; };
+		23FEBA24255BDBC2001EA146 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA23255BDBC2001EA146 /* Array+Extensions.swift */; };
+		23FEBA27255BDBCA001EA146 /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA26255BDBCA001EA146 /* UILabel+Extensions.swift */; };
+		23FEBA31255BDC7A001EA146 /* MainProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA30255BDC7A001EA146 /* MainProgressView.swift */; };
+		23FEBA34255BDC81001EA146 /* HorizontalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA33255BDC81001EA146 /* HorizontalView.swift */; };
+		23FEBA37255BDC87001EA146 /* MealTodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA36255BDC87001EA146 /* MealTodayView.swift */; };
+		23FEBA3B255BDCA6001EA146 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA3A255BDCA5001EA146 /* CircularProgressView.swift */; };
+		23FEBA3F255BDCAE001EA146 /* SmallCircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA3E255BDCAE001EA146 /* SmallCircularProgressView.swift */; };
+		23FEBA42255BDCB3001EA146 /* MealCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA41255BDCB3001EA146 /* MealCellView.swift */; };
+		23FEBA46255BDCBC001EA146 /* PichoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA45255BDCBC001EA146 /* PichoCardView.swift */; };
+		23FEBA4D255BDD49001EA146 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA4C255BDD49001EA146 /* ProfileViewModel.swift */; };
+		23FEBA50255BDD51001EA146 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA4F255BDD51001EA146 /* ProfileViewController.swift */; };
+		23FEBA53255BDD59001EA146 /* Value1Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA52255BDD59001EA146 /* Value1Cell.swift */; };
+		23FEBA56255BDD75001EA146 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA55255BDD75001EA146 /* HistoryViewController.swift */; };
+		23FEBA59255BDD90001EA146 /* FoodDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA58255BDD90001EA146 /* FoodDetailScreen.swift */; };
+		23FEBA5C255BDDB2001EA146 /* FoodInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA5B255BDDB2001EA146 /* FoodInputViewController.swift */; };
+		23FEBA5F255BDDE6001EA146 /* NSAttributedString+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA5E255BDDE6001EA146 /* NSAttributedString+Extensions.swift */; };
+		23FEBA62255BDF3A001EA146 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA61255BDF3A001EA146 /* NotificationViewController.swift */; };
 		6BE5482A823830922085C9A8 /* Pods_Picho.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 047BD003AF371FA6292C078C /* Pods_Picho.framework */; };
 		A28A5AF7255BD410007E66FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A5AF6255BD410007E66FA /* AppDelegate.swift */; };
 		A28A5AF9255BD410007E66FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A5AF8255BD410007E66FA /* SceneDelegate.swift */; };
-		A28A5AFB255BD410007E66FA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A5AFA255BD410007E66FA /* ViewController.swift */; };
-		A28A5AFE255BD410007E66FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A28A5AFC255BD410007E66FA /* Main.storyboard */; };
+		A28A5AFB255BD410007E66FA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A5AFA255BD410007E66FA /* MainViewController.swift */; };
 		A28A5B01255BD410007E66FA /* Picho.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A28A5AFF255BD410007E66FA /* Picho.xcdatamodeld */; };
 		A28A5B03255BD412007E66FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A28A5B02255BD412007E66FA /* Assets.xcassets */; };
 		A28A5B06255BD412007E66FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A28A5B04255BD412007E66FA /* LaunchScreen.storyboard */; };
@@ -59,12 +77,30 @@
 		23FEBA0F255BDB48001EA146 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		23FEBA12255BDB50001EA146 /* HealtKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealtKitService.swift; sourceTree = "<group>"; };
 		23FEBA15255BDB55001EA146 /* UserDefaultService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultService.swift; sourceTree = "<group>"; };
+		23FEBA1C255BDBB4001EA146 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		23FEBA20255BDBBB001EA146 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		23FEBA23255BDBC2001EA146 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
+		23FEBA26255BDBCA001EA146 /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
+		23FEBA30255BDC7A001EA146 /* MainProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProgressView.swift; sourceTree = "<group>"; };
+		23FEBA33255BDC81001EA146 /* HorizontalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalView.swift; sourceTree = "<group>"; };
+		23FEBA36255BDC87001EA146 /* MealTodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealTodayView.swift; sourceTree = "<group>"; };
+		23FEBA3A255BDCA5001EA146 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
+		23FEBA3E255BDCAE001EA146 /* SmallCircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCircularProgressView.swift; sourceTree = "<group>"; };
+		23FEBA41255BDCB3001EA146 /* MealCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealCellView.swift; sourceTree = "<group>"; };
+		23FEBA45255BDCBC001EA146 /* PichoCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PichoCardView.swift; sourceTree = "<group>"; };
+		23FEBA4C255BDD49001EA146 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		23FEBA4F255BDD51001EA146 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		23FEBA52255BDD59001EA146 /* Value1Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Value1Cell.swift; sourceTree = "<group>"; };
+		23FEBA55255BDD75001EA146 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		23FEBA58255BDD90001EA146 /* FoodDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetailScreen.swift; sourceTree = "<group>"; };
+		23FEBA5B255BDDB2001EA146 /* FoodInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodInputViewController.swift; sourceTree = "<group>"; };
+		23FEBA5E255BDDE6001EA146 /* NSAttributedString+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Extensions.swift"; sourceTree = "<group>"; };
+		23FEBA61255BDF3A001EA146 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		49A721B55AC962597415D463 /* Pods-Picho.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Picho.release.xcconfig"; path = "Target Support Files/Pods-Picho/Pods-Picho.release.xcconfig"; sourceTree = "<group>"; };
 		A28A5AF3255BD410007E66FA /* Picho.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Picho.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A28A5AF6255BD410007E66FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A28A5AF8255BD410007E66FA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A28A5AFA255BD410007E66FA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		A28A5AFD255BD410007E66FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A28A5AFA255BD410007E66FA /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		A28A5B00255BD410007E66FA /* Picho.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Picho.xcdatamodel; sourceTree = "<group>"; };
 		A28A5B02255BD412007E66FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A28A5B05255BD412007E66FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -150,6 +186,96 @@
 			name = Services;
 			sourceTree = "<group>";
 		};
+		23FEBA1B255BDBA9001EA146 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				23FEBA1C255BDBB4001EA146 /* UIView+Extensions.swift */,
+				23FEBA20255BDBBB001EA146 /* Date+Extensions.swift */,
+				23FEBA23255BDBC2001EA146 /* Array+Extensions.swift */,
+				23FEBA26255BDBCA001EA146 /* UILabel+Extensions.swift */,
+				23FEBA5E255BDDE6001EA146 /* NSAttributedString+Extensions.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		23FEBA29255BDBF2001EA146 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				23FEBA2A255BDC09001EA146 /* MainScreen */,
+				23FEBA48255BDCEA001EA146 /* FoodInputScreen */,
+				23FEBA49255BDCFE001EA146 /* FoodDetailScreen */,
+				23FEBA4A255BDD06001EA146 /* HistoryScreen */,
+				23FEBA4B255BDD0E001EA146 /* ProfileScreen */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		23FEBA2A255BDC09001EA146 /* MainScreen */ = {
+			isa = PBXGroup;
+			children = (
+				A28A5AFA255BD410007E66FA /* MainViewController.swift */,
+				23FEBA2F255BDC73001EA146 /* Components */,
+				23FEBA39255BDC8A001EA146 /* ReusableViews */,
+			);
+			name = MainScreen;
+			sourceTree = "<group>";
+		};
+		23FEBA2F255BDC73001EA146 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				23FEBA30255BDC7A001EA146 /* MainProgressView.swift */,
+				23FEBA33255BDC81001EA146 /* HorizontalView.swift */,
+				23FEBA36255BDC87001EA146 /* MealTodayView.swift */,
+			);
+			name = Components;
+			sourceTree = "<group>";
+		};
+		23FEBA39255BDC8A001EA146 /* ReusableViews */ = {
+			isa = PBXGroup;
+			children = (
+				23FEBA3A255BDCA5001EA146 /* CircularProgressView.swift */,
+				23FEBA3E255BDCAE001EA146 /* SmallCircularProgressView.swift */,
+				23FEBA41255BDCB3001EA146 /* MealCellView.swift */,
+				23FEBA45255BDCBC001EA146 /* PichoCardView.swift */,
+			);
+			name = ReusableViews;
+			sourceTree = "<group>";
+		};
+		23FEBA48255BDCEA001EA146 /* FoodInputScreen */ = {
+			isa = PBXGroup;
+			children = (
+				23FEBA5B255BDDB2001EA146 /* FoodInputViewController.swift */,
+			);
+			name = FoodInputScreen;
+			sourceTree = "<group>";
+		};
+		23FEBA49255BDCFE001EA146 /* FoodDetailScreen */ = {
+			isa = PBXGroup;
+			children = (
+				23FEBA58255BDD90001EA146 /* FoodDetailScreen.swift */,
+			);
+			name = FoodDetailScreen;
+			sourceTree = "<group>";
+		};
+		23FEBA4A255BDD06001EA146 /* HistoryScreen */ = {
+			isa = PBXGroup;
+			children = (
+				23FEBA55255BDD75001EA146 /* HistoryViewController.swift */,
+			);
+			name = HistoryScreen;
+			sourceTree = "<group>";
+		};
+		23FEBA4B255BDD0E001EA146 /* ProfileScreen */ = {
+			isa = PBXGroup;
+			children = (
+				23FEBA4C255BDD49001EA146 /* ProfileViewModel.swift */,
+				23FEBA4F255BDD51001EA146 /* ProfileViewController.swift */,
+				23FEBA52255BDD59001EA146 /* Value1Cell.swift */,
+				23FEBA61255BDF3A001EA146 /* NotificationViewController.swift */,
+			);
+			name = ProfileScreen;
+			sourceTree = "<group>";
+		};
 		A28A5AEA255BD410007E66FA = {
 			isa = PBXGroup;
 			children = (
@@ -175,8 +301,8 @@
 				23FEB9FC255BDAED001EA146 /* Base */,
 				23FEBA07255BDB16001EA146 /* Constants */,
 				23FEBA09255BDB2D001EA146 /* Services */,
-				A28A5AFA255BD410007E66FA /* ViewController.swift */,
-				A28A5AFC255BD410007E66FA /* Main.storyboard */,
+				23FEBA1B255BDBA9001EA146 /* Extensions */,
+				23FEBA29255BDBF2001EA146 /* ViewControllers */,
 				A28A5B02255BD412007E66FA /* Assets.xcassets */,
 				A28A5B04255BD412007E66FA /* LaunchScreen.storyboard */,
 				A28A5B07255BD412007E66FA /* Info.plist */,
@@ -263,7 +389,6 @@
 			files = (
 				A28A5B06255BD412007E66FA /* LaunchScreen.storyboard in Resources */,
 				A28A5B03255BD412007E66FA /* Assets.xcassets in Resources */,
-				A28A5AFE255BD410007E66FA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,28 +441,47 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23FEBA5C255BDDB2001EA146 /* FoodInputViewController.swift in Sources */,
 				23FEB9EE255BDA8F001EA146 /* CharacterSet+Utils.swift in Sources */,
 				23FEB9F7255BDAA2001EA146 /* String+Utils.swift in Sources */,
+				23FEBA1D255BDBB4001EA146 /* UIView+Extensions.swift in Sources */,
+				23FEBA21255BDBBB001EA146 /* Date+Extensions.swift in Sources */,
+				23FEBA62255BDF3A001EA146 /* NotificationViewController.swift in Sources */,
 				23FEBA05255BDB10001EA146 /* EatingTime.swift in Sources */,
 				23FEB9EB255BDA85001EA146 /* Search.swift in Sources */,
 				23FEB9D6255BDA49001EA146 /* FatSecretCredentials.swift in Sources */,
-				A28A5AFB255BD410007E66FA /* ViewController.swift in Sources */,
+				23FEBA31255BDC7A001EA146 /* MainProgressView.swift in Sources */,
+				A28A5AFB255BD410007E66FA /* MainViewController.swift in Sources */,
 				23FEBA10255BDB48001EA146 /* CoreDataService.swift in Sources */,
 				23FEB9F1255BDA94001EA146 /* Array+Utils.swift in Sources */,
 				23FEBA13255BDB50001EA146 /* HealtKitService.swift in Sources */,
+				23FEBA34255BDC81001EA146 /* HorizontalView.swift in Sources */,
 				23FEB9FE255BDAF3001EA146 /* AppCoordinator.swift in Sources */,
 				23FEB9DF255BDA72001EA146 /* SearchedFood.swift in Sources */,
+				23FEBA53255BDD59001EA146 /* Value1Cell.swift in Sources */,
+				23FEBA37255BDC87001EA146 /* MealTodayView.swift in Sources */,
 				23FEB9DC255BDA6C001EA146 /* APIKey.swift in Sources */,
 				23FEB9D2255BDA40001EA146 /* FatSecretClient.swift in Sources */,
 				23FEB9E8255BDA81001EA146 /* Food.swift in Sources */,
+				23FEBA59255BDD90001EA146 /* FoodDetailScreen.swift in Sources */,
 				23FEBA02255BDB06001EA146 /* Color.swift in Sources */,
 				23FEBA0C255BDB42001EA146 /* NetworkService.swift in Sources */,
 				23FEBA16255BDB55001EA146 /* UserDefaultService.swift in Sources */,
+				23FEBA3F255BDCAE001EA146 /* SmallCircularProgressView.swift in Sources */,
+				23FEBA24255BDBC2001EA146 /* Array+Extensions.swift in Sources */,
+				23FEBA27255BDBCA001EA146 /* UILabel+Extensions.swift in Sources */,
 				23FEB9F4255BDA9C001EA146 /* URLComponents+Utils.swift in Sources */,
 				A28A5B01255BD410007E66FA /* Picho.xcdatamodeld in Sources */,
+				23FEBA42255BDCB3001EA146 /* MealCellView.swift in Sources */,
+				23FEBA5F255BDDE6001EA146 /* NSAttributedString+Extensions.swift in Sources */,
+				23FEBA3B255BDCA6001EA146 /* CircularProgressView.swift in Sources */,
+				23FEBA56255BDD75001EA146 /* HistoryViewController.swift in Sources */,
 				23FEB9E2255BDA79001EA146 /* FatSecretError.swift in Sources */,
+				23FEBA4D255BDD49001EA146 /* ProfileViewModel.swift in Sources */,
 				23FEB9D9255BDA53001EA146 /* FatSecretParams.swift in Sources */,
+				23FEBA46255BDCBC001EA146 /* PichoCardView.swift in Sources */,
 				A28A5AF7255BD410007E66FA /* AppDelegate.swift in Sources */,
+				23FEBA50255BDD51001EA146 /* ProfileViewController.swift in Sources */,
 				23FEB9E5255BDA7D001EA146 /* Serving.swift in Sources */,
 				A28A5AF9255BD410007E66FA /* SceneDelegate.swift in Sources */,
 			);
@@ -346,14 +490,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		A28A5AFC255BD410007E66FA /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A28A5AFD255BD410007E66FA /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		A28A5B04255BD412007E66FA /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
