@@ -7,6 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		23FEB9D2255BDA40001EA146 /* FatSecretClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9D1255BDA40001EA146 /* FatSecretClient.swift */; };
+		23FEB9D6255BDA49001EA146 /* FatSecretCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9D5255BDA49001EA146 /* FatSecretCredentials.swift */; };
+		23FEB9D9255BDA53001EA146 /* FatSecretParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9D8255BDA53001EA146 /* FatSecretParams.swift */; };
+		23FEB9DC255BDA6C001EA146 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9DB255BDA6C001EA146 /* APIKey.swift */; };
+		23FEB9DF255BDA72001EA146 /* SearchedFood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9DE255BDA72001EA146 /* SearchedFood.swift */; };
+		23FEB9E2255BDA79001EA146 /* FatSecretError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9E1255BDA79001EA146 /* FatSecretError.swift */; };
+		23FEB9E5255BDA7D001EA146 /* Serving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9E4255BDA7D001EA146 /* Serving.swift */; };
+		23FEB9E8255BDA81001EA146 /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9E7255BDA81001EA146 /* Food.swift */; };
+		23FEB9EB255BDA85001EA146 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9EA255BDA85001EA146 /* Search.swift */; };
+		23FEB9EE255BDA8F001EA146 /* CharacterSet+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9ED255BDA8F001EA146 /* CharacterSet+Utils.swift */; };
+		23FEB9F1255BDA94001EA146 /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9F0255BDA94001EA146 /* Array+Utils.swift */; };
+		23FEB9F4255BDA9C001EA146 /* URLComponents+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9F3255BDA9C001EA146 /* URLComponents+Utils.swift */; };
+		23FEB9F7255BDAA2001EA146 /* String+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9F6255BDAA2001EA146 /* String+Utils.swift */; };
 		6BE5482A823830922085C9A8 /* Pods_Picho.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 047BD003AF371FA6292C078C /* Pods_Picho.framework */; };
 		A28A5AF7255BD410007E66FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A5AF6255BD410007E66FA /* AppDelegate.swift */; };
 		A28A5AF9255BD410007E66FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A5AF8255BD410007E66FA /* SceneDelegate.swift */; };
@@ -19,6 +32,19 @@
 
 /* Begin PBXFileReference section */
 		047BD003AF371FA6292C078C /* Pods_Picho.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Picho.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		23FEB9D1255BDA40001EA146 /* FatSecretClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FatSecretClient.swift; sourceTree = "<group>"; };
+		23FEB9D5255BDA49001EA146 /* FatSecretCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FatSecretCredentials.swift; sourceTree = "<group>"; };
+		23FEB9D8255BDA53001EA146 /* FatSecretParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FatSecretParams.swift; sourceTree = "<group>"; };
+		23FEB9DB255BDA6C001EA146 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		23FEB9DE255BDA72001EA146 /* SearchedFood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchedFood.swift; sourceTree = "<group>"; };
+		23FEB9E1255BDA79001EA146 /* FatSecretError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FatSecretError.swift; sourceTree = "<group>"; };
+		23FEB9E4255BDA7D001EA146 /* Serving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Serving.swift; sourceTree = "<group>"; };
+		23FEB9E7255BDA81001EA146 /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
+		23FEB9EA255BDA85001EA146 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
+		23FEB9ED255BDA8F001EA146 /* CharacterSet+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterSet+Utils.swift"; sourceTree = "<group>"; };
+		23FEB9F0255BDA94001EA146 /* Array+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Utils.swift"; sourceTree = "<group>"; };
+		23FEB9F3255BDA9C001EA146 /* URLComponents+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLComponents+Utils.swift"; sourceTree = "<group>"; };
+		23FEB9F6255BDAA2001EA146 /* String+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Utils.swift"; sourceTree = "<group>"; };
 		49A721B55AC962597415D463 /* Pods-Picho.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Picho.release.xcconfig"; path = "Target Support Files/Pods-Picho/Pods-Picho.release.xcconfig"; sourceTree = "<group>"; };
 		A28A5AF3255BD410007E66FA /* Picho.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Picho.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A28A5AF6255BD410007E66FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -44,6 +70,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		23FEB9D0255BDA35001EA146 /* FatSecretSwift */ = {
+			isa = PBXGroup;
+			children = (
+				23FEB9D1255BDA40001EA146 /* FatSecretClient.swift */,
+				23FEB9D5255BDA49001EA146 /* FatSecretCredentials.swift */,
+				23FEB9D8255BDA53001EA146 /* FatSecretParams.swift */,
+				23FEB9FA255BDAAE001EA146 /* Models */,
+				23FEB9F9255BDAA7001EA146 /* Extensions */,
+			);
+			name = FatSecretSwift;
+			sourceTree = "<group>";
+		};
+		23FEB9F9255BDAA7001EA146 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				23FEB9ED255BDA8F001EA146 /* CharacterSet+Utils.swift */,
+				23FEB9F0255BDA94001EA146 /* Array+Utils.swift */,
+				23FEB9F3255BDA9C001EA146 /* URLComponents+Utils.swift */,
+				23FEB9F6255BDAA2001EA146 /* String+Utils.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		23FEB9FA255BDAAE001EA146 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				23FEB9DB255BDA6C001EA146 /* APIKey.swift */,
+				23FEB9DE255BDA72001EA146 /* SearchedFood.swift */,
+				23FEB9E1255BDA79001EA146 /* FatSecretError.swift */,
+				23FEB9E4255BDA7D001EA146 /* Serving.swift */,
+				23FEB9E7255BDA81001EA146 /* Food.swift */,
+				23FEB9EA255BDA85001EA146 /* Search.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		A28A5AEA255BD410007E66FA = {
 			isa = PBXGroup;
 			children = (
@@ -65,6 +127,7 @@
 		A28A5AF5255BD410007E66FA /* Picho */ = {
 			isa = PBXGroup;
 			children = (
+				23FEB9D0255BDA35001EA146 /* FatSecretSwift */,
 				A28A5AF6255BD410007E66FA /* AppDelegate.swift */,
 				A28A5AF8255BD410007E66FA /* SceneDelegate.swift */,
 				A28A5AFA255BD410007E66FA /* ViewController.swift */,
@@ -208,9 +271,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23FEB9EE255BDA8F001EA146 /* CharacterSet+Utils.swift in Sources */,
+				23FEB9F7255BDAA2001EA146 /* String+Utils.swift in Sources */,
+				23FEB9EB255BDA85001EA146 /* Search.swift in Sources */,
+				23FEB9D6255BDA49001EA146 /* FatSecretCredentials.swift in Sources */,
 				A28A5AFB255BD410007E66FA /* ViewController.swift in Sources */,
+				23FEB9F1255BDA94001EA146 /* Array+Utils.swift in Sources */,
+				23FEB9DF255BDA72001EA146 /* SearchedFood.swift in Sources */,
+				23FEB9DC255BDA6C001EA146 /* APIKey.swift in Sources */,
+				23FEB9D2255BDA40001EA146 /* FatSecretClient.swift in Sources */,
+				23FEB9E8255BDA81001EA146 /* Food.swift in Sources */,
+				23FEB9F4255BDA9C001EA146 /* URLComponents+Utils.swift in Sources */,
 				A28A5B01255BD410007E66FA /* Picho.xcdatamodeld in Sources */,
+				23FEB9E2255BDA79001EA146 /* FatSecretError.swift in Sources */,
+				23FEB9D9255BDA53001EA146 /* FatSecretParams.swift in Sources */,
 				A28A5AF7255BD410007E66FA /* AppDelegate.swift in Sources */,
+				23FEB9E5255BDA7D001EA146 /* Serving.swift in Sources */,
 				A28A5AF9255BD410007E66FA /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
