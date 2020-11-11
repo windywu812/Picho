@@ -22,6 +22,7 @@ class HistoryViewController: UIViewController, ChartViewDelegate {
         super.viewDidLoad()
         
         setupChart()
+        navigationItem.title = "Progress"
     }
     
     private func setupChart() {

@@ -19,10 +19,9 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         navigationItem.title = "Profile"
-        navigationController?.navigationBar.prefersLargeTitles = true
-        
         setupView()
         setupTableView()
+        view.backgroundColor = Color.background
     }
     
     private func setupView() {
@@ -35,14 +34,14 @@ class ProfileViewController: UIViewController {
         view.addSubview(imageProfile)
         
         imageProfile.setConstraint(
-            topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 32,
+            topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 8,
             centerXAnchor: view.centerXAnchor,
             heighAnchorConstant: 120, widthAnchorConstant: 120)
         
         editButton = UIButton(type: .system)
         editButton.setAttributedTitle(NSAttributedString.bodyFont(text: "Edit", color: Color.green), for: .normal)
         editButton.layer.cornerRadius = 8
-        editButton.backgroundColor = #colorLiteral(red: 0.8556287885, green: 0.9158852696, blue: 0.9015760422, alpha: 1)
+        editButton.backgroundColor = Color.background
         view.addSubview(editButton)
         
         editButton.setConstraint(
@@ -125,12 +124,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 navigationController?.pushViewController(vc, animated: true)
             }
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        
-        navigationController?.navigationBar.prefersLargeTitles = false
     }
     
 }

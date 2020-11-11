@@ -123,7 +123,7 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
         if indexPath.row == 1 {
             cell.textLabel?.text = "Remind me at"
         }
-        
+        cell.imageView?.image = UIImage(systemName: "person")
         cell.selectionStyle = .none
         return cell
     }

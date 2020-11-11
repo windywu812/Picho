@@ -33,7 +33,6 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         
         navigationItem.title = "Today"
-        navigationController?.navigationBar.prefersLargeTitles = true
         
 //        checkUser()
         

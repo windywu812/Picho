@@ -10,23 +10,25 @@ import UIKit
 class AppCoordinator {
     
     private let window: UIWindow
-    private let tabBar: UITabBarController
-    
+    private var tabBar: UITabBarController!
     private var mainViewController: UINavigationController!
     private var historyViewController: UINavigationController!
     private var profileViewController: UINavigationController!
     
     init(window: UIWindow) {
         self.window = window
-        self.tabBar = UITabBarController()
     }
     
     func start() {
+        
+        FatSecretCredentials.setConsumerKey(APIKey.apiKey)
+        FatSecretCredentials.setSharedSecret(APIKey.apiSecret)
         
         setupHomeVC()
         setupHistoryVC()
         setupProfileVC()
         
+        tabBar = UITabBarController()
         tabBar.viewControllers = [
             mainViewController,
             historyViewController,
@@ -42,6 +44,7 @@ class AppCoordinator {
     
     private func setupHomeVC() {
         mainViewController = UINavigationController(rootViewController: MainViewController())
+        mainViewController.navigationBar.prefersLargeTitles = true
         mainViewController.tabBarItem = UITabBarItem(
             title: "Journal",
             image: UIImage(named: "journal"), tag: 0)
@@ -49,6 +52,7 @@ class AppCoordinator {
    
     private func setupHistoryVC() {
         historyViewController = UINavigationController(rootViewController: HistoryViewController())
+        historyViewController.navigationBar.prefersLargeTitles = true
         historyViewController.tabBarItem = UITabBarItem(
             title: "Progress",
             image: UIImage(named: "history"), tag: 1)
@@ -56,6 +60,7 @@ class AppCoordinator {
     
     private func setupProfileVC() {
         profileViewController = UINavigationController(rootViewController: ProfileViewController())
+        profileViewController.navigationBar.prefersLargeTitles = true
         profileViewController.tabBarItem = UITabBarItem(
             title: "Profile",
             image: UIImage(named: "Profile"), tag: 2)
