@@ -20,6 +20,13 @@
 		23FEB9F1255BDA94001EA146 /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9F0255BDA94001EA146 /* Array+Utils.swift */; };
 		23FEB9F4255BDA9C001EA146 /* URLComponents+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9F3255BDA9C001EA146 /* URLComponents+Utils.swift */; };
 		23FEB9F7255BDAA2001EA146 /* String+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9F6255BDAA2001EA146 /* String+Utils.swift */; };
+		23FEB9FE255BDAF3001EA146 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9FD255BDAF3001EA146 /* AppCoordinator.swift */; };
+		23FEBA02255BDB06001EA146 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA01255BDB06001EA146 /* Color.swift */; };
+		23FEBA05255BDB10001EA146 /* EatingTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA04255BDB10001EA146 /* EatingTime.swift */; };
+		23FEBA0C255BDB42001EA146 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA0B255BDB42001EA146 /* NetworkService.swift */; };
+		23FEBA10255BDB48001EA146 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA0F255BDB48001EA146 /* CoreDataService.swift */; };
+		23FEBA13255BDB50001EA146 /* HealtKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA12255BDB50001EA146 /* HealtKitService.swift */; };
+		23FEBA16255BDB55001EA146 /* UserDefaultService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA15255BDB55001EA146 /* UserDefaultService.swift */; };
 		6BE5482A823830922085C9A8 /* Pods_Picho.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 047BD003AF371FA6292C078C /* Pods_Picho.framework */; };
 		A28A5AF7255BD410007E66FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A5AF6255BD410007E66FA /* AppDelegate.swift */; };
 		A28A5AF9255BD410007E66FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A5AF8255BD410007E66FA /* SceneDelegate.swift */; };
@@ -45,6 +52,13 @@
 		23FEB9F0255BDA94001EA146 /* Array+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Utils.swift"; sourceTree = "<group>"; };
 		23FEB9F3255BDA9C001EA146 /* URLComponents+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLComponents+Utils.swift"; sourceTree = "<group>"; };
 		23FEB9F6255BDAA2001EA146 /* String+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Utils.swift"; sourceTree = "<group>"; };
+		23FEB9FD255BDAF3001EA146 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		23FEBA01255BDB06001EA146 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		23FEBA04255BDB10001EA146 /* EatingTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EatingTime.swift; sourceTree = "<group>"; };
+		23FEBA0B255BDB42001EA146 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		23FEBA0F255BDB48001EA146 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
+		23FEBA12255BDB50001EA146 /* HealtKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealtKitService.swift; sourceTree = "<group>"; };
+		23FEBA15255BDB55001EA146 /* UserDefaultService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultService.swift; sourceTree = "<group>"; };
 		49A721B55AC962597415D463 /* Pods-Picho.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Picho.release.xcconfig"; path = "Target Support Files/Pods-Picho/Pods-Picho.release.xcconfig"; sourceTree = "<group>"; };
 		A28A5AF3255BD410007E66FA /* Picho.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Picho.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A28A5AF6255BD410007E66FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +120,36 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
+		23FEB9FC255BDAED001EA146 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				A28A5AF6255BD410007E66FA /* AppDelegate.swift */,
+				A28A5AF8255BD410007E66FA /* SceneDelegate.swift */,
+				23FEB9FD255BDAF3001EA146 /* AppCoordinator.swift */,
+			);
+			name = Base;
+			sourceTree = "<group>";
+		};
+		23FEBA07255BDB16001EA146 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				23FEBA01255BDB06001EA146 /* Color.swift */,
+				23FEBA04255BDB10001EA146 /* EatingTime.swift */,
+			);
+			name = Constants;
+			sourceTree = "<group>";
+		};
+		23FEBA09255BDB2D001EA146 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				23FEBA0B255BDB42001EA146 /* NetworkService.swift */,
+				23FEBA0F255BDB48001EA146 /* CoreDataService.swift */,
+				23FEBA12255BDB50001EA146 /* HealtKitService.swift */,
+				23FEBA15255BDB55001EA146 /* UserDefaultService.swift */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
 		A28A5AEA255BD410007E66FA = {
 			isa = PBXGroup;
 			children = (
@@ -128,8 +172,9 @@
 			isa = PBXGroup;
 			children = (
 				23FEB9D0255BDA35001EA146 /* FatSecretSwift */,
-				A28A5AF6255BD410007E66FA /* AppDelegate.swift */,
-				A28A5AF8255BD410007E66FA /* SceneDelegate.swift */,
+				23FEB9FC255BDAED001EA146 /* Base */,
+				23FEBA07255BDB16001EA146 /* Constants */,
+				23FEBA09255BDB2D001EA146 /* Services */,
 				A28A5AFA255BD410007E66FA /* ViewController.swift */,
 				A28A5AFC255BD410007E66FA /* Main.storyboard */,
 				A28A5B02255BD412007E66FA /* Assets.xcassets */,
@@ -273,14 +318,21 @@
 			files = (
 				23FEB9EE255BDA8F001EA146 /* CharacterSet+Utils.swift in Sources */,
 				23FEB9F7255BDAA2001EA146 /* String+Utils.swift in Sources */,
+				23FEBA05255BDB10001EA146 /* EatingTime.swift in Sources */,
 				23FEB9EB255BDA85001EA146 /* Search.swift in Sources */,
 				23FEB9D6255BDA49001EA146 /* FatSecretCredentials.swift in Sources */,
 				A28A5AFB255BD410007E66FA /* ViewController.swift in Sources */,
+				23FEBA10255BDB48001EA146 /* CoreDataService.swift in Sources */,
 				23FEB9F1255BDA94001EA146 /* Array+Utils.swift in Sources */,
+				23FEBA13255BDB50001EA146 /* HealtKitService.swift in Sources */,
+				23FEB9FE255BDAF3001EA146 /* AppCoordinator.swift in Sources */,
 				23FEB9DF255BDA72001EA146 /* SearchedFood.swift in Sources */,
 				23FEB9DC255BDA6C001EA146 /* APIKey.swift in Sources */,
 				23FEB9D2255BDA40001EA146 /* FatSecretClient.swift in Sources */,
 				23FEB9E8255BDA81001EA146 /* Food.swift in Sources */,
+				23FEBA02255BDB06001EA146 /* Color.swift in Sources */,
+				23FEBA0C255BDB42001EA146 /* NetworkService.swift in Sources */,
+				23FEBA16255BDB55001EA146 /* UserDefaultService.swift in Sources */,
 				23FEB9F4255BDA9C001EA146 /* URLComponents+Utils.swift in Sources */,
 				A28A5B01255BD410007E66FA /* Picho.xcdatamodeld in Sources */,
 				23FEB9E2255BDA79001EA146 /* FatSecretError.swift in Sources */,
