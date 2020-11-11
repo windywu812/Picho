@@ -36,7 +36,6 @@
 		23FEBA37255BDC87001EA146 /* MealTodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA36255BDC87001EA146 /* MealTodayView.swift */; };
 		23FEBA3B255BDCA6001EA146 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA3A255BDCA5001EA146 /* CircularProgressView.swift */; };
 		23FEBA3F255BDCAE001EA146 /* SmallCircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA3E255BDCAE001EA146 /* SmallCircularProgressView.swift */; };
-		23FEBA42255BDCB3001EA146 /* MealCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA41255BDCB3001EA146 /* MealCellView.swift */; };
 		23FEBA46255BDCBC001EA146 /* PichoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA45255BDCBC001EA146 /* PichoCardView.swift */; };
 		23FEBA4D255BDD49001EA146 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA4C255BDD49001EA146 /* ProfileViewModel.swift */; };
 		23FEBA50255BDD51001EA146 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA4F255BDD51001EA146 /* ProfileViewController.swift */; };
@@ -46,6 +45,7 @@
 		23FEBA5C255BDDB2001EA146 /* FoodInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA5B255BDDB2001EA146 /* FoodInputViewController.swift */; };
 		23FEBA5F255BDDE6001EA146 /* NSAttributedString+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA5E255BDDE6001EA146 /* NSAttributedString+Extensions.swift */; };
 		23FEBA62255BDF3A001EA146 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA61255BDF3A001EA146 /* NotificationViewController.swift */; };
+		23FEBA69255BE00C001EA146 /* MealCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA68255BE00C001EA146 /* MealCellView.swift */; };
 		6BE5482A823830922085C9A8 /* Pods_Picho.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 047BD003AF371FA6292C078C /* Pods_Picho.framework */; };
 		A28A5AF7255BD410007E66FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A5AF6255BD410007E66FA /* AppDelegate.swift */; };
 		A28A5AF9255BD410007E66FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A5AF8255BD410007E66FA /* SceneDelegate.swift */; };
@@ -86,7 +86,6 @@
 		23FEBA36255BDC87001EA146 /* MealTodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealTodayView.swift; sourceTree = "<group>"; };
 		23FEBA3A255BDCA5001EA146 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		23FEBA3E255BDCAE001EA146 /* SmallCircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCircularProgressView.swift; sourceTree = "<group>"; };
-		23FEBA41255BDCB3001EA146 /* MealCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealCellView.swift; sourceTree = "<group>"; };
 		23FEBA45255BDCBC001EA146 /* PichoCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PichoCardView.swift; sourceTree = "<group>"; };
 		23FEBA4C255BDD49001EA146 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		23FEBA4F255BDD51001EA146 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -96,6 +95,7 @@
 		23FEBA5B255BDDB2001EA146 /* FoodInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodInputViewController.swift; sourceTree = "<group>"; };
 		23FEBA5E255BDDE6001EA146 /* NSAttributedString+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Extensions.swift"; sourceTree = "<group>"; };
 		23FEBA61255BDF3A001EA146 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		23FEBA68255BE00C001EA146 /* MealCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealCellView.swift; sourceTree = "<group>"; };
 		49A721B55AC962597415D463 /* Pods-Picho.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Picho.release.xcconfig"; path = "Target Support Files/Pods-Picho/Pods-Picho.release.xcconfig"; sourceTree = "<group>"; };
 		A28A5AF3255BD410007E66FA /* Picho.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Picho.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A28A5AF6255BD410007E66FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -235,8 +235,8 @@
 			children = (
 				23FEBA3A255BDCA5001EA146 /* CircularProgressView.swift */,
 				23FEBA3E255BDCAE001EA146 /* SmallCircularProgressView.swift */,
-				23FEBA41255BDCB3001EA146 /* MealCellView.swift */,
 				23FEBA45255BDCBC001EA146 /* PichoCardView.swift */,
+				23FEBA68255BE00C001EA146 /* MealCellView.swift */,
 			);
 			name = ReusableViews;
 			sourceTree = "<group>";
@@ -464,6 +464,7 @@
 				23FEB9D2255BDA40001EA146 /* FatSecretClient.swift in Sources */,
 				23FEB9E8255BDA81001EA146 /* Food.swift in Sources */,
 				23FEBA59255BDD90001EA146 /* FoodDetailScreen.swift in Sources */,
+				23FEBA69255BE00C001EA146 /* MealCellView.swift in Sources */,
 				23FEBA02255BDB06001EA146 /* Color.swift in Sources */,
 				23FEBA0C255BDB42001EA146 /* NetworkService.swift in Sources */,
 				23FEBA16255BDB55001EA146 /* UserDefaultService.swift in Sources */,
@@ -472,7 +473,6 @@
 				23FEBA27255BDBCA001EA146 /* UILabel+Extensions.swift in Sources */,
 				23FEB9F4255BDA9C001EA146 /* URLComponents+Utils.swift in Sources */,
 				A28A5B01255BD410007E66FA /* Picho.xcdatamodeld in Sources */,
-				23FEBA42255BDCB3001EA146 /* MealCellView.swift in Sources */,
 				23FEBA5F255BDDE6001EA146 /* NSAttributedString+Extensions.swift in Sources */,
 				23FEBA3B255BDCA6001EA146 /* CircularProgressView.swift in Sources */,
 				23FEBA56255BDD75001EA146 /* HistoryViewController.swift in Sources */,
