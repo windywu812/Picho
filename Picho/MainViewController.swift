@@ -35,11 +35,22 @@ class MainViewController: UIViewController {
         navigationItem.title = "Today"
         navigationController?.navigationBar.prefersLargeTitles = true
         
+        checkUser()
+        
         setupScrollView()
         setupMainProgress()
         setupPichoCard()
         setupActivity()
         setupMealTodayView()
+    }
+    
+    private func checkUser(){
+        if !UserDefaultService.hasLaunched {
+            //show onboarding
+            let vc = PageControlDescription()
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true)
+        }
     }
     
     private func setupScrollView() {
