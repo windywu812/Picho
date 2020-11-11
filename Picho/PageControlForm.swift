@@ -11,8 +11,12 @@ import UIKit
 class PageControlForm: UIPageViewController,UIPageViewControllerDataSource,UIPageViewControllerDelegate {
     
     var orderedViewControllers : [UIViewController] = []
-    
     var pageControl = UIPageControl()
+    
+    override init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey : Any]? = nil) {
+        super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,11 +44,10 @@ class PageControlForm: UIPageViewController,UIPageViewControllerDataSource,UIPag
         self.pageControl.currentPage = orderedViewControllers.lastIndex(of: pageContentViewController)!
     }
     func configurePageControl(){
-        pageControl = UIPageControl(frame: CGRect(x: 0, y: UIScreen.main.bounds.maxY - 50 , width: UIScreen.main.bounds.width, height: 50))
+        pageControl = UIPageControl(frame: CGRect(x: 0, y: UIScreen.main.bounds.maxY - 75, width: UIScreen.main.bounds.width, height: 50))
         pageControl.numberOfPages = orderedViewControllers.count
         pageControl.currentPage = 0
-        pageControl.tintColor = .black
-        pageControl.pageIndicatorTintColor = .white
+        pageControl.pageIndicatorTintColor = .tertiaryLabel
         pageControl.currentPageIndicatorTintColor = .black
         self.view.addSubview(pageControl)
     }
@@ -78,6 +81,8 @@ class PageControlForm: UIPageViewController,UIPageViewControllerDataSource,UIPag
         return orderedViewControllers[nextIndex]
     }
     
-    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
 }

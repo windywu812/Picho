@@ -65,7 +65,9 @@ class DescriptionScreen4: UIViewController {
     }
     
     @objc func handleStarted() {
-        present(PageControlForm(), animated: true, completion: nil)
+        let vc = PageControlForm()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
     }
 }
 

@@ -35,7 +35,7 @@ class MainViewController: UIViewController {
         navigationItem.title = "Today"
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        checkUser()
+//        checkUser()
         
         setupScrollView()
         setupMainProgress()
@@ -44,7 +44,7 @@ class MainViewController: UIViewController {
         setupMealTodayView()
     }
     
-    private func checkUser(){
+    private func checkUser() {
         if !UserDefaultService.hasLaunched {
             //show onboarding
             let vc = PageControlDescription()
