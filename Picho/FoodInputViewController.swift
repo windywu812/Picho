@@ -30,6 +30,7 @@ class FoodInputViewController: UIViewController {
         setupLayout()
         
         navigationItem.largeTitleDisplayMode = .never
+        title = timeLabel
     }
     
     private func setupView() {
@@ -96,7 +97,7 @@ class FoodInputViewController: UIViewController {
 //            )
 
         tableView.setConstraint(
-            topAnchor: mainStack.bottomAnchor, topAnchorConstant: 16,
+            topAnchor: mainStack.bottomAnchor, topAnchorConstant: 24,
             bottomAnchor: view.safeAreaLayoutGuide.bottomAnchor, bottomAnchorConstant: 8,
             leadingAnchor: view.leadingAnchor,
             trailingAnchor: view.trailingAnchor

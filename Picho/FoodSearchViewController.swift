@@ -57,8 +57,8 @@ class FoodSearchViewController: UIViewController {
     private func setupLayout() {
         searchBar.setConstraint(
             topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 16,
-            leadingAnchor: view.safeAreaLayoutGuide.leadingAnchor, leadingAnchorConstant: 10,
-            trailingAnchor: view.safeAreaLayoutGuide.trailingAnchor, trailingAnchorConstant: -10
+            leadingAnchor: view.safeAreaLayoutGuide.leadingAnchor, leadingAnchorConstant: 12,
+            trailingAnchor: view.safeAreaLayoutGuide.trailingAnchor, trailingAnchorConstant: -11
         )
         
         segmentedControl.setConstraint(

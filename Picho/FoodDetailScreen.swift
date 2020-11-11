@@ -102,6 +102,7 @@ class FoodDetailScreen: UITableViewController {
         
         tableView.register(DetailCell.self, forCellReuseIdentifier: DetailCell.reuseIdentifier)
         tableView.allowsSelection = false
+        tableView.showsVerticalScrollIndicator = false
     }
     
     private func setupLayout() {
@@ -112,20 +113,18 @@ class FoodDetailScreen: UITableViewController {
         calorieHeader.addSubview(calorieStack)
         
         calorieStack.setConstraint(
-            topAnchor: calorieHeader.layoutMarginsGuide.topAnchor,
-            bottomAnchor: calorieHeader.layoutMarginsGuide.bottomAnchor,
-            leadingAnchor: calorieHeader.layoutMarginsGuide.leadingAnchor
-        )
+            topAnchor: calorieHeader.topAnchor, topAnchorConstant: 16,
+            bottomAnchor: calorieHeader.bottomAnchor, bottomAnchorConstant: -16,
+            leadingAnchor: calorieHeader.leadingAnchor, leadingAnchorConstant: 18)
 
         nutritionLabel.setConstraint(
             topAnchor: nutritionHeader.layoutMarginsGuide.topAnchor,
-            leadingAnchor: nutritionHeader.layoutMarginsGuide.leadingAnchor
-        )
+            leadingAnchor: nutritionHeader.layoutMarginsGuide.leadingAnchor, leadingAnchorConstant: 12)
 
         servingLabel.setConstraint(
             topAnchor: nutritionLabel.bottomAnchor, topAnchorConstant: 8,
             bottomAnchor: nutritionHeader.bottomAnchor, bottomAnchorConstant: -8,
-            trailingAnchor: nutritionHeader.trailingAnchor, trailingAnchorConstant: -10)
+            trailingAnchor: nutritionHeader.trailingAnchor, trailingAnchorConstant: -20)
     }
     
     private func setupFavorite() {

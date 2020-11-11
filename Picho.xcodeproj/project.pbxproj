@@ -21,7 +21,6 @@
 		2381F794255C057D008004DE /* UITextfield+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2381F793255C057D008004DE /* UITextfield+Extensions.swift */; };
 		238C9405255BEB0C00591791 /* FoodSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238C9404255BEB0C00591791 /* FoodSearchViewController.swift */; };
 		238C9409255BEB1900591791 /* FoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238C9408255BEB1900591791 /* FoodCell.swift */; };
-		238C940F255BEBA600591791 /* HorizontalRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238C940E255BEBA600591791 /* HorizontalRow.swift */; };
 		238C9412255BEBAF00591791 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238C9411255BEBAF00591791 /* DetailCell.swift */; };
 		238C9417255BEC2D00591791 /* StringOptional+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238C9416255BEC2D00591791 /* StringOptional+Extensions.swift */; };
 		23FEB9D2255BDA40001EA146 /* FatSecretClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9D1255BDA40001EA146 /* FatSecretClient.swift */; };
@@ -88,7 +87,6 @@
 		2381F793255C057D008004DE /* UITextfield+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextfield+Extensions.swift"; sourceTree = "<group>"; };
 		238C9404255BEB0C00591791 /* FoodSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSearchViewController.swift; sourceTree = "<group>"; };
 		238C9408255BEB1900591791 /* FoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCell.swift; sourceTree = "<group>"; };
-		238C940E255BEBA600591791 /* HorizontalRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalRow.swift; sourceTree = "<group>"; };
 		238C9411255BEBAF00591791 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
 		238C9416255BEC2D00591791 /* StringOptional+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StringOptional+Extensions.swift"; sourceTree = "<group>"; };
 		23FEB9D1255BDA40001EA146 /* FatSecretClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FatSecretClient.swift; sourceTree = "<group>"; };
@@ -349,7 +347,6 @@
 			isa = PBXGroup;
 			children = (
 				23FEBA58255BDD90001EA146 /* FoodDetailScreen.swift */,
-				238C940E255BEBA600591791 /* HorizontalRow.swift */,
 				238C9414255BEBB500591791 /* Cells */,
 			);
 			name = FoodDetailScreen;
@@ -570,7 +567,6 @@
 				23FEB9DC255BDA6C001EA146 /* APIKey.swift in Sources */,
 				23FEB9D2255BDA40001EA146 /* FatSecretClient.swift in Sources */,
 				23FEB9E8255BDA81001EA146 /* Food.swift in Sources */,
-				238C940F255BEBA600591791 /* HorizontalRow.swift in Sources */,
 				2381F775255C03DF008004DE /* FormScreen3.swift in Sources */,
 				23FEBA59255BDD90001EA146 /* FoodDetailScreen.swift in Sources */,
 				23FEBA69255BE00C001EA146 /* MealCellView.swift in Sources */,
