@@ -18,6 +18,9 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.title = "Profile"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
         setupView()
         setupTableView()
     }

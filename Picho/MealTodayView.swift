@@ -37,16 +37,16 @@ class MealsTodayView: UIView {
         
         title.setFont(text: "Meals Today", size: 22, weight: .bold)
         
-        breakFastCard = MealCellView(iconImage: "breakfast", title: "Breakfast", buttonText: "Add Breakfast")
+        breakFastCard = MealCellView(iconImage: "breakfast", title: "Breakfast", buttonText: "Add Breakfast", rootView: rootView)
         breakFastCard.addGestureRecognizer(tapBreakfast)
         
-        lunchCard = MealCellView(iconImage: "lunch", title: "Lunch", buttonText: "Add Lunch")
+        lunchCard = MealCellView(iconImage: "lunch", title: "Lunch", buttonText: "Add Lunch", rootView: rootView)
         lunchCard.addGestureRecognizer(tapLunch)
         
-        dinnerCard = MealCellView(iconImage: "dinner", title: "Dinner", buttonText: "Add Dinner")
+        dinnerCard = MealCellView(iconImage: "dinner", title: "Dinner", buttonText: "Add Dinner", rootView: rootView)
         dinnerCard.addGestureRecognizer(tapDinner)
         
-        snackCard = MealCellView(iconImage: "lunch", title: "Snacks", buttonText: "Add Snacks")
+        snackCard = MealCellView(iconImage: "lunch", title: "Snacks", buttonText: "Add Snacks", rootView: rootView)
         snackCard.addGestureRecognizer(tapSnack)
         
         addSubview(title)

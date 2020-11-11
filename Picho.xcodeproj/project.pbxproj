@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		238C9405255BEB0C00591791 /* FoodSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238C9404255BEB0C00591791 /* FoodSearchViewController.swift */; };
+		238C9409255BEB1900591791 /* FoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238C9408255BEB1900591791 /* FoodCell.swift */; };
+		238C940F255BEBA600591791 /* HorizontalRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238C940E255BEBA600591791 /* HorizontalRow.swift */; };
+		238C9412255BEBAF00591791 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238C9411255BEBAF00591791 /* DetailCell.swift */; };
+		238C9417255BEC2D00591791 /* StringOptional+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238C9416255BEC2D00591791 /* StringOptional+Extensions.swift */; };
 		23FEB9D2255BDA40001EA146 /* FatSecretClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9D1255BDA40001EA146 /* FatSecretClient.swift */; };
 		23FEB9D6255BDA49001EA146 /* FatSecretCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9D5255BDA49001EA146 /* FatSecretCredentials.swift */; };
 		23FEB9D9255BDA53001EA146 /* FatSecretParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9D8255BDA53001EA146 /* FatSecretParams.swift */; };
@@ -57,6 +62,11 @@
 
 /* Begin PBXFileReference section */
 		047BD003AF371FA6292C078C /* Pods_Picho.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Picho.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		238C9404255BEB0C00591791 /* FoodSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSearchViewController.swift; sourceTree = "<group>"; };
+		238C9408255BEB1900591791 /* FoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCell.swift; sourceTree = "<group>"; };
+		238C940E255BEBA600591791 /* HorizontalRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalRow.swift; sourceTree = "<group>"; };
+		238C9411255BEBAF00591791 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
+		238C9416255BEC2D00591791 /* StringOptional+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StringOptional+Extensions.swift"; sourceTree = "<group>"; };
 		23FEB9D1255BDA40001EA146 /* FatSecretClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FatSecretClient.swift; sourceTree = "<group>"; };
 		23FEB9D5255BDA49001EA146 /* FatSecretCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FatSecretCredentials.swift; sourceTree = "<group>"; };
 		23FEB9D8255BDA53001EA146 /* FatSecretParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FatSecretParams.swift; sourceTree = "<group>"; };
@@ -120,6 +130,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		238C9403255BEAF700591791 /* FoodSearchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				238C9404255BEB0C00591791 /* FoodSearchViewController.swift */,
+				238C940B255BEB1D00591791 /* ReusableViews */,
+			);
+			name = FoodSearchScreen;
+			sourceTree = "<group>";
+		};
+		238C940B255BEB1D00591791 /* ReusableViews */ = {
+			isa = PBXGroup;
+			children = (
+				238C9408255BEB1900591791 /* FoodCell.swift */,
+			);
+			name = ReusableViews;
+			sourceTree = "<group>";
+		};
+		238C9414255BEBB500591791 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				238C9411255BEBAF00591791 /* DetailCell.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
 		23FEB9D0255BDA35001EA146 /* FatSecretSwift */ = {
 			isa = PBXGroup;
 			children = (
@@ -182,6 +217,7 @@
 				23FEBA0F255BDB48001EA146 /* CoreDataService.swift */,
 				23FEBA12255BDB50001EA146 /* HealtKitService.swift */,
 				23FEBA15255BDB55001EA146 /* UserDefaultService.swift */,
+				238C9416255BEC2D00591791 /* StringOptional+Extensions.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -203,6 +239,7 @@
 			children = (
 				23FEBA2A255BDC09001EA146 /* MainScreen */,
 				23FEBA48255BDCEA001EA146 /* FoodInputScreen */,
+				238C9403255BEAF700591791 /* FoodSearchScreen */,
 				23FEBA49255BDCFE001EA146 /* FoodDetailScreen */,
 				23FEBA4A255BDD06001EA146 /* HistoryScreen */,
 				23FEBA4B255BDD0E001EA146 /* ProfileScreen */,
@@ -253,6 +290,8 @@
 			isa = PBXGroup;
 			children = (
 				23FEBA58255BDD90001EA146 /* FoodDetailScreen.swift */,
+				238C940E255BEBA600591791 /* HorizontalRow.swift */,
+				238C9414255BEBB500591791 /* Cells */,
 			);
 			name = FoodDetailScreen;
 			sourceTree = "<group>";
@@ -448,6 +487,7 @@
 				23FEBA21255BDBBB001EA146 /* Date+Extensions.swift in Sources */,
 				23FEBA62255BDF3A001EA146 /* NotificationViewController.swift in Sources */,
 				23FEBA05255BDB10001EA146 /* EatingTime.swift in Sources */,
+				238C9409255BEB1900591791 /* FoodCell.swift in Sources */,
 				23FEB9EB255BDA85001EA146 /* Search.swift in Sources */,
 				23FEB9D6255BDA49001EA146 /* FatSecretCredentials.swift in Sources */,
 				23FEBA31255BDC7A001EA146 /* MainProgressView.swift in Sources */,
@@ -459,18 +499,22 @@
 				23FEB9FE255BDAF3001EA146 /* AppCoordinator.swift in Sources */,
 				23FEB9DF255BDA72001EA146 /* SearchedFood.swift in Sources */,
 				23FEBA53255BDD59001EA146 /* Value1Cell.swift in Sources */,
+				238C9405255BEB0C00591791 /* FoodSearchViewController.swift in Sources */,
 				23FEBA37255BDC87001EA146 /* MealTodayView.swift in Sources */,
 				23FEB9DC255BDA6C001EA146 /* APIKey.swift in Sources */,
 				23FEB9D2255BDA40001EA146 /* FatSecretClient.swift in Sources */,
 				23FEB9E8255BDA81001EA146 /* Food.swift in Sources */,
+				238C940F255BEBA600591791 /* HorizontalRow.swift in Sources */,
 				23FEBA59255BDD90001EA146 /* FoodDetailScreen.swift in Sources */,
 				23FEBA69255BE00C001EA146 /* MealCellView.swift in Sources */,
 				23FEBA02255BDB06001EA146 /* Color.swift in Sources */,
 				23FEBA0C255BDB42001EA146 /* NetworkService.swift in Sources */,
+				238C9412255BEBAF00591791 /* DetailCell.swift in Sources */,
 				23FEBA16255BDB55001EA146 /* UserDefaultService.swift in Sources */,
 				23FEBA3F255BDCAE001EA146 /* SmallCircularProgressView.swift in Sources */,
 				23FEBA24255BDBC2001EA146 /* Array+Extensions.swift in Sources */,
 				23FEBA27255BDBCA001EA146 /* UILabel+Extensions.swift in Sources */,
+				238C9417255BEC2D00591791 /* StringOptional+Extensions.swift in Sources */,
 				23FEB9F4255BDA9C001EA146 /* URLComponents+Utils.swift in Sources */,
 				A28A5B01255BD410007E66FA /* Picho.xcdatamodeld in Sources */,
 				23FEBA5F255BDDE6001EA146 /* NSAttributedString+Extensions.swift in Sources */,

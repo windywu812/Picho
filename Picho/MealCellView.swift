@@ -14,6 +14,7 @@ class MealCellView: UIView {
     private var detaiLabel: UILabel
     private var totalCalorieLabel: UILabel
     private var button: UIButton
+    private let rootView: UIViewController
     
     func setData(detail: String, totalCalorie: Double) {
         detaiLabel.text = detail
@@ -23,7 +24,8 @@ class MealCellView: UIView {
     init(frame: CGRect = .zero,
          iconImage: String,
          title: String,
-         buttonText: String
+         buttonText: String,
+         rootView: UIViewController
     ) {
         
         button = UIButton(type: .system)
@@ -31,6 +33,7 @@ class MealCellView: UIView {
         titleLabel = UILabel()
         detaiLabel = UILabel()
         totalCalorieLabel = UILabel()
+        self.rootView = rootView
         
         super.init(frame: frame)
         
@@ -61,7 +64,26 @@ class MealCellView: UIView {
     }
     
     @objc func handleTap(sender: UIButton) {
-        print(sender.titleLabel?.text)
+        switch sender.titleLabel?.text {
+        case "Add Breakfast":
+            let vc = FoodInputViewController()
+            vc.timeLabel = "Breakfast"
+            rootView.navigationController?.pushViewController(vc, animated: true)
+        case "Add Lunch":
+            let vc = FoodInputViewController()
+            vc.timeLabel = "Lunch"
+            rootView.navigationController?.pushViewController(vc, animated: true)
+        case "Add Dinner":
+            let vc = FoodInputViewController()
+            vc.timeLabel = "Dinner"
+            rootView.navigationController?.pushViewController(vc, animated: true)
+        case "Add Snacks":
+            let vc = FoodInputViewController()
+            vc.timeLabel = "Snacks"
+            rootView.navigationController?.pushViewController(vc, animated: true)
+        default:
+            break
+        }
     }
     
     private func setupLayout() {

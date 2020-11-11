@@ -31,6 +31,10 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.title = "Today"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
         setupScrollView()
         setupMainProgress()
         setupPichoCard()
@@ -38,12 +42,25 @@ class MainViewController: UIViewController {
         setupMealTodayView()
     }
     
+    private func setupScrollView() {
+        scrollView = UIScrollView()
+        scrollView.backgroundColor = Color.background
+        scrollView.showsVerticalScrollIndicator = false
+        view.addSubview(scrollView)
+        
+        scrollView.setConstraint(
+            topAnchor: view.safeAreaLayoutGuide.topAnchor,
+            bottomAnchor: view.safeAreaLayoutGuide.bottomAnchor,
+            leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
+            trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
+    }
+    
     private func setupMainProgress() {
         mainProgressView = MainProgressView()
         scrollView.addSubview(mainProgressView)
         
         mainProgressView.setConstraint(
-            topAnchor: scrollView.topAnchor,
+            topAnchor: scrollView.topAnchor, topAnchorConstant: 16,
             leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
             trailingAnchor: view.layoutMarginsGuide.trailingAnchor,
             heighAnchorConstant: 206)
@@ -65,19 +82,6 @@ class MainViewController: UIViewController {
             heighAnchorConstant: 130)
     }
     
-    private func setupScrollView() {
-        scrollView = UIScrollView()
-        scrollView.backgroundColor = Color.background
-        scrollView.showsVerticalScrollIndicator = false
-        view.addSubview(scrollView)
-        
-        scrollView.setConstraint(
-            topAnchor: view.safeAreaLayoutGuide.topAnchor,
-            bottomAnchor: view.safeAreaLayoutGuide.bottomAnchor,
-            leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
-            trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
-    }
-    
     private func setupActivity() {
         waterView = HorizontalView(
             labelText: "Water",
@@ -96,7 +100,8 @@ class MainViewController: UIViewController {
         activityStack = UIStackView(arrangedSubviews: [waterView, activityView])
         activityStack.spacing = 16
         activityStack.axis = .vertical
-        view.addSubview(activityStack)
+        scrollView.addSubview(activityStack)
+        
         activityStack.setConstraint(
             topAnchor: pichoCardView.bottomAnchor, topAnchorConstant: 16,
             leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
