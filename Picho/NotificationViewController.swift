@@ -10,18 +10,16 @@ import UIKit
 class NotificationViewController: UIViewController {
    
     let labelCell = ["Breakfast", "Lunch", "Dinner", "Snacks", "Water", "Weigh In", "Reflection"]
-    private let datePicker: UIDatePicker = {
-        let datePick = UIDatePicker()
-        datePick.datePickerMode = .time
-        if #available(iOS 13.4, *) {
-            datePick.preferredDatePickerStyle = .wheels
-        }
-        return datePick
-    }()
-    
-    
     
     private var tableView: UITableView!
+    
+    private var breakfastTextfield: UITextField!
+    private var lunchTextfield: UITextField!
+    private var dinnerTextfield: UITextField!
+    private var snacksTextfield: UITextField!
+    private var waterTextfield: UITextField!
+    private var wightInTextfield: UITextField!
+    private var reflectionTextfield: UITextField!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -31,8 +29,8 @@ class NotificationViewController: UIViewController {
         super.viewDidLoad()
         
         title = "Notifications"
-        
         setupTableView()
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
     }
     
     private func setupTableView() {
@@ -54,34 +52,37 @@ class NotificationViewController: UIViewController {
         print(sender.isOn)
     }
     @objc func handleDataPicker(sender: UIDatePicker) {
+        
         let dateFormat = DateFormatter()
         dateFormat.dateFormat = "HH:mm"
+        
+        print(sender.tag)
+        
         switch sender.tag {
         case 0:
-           func handleTextField(sender2: UITextField) {
-//                sender2.viewWithTag(0).text = dateFormat.string(from: sender.date)
-                sender2.text = dateFormat.string(from: sender.date)
-            }
-            
+            breakfastTextfield.text = dateFormat.string(from: sender.date)
         case 1:
-            func handleTextField(sender2: UITextField) {
- //                sender2.viewWithTag(0).text = dateFormat.string(from: sender.date)
-                 sender2.text = dateFormat.string(from: sender.date)
-             }
+            lunchTextfield.text = dateFormat.string(from: sender.date)
+        case 2:
+            dinnerTextfield.text = dateFormat.string(from: sender.date)
+        case 3:
+            snacksTextfield.text = dateFormat.string(from: sender.date)
+        case 4:
+            waterTextfield.text = dateFormat.string(from: sender.date)
+        case 5:
+            wightInTextfield.text = dateFormat.string(from: sender.date)
+        case 6:
+            reflectionTextfield.text = dateFormat.string(from: sender.date)
         default:
             break
         }
         
-        print(sender.tag)
-        
-//        if let dateTextField = startDateTextField.viewWithTag(sender.tag) as? UITextField {
-//            dateTextField.text = dateFormat.string(from: sender.date)
-//        }
-        
+    }
+    
+    @objc private func handleTap() {
+        view.endEditing(false)
     }
    
-
-    
 }
 
 extension NotificationViewController: UITableViewDelegate, UITableViewDataSource {
@@ -92,94 +93,144 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
         switch indexPath.section {
         case 0:
             if indexPath.row == 0 {
-                cell.textLabel?.setFont(text: labelCell[0], size: 17, weight: .bold)
+                cell.textLabel?.setFont(text: labelCell[0], weight: .bold)
                 let control = UISwitch()
                 control.tag = 0
                 control.addTarget(self, action: #selector(handleSwitch(sender:)), for: .valueChanged)
                 cell.accessoryView = control
             } else {
-               
-                let startDateTextField = UITextField(frame: CGRect(x: 0, y: 0, width: 55, height: 30))
-                startDateTextField.layer.cornerRadius = 5.0
-                startDateTextField.layer.borderColor = Color.green.cgColor
-                startDateTextField.layer.borderWidth = 2.0
-                startDateTextField.tag = 0
-                startDateTextField.addPadding(padding: .equalSpacing(5))
-                startDateTextField.inputView = datePicker
+                let datePicker = UIDatePicker()
+                datePicker.tag = 0
+                datePicker.setupStyle()
                 datePicker.addTarget(self, action: #selector(self.handleDataPicker(sender:)), for: .valueChanged)
-                cell.accessoryView = startDateTextField
+                
+                breakfastTextfield = UITextField(frame: CGRect(x: 0, y: 0, width: 56, height: 30))
+                breakfastTextfield.addStyle()
+                breakfastTextfield.tag = 0
+                breakfastTextfield.text = "08:00"
+                breakfastTextfield.inputView = datePicker
+                cell.accessoryView = breakfastTextfield
             }
         
         case 1:
             if indexPath.row == 0 {
-                cell.textLabel?.setFont(text: labelCell[1], size: 17, weight: .bold)
+                cell.textLabel?.setFont(text: labelCell[1], weight: .bold)
                 let control = UISwitch()
                 control.tag = 1
                 control.addTarget(self, action: #selector(handleSwitch(sender:)), for: .valueChanged)
                 cell.accessoryView = control
             } else {
-               let startDateTextField = UITextField(frame: CGRect(x: 0, y: 0, width: 55, height: 30))
-                startDateTextField.layer.cornerRadius = 5.0
-                startDateTextField.layer.borderColor = Color.green.cgColor
-                startDateTextField.layer.borderWidth = 2.0
-                startDateTextField.addPadding(padding: .equalSpacing(5))
-                startDateTextField.inputView = datePicker
-                startDateTextField.tag = 1
-//                datePicker.tag =
-//                datePicker.addTarget(self, action: #selector(self.handleDataPicker(sender: datePicker, textField:startDateTextField)), for: .valueChanged)
+                let datePicker = UIDatePicker()
+                datePicker.tag = 1
+                datePicker.setupStyle()
+                datePicker.addTarget(self, action: #selector(self.handleDataPicker(sender:)), for: .valueChanged)
                 
-                datePicker.addTarget (self, action: #selector (self.handleDataPicker(sender:)), for: .valueChanged)
-                
-                cell.accessoryView = startDateTextField
+                lunchTextfield = UITextField(frame: CGRect(x: 0, y: 0, width: 56, height: 30))
+                lunchTextfield.addStyle()
+                lunchTextfield.tag = 1
+                lunchTextfield.text = "12.00"
+                lunchTextfield.inputView = datePicker
+                cell.accessoryView = lunchTextfield
             }
         case 2:
             if indexPath.row == 0 {
-                cell.textLabel?.setFont(text: labelCell[2], size: 17, weight: .bold)
+                cell.textLabel?.setFont(text: labelCell[2], weight: .bold)
                 let control = UISwitch()
                 control.tag = 2
                 control.addTarget(self, action: #selector(handleSwitch(sender:)), for: .valueChanged)
                 cell.accessoryView = control
+            } else {
+                let datePicker = UIDatePicker()
+                datePicker.tag = 2
+                datePicker.setupStyle()
+                datePicker.addTarget(self, action: #selector(self.handleDataPicker(sender:)), for: .valueChanged)
+                
+                dinnerTextfield = UITextField(frame: CGRect(x: 0, y: 0, width: 56, height: 30))
+                dinnerTextfield.addStyle()
+                dinnerTextfield.tag = 2
+                dinnerTextfield.text = "07.00"
+                dinnerTextfield.inputView = datePicker
+                cell.accessoryView = dinnerTextfield
             }
-            
         case 3:
             if indexPath.row == 0 {
-                cell.textLabel?.setFont(text: labelCell[3], size: 17, weight: .bold)
+                cell.textLabel?.setFont(text: labelCell[3], weight: .bold)
                 let control = UISwitch()
                 control.tag = 3
                 control.addTarget(self, action: #selector(handleSwitch(sender:)), for: .valueChanged)
                 cell.accessoryView = control
+            } else {
+                let datePicker = UIDatePicker()
+                datePicker.tag = 3
+                datePicker.setupStyle()
+                datePicker.addTarget(self, action: #selector(self.handleDataPicker(sender:)), for: .valueChanged)
+                
+                snacksTextfield = UITextField(frame: CGRect(x: 0, y: 0, width: 56, height: 30))
+                snacksTextfield.addStyle()
+                snacksTextfield.tag = 3
+                snacksTextfield.text = "16.00"
+                snacksTextfield.inputView = datePicker
+                cell.accessoryView = snacksTextfield
             }
         case 4:
             if indexPath.row == 0 {
-                cell.textLabel?.setFont(text: labelCell[4], size: 17, weight: .bold)
+                cell.textLabel?.setFont(text: labelCell[4], weight: .bold)
                 let control = UISwitch()
                 control.tag = 4
                 control.addTarget(self, action: #selector(handleSwitch(sender:)), for: .valueChanged)
                 cell.accessoryView = control
+            } else {
+                let datePicker = UIDatePicker()
+                datePicker.tag = 4
+                datePicker.setupStyle()
+                datePicker.addTarget(self, action: #selector(self.handleDataPicker(sender:)), for: .valueChanged)
+                
+                waterTextfield = UITextField(frame: CGRect(x: 0, y: 0, width: 56, height: 30))
+                waterTextfield.addStyle()
+                waterTextfield.tag = 4
+                waterTextfield.text = "12.00"
+                waterTextfield.inputView = datePicker
+                cell.accessoryView = waterTextfield
             }
         case 5:
             if indexPath.row == 0 {
-                cell.textLabel?.setFont(text: labelCell[5], size: 17, weight: .bold)
+                cell.textLabel?.setFont(text: labelCell[5], weight: .bold)
                 let control = UISwitch()
                 control.tag = 5
                 control.addTarget(self, action: #selector(handleSwitch(sender:)), for: .valueChanged)
                 cell.accessoryView = control
+            } else {
+                let datePicker = UIDatePicker()
+                datePicker.tag = 5
+                datePicker.setupStyle()
+                datePicker.addTarget(self, action: #selector(self.handleDataPicker(sender:)), for: .valueChanged)
+                
+                wightInTextfield = UITextField(frame: CGRect(x: 0, y: 0, width: 56, height: 30))
+                wightInTextfield.addStyle()
+                wightInTextfield.tag = 5
+                wightInTextfield.text = "12.00"
+                wightInTextfield.inputView = datePicker
+                cell.accessoryView = wightInTextfield
             }
         case 6:
             if indexPath.row == 0 {
-                cell.textLabel?.setFont(text: labelCell[6], size: 17, weight: .bold)
+                cell.textLabel?.setFont(text: labelCell[6], weight: .bold)
                 let control = UISwitch()
                 control.tag = 6
                 control.addTarget(self, action: #selector(handleSwitch(sender:)), for: .valueChanged)
                 cell.accessoryView = control
-            }
-        case 7:
-            if indexPath.row == 0 {
-                cell.textLabel?.setFont(text: labelCell[7], size: 17, weight: .bold)
-                let control = UISwitch()
-                control.tag = 7
-                control.addTarget(self, action: #selector(handleSwitch(sender:)), for: .valueChanged)
-                cell.accessoryView = control
+            } else {
+                let datePicker = UIDatePicker()
+                datePicker.tag = 6
+                datePicker.setupStyle()
+                datePicker.addTarget(self, action: #selector(self.handleDataPicker(sender:)), for: .valueChanged)
+                
+                reflectionTextfield = UITextField(frame: CGRect(x: 0, y: 0, width: 56, height: 30))
+                reflectionTextfield.addStyle()
+                reflectionTextfield.tag = 6
+                reflectionTextfield.text = "20.00"
+                reflectionTextfield.inputView = datePicker
+                cell.accessoryView = reflectionTextfield
             }
         default:
             break
@@ -193,8 +244,6 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
         return cell
     }
 
-
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 7
     }
