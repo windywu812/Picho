@@ -9,6 +9,7 @@ import UIKit
 
 class InfoDetailViewController: UIViewController {
     
+    private var scrollView: UIScrollView!
     private var progressView: TopProgressView!
     private var detailLabel: UILabel!
     private let detailText = """
@@ -27,10 +28,14 @@ class InfoDetailViewController: UIViewController {
     private func setupView() {
         navigationItem.title = "Detail"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(handleDone))
+        view.backgroundColor = Color.background
+        
+        scrollView = UIScrollView()
+        scrollView.showsHorizontalScrollIndicator = false
+        view.addSubview(scrollView)
         
         progressView = TopProgressView()
-        view.addSubview(progressView)
-        view.backgroundColor = Color.background
+        scrollView.addSubview(progressView)
         
         progressView.calorieProgress.animate(value: 454, total: 2000)
         progressView.satFatProgress.animate(value: 12, total: 25)
@@ -39,18 +44,26 @@ class InfoDetailViewController: UIViewController {
         detailLabel = UILabel()
         detailLabel.setFont(text: detailText)
         detailLabel.numberOfLines = 0
-        view.addSubview(detailLabel)
+        scrollView.addSubview(detailLabel)
     }
     
     private func setupLayout() {
+        
+        scrollView.setConstraint(
+            topAnchor: view.safeAreaLayoutGuide.topAnchor,
+            bottomAnchor: view.safeAreaLayoutGuide.bottomAnchor,
+            leadingAnchor: view.safeAreaLayoutGuide.leadingAnchor,
+            trailingAnchor: view.safeAreaLayoutGuide.trailingAnchor)
+        
         progressView.setConstraint(
-            topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 32,
+            topAnchor: scrollView.topAnchor, topAnchorConstant: 24,
             leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
             trailingAnchor: view.layoutMarginsGuide.trailingAnchor,
             heighAnchorConstant: 320)
         
         detailLabel.setConstraint(
             topAnchor: progressView.bottomAnchor, topAnchorConstant: 16,
+            bottomAnchor: scrollView.bottomAnchor, bottomAnchorConstant: -24,
             leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
             trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
     }
