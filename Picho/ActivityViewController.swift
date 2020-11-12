@@ -15,6 +15,7 @@ class ActivityViewController: UIViewController {
     
     private var descriptionLabel: UILabel!
     private var cardView: PichoCardView!
+    private var activityCard: ActivityCard!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +43,9 @@ class ActivityViewController: UIViewController {
         
         cardView = PichoCardView(mascot: "mascot", title: "Activity \"Health\"", detail: "For better result, connect Picho to Apple Health", buttonText: "Connect to ❤️", rootView: self)
         view.addSubview(cardView)
+        
+        activityCard = ActivityCard()
+        view.addSubview(activityCard)
     }
     
     private func setupLayout() {
@@ -55,6 +59,50 @@ class ActivityViewController: UIViewController {
             leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
             trailingAnchor: view.layoutMarginsGuide.trailingAnchor,
             heighAnchorConstant: 130)
+        
+        activityCard.setConstraint(
+            bottomAnchor: cardView.topAnchor, bottomAnchorConstant: -32,
+            leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
+            trailingAnchor: view.layoutMarginsGuide.trailingAnchor,
+            heighAnchorConstant: 50)
+    }
+    
+}
+
+class ActivityCard: UIView {
+    
+    private var activityLabel: UILabel!
+    private var amountLabel: UILabel!
+    
+    var activity: Double = 0 {
+        didSet { amountLabel.text = "\(activity)" }
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        backgroundColor = Color.red
+        layer.cornerRadius = 8
+        
+        activityLabel = UILabel()
+        activityLabel.setFont(text: "Activity", weight: .bold, color: .white)
+        
+        amountLabel = UILabel()
+        amountLabel.setFont(text: "🔥 300 cal", weight: .bold, color: .white)
+        
+        let activityStack = UIStackView(arrangedSubviews: [activityLabel, amountLabel])
+        activityStack.axis = .horizontal
+        activityStack.distribution = .equalCentering
+        addSubview(activityStack)
+        
+        activityStack.setConstraint(
+            leadingAnchor: layoutMarginsGuide.leadingAnchor, 
+            trailingAnchor: layoutMarginsGuide.trailingAnchor,
+            centerYAnchor: centerYAnchor)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
 }
