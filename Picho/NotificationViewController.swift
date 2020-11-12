@@ -8,8 +8,18 @@
 import UIKit
 
 class NotificationViewController: UIViewController {
-    
+   
     let labelCell = ["Breakfast", "Lunch", "Dinner", "Snacks", "Water", "Weigh In", "Reflection"]
+    private let datePicker: UIDatePicker = {
+        let datePick = UIDatePicker()
+        datePick.datePickerMode = .time
+        if #available(iOS 13.4, *) {
+            datePick.preferredDatePickerStyle = .wheels
+        }
+        return datePick
+    }()
+    
+    
     
     private var tableView: UITableView!
     
@@ -43,6 +53,34 @@ class NotificationViewController: UIViewController {
         print(sender.tag)
         print(sender.isOn)
     }
+    @objc func handleDataPicker(sender: UIDatePicker) {
+        let dateFormat = DateFormatter()
+        dateFormat.dateFormat = "HH:mm"
+        switch sender.tag {
+        case 0:
+           func handleTextField(sender2: UITextField) {
+//                sender2.viewWithTag(0).text = dateFormat.string(from: sender.date)
+                sender2.text = dateFormat.string(from: sender.date)
+            }
+            
+        case 1:
+            func handleTextField(sender2: UITextField) {
+ //                sender2.viewWithTag(0).text = dateFormat.string(from: sender.date)
+                 sender2.text = dateFormat.string(from: sender.date)
+             }
+        default:
+            break
+        }
+        
+        print(sender.tag)
+        
+//        if let dateTextField = startDateTextField.viewWithTag(sender.tag) as? UITextField {
+//            dateTextField.text = dateFormat.string(from: sender.date)
+//        }
+        
+    }
+   
+
     
 }
 
@@ -59,7 +97,19 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
                 control.tag = 0
                 control.addTarget(self, action: #selector(handleSwitch(sender:)), for: .valueChanged)
                 cell.accessoryView = control
+            } else {
+               
+                let startDateTextField = UITextField(frame: CGRect(x: 0, y: 0, width: 55, height: 30))
+                startDateTextField.layer.cornerRadius = 5.0
+                startDateTextField.layer.borderColor = Color.green.cgColor
+                startDateTextField.layer.borderWidth = 2.0
+                startDateTextField.tag = 0
+                startDateTextField.addPadding(padding: .equalSpacing(5))
+                startDateTextField.inputView = datePicker
+                datePicker.addTarget(self, action: #selector(self.handleDataPicker(sender:)), for: .valueChanged)
+                cell.accessoryView = startDateTextField
             }
+        
         case 1:
             if indexPath.row == 0 {
                 cell.textLabel?.setFont(text: labelCell[1], size: 17, weight: .bold)
@@ -67,6 +117,20 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
                 control.tag = 1
                 control.addTarget(self, action: #selector(handleSwitch(sender:)), for: .valueChanged)
                 cell.accessoryView = control
+            } else {
+               let startDateTextField = UITextField(frame: CGRect(x: 0, y: 0, width: 55, height: 30))
+                startDateTextField.layer.cornerRadius = 5.0
+                startDateTextField.layer.borderColor = Color.green.cgColor
+                startDateTextField.layer.borderWidth = 2.0
+                startDateTextField.addPadding(padding: .equalSpacing(5))
+                startDateTextField.inputView = datePicker
+                startDateTextField.tag = 1
+//                datePicker.tag =
+//                datePicker.addTarget(self, action: #selector(self.handleDataPicker(sender: datePicker, textField:startDateTextField)), for: .valueChanged)
+                
+                datePicker.addTarget (self, action: #selector (self.handleDataPicker(sender:)), for: .valueChanged)
+                
+                cell.accessoryView = startDateTextField
             }
         case 2:
             if indexPath.row == 0 {
@@ -76,6 +140,7 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
                 control.addTarget(self, action: #selector(handleSwitch(sender:)), for: .valueChanged)
                 cell.accessoryView = control
             }
+            
         case 3:
             if indexPath.row == 0 {
                 cell.textLabel?.setFont(text: labelCell[3], size: 17, weight: .bold)
@@ -127,6 +192,8 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
         cell.selectionStyle = .none
         return cell
     }
+
+
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 7
