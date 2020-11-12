@@ -100,7 +100,7 @@ class ActivityCard: UIView {
             trailingAnchor: layoutMarginsGuide.trailingAnchor,
             centerYAnchor: centerYAnchor)
     }
-    
+     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

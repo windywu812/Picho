@@ -24,9 +24,9 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        mainProgressView.calorieProgress.animate()
-        mainProgressView.sugarProgress.animate()
-        mainProgressView.satFatProgress.animate()
+        mainProgressView.calorieProgress.animate(value: 422, total: 2000)
+        mainProgressView.sugarProgress.animate(value: 23, total: 36)
+        mainProgressView.satFatProgress.animate(value: 13, total: 25)
     }
     
     override func viewDidLoad() {
@@ -86,6 +86,7 @@ class MainViewController: UIViewController {
     
     private func setupMainProgress() {
         mainProgressView = MainProgressView()
+        mainProgressView.rootView = self
         scrollView.addSubview(mainProgressView)
         
         mainProgressView.setConstraint(

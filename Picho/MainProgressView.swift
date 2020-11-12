@@ -24,6 +24,8 @@ class MainProgressView: UIView {
     private let totalCalorieLabel: UILabel
     let calorieProgress: CircularProgressView
     
+    var rootView: UIViewController?
+    
     override init(frame: CGRect) {
         calorieLabel = UILabel()
         totalCalorieLabel = UILabel()
@@ -47,6 +49,22 @@ class MainProgressView: UIView {
         setupCalorie()
         setupSatFat()
         setupSugar()
+        setupButton()
+    }
+    
+    private func setupButton() {
+        let buttonInfo = UIButton(type: .infoLight)
+        buttonInfo.addTarget(self, action: #selector(handleTap(sender:)), for: .touchUpInside)
+        addSubview(buttonInfo)
+        
+        buttonInfo.setConstraint(
+            topAnchor: topAnchor, topAnchorConstant: 8,
+            trailingAnchor: trailingAnchor, trailingAnchorConstant: -8)
+    }
+    
+    @objc private func handleTap(sender: UIButton) {
+        let vc = UINavigationController(rootViewController: InfoDetailViewController())
+        rootView?.present(vc, animated: true)
     }
     
     private func setupCalorie() {

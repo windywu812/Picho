@@ -10,6 +10,7 @@
 		23414A07255CD36A00E1F48D /* WaterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23414A06255CD36A00E1F48D /* WaterViewController.swift */; };
 		23414A0A255CDE4800E1F48D /* HorizontalProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23414A09255CDE4800E1F48D /* HorizontalProgressView.swift */; };
 		23645F23255C2D5400DA5697 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23645F22255C2D5400DA5697 /* ActivityViewController.swift */; };
+		236D9C7A255D3EB500B252B5 /* InfoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236D9C79255D3EB500B252B5 /* InfoDetailViewController.swift */; };
 		2381F76E255C03D5008004DE /* FormScreen1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2381F76D255C03D5008004DE /* FormScreen1.swift */; };
 		2381F772255C03DB008004DE /* FormScreen2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2381F771255C03DB008004DE /* FormScreen2.swift */; };
 		2381F775255C03DF008004DE /* FormScreen3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2381F774255C03DF008004DE /* FormScreen3.swift */; };
@@ -79,6 +80,7 @@
 		23414A06255CD36A00E1F48D /* WaterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterViewController.swift; sourceTree = "<group>"; };
 		23414A09255CDE4800E1F48D /* HorizontalProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalProgressView.swift; sourceTree = "<group>"; };
 		23645F22255C2D5400DA5697 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
+		236D9C79255D3EB500B252B5 /* InfoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoDetailViewController.swift; sourceTree = "<group>"; };
 		2381F76D255C03D5008004DE /* FormScreen1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormScreen1.swift; sourceTree = "<group>"; };
 		2381F771255C03DB008004DE /* FormScreen2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormScreen2.swift; sourceTree = "<group>"; };
 		2381F774255C03DF008004DE /* FormScreen3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormScreen3.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				23645F22255C2D5400DA5697 /* ActivityViewController.swift */,
+				236D9C79255D3EB500B252B5 /* InfoDetailViewController.swift */,
 				23414A06255CD36A00E1F48D /* WaterViewController.swift */,
 				23414A09255CDE4800E1F48D /* HorizontalProgressView.swift */,
 			);
@@ -566,6 +569,7 @@
 				23FEBA62255BDF3A001EA146 /* NotificationViewController.swift in Sources */,
 				23FEBA05255BDB10001EA146 /* EatingTime.swift in Sources */,
 				238C9409255BEB1900591791 /* FoodCell.swift in Sources */,
+				236D9C7A255D3EB500B252B5 /* InfoDetailViewController.swift in Sources */,
 				23FEB9EB255BDA85001EA146 /* Search.swift in Sources */,
 				23FEB9D6255BDA49001EA146 /* FatSecretCredentials.swift in Sources */,
 				23FEBA31255BDC7A001EA146 /* MainProgressView.swift in Sources */,
