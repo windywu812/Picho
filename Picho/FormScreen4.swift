@@ -26,7 +26,7 @@ class FormScreen4: UIViewController {
         view.addSubview(imageview)
         imageview.translatesAutoresizingMaskIntoConstraints = false
         imageview.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        imageview.topAnchor.constraint(equalTo: view.topAnchor,constant: 20).isActive = true
+        imageview.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor,constant: 20).isActive = true
         imageview.widthAnchor.constraint(equalToConstant: 95).isActive = true
         imageview.heightAnchor.constraint(equalToConstant: 115).isActive = true
         
