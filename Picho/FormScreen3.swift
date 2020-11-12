@@ -11,7 +11,9 @@ class FormScreen3: UIViewController {
     
     var gender = ["Male","Female"]
     let genderTextField = UITextField()
+    let ageTextField = UITextField()
     let pickerView = UIPickerView()
+    var rootViewS3 : PageControlForm?
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -69,7 +71,7 @@ class FormScreen3: UIViewController {
         view.addSubview(genderTextField)
         genderTextField.setConstraint(topAnchor: label2.bottomAnchor,topAnchorConstant: 50,centerXAnchor: view.centerXAnchor,heighAnchorConstant: 50, widthAnchorConstant: 299)
         
-        let ageTextField = UITextField()
+       
         ageTextField.addPadding(padding: .equalSpacing(10))
         ageTextField.layer.cornerRadius = 10.0
         ageTextField.layer.borderColor = Color.green.cgColor
@@ -79,7 +81,7 @@ class FormScreen3: UIViewController {
         ageTextField.setConstraint(topAnchor: genderTextField.bottomAnchor,topAnchorConstant: 50,centerXAnchor: view.centerXAnchor,heighAnchorConstant: 50, widthAnchorConstant: 299)
         
         let getStartedBtn = UIButton()
-        getStartedBtn.setTitle("Hi Picho", for: .normal)
+        getStartedBtn.setTitle("Continue", for: .normal)
         getStartedBtn.layer.cornerRadius =  5
         getStartedBtn.backgroundColor = Color.green
         view.addSubview(getStartedBtn)
@@ -88,8 +90,19 @@ class FormScreen3: UIViewController {
         getStartedBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         getStartedBtn.heightAnchor.constraint(equalToConstant: 50).isActive = true
         getStartedBtn.widthAnchor.constraint(equalToConstant: 270).isActive = true
+        
+        getStartedBtn.addTarget(self, action: #selector(handleSave), for: .touchUpInside)
     }
-    
+    @objc func handleSave(){
+        print("okeeee")
+        UserDefaultService.gender = genderTextField.text!
+        UserDefaultService.age = ageTextField.text!
+        
+        rootViewS3?.setView(index: 3)
+        
+            
+        
+    }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }

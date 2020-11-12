@@ -8,7 +8,7 @@
 import UIKit
 
 class FormScreen1: UIViewController {
-    
+   var rootViewS1 : PageControlForm?
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,12 +27,13 @@ class FormScreen1: UIViewController {
         
         let label1 = UILabel()
         label1.text = "Picho is here to help!"
+        label1.textAlignment = .center
         label1.font = UIFont.boldSystemFont(ofSize: 25.0)
         view.addSubview(label1)
   
         label1.setConstraint(topAnchor: imageview.bottomAnchor,topAnchorConstant: 20,
-                                leadingAnchor: view.layoutMarginsGuide.leadingAnchor,leadingAnchorConstant: 51,
-                                trailingAnchor: view.layoutMarginsGuide.trailingAnchor,trailingAnchorConstant: 51)
+                                leadingAnchor: view.layoutMarginsGuide.leadingAnchor,leadingAnchorConstant: 31,
+                                trailingAnchor: view.layoutMarginsGuide.trailingAnchor,trailingAnchorConstant: -31)
        
         
       
@@ -61,5 +62,13 @@ class FormScreen1: UIViewController {
         getStartedBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         getStartedBtn.heightAnchor.constraint(equalToConstant: 50).isActive = true
         getStartedBtn.widthAnchor.constraint(equalToConstant: 270).isActive = true
+        
+        getStartedBtn.addTarget(self, action: #selector(handleSave), for: .touchUpInside)
+    }
+    @objc func handleSave(){
+        print("okeeee")
+
+        
+        rootViewS1?.setView(index: 1)
     }
 }

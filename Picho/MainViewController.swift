@@ -34,7 +34,7 @@ class MainViewController: UIViewController {
         
         navigationItem.title = "Today"
         
-//        checkUser()
+        checkUser()
         
         setupScrollView()
         setupMainProgress()

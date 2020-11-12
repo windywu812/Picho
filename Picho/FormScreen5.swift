@@ -76,7 +76,8 @@ class FormScreen5: UIViewController {
         stackAgreement.setConstraint(topAnchor: label3.bottomAnchor, topAnchorConstant: 20, centerXAnchor: view.centerXAnchor, centerXAnchorConstant: 0,widthAnchorConstant: 270)
         
         let getStartedBtn = UIButton()
-        getStartedBtn.setTitle("Hi Picho", for: .normal)
+        getStartedBtn.setTitle("LET’S DO THIS!", for: .normal)
+        getStartedBtn.isEnabled = false
         getStartedBtn.layer.cornerRadius =  5
         getStartedBtn.backgroundColor = Color.green
         view.addSubview(getStartedBtn)

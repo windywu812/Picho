@@ -10,7 +10,8 @@ import UIKit
 class FormScreen4: UIViewController {
     
     let WeightTextField = UITextField()
-    
+    let HeightTextField = UITextField()
+    var rootViewS4 : PageControlForm?
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -72,7 +73,7 @@ class FormScreen4: UIViewController {
         heightLabel.setFont(text: "Height(CM)", size: 16, weight: .bold, color: .black)
         
         var stackHeight = UIStackView()
-        let HeightTextField = UITextField()
+        
         HeightTextField.addPadding(padding: .equalSpacing(10))
         HeightTextField.layer.cornerRadius = 10.0
         HeightTextField.layer.borderColor = Color.green.cgColor
@@ -87,7 +88,7 @@ class FormScreen4: UIViewController {
         stackHeight.setConstraint(topAnchor: stackWeight.bottomAnchor,topAnchorConstant: 20,centerXAnchor: view.centerXAnchor, widthAnchorConstant: 299)
         
         let getStartedBtn = UIButton()
-        getStartedBtn.setTitle("Hi Picho", for: .normal)
+        getStartedBtn.setTitle("Continue", for: .normal)
         getStartedBtn.layer.cornerRadius =  5
         getStartedBtn.backgroundColor = Color.green
         view.addSubview(getStartedBtn)
@@ -96,6 +97,18 @@ class FormScreen4: UIViewController {
         getStartedBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         getStartedBtn.heightAnchor.constraint(equalToConstant: 50).isActive = true
         getStartedBtn.widthAnchor.constraint(equalToConstant: 270).isActive = true
+        
+        getStartedBtn.addTarget(self, action: #selector(handleSave), for: .touchUpInside)
+    }
+    
+    @objc func handleSave(){
+        print("okeeee")
+        UserDefaultService.height = HeightTextField.text!
+        UserDefaultService.weight = WeightTextField.text!
+        
+        rootViewS4?.setView(index: 4)
+            
+        
     }
 }
 

@@ -9,9 +9,22 @@ import UIKit
 
 class FormScreen2: UIViewController {
     
+    let label1 = UILabel()
+    let label2 = UILabel()
+    let nameTextField = UITextField()
+    let getStartedBtn = UIButton()
+   
+    var rootViewS2 : PageControlForm?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupView()
+        
+        
+    }
+ 
+    func setupView(){
         view.backgroundColor = .white
         
         let image = UIImage(named: "mascot")
@@ -25,7 +38,7 @@ class FormScreen2: UIViewController {
         imageview.widthAnchor.constraint(equalToConstant: 95).isActive = true
         imageview.heightAnchor.constraint(equalToConstant: 115).isActive = true
         
-        let label1 = UILabel()
+        
         label1.text = "Nice to meet you!"
         label1.font = UIFont.boldSystemFont(ofSize: 25.0)
         label1.textAlignment = .center
@@ -34,7 +47,7 @@ class FormScreen2: UIViewController {
                              leadingAnchor: view.layoutMarginsGuide.leadingAnchor,leadingAnchorConstant: 40,
                              trailingAnchor: view.layoutMarginsGuide.trailingAnchor,trailingAnchorConstant: -40)
         
-        let label2 = UILabel()
+        
         label2.text = "Picho will be your buddy throughout this journey, tell him your name so you can get to know each other!"
         label2.font = UIFont.systemFont(ofSize: 17)
         label2.numberOfLines = 0
@@ -44,7 +57,7 @@ class FormScreen2: UIViewController {
                              leadingAnchor: view.layoutMarginsGuide.leadingAnchor,leadingAnchorConstant: 40,
                              trailingAnchor: view.layoutMarginsGuide.trailingAnchor,trailingAnchorConstant: -40)
         
-        let nameTextField = UITextField()
+        
         nameTextField.layer.cornerRadius = 10.0
         nameTextField.layer.borderColor = Color.green.cgColor
         nameTextField.layer.borderWidth = 2.0
@@ -53,8 +66,8 @@ class FormScreen2: UIViewController {
         view.addSubview(nameTextField)
         nameTextField.setConstraint(topAnchor: label2.bottomAnchor,topAnchorConstant: 50,centerXAnchor: view.centerXAnchor,heighAnchorConstant: 50, widthAnchorConstant: 299)
         
-        let getStartedBtn = UIButton()
-        getStartedBtn.setTitle("Hi Picho", for: .normal)
+        
+        getStartedBtn.setTitle("Continue", for: .normal)
         getStartedBtn.layer.cornerRadius =  5
         getStartedBtn.backgroundColor = Color.green
         view.addSubview(getStartedBtn)
@@ -64,5 +77,13 @@ class FormScreen2: UIViewController {
         getStartedBtn.heightAnchor.constraint(equalToConstant: 50).isActive = true
         getStartedBtn.widthAnchor.constraint(equalToConstant: 270).isActive = true
         
+        getStartedBtn.addTarget(self, action: #selector(handleSaveName), for: .touchUpInside)
+        
+        
+    }
+    @objc func handleSaveName(){
+        UserDefaultService.firstName = nameTextField.text!
+     
+        rootViewS2?.setView(index: 2)
     }
 }
