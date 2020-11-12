@@ -33,7 +33,6 @@ class ActivityViewController: UIViewController {
     }
     
     private func setupView() {
-        
         view.backgroundColor = Color.background
         
         descriptionLabel = UILabel()

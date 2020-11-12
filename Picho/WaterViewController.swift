@@ -22,6 +22,8 @@ class WaterViewController: UIViewController {
     private var infoLabel: UILabel!
     private var waterCollectionView: UICollectionView!
     
+    private var totalWater: Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,8 +31,13 @@ class WaterViewController: UIViewController {
         setupLayout()
     }
     
+    @objc private func handleDone() {
+        dismiss(animated: true, completion: nil)
+    }
+    
     private func setupView() {
         navigationItem.title = "Water"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(handleDone))
         view.backgroundColor = Color.background
         
         detailLabel = UILabel()
@@ -43,11 +50,10 @@ class WaterViewController: UIViewController {
         view.addSubview(waterLabel)
         
         waterAmount = UILabel()
-        waterAmount.setFont(text: "322 ml", size: 34, weight: .bold)
+        waterAmount.setFont(text: "\(totalWater) ml", size: 34, weight: .bold)
         view.addSubview(waterAmount)
         
-        waterProgress = HorizontalProgressView()
-        waterProgress.progress = 0.5
+        waterProgress = HorizontalProgressView(progress: totalWater)
         view.addSubview(waterProgress)
         
         infoLabel = UILabel()
@@ -63,6 +69,7 @@ class WaterViewController: UIViewController {
         waterCollectionView.register(WaterCell.self, forCellWithReuseIdentifier: WaterCell.reuseIdentifier)
         waterCollectionView.delegate = self
         waterCollectionView.dataSource = self
+        waterCollectionView.showsHorizontalScrollIndicator = false
         view.addSubview(waterCollectionView)
     }
     
@@ -116,16 +123,14 @@ extension WaterViewController: UICollectionViewDelegate, UICollectionViewDataSou
         if let cell = collectionView.cellForItem(at: indexPath) as? WaterCell {
             if cell.image == UIImage(named: "glass_fill") {
                 cell.image = UIImage(named: "glass_empty")
+                totalWater -= 100
+                waterAmount.text = "\(totalWater) ml"
+                waterProgress.setProgress(progress: totalWater)
             } else {
                 cell.image = UIImage(named: "glass_fill")
-            }
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-            if let cell = collectionView.cellForItem(at: indexPath) as? WaterCell {
-                cell.image = UIImage(named: "glass_empty")
+                totalWater += 100
+                waterAmount.text = "\(totalWater) ml"
+                waterProgress.setProgress(progress: totalWater)
             }
         }
     }
