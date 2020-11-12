@@ -81,7 +81,7 @@ class HistoryViewController: UIViewController, ChartViewDelegate {
         chartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: ["1", "2", "3", "4", "5"])
         chartView.xAxis.axisMinimum = 0
         chartView.xAxis.granularity = 1
-        chartView.animate(xAxisDuration: 2.5, yAxisDuration: 2.5, easingOption: .linear)
+        chartView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
     }
     
 }
