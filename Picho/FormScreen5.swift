@@ -91,9 +91,11 @@ class FormScreen5: UIViewController {
         isChecked = !isChecked
         if isChecked{
             sender.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+            sender.isEnabled = true
         }
         else{
             sender.setImage(UIImage(systemName: "circle"), for: .normal)
+            sender.isEnabled = false
         }
     }
     

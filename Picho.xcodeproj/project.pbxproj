@@ -70,6 +70,7 @@
 		A28A5B03255BD412007E66FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A28A5B02255BD412007E66FA /* Assets.xcassets */; };
 		A28A5B06255BD412007E66FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A28A5B04255BD412007E66FA /* LaunchScreen.storyboard */; };
 		A28A5B3A255C29F5007E66FA /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A28A5B39255C29F5007E66FA /* HealthKit.framework */; };
+		A28A5B41255CE519007E66FA /* DetailSugarNSatFat.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A5B40255CE519007E66FA /* DetailSugarNSatFat.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -140,6 +141,7 @@
 		A28A5B07255BD412007E66FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A28A5B38255C29F4007E66FA /* Picho.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Picho.entitlements; sourceTree = "<group>"; };
 		A28A5B39255C29F5007E66FA /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		A28A5B40255CE519007E66FA /* DetailSugarNSatFat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSugarNSatFat.swift; sourceTree = "<group>"; };
 		DF51C23FDE764A8B4E5209B0 /* Pods-Picho.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Picho.debug.xcconfig"; path = "Target Support Files/Pods-Picho/Pods-Picho.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -351,6 +353,7 @@
 			isa = PBXGroup;
 			children = (
 				23FEBA58255BDD90001EA146 /* FoodDetailScreen.swift */,
+				A28A5B40255CE519007E66FA /* DetailSugarNSatFat.swift */,
 				238C9414255BEBB500591791 /* Cells */,
 			);
 			name = FoodDetailScreen;
@@ -556,6 +559,7 @@
 				238C9409255BEB1900591791 /* FoodCell.swift in Sources */,
 				23FEB9EB255BDA85001EA146 /* Search.swift in Sources */,
 				23FEB9D6255BDA49001EA146 /* FatSecretCredentials.swift in Sources */,
+				A28A5B41255CE519007E66FA /* DetailSugarNSatFat.swift in Sources */,
 				23FEBA31255BDC7A001EA146 /* MainProgressView.swift in Sources */,
 				A28A5AFB255BD410007E66FA /* MainViewController.swift in Sources */,
 				23FEBA10255BDB48001EA146 /* CoreDataService.swift in Sources */,
