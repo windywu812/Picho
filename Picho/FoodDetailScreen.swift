@@ -17,6 +17,7 @@ class FoodDetailScreen: UITableViewController {
     private var calorieLabel: UILabel!
     private var calorieAmount: UILabel!
     
+    private var calorieNutrition = 0.0
     private var mainNutritions: [String] = []
     private var fatNutritions: [String] = []
     private var cholesterolNutritions: [String] = []
@@ -35,16 +36,18 @@ class FoodDetailScreen: UITableViewController {
     private var amounts: [[Double]] = []
     
     let healthStore = HKHealthStore()
-        
+    
+    var foodDescription: String = ""
+    var foodName: String = ""
     var foodId: String = "" {
         didSet {
             fetchingFood()
         }
     }
     
-    var foodName: String = ""
+    var eatingTime: EatTime = .breakfast
     
-    var isFavorite: Bool = false
+    private var isFavorite: Bool = false
     
     override init(style: UITableView.Style = .grouped) {
         super.init(style: style)
@@ -143,21 +146,23 @@ class FoodDetailScreen: UITableViewController {
     }
 
     @objc private func handleAdd() {
-        NetworkService.shared.getFood(id: foodId) { food in
-            switch food {
-            case .success(let food):
-                guard let servings = food.servings?.first else { return }
-
-                HealthKitService.addData(sugar: Double(servings.saturatedFat ?? "0") ?? 0, date: Date(), type: .dietaryFatSaturated, unit: HKUnit.gram())
-                HealthKitService.addData(sugar: Double(servings.sugar ?? "0") ?? 0, date: Date(), type: .dietarySugar, unit: HKUnit.gram())
-                HealthKitService.addData(sugar: Double(servings.calories ?? "0") ?? 0, date: Date(), type: .dietaryEnergyConsumed, unit: HKUnit.smallCalorie())
-
-            case .failure(let err):
-                print(err.localizedDescription)
-            }
+//        NetworkService.shared.getFood(id: foodId) { food in
+//            switch food {
+//            case .success(let food):
+//                guard let servings = food.servings?.first else { return }
+//
+//                HealthKitService.addData(sugar: Double(servings.saturatedFat ?? "0") ?? 0, date: Date(), type: .dietaryFatSaturated, unit: HKUnit.gram())
+//                HealthKitService.addData(sugar: Double(servings.sugar ?? "0") ?? 0, date: Date(), type: .dietarySugar, unit: HKUnit.gram())
+//                HealthKitService.addData(sugar: Double(servings.calories ?? "0") ?? 0, date: Date(), type: .dietaryEnergyConsumed, unit: HKUnit.smallCalorie())
+//
+//            case .failure(let err):
+//                print(err.localizedDescription)
+//            }
+//        }
+        
+        if !mainAmounts.isEmpty {
+            CoreDataService.shared.addDailyIntake(id: UUID(), foodId: foodId, name: foodName, description: foodDescription, calorie: calorieNutrition, saturatedFat: mainAmounts[0], sugars: mainAmounts[1], time: eatingTime)
         }
-
-        CoreDataService.shared.addFood(foodName: foodName, date: Date(), eatingTime: .breakfast, calorie: Int(calorieAmount.text ?? "0") ?? 0)
 
         self.navigationController?.popToRootViewController(animated: true)
     }
@@ -170,6 +175,9 @@ class FoodDetailScreen: UITableViewController {
                 
                 DispatchQueue.main.async {
                     self.navigationItem.title = self.foodName
+                    
+                    self.calorieNutrition = servings.calories.convertToDouble()
+                    self.calorieAmount.text = String(self.calorieNutrition)
                     
                     self.mainAmounts.append(servings.saturatedFat.convertToDouble())
                     self.mainAmounts.append(servings.sugar.convertToDouble())

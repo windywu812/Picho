@@ -15,12 +15,18 @@ class FoodInputViewController: UIViewController {
     private var addButton: UIButton!
     private var tableView: UITableView!
     
-    var timeLabel: String = ""
+    var eatingTime: EatTime = .breakfast
     
-    private let foods = [
-        SearchedFood(id: "5873608", name: "Nasi Goreng", description: "Per 1122g - Calories: 1850kcal | Fat: 65.44g | Carbs: 240.17g | Protein: 69.07g", brand: nil, type: "Generic", url: "https://www.fatsecret.com/calories-nutrition/generic/nasi-goreng"),
-        SearchedFood(id: "5873608", name: "Nasi Goreng", description: "Per 1122g - Calories: 1850kcal | Fat: 65.44g | Carbs: 240.17g | Protein: 69.07g", brand: nil, type: "Generic", url: "https://www.fatsecret.com/calories-nutrition/generic/nasi-goreng")
-    ]
+//    private let foods = [
+//        SearchedFood(id: "5873608", name: "Nasi Goreng", description: "Per 1122g - Calories: 1850kcal | Fat: 65.44g | Carbs: 240.17g | Protein: 69.07g", brand: nil, type: "Generic", url: "https://www.fatsecret.com/calories-nutrition/generic/nasi-goreng"),
+//        SearchedFood(id: "5873608", name: "Nasi Goreng", description: "Per 1122g - Calories: 1850kcal | Fat: 65.44g | Carbs: 240.17g | Protein: 69.07g", brand: nil, type: "Generic", url: "https://www.fatsecret.com/calories-nutrition/generic/nasi-goreng")
+//    ]
+    
+    private var foods: [DailyIntake] = []
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,9 +34,10 @@ class FoodInputViewController: UIViewController {
         setupView()
         setupTable()
         setupLayout()
+        fetchData()
         
         navigationItem.largeTitleDisplayMode = .never
-        title = timeLabel
+        title = eatingTime.rawValue.capitalized
     }
     
     private func setupView() {
@@ -45,20 +52,15 @@ class FoodInputViewController: UIViewController {
         titleLabel.numberOfLines = 0
         titleLabel.textAlignment = .center
         titleLabel.font = .systemFont(ofSize: 22, weight: .bold)
-        titleLabel.text = "Would you mind to share your \n\(timeLabel) with me?"
+        titleLabel.text = "Would you mind to share your \n\(eatingTime.rawValue) with me?"
         
         addButton = UIButton()
         addButton.backgroundColor = Color.green
         addButton.layer.cornerRadius = 8
         addButton.contentEdgeInsets = UIEdgeInsets(top: 12, left: view.safeAreaInsets.left, bottom: 12, right: view.safeAreaInsets.right)
-        addButton.setTitle("Add \(timeLabel)", for: .normal)
+        addButton.setTitle("Add \(eatingTime.rawValue.capitalized)", for: .normal)
         addButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
         addButton.addTarget(self, action: #selector(handleAdd), for: .touchUpInside)
-        
-//        separator = UIView()
-//        separator.frame = CGRect(x: 0, y: 200, width: self.view.bounds.size.width, height: 1)
-//        separator.backgroundColor = .red
-//        view.addSubview(separator)
     }
     
     private func setupTable() {
@@ -90,12 +92,6 @@ class FoodInputViewController: UIViewController {
             leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
             trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
 
-//        separator.setConstraint(
-//            topAnchor: mainStack.bottomAnchor, topAnchorConstant: 20,
-//            leadingAnchor: view.safeAreaLayoutGuide.leadingAnchor, leadingAnchorConstant: 10,
-//            trailingAnchor: view.safeAreaLayoutGuide.trailingAnchor, trailingAnchorConstant: -10
-//            )
-
         tableView.setConstraint(
             topAnchor: mainStack.bottomAnchor, topAnchorConstant: 24,
             bottomAnchor: view.safeAreaLayoutGuide.bottomAnchor, bottomAnchorConstant: 8,
@@ -104,8 +100,15 @@ class FoodInputViewController: UIViewController {
         )
     }
     
+    private func fetchData() {
+        CoreDataService.shared.getDailyIntake(time: eatingTime, date: Date()) { intakes in
+            self.foods = intakes
+        }
+    }
+    
     @objc private func handleAdd() {
         let vc = FoodSearchViewController()
+        vc.eatingTime = eatingTime
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -116,8 +119,9 @@ extension FoodInputViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let foodVC = FoodDetailScreen()
         let food = foods[indexPath.row]
-        foodVC.foodId = food.id
-        foodVC.foodName = food.name
+        foodVC.foodId = food.foodId ?? ""
+        foodVC.foodDescription = food.description
+        foodVC.foodName = food.name ?? ""
         
         let vc = UINavigationController(rootViewController: foodVC)
         self.navigationController?.present(vc, animated: true, completion: nil)
@@ -143,7 +147,7 @@ extension FoodInputViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FoodCell.reuseIdentifier, for: indexPath) as! FoodCell
-        cell.configureCell(foodName: foods[indexPath.row].name, description: foods[indexPath.row].description)
+        cell.configureCell(foodName: foods[indexPath.row].name ?? "", description: foods[indexPath.row].desc ?? "")
         cell.selectionStyle = .none
         return cell
     }

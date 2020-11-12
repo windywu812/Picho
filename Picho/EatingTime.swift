@@ -8,12 +8,12 @@
 import Foundation
 
 struct EatingTime {
-    static let eatingTime = ["Breakfast", "Lunch", "Dinner", "Snacks"]
+    static let eatingTime: [EatTime] = [.breakfast, .lunch, .dinner, .snacks]
 }
 
 enum EatTime: String {
-    case breakfast = "Breakfast"
-    case lunch = "Lunch"
-    case dinner = "Dinner"
-    case snack = "Snack"
+    case breakfast = "breakfast"
+    case lunch = "lunch"
+    case dinner = "dinner"
+    case snacks = "snacks"
 }

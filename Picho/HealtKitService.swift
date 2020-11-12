@@ -83,7 +83,7 @@ class HealthKitService {
             guard error == nil,
                   let quantitySamples = sample as? [HKQuantitySample] else { return }
             
-            let totalCalories = quantitySamples.reduce(0.0) { $0 + $1.quantity.doubleValue(for: HKUnit.calorie()) }
+            let totalCalories = quantitySamples.reduce(0.0) { $0 + $1.quantity.doubleValue(for: HKUnit.smallCalorie()) }
             
             completion(totalCalories)
         }
