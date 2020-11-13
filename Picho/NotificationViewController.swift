@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import UserNotifications
 class NotificationViewController: UIViewController {
    
     let labelCell = ["Breakfast", "Lunch", "Dinner", "Snacks", "Water", "Weigh In", "Reflection"]
@@ -20,6 +20,14 @@ class NotificationViewController: UIViewController {
     private var waterTextfield: UITextField!
     private var wightInTextfield: UITextField!
     private var reflectionTextfield: UITextField!
+    
+    private var timeBreakfast : Date!
+    private var timeLunch : Date!
+    private var timeDinner : Date!
+    private var timeSnacks : Date!
+    private var timeWater : Date!
+    private var timeWight : Date!
+    private var timeReflection : Date!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -50,6 +58,69 @@ class NotificationViewController: UIViewController {
     @objc func handleSwitch(sender: UISwitch) {
         print(sender.tag)
         print(sender.isOn)
+        
+        let dateFormat = DateFormatter()
+        dateFormat.dateFormat = "HH:mm"
+       
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert,.sound]){ (granted,error) in}
+        let notificationContent = UNMutableNotificationContent()
+       
+        
+        
+        switch sender.tag {
+        case 0:
+            let uuidString = UUID().uuidString
+            notificationContent.title = "Good morning"
+            notificationContent.body = "Dont Forget to set your breakfast"
+            let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: timeBreakfast!)
+            print(dateComponents)
+            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+            
+            let request = UNNotificationRequest(identifier: uuidString, content: notificationContent, trigger: trigger)
+            if sender.isOn {
+                
+                center.add(request) { (error) in
+                    print("oke")
+                }
+                print(timeBreakfast!)
+                print(dateFormat.string(from: timeBreakfast!))
+            }else{
+                center.removePendingNotificationRequests(withIdentifiers: [uuidString])
+            }
+        case 1:
+            if sender.isOn {
+                print(timeLunch!)
+                print(dateFormat.string(from: timeLunch!))
+            }
+        case 2:
+            if sender.isOn {
+                print(timeDinner!)
+                print(dateFormat.string(from: timeDinner!))
+            }
+        case 3:
+            if sender.isOn {
+                print(timeSnacks!)
+                print(dateFormat.string(from: timeSnacks!))
+            }
+        case 4:
+            if sender.isOn {
+                print(timeWater!)
+                print(dateFormat.string(from: timeWater!))
+            }
+        case 5:
+            if sender.isOn {
+                print(timeWight!)
+                print(dateFormat.string(from: timeWight!))
+            }
+        case 6:
+            if sender.isOn {
+                print(timeReflection!)
+                print(dateFormat.string(from: timeReflection!))
+            }
+        default:
+            break
+        }
     }
     @objc func handleDataPicker(sender: UIDatePicker) {
         
@@ -61,18 +132,25 @@ class NotificationViewController: UIViewController {
         switch sender.tag {
         case 0:
             breakfastTextfield.text = dateFormat.string(from: sender.date)
+            timeBreakfast = sender.date
         case 1:
             lunchTextfield.text = dateFormat.string(from: sender.date)
+            timeLunch = sender.date
         case 2:
             dinnerTextfield.text = dateFormat.string(from: sender.date)
+            timeDinner = sender.date
         case 3:
             snacksTextfield.text = dateFormat.string(from: sender.date)
+            timeSnacks = sender.date
         case 4:
             waterTextfield.text = dateFormat.string(from: sender.date)
+            timeWater = sender.date
         case 5:
             wightInTextfield.text = dateFormat.string(from: sender.date)
+            timeWight = sender.date
         case 6:
             reflectionTextfield.text = dateFormat.string(from: sender.date)
+            timeReflection = sender.date
         default:
             break
         }
@@ -253,3 +331,11 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
     }
     
 }
+extension NotificationViewController : UNUserNotificationCenterDelegate{
+       func userNotificationCenter(_ center:UNUserNotificationCenter, willPresent notification:
+           UNNotification,withCompletionHandler completionHandler: @escaping
+           (UNNotificationPresentationOptions) -> Void){
+           completionHandler([.sound,.alert])
+       }
+       
+   }
