@@ -12,6 +12,7 @@ class ProfileViewController: UIViewController {
     private var imageProfile: UIImageView!
     private var editButton: UIButton!
     private var tableView: UITableView!
+    private var scrollView: UIScrollView!
     
     let viewModel = ProfileViewModel()
     
@@ -25,16 +26,27 @@ class ProfileViewController: UIViewController {
     }
     
     private func setupView() {
+        scrollView = UIScrollView()
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.backgroundColor = Color.background
+        view.addSubview(scrollView)
+        
+        scrollView.setConstraint(
+            topAnchor: view.safeAreaLayoutGuide.topAnchor,
+            bottomAnchor: view.safeAreaLayoutGuide.bottomAnchor,
+            leadingAnchor: view.safeAreaLayoutGuide.leadingAnchor,
+            trailingAnchor: view.safeAreaLayoutGuide.trailingAnchor)
+        
         imageProfile = UIImageView()
         //        imageProfile.image = UIImage(named: viewModel.imageProfile)
         imageProfile.layer.borderWidth = 5
         imageProfile.layer.borderColor = Color.green.cgColor
         imageProfile.backgroundColor = .secondaryLabel
         imageProfile.layer.cornerRadius = 60
-        view.addSubview(imageProfile)
+        scrollView.addSubview(imageProfile)
         
         imageProfile.setConstraint(
-            topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 8,
+            topAnchor: scrollView.topAnchor, topAnchorConstant: 8,
             centerXAnchor: view.centerXAnchor,
             heighAnchorConstant: 120, widthAnchorConstant: 120)
         
@@ -42,7 +54,7 @@ class ProfileViewController: UIViewController {
         editButton.setAttributedTitle(NSAttributedString.bodyFont(text: "Edit", color: Color.green), for: .normal)
         editButton.layer.cornerRadius = 8
         editButton.backgroundColor = Color.background
-        view.addSubview(editButton)
+        scrollView.addSubview(editButton)
         
         editButton.setConstraint(
             topAnchor: imageProfile.bottomAnchor, topAnchorConstant: 32,
@@ -55,15 +67,23 @@ class ProfileViewController: UIViewController {
         tableView.register(Value1Cell.self, forCellReuseIdentifier: Value1Cell.reuseIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
-        view.addSubview(tableView)
+        tableView.isScrollEnabled = false
+        scrollView.addSubview(tableView)
         
         let safeArea = view.safeAreaLayoutGuide
         
+        var totalRow = 0
+        for section in 0..<tableView.numberOfSections {
+            totalRow += tableView.numberOfRows(inSection: section)
+        }
+        let totalHeight = 40 * tableView.numberOfSections + totalRow * 51
+                
         tableView.setConstraint(
             topAnchor: editButton.bottomAnchor, topAnchorConstant: 0,
-            bottomAnchor: safeArea.bottomAnchor, bottomAnchorConstant: 0,
+            bottomAnchor: scrollView.bottomAnchor, bottomAnchorConstant: 0,
             leadingAnchor: safeArea.leadingAnchor, leadingAnchorConstant: 0,
-            trailingAnchor: safeArea.trailingAnchor, trailingAnchorConstant: 0)
+            trailingAnchor: safeArea.trailingAnchor, trailingAnchorConstant: 0,
+            heighAnchorConstant: CGFloat(totalHeight))
     }
     
     @objc private func handleSwitch(sender: UISwitch) {
