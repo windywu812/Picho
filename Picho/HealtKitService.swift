@@ -143,4 +143,29 @@ class HealthKitService {
         HKHealthStore().execute(energyQuery)
     }
     
+    static func fetchActivity(completion: @escaping (Double) -> Void) {
+        
+        guard let dataType = HKSampleType.quantityType(forIdentifier: .activeEnergyBurned) else {
+            print("Sampe type not available")
+            return
+        }
+        
+        let start = Date().startOfTheDay()
+        let last24Predicate = HKQuery.predicateForSamples(withStart: start, end: Date(), options: .strictEndDate)
+        
+        let query = HKSampleQuery(sampleType: dataType,
+                                  predicate: last24Predicate,
+                                  limit: HKObjectQueryNoLimit,
+                                  sortDescriptors: nil) { (query, sample, error) in
+            guard error == nil,
+                  let quantitySamples = sample as? [HKQuantitySample] else { return }
+            
+            let totalEneryBurned = quantitySamples.reduce(0.0) { $0 + $1.quantity.doubleValue(for: HKUnit.gram()) }
+          
+            completion(totalEneryBurned)
+        }
+        
+        HKHealthStore().execute(query)
+    }
+    
 }

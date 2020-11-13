@@ -44,12 +44,11 @@ class SmallCircularProgressView: UIView {
         shapeLayer.fillColor = UIColor.clear.cgColor
         layer.addSublayer(shapeLayer)
         
-        animate()
     }
     
-    func animate() {
+    func animate(value: Float, total: Float) {
         let animation = CABasicAnimation(keyPath: "strokeEnd")
-        animation.toValue = 0.3
+        animation.toValue = value / total
         animation.duration = 2
         animation.fromValue = 0
         animation.fillMode = .forwards

@@ -24,11 +24,6 @@ class CircularProgressView: UIView {
             text: "Cal left",
             size: 15)
         
-        calorieLabel.setFont(
-            text: "2500", size: 28,
-            weight: .bold,
-            color: Color.green)
-
         let mainStack = UIStackView(arrangedSubviews: [calorieLabel, label])
         mainStack.axis = .vertical
         mainStack.alignment = .center
@@ -66,9 +61,15 @@ class CircularProgressView: UIView {
         layer.addSublayer(shapeLayer)
     }
     
-    func animate() {
+    func animate(value: Float, total: Float) {
+        
+        calorieLabel.setFont(
+            text: "\(Int(value))", size: 28,
+            weight: .bold,
+            color: Color.green)
+        
         let animation = CABasicAnimation(keyPath: "strokeEnd")
-        animation.toValue = 0.9
+        animation.toValue = value / total
         animation.duration = 2
         animation.fromValue = 0
         animation.fillMode = .forwards

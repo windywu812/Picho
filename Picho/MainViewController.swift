@@ -15,8 +15,8 @@ class MainViewController: UIViewController {
     private var mainProgressView: MainProgressView!
     private var pichoCardView: PichoCardView!
     
-    private var waterView: HorizontalView!
-    private var activityView: HorizontalView!
+    private var waterCardView: HorizontalView!
+    private var activityCardView: HorizontalView!
     private var activityStack: UIStackView!
     
     private var mealTodayView: MealsTodayView!
@@ -28,9 +28,9 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        mainProgressView.calorieProgress.animate()
-        mainProgressView.sugarProgress.animate()
-        mainProgressView.satFatProgress.animate()
+        mainProgressView.calorieProgress.animate(value: 422, total: 2000)
+        mainProgressView.sugarProgress.animate(value: 23, total: 36)
+        mainProgressView.satFatProgress.animate(value: 13, total: 25)
     }
     
     override func viewDidLoad() {
@@ -45,6 +45,7 @@ class MainViewController: UIViewController {
         setupPichoCard()
         setupActivity()
         setupMealTodayView()
+        setupGesture()
     }
     
     private func checkUser() {
@@ -54,6 +55,24 @@ class MainViewController: UIViewController {
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true)
         }
+    }
+    
+    private func setupGesture() {
+        let tapActivity = UITapGestureRecognizer(target: self, action: #selector(handleActivity))
+        activityCardView.addGestureRecognizer(tapActivity)
+        
+        let tapWater = UITapGestureRecognizer(target: self, action: #selector(handleWater))
+        waterCardView.addGestureRecognizer(tapWater)
+    }
+    
+    @objc private func handleActivity() {
+        let vc = UINavigationController(rootViewController: ActivityViewController())
+        navigationController?.present(vc, animated: true, completion: nil)
+    }
+    
+    @objc private func handleWater() {
+        let vc = UINavigationController(rootViewController: WaterViewController())
+        navigationController?.present(vc, animated: true, completion: nil)
     }
     
     private func setupScrollView() {
@@ -71,6 +90,7 @@ class MainViewController: UIViewController {
     
     private func setupMainProgress() {
         mainProgressView = MainProgressView()
+        mainProgressView.rootView = self
         scrollView.addSubview(mainProgressView)
         
         mainProgressView.setConstraint(
@@ -97,21 +117,21 @@ class MainViewController: UIViewController {
     }
     
     private func setupActivity() {
-        waterView = HorizontalView(
+        waterCardView = HorizontalView(
             labelText: "Water",
             detailText: "💧 8 cups remaining",
             iconImage: UIImage(),
             background: Color.blue)
-        waterView.setConstraint(heighAnchorConstant: 46)
+        waterCardView.setConstraint(heighAnchorConstant: 46)
         
-        activityView = HorizontalView(
+        activityCardView = HorizontalView(
             labelText: "Activity",
             detailText: "🔥 300cal",
             iconImage: UIImage(),
             background: Color.red)
-        activityView.setConstraint(heighAnchorConstant: 46)
+        activityCardView.setConstraint(heighAnchorConstant: 46)
         
-        activityStack = UIStackView(arrangedSubviews: [waterView, activityView])
+        activityStack = UIStackView(arrangedSubviews: [waterCardView, activityCardView])
         activityStack.spacing = 16
         activityStack.axis = .vertical
         scrollView.addSubview(activityStack)
