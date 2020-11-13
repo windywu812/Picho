@@ -16,6 +16,12 @@ class ProfileViewController: UIViewController {
     
     let viewModel = ProfileViewModel()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        viewModel.fetchUserDefault()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -120,6 +126,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.text = viewModel.fullName[indexPath.row]
         case 1:
             cell.textLabel?.text = viewModel.secondSectionLabel[indexPath.row]
+            cell.detailTextLabel?.text = viewModel.secondSection[indexPath.row]
         case 2:
             cell.textLabel?.text = viewModel.thirdSectionLabel[indexPath.row]
             if indexPath.row == 0 {

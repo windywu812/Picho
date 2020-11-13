@@ -80,6 +80,7 @@ class FormScreen5: UIViewController {
         getStartedBtn.isEnabled = false
         getStartedBtn.layer.cornerRadius =  5
         getStartedBtn.backgroundColor = Color.green
+        getStartedBtn.addTarget(self, action: #selector(handleTap), for: .touchUpInside)
         view.addSubview(getStartedBtn)
         getStartedBtn.translatesAutoresizingMaskIntoConstraints = false
         getStartedBtn.topAnchor.constraint(equalTo: stackAgreement.bottomAnchor, constant: 20).isActive = true
@@ -87,9 +88,10 @@ class FormScreen5: UIViewController {
         getStartedBtn.heightAnchor.constraint(equalToConstant: 50).isActive = true
         getStartedBtn.widthAnchor.constraint(equalToConstant: 270).isActive = true
     }
-    @objc func handleCheckBox(sender: UIButton) {
+    
+    @objc private func handleCheckBox(sender: UIButton) {
         isChecked = !isChecked
-        if isChecked{
+        if isChecked {
             sender.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
             sender.isEnabled = true
         }
@@ -97,6 +99,12 @@ class FormScreen5: UIViewController {
             sender.setImage(UIImage(systemName: "circle"), for: .normal)
             sender.isEnabled = false
         }
+    }
+    
+    @objc private func handleTap() {
+        let vc = UINavigationController(rootViewController: MainViewController())
+        UserDefaultService.hasLaunched = true
+        present(vc, animated: true, completion: nil)
     }
     
 }

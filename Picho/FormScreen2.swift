@@ -20,11 +20,9 @@ class FormScreen2: UIViewController {
         super.viewDidLoad()
 
         setupView()
-        
-        
     }
  
-    func setupView(){
+    func setupView() {
         view.backgroundColor = .white
         
         let image = UIImage(named: "mascot")
@@ -32,12 +30,12 @@ class FormScreen2: UIViewController {
         imageview.contentMode = UIView.ContentMode.scaleToFill
         imageview.image = image
         view.addSubview(imageview)
+        
         imageview.translatesAutoresizingMaskIntoConstraints = false
         imageview.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         imageview.topAnchor.constraint(equalTo: view.topAnchor,constant: 100).isActive = true
         imageview.widthAnchor.constraint(equalToConstant: 95).isActive = true
         imageview.heightAnchor.constraint(equalToConstant: 115).isActive = true
-        
         
         label1.text = "Nice to meet you!"
         label1.font = UIFont.boldSystemFont(ofSize: 25.0)

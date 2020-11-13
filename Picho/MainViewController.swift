@@ -32,9 +32,9 @@ class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        mainProgressView.calorieProgress.animate(value: 422, total: Float(calorieIntake))
-        mainProgressView.sugarProgress.animate(value: 23, total: 36)
-        mainProgressView.satFatProgress.animate(value: 13, total: Float(saturatedFatIntake))
+        mainProgressView.calorieProgress.animate(value: 2400, total: 2400)
+        mainProgressView.sugarProgress.animate(value: 36, total: 36)
+        mainProgressView.satFatProgress.animate(value: 25, total: 25)
     }
     
     override func viewDidLoad() {
@@ -42,7 +42,7 @@ class MainViewController: UIViewController {
         
         navigationItem.title = "Today"
         
-//        checkUser()
+        checkUser()
       
         setupScrollView()
         setupMainProgress()

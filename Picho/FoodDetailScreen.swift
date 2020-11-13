@@ -224,7 +224,7 @@ class FoodDetailScreen: UITableViewController {
         case 2:
             return nutritionHeader
         default:
-            return UIView()
+            return nil
         }
     }
     

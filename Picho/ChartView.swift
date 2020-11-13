@@ -110,7 +110,7 @@ class ChartView: UIView, ChartViewDelegate {
     }
     
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
-      
+        print("Tap")
     }
     
     required init?(coder: NSCoder) {

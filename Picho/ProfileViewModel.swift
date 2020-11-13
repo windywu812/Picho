@@ -29,7 +29,7 @@ class ProfileViewModel {
         }
     }
     
-    private func fetchUserDefault() {
+    func fetchUserDefault() {
         fullName = [
             UserDefaultService.firstName,
             UserDefaultService.lastName]

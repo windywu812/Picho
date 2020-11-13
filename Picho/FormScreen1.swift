@@ -34,11 +34,7 @@ class FormScreen1: UIViewController {
         label1.setConstraint(topAnchor: imageview.bottomAnchor,topAnchorConstant: 20,
                                 leadingAnchor: view.layoutMarginsGuide.leadingAnchor,leadingAnchorConstant: 31,
                                 trailingAnchor: view.layoutMarginsGuide.trailingAnchor,trailingAnchorConstant: -31)
-       
-        
-      
-        
-        
+               
         let label2 = UILabel()
         label2.text = "Picho needs the following information to help you with your recommended daily intake of calorie, saturated fat and sugar."
         label2.font = UIFont.systemFont(ofSize: 17)
