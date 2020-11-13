@@ -56,6 +56,7 @@ extension FoodHistory: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FoodHistoryCell.reuseIdentifier) as! FoodHistoryCell
+        cell.selectionStyle = .none
         
         switch indexPath.section {
         case 0:

@@ -75,6 +75,7 @@ class ChartView: UIView, ChartViewDelegate {
         sugarData.circleColors = [Color.green]
         sugarData.drawCircleHoleEnabled = false
         sugarData.drawValuesEnabled = false
+        sugarData.highlightColor = Color.green
         
         let satFatEntry = (0..<5).map { (i) -> ChartDataEntry in
             return ChartDataEntry(x: Double(i), y: Double(Int.random(in: 100...500)))
@@ -87,6 +88,7 @@ class ChartView: UIView, ChartViewDelegate {
         satFatData.circleColors = [Color.yellow]
         satFatData.drawCircleHoleEnabled = false
         satFatData.drawValuesEnabled = false
+        satFatData.highlightColor = Color.yellow
         
         let data: LineChartData = LineChartData(dataSets: [sugarData, satFatData])
         chartView.data = data
@@ -94,6 +96,10 @@ class ChartView: UIView, ChartViewDelegate {
         chartView.xAxis.axisMinimum = 0
         chartView.xAxis.granularity = 1
         chartView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
+    }
+    
+    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
+      
     }
     
     required init?(coder: NSCoder) {
