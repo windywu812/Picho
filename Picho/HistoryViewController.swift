@@ -32,6 +32,13 @@ class HistoryViewController: UIViewController {
         
         setupView()
         setupLayout()
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleDismiss))
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc private func handleDismiss() {
+        view.endEditing(true)
     }
     
     private func setupView() {
