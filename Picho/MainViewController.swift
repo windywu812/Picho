@@ -22,10 +22,13 @@ class MainViewController: UIViewController {
     private var saturatedFatIntake : Double = 0.0
     private var mealTodayView: MealsTodayView!
     
-    
-   let age = Double(UserDefaultService.age)
-   let weight = Double(UserDefaultService.weight)
+    let age = Double(UserDefaultService.age)
+    let weight = Double(UserDefaultService.weight)
     let height = Double(UserDefaultService.height)
+  
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)

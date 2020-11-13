@@ -16,6 +16,8 @@ class FoodSearchViewController: UIViewController {
     private var currentSegment = 0
     private var cancelable = Set<AnyCancellable>()
     
+    var eatingTime: EatTime =  .breakfast
+    
     @Published private var foods: [SearchedFood] = []
     
     override func viewDidLoad() {
@@ -75,36 +77,36 @@ class FoodSearchViewController: UIViewController {
     }
     
     private func setupSearchBar() {
-        let foods = [
-            SearchedFood(id: "5873608", name: "Nasi Goreng", description: "Per 1122g - Calories: 1850kcal | Fat: 65.44g | Carbs: 240.17g | Protein: 69.07g", brand: nil, type: "Generic", url: "https://www.fatsecret.com/calories-nutrition/generic/nasi-goreng"),
-            SearchedFood(id: "5873608", name: "Nasi Goreng", description: "Per 1122g - Calories: 1850kcal | Fat: 65.44g | Carbs: 240.17g | Protein: 69.07g", brand: nil, type: "Generic", url: "https://www.fatsecret.com/calories-nutrition/generic/nasi-goreng")
-        ]
-        self.foods = foods
+//        let foods = [
+//            SearchedFood(id: "5873608", name: "Nasi Goreng", description: "Per 1122g - Calories: 1850kcal | Fat: 65.44g | Carbs: 240.17g | Protein: 69.07g", brand: nil, type: "Generic", url: "https://www.fatsecret.com/calories-nutrition/generic/nasi-goreng"),
+//            SearchedFood(id: "5873608", name: "Nasi Goreng", description: "Per 1122g - Calories: 1850kcal | Fat: 65.44g | Carbs: 240.17g | Protein: 69.07g", brand: nil, type: "Generic", url: "https://www.fatsecret.com/calories-nutrition/generic/nasi-goreng")
+//        ]
+//        self.foods = foods
         
-//        NotificationCenter.default.publisher(for: UISearchTextField.textDidChangeNotification, object: searchBar.searchTextField)
-//            .map({ ($0.object as! UISearchTextField).text })
-//            .debounce(for: .milliseconds(400), scheduler: RunLoop.main)
-//            .filter({ !$0!.isEmpty })
-//            .sink { text in
-//                guard let text = text else { return }
-//                NetworkService.shared.searchFood(keyword: text) { (result) in
-//                    switch result {
-//                    case .success(let foods):
-//                        self.foods = foods
-//                    case .failure(let err):
-//                        self.foods = []
-//                        print(err.localizedDescription)
-//                    }
-//                }
-//            }
-//            .store(in: &cancelable)
-//
-//        $foods
-//            .sink { (_) in
-//                DispatchQueue.main.async {
-//                    self.tableView.reloadData()
-//                }
-//            }.store(in: &cancelable)
+        NotificationCenter.default.publisher(for: UISearchTextField.textDidChangeNotification, object: searchBar.searchTextField)
+            .map({ ($0.object as! UISearchTextField).text })
+            .debounce(for: .milliseconds(400), scheduler: RunLoop.main)
+            .filter({ !$0!.isEmpty })
+            .sink { text in
+                guard let text = text else { return }
+                NetworkService.shared.searchFood(keyword: text) { (result) in
+                    switch result {
+                    case .success(let foods):
+                        self.foods = foods
+                    case .failure(let err):
+                        self.foods = []
+                        print(err.localizedDescription)
+                    }
+                }
+            }
+            .store(in: &cancelable)
+
+        $foods
+            .sink { (_) in
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }.store(in: &cancelable)
     }
     
     @objc private func handleSegmentChange() {
@@ -130,6 +132,8 @@ extension FoodSearchViewController: UITableViewDataSource, UITableViewDelegate {
         let food = foods[indexPath.row]
         foodVC.foodId = food.id
         foodVC.foodName = food.name
+        foodVC.foodDescription = food.description
+        foodVC.eatingTime = eatingTime
         
         let vc = UINavigationController(rootViewController: foodVC)
         self.navigationController?.present(vc, animated: true, completion: nil)
