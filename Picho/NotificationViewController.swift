@@ -29,6 +29,7 @@ class NotificationViewController: UIViewController {
     private var timeWight : Date!
     private var timeReflection : Date!
     
+    var uud : String = ""
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
     }
@@ -70,6 +71,7 @@ class NotificationViewController: UIViewController {
         switch sender.tag {
         case 0:
             let uuidString = UUID().uuidString
+            
             notificationContent.title = "Good morning!"
             notificationContent.body = "Start your day with a breakfast, and don’t forget to log it! 😉"
             let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: timeBreakfast!)
@@ -81,17 +83,18 @@ class NotificationViewController: UIViewController {
             if sender.isOn == true{
                 
                 center.add(request) { (error) in
-                    print("okeeeee")
-                    print("2:\(uuidString)")
+                   
+                    self.uud = uuidString
+                    
                 }
                 print(timeBreakfast!)
                 print(dateFormat.string(from: timeBreakfast!))
                 print(sender.isOn)
             }
             if sender.isOn == false{
-                print("3:\(uuidString)")
-                center.removeDeliveredNotifications(withIdentifiers: [uuidString])
-                center.removePendingNotificationRequests(withIdentifiers: [uuidString])
+                print("3:\(uud)")
+                center.removeDeliveredNotifications(withIdentifiers: [uud])
+                center.removePendingNotificationRequests(withIdentifiers: [uud])
             }
         case 1:
             if sender.isOn {
@@ -103,13 +106,14 @@ class NotificationViewController: UIViewController {
                 let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
                 
                 let request = UNNotificationRequest(identifier: uuidString, content: notificationContent, trigger: trigger)
-                if sender.isOn {
-                    
+                if sender.isOn == true{
                     center.add(request) { (error) in
-                        print("oke")
+                    self.uud = uuidString
                     }
-                }else{
-                    center.removePendingNotificationRequests(withIdentifiers: [uuidString])
+                }
+                if sender.isOn == false{
+                    center.removeDeliveredNotifications(withIdentifiers: [uud])
+                    center.removePendingNotificationRequests(withIdentifiers: [uud])
                 }
             }
         case 2:
@@ -122,13 +126,14 @@ class NotificationViewController: UIViewController {
                 let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
                 
                 let request = UNNotificationRequest(identifier: uuidString, content: notificationContent, trigger: trigger)
-                if sender.isOn {
-                    
+                if sender.isOn == true{
                     center.add(request) { (error) in
-                        print("oke")
+                    self.uud = uuidString
                     }
-                }else{
-                    center.removePendingNotificationRequests(withIdentifiers: [uuidString])
+                }
+                if sender.isOn == false{
+                    center.removeDeliveredNotifications(withIdentifiers: [uud])
+                    center.removePendingNotificationRequests(withIdentifiers: [uud])
                 }
             }
         case 3:
@@ -141,13 +146,14 @@ class NotificationViewController: UIViewController {
                 let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
                 
                 let request = UNNotificationRequest(identifier: uuidString, content: notificationContent, trigger: trigger)
-                if sender.isOn {
-                    
+                if sender.isOn == true{
                     center.add(request) { (error) in
-                        print("oke")
+                    self.uud = uuidString
                     }
-                }else{
-                    center.removePendingNotificationRequests(withIdentifiers: [uuidString])
+                }
+                if sender.isOn == false{
+                    center.removeDeliveredNotifications(withIdentifiers: [uud])
+                    center.removePendingNotificationRequests(withIdentifiers: [uud])
                 }
             }
         case 4:
@@ -160,13 +166,14 @@ class NotificationViewController: UIViewController {
                 let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
                 
                 let request = UNNotificationRequest(identifier: uuidString, content: notificationContent, trigger: trigger)
-                if sender.isOn {
-                    
+                if sender.isOn == true{
                     center.add(request) { (error) in
-                        print("oke")
+                    self.uud = uuidString
                     }
-                }else{
-                    center.removePendingNotificationRequests(withIdentifiers: [uuidString])
+                }
+                if sender.isOn == false{
+                    center.removeDeliveredNotifications(withIdentifiers: [uud])
+                    center.removePendingNotificationRequests(withIdentifiers: [uud])
                 }
             }
         case 5:
@@ -179,32 +186,34 @@ class NotificationViewController: UIViewController {
                 let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
                 
                 let request = UNNotificationRequest(identifier: uuidString, content: notificationContent, trigger: trigger)
-                if sender.isOn {
-                    
+                if sender.isOn == true{
                     center.add(request) { (error) in
-                        print("oke")
+                    self.uud = uuidString
                     }
-                }else{
-                    center.removePendingNotificationRequests(withIdentifiers: [uuidString])
+                }
+                if sender.isOn == false{
+                    center.removeDeliveredNotifications(withIdentifiers: [uud])
+                    center.removePendingNotificationRequests(withIdentifiers: [uud])
                 }
             }
         case 6:
             if sender.isOn {
                 let uuidString = UUID().uuidString
-                notificationContent.title = "Weigh In"
-                notificationContent.body = "Have you checked your weight? "
+                notificationContent.title = "Reflection"
+                notificationContent.body = "Check Your Proggress "
                 let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: timeReflection!)
                 print(dateComponents)
                 let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
                 
                 let request = UNNotificationRequest(identifier: uuidString, content: notificationContent, trigger: trigger)
-                if sender.isOn {
-                    
+                if sender.isOn == true{
                     center.add(request) { (error) in
-                        print("oke")
+                    self.uud = uuidString
                     }
-                }else{
-                    center.removePendingNotificationRequests(withIdentifiers: [uuidString])
+                }
+                if sender.isOn == false{
+                    center.removeDeliveredNotifications(withIdentifiers: [uud])
+                    center.removePendingNotificationRequests(withIdentifiers: [uud])
                 }
             }
         default:

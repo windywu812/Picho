@@ -21,9 +21,17 @@ class MainViewController: UIViewController {
     
     private var mealTodayView: MealsTodayView!
     
+    
+//    if let age = Double(UserDefaultService.age) else {return}
+//    if let weight = Double(UserDefaultService.weight) else {return}
+//    if let height = Double(UserDefaultService.height) else {return}
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
+//        let calIntake = (10 * weight) + (6.25 * height) - (5 * age) + 5
+        
+        print(UserDefaultService.age)
         mainProgressView.calorieProgress.animate(value: 422, total: 2000)
         mainProgressView.sugarProgress.animate(value: 23, total: 36)
         mainProgressView.satFatProgress.animate(value: 13, total: 25)
