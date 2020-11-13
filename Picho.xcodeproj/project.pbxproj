@@ -80,6 +80,7 @@
 		26F98138255EDA9E00774F94 /* DailyIntake+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F98134255EDA9E00774F94 /* DailyIntake+CoreDataProperties.swift */; };
 		26F98139255EDA9E00774F94 /* Favorite+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F98135255EDA9E00774F94 /* Favorite+CoreDataClass.swift */; };
 		26F9813A255EDA9E00774F94 /* Favorite+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F98136255EDA9E00774F94 /* Favorite+CoreDataProperties.swift */; };
+		26F98151255EE1C400774F94 /* NotificationName+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F98150255EE1C400774F94 /* NotificationName+Extensions.swift */; };
 		6BE5482A823830922085C9A8 /* Pods_Picho.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 047BD003AF371FA6292C078C /* Pods_Picho.framework */; };
 		A28A5AF7255BD410007E66FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A5AF6255BD410007E66FA /* AppDelegate.swift */; };
 		A28A5AF9255BD410007E66FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A5AF8255BD410007E66FA /* SceneDelegate.swift */; };
@@ -166,6 +167,7 @@
 		26F98134255EDA9E00774F94 /* DailyIntake+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DailyIntake+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		26F98135255EDA9E00774F94 /* Favorite+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Favorite+CoreDataClass.swift"; sourceTree = "<group>"; };
 		26F98136255EDA9E00774F94 /* Favorite+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Favorite+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		26F98150255EE1C400774F94 /* NotificationName+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+Extensions.swift"; sourceTree = "<group>"; };
 		49A721B55AC962597415D463 /* Pods-Picho.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Picho.release.xcconfig"; path = "Target Support Files/Pods-Picho/Pods-Picho.release.xcconfig"; sourceTree = "<group>"; };
 		A28A5AF3255BD410007E66FA /* Picho.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Picho.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A28A5AF6255BD410007E66FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -357,6 +359,7 @@
 				23FEBA5E255BDDE6001EA146 /* NSAttributedString+Extensions.swift */,
 				2381F793255C057D008004DE /* UITextfield+Extensions.swift */,
 				238C9416255BEC2D00591791 /* StringOptional+Extensions.swift */,
+				26F98150255EE1C400774F94 /* NotificationName+Extensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -654,6 +657,7 @@
 				23FEB9DF255BDA72001EA146 /* SearchedFood.swift in Sources */,
 				26F98137255EDA9E00774F94 /* DailyIntake+CoreDataClass.swift in Sources */,
 				2381F77B255C03E7008004DE /* FormScreen5.swift in Sources */,
+				26F98151255EE1C400774F94 /* NotificationName+Extensions.swift in Sources */,
 				23FEBA53255BDD59001EA146 /* Value1Cell.swift in Sources */,
 				238C9405255BEB0C00591791 /* FoodSearchViewController.swift in Sources */,
 				26F98139255EDA9E00774F94 /* Favorite+CoreDataClass.swift in Sources */,

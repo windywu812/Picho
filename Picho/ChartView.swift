@@ -149,7 +149,9 @@ extension CustomDatePicker: UIPickerViewDelegate, UIPickerViewDataSource {
         
         let date: (String, Int) = (months[row], years[row])
         
-        NotificationCenter.default.post(name: .dateChanged, object: date)
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: .dateChanged, object: date)
+        }
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -174,8 +176,3 @@ extension CustomDatePicker: UIPickerViewDelegate, UIPickerViewDataSource {
     
 }
 
-extension Notification.Name {
-    static var dateChanged: Notification.Name {
-        return .init("dateChanged")
-    }
-}
