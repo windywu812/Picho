@@ -104,7 +104,7 @@ class FoodInputViewController: UIViewController {
     
     private func setupObservers() {
         let name = Notification.Name(rawValue: NotificationKey.dailyIntakeKey)
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadData(_:)), name: name, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadFetching(_:)), name: name, object: nil)
     }
     
     private func fetchData() {
@@ -114,7 +114,7 @@ class FoodInputViewController: UIViewController {
         tableView.reloadData()
     }
     
-    @objc private func reloadData(_ notification:Notification) {
+    @objc private func reloadFetching(_ notification:Notification) {
         fetchData()
     }
     

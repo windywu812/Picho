@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="19H15" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="DailyIntake" representedClassName=".DailyIntake" syncable="YES" codeGenerationType="class">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="20B29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="DailyIntake" representedClassName=".DailyIntake" syncable="YES">
         <attribute name="calorie" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="desc" attributeType="String"/>
@@ -11,13 +11,14 @@
         <attribute name="sugars" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="time" attributeType="String"/>
     </entity>
-    <entity name="Favorite" representedClassName="Favorite" syncable="YES" codeGenerationType="class">
+    <entity name="Favorite" representedClassName="Favorite" syncable="YES">
+        <attribute name="desc" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="isFavorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="DailyIntake" positionX="301.48046875" positionY="157.16015625" width="128" height="178"/>
-        <element name="Favorite" positionX="306" positionY="225" width="128" height="88"/>
+        <element name="DailyIntake" positionX="301.48046875" positionY="157.16015625" width="128" height="164"/>
+        <element name="Favorite" positionX="306" positionY="225" width="128" height="89"/>
     </elements>
 </model>

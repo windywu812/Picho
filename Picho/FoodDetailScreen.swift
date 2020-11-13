@@ -169,7 +169,6 @@ class FoodDetailScreen: UITableViewController {
         NotificationService.shared.post()
         
         dismiss(animated: true, completion: nil)
-//        self.navigationController?.popToRootViewController(animated: true)
     }
 
     private func fetchingFood() {
