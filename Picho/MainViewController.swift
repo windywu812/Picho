@@ -18,23 +18,20 @@ class MainViewController: UIViewController {
     private var waterCardView: HorizontalView!
     private var activityCardView: HorizontalView!
     private var activityStack: UIStackView!
-    
+    private var calorieIntake : Double = 0.0
+    private var saturatedFatIntake : Double = 0.0
     private var mealTodayView: MealsTodayView!
     
     
-//    if let age = Double(UserDefaultService.age) else {return}
-//    if let weight = Double(UserDefaultService.weight) else {return}
-//    if let height = Double(UserDefaultService.height) else {return}
+   let age = Double(UserDefaultService.age)
+   let weight = Double(UserDefaultService.weight)
+    let height = Double(UserDefaultService.height)
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
-//        let calIntake = (10 * weight) + (6.25 * height) - (5 * age) + 5
-        
-        print(UserDefaultService.age)
-        mainProgressView.calorieProgress.animate(value: 422, total: 2000)
+        mainProgressView.calorieProgress.animate(value: 422, total: Float(calorieIntake))
         mainProgressView.sugarProgress.animate(value: 23, total: 36)
-        mainProgressView.satFatProgress.animate(value: 13, total: 25)
+        mainProgressView.satFatProgress.animate(value: 13, total: Float(saturatedFatIntake))
     }
     
     override func viewDidLoad() {
@@ -43,7 +40,7 @@ class MainViewController: UIViewController {
         navigationItem.title = "Today"
         
 //        checkUser()
-        
+      
         setupScrollView()
         setupMainProgress()
         setupPichoCard()
@@ -60,7 +57,16 @@ class MainViewController: UIViewController {
             present(vc, animated: true)
         }
     }
-    
+    private func countCalorie(){
+        if UserDefaultService.gender == "Male" {
+            calorieIntake = (10 * weight!) + (6.25 * height!) - (5 * age!) + 5
+            saturatedFatIntake = (calorieIntake / 10) / 9
+        }
+        if UserDefaultService.gender == "Female" {
+            calorieIntake = (10 * weight!) + (6.25 * height!) - (5 * age!) - 161
+            saturatedFatIntake = (calorieIntake / 10) / 9
+        }
+    }
     private func setupGesture() {
         let tapActivity = UITapGestureRecognizer(target: self, action: #selector(handleActivity))
         activityCardView.addGestureRecognizer(tapActivity)
