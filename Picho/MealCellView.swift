@@ -16,15 +16,23 @@ class MealCellView: UIView {
     private var button: UIButton
     private let rootView: UIViewController
     
-    func setData(detail: String, totalCalorie: Double) {
-        detaiLabel.text = detail
-        totalCalorieLabel.text = "\(totalCalorie)"
+    var eatingTime: EatTime = .breakfast
+    
+    func setData(foods: [DailyIntake]) {
+        let mappedFoods = foods.map { $0.name ?? "" }
+        let mappedCalories = foods.map { $0.calorie }
+        let loggedFoods = mappedFoods.joined(separator: "\n")
+        let loggedCalories = mappedCalories.reduce(0.0, +)
+        
+        detaiLabel.text = loggedFoods
+        totalCalorieLabel.text = "\(Int(loggedCalories)) cal"
     }
     
     init(frame: CGRect = .zero,
          iconImage: String,
          title: String,
          buttonText: String,
+         foods: [DailyIntake],
          rootView: UIViewController
     ) {
         
@@ -51,14 +59,19 @@ class MealCellView: UIView {
         
         titleLabel.setFont(text: title, size: 17, weight: .bold)
         
-        detaiLabel.setFont(text: "Food Names 1\nFood Names 2\nFood Names 3\nFood Names 4", size: 15)
+        let mappedFoods = foods.map { $0.name ?? "" }
+        let mappedCalories = foods.map { $0.calorie }
+        let loggedFoods = mappedFoods.joined(separator: "\n")
+        let loggedCalories = mappedCalories.reduce(0.0, +)
+        
+        detaiLabel.setFont(text: loggedFoods, size: 15)
         detaiLabel.numberOfLines = 3
         
         button.tintColor = Color.green
         button.setAttributedTitle(NSAttributedString.bodyFont(text: buttonText), for: .normal)
         button.addTarget(self, action: #selector(handleTap(sender:)), for: .touchUpInside)
         
-        totalCalorieLabel.setFont(text: "322 cal", size: 17, weight: .bold)
+        totalCalorieLabel.setFont(text: "\(Int(loggedCalories)) cal", size: 17, weight: .bold)
         
         setupLayout()
     }
@@ -67,19 +80,19 @@ class MealCellView: UIView {
         switch sender.titleLabel?.text {
         case "Add Breakfast":
             let vc = FoodInputViewController()
-            vc.timeLabel = "Breakfast"
+            vc.eatingTime = EatTime.breakfast
             rootView.navigationController?.pushViewController(vc, animated: true)
         case "Add Lunch":
             let vc = FoodInputViewController()
-            vc.timeLabel = "Lunch"
+            vc.eatingTime = EatTime.lunch
             rootView.navigationController?.pushViewController(vc, animated: true)
         case "Add Dinner":
             let vc = FoodInputViewController()
-            vc.timeLabel = "Dinner"
+            vc.eatingTime = EatTime.dinner
             rootView.navigationController?.pushViewController(vc, animated: true)
         case "Add Snacks":
             let vc = FoodInputViewController()
-            vc.timeLabel = "Snacks"
+            vc.eatingTime = EatTime.snacks
             rootView.navigationController?.pushViewController(vc, animated: true)
         default:
             break

@@ -66,6 +66,12 @@
 		23FEBA5F255BDDE6001EA146 /* NSAttributedString+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA5E255BDDE6001EA146 /* NSAttributedString+Extensions.swift */; };
 		23FEBA62255BDF3A001EA146 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA61255BDF3A001EA146 /* NotificationViewController.swift */; };
 		23FEBA69255BE00C001EA146 /* MealCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA68255BE00C001EA146 /* MealCellView.swift */; };
+		26AF6A3E255E545A0045877C /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AF6A3D255E545A0045877C /* NotificationService.swift */; };
+		26D0532D255D43B200D3C09A /* NotificationKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D0532C255D43B200D3C09A /* NotificationKey.swift */; };
+		26F98137255EDA9E00774F94 /* DailyIntake+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F98133255EDA9E00774F94 /* DailyIntake+CoreDataClass.swift */; };
+		26F98138255EDA9E00774F94 /* DailyIntake+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F98134255EDA9E00774F94 /* DailyIntake+CoreDataProperties.swift */; };
+		26F98139255EDA9E00774F94 /* Favorite+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F98135255EDA9E00774F94 /* Favorite+CoreDataClass.swift */; };
+		26F9813A255EDA9E00774F94 /* Favorite+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F98136255EDA9E00774F94 /* Favorite+CoreDataProperties.swift */; };
 		6BE5482A823830922085C9A8 /* Pods_Picho.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 047BD003AF371FA6292C078C /* Pods_Picho.framework */; };
 		A28A5AF7255BD410007E66FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A5AF6255BD410007E66FA /* AppDelegate.swift */; };
 		A28A5AF9255BD410007E66FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A5AF8255BD410007E66FA /* SceneDelegate.swift */; };
@@ -138,6 +144,12 @@
 		23FEBA5E255BDDE6001EA146 /* NSAttributedString+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Extensions.swift"; sourceTree = "<group>"; };
 		23FEBA61255BDF3A001EA146 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		23FEBA68255BE00C001EA146 /* MealCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealCellView.swift; sourceTree = "<group>"; };
+		26AF6A3D255E545A0045877C /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		26D0532C255D43B200D3C09A /* NotificationKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationKey.swift; sourceTree = "<group>"; };
+		26F98133255EDA9E00774F94 /* DailyIntake+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DailyIntake+CoreDataClass.swift"; sourceTree = "<group>"; };
+		26F98134255EDA9E00774F94 /* DailyIntake+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DailyIntake+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		26F98135255EDA9E00774F94 /* Favorite+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Favorite+CoreDataClass.swift"; sourceTree = "<group>"; };
+		26F98136255EDA9E00774F94 /* Favorite+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Favorite+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		49A721B55AC962597415D463 /* Pods-Picho.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Picho.release.xcconfig"; path = "Target Support Files/Pods-Picho/Pods-Picho.release.xcconfig"; sourceTree = "<group>"; };
 		A28A5AF3255BD410007E66FA /* Picho.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Picho.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A28A5AF6255BD410007E66FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -287,6 +299,7 @@
 			children = (
 				23FEBA01255BDB06001EA146 /* Color.swift */,
 				23FEBA04255BDB10001EA146 /* EatingTime.swift */,
+				26D0532C255D43B200D3C09A /* NotificationKey.swift */,
 			);
 			name = Constants;
 			sourceTree = "<group>";
@@ -298,7 +311,7 @@
 				23FEBA0F255BDB48001EA146 /* CoreDataService.swift */,
 				23FEBA12255BDB50001EA146 /* HealtKitService.swift */,
 				23FEBA15255BDB55001EA146 /* UserDefaultService.swift */,
-				238C9416255BEC2D00591791 /* StringOptional+Extensions.swift */,
+				26AF6A3D255E545A0045877C /* NotificationService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -312,6 +325,7 @@
 				23FEBA26255BDBCA001EA146 /* UILabel+Extensions.swift */,
 				23FEBA5E255BDDE6001EA146 /* NSAttributedString+Extensions.swift */,
 				2381F793255C057D008004DE /* UITextfield+Extensions.swift */,
+				238C9416255BEC2D00591791 /* StringOptional+Extensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -398,6 +412,17 @@
 			name = ProfileScreen;
 			sourceTree = "<group>";
 		};
+		26F98128255ED9E000774F94 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				26F98133255EDA9E00774F94 /* DailyIntake+CoreDataClass.swift */,
+				26F98134255EDA9E00774F94 /* DailyIntake+CoreDataProperties.swift */,
+				26F98135255EDA9E00774F94 /* Favorite+CoreDataClass.swift */,
+				26F98136255EDA9E00774F94 /* Favorite+CoreDataProperties.swift */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
 		A28A5AEA255BD410007E66FA = {
 			isa = PBXGroup;
 			children = (
@@ -419,6 +444,7 @@
 		A28A5AF5255BD410007E66FA /* Picho */ = {
 			isa = PBXGroup;
 			children = (
+				26F98128255ED9E000774F94 /* CoreData */,
 				A28A5B38255C29F4007E66FA /* Picho.entitlements */,
 				23FEB9D0255BDA35001EA146 /* FatSecretSwift */,
 				23FEB9FC255BDAED001EA146 /* Base */,
@@ -583,6 +609,7 @@
 				23FEB9D6255BDA49001EA146 /* FatSecretCredentials.swift in Sources */,
 				A28A5B41255CE519007E66FA /* DetailSugarNSatFat.swift in Sources */,
 				23FEBA31255BDC7A001EA146 /* MainProgressView.swift in Sources */,
+				26AF6A3E255E545A0045877C /* NotificationService.swift in Sources */,
 				A28A5AFB255BD410007E66FA /* MainViewController.swift in Sources */,
 				23FEBA10255BDB48001EA146 /* CoreDataService.swift in Sources */,
 				23FEB9F1255BDA94001EA146 /* Array+Utils.swift in Sources */,
@@ -591,17 +618,21 @@
 				2381F790255C0428008004DE /* PageControlDescription.swift in Sources */,
 				23FEB9FE255BDAF3001EA146 /* AppCoordinator.swift in Sources */,
 				23FEB9DF255BDA72001EA146 /* SearchedFood.swift in Sources */,
+				26F98137255EDA9E00774F94 /* DailyIntake+CoreDataClass.swift in Sources */,
 				2381F77B255C03E7008004DE /* FormScreen5.swift in Sources */,
 				23FEBA53255BDD59001EA146 /* Value1Cell.swift in Sources */,
 				238C9405255BEB0C00591791 /* FoodSearchViewController.swift in Sources */,
+				26F98139255EDA9E00774F94 /* Favorite+CoreDataClass.swift in Sources */,
 				23FEBA37255BDC87001EA146 /* MealTodayView.swift in Sources */,
 				23414A0A255CDE4800E1F48D /* HorizontalProgressView.swift in Sources */,
 				2381F78D255C041E008004DE /* DescriptionScreen4.swift in Sources */,
 				23FEB9DC255BDA6C001EA146 /* APIKey.swift in Sources */,
+				26F9813A255EDA9E00774F94 /* Favorite+CoreDataProperties.swift in Sources */,
 				23FEB9D2255BDA40001EA146 /* FatSecretClient.swift in Sources */,
 				23FEB9E8255BDA81001EA146 /* Food.swift in Sources */,
 				2381F775255C03DF008004DE /* FormScreen3.swift in Sources */,
 				23FEBA59255BDD90001EA146 /* FoodDetailScreen.swift in Sources */,
+				26D0532D255D43B200D3C09A /* NotificationKey.swift in Sources */,
 				23FEBA69255BE00C001EA146 /* MealCellView.swift in Sources */,
 				23FEBA02255BDB06001EA146 /* Color.swift in Sources */,
 				2381F794255C057D008004DE /* UITextfield+Extensions.swift in Sources */,
@@ -628,6 +659,7 @@
 				A28A5AF7255BD410007E66FA /* AppDelegate.swift in Sources */,
 				2381F76E255C03D5008004DE /* FormScreen1.swift in Sources */,
 				23FEBA50255BDD51001EA146 /* ProfileViewController.swift in Sources */,
+				26F98138255EDA9E00774F94 /* DailyIntake+CoreDataProperties.swift in Sources */,
 				23FEB9E5255BDA7D001EA146 /* Serving.swift in Sources */,
 				A28A5AF9255BD410007E66FA /* SceneDelegate.swift in Sources */,
 			);

@@ -17,22 +17,30 @@ extension Date {
     }
     
     func startOfTheDay() -> Date {
-        return Calendar.current.startOfDay(for: self)
+        var calendar = Calendar.current
+        calendar.timeZone = NSTimeZone(forSecondsFromGMT: 0) as TimeZone
+        return calendar.startOfDay(for: self)
     }
 
-    func endDate(of date: Date) -> Date {
+    func endDate() -> Date {
         var components = DateComponents()
         components.day = 1
         components.second = -1
         
-        return Calendar.current.date(byAdding: components, to: Date().startOfTheDay())!
+        var calendar = Calendar.current
+        calendar.timeZone = NSTimeZone.local
+        
+        return calendar.date(byAdding: components, to: self.startOfTheDay())!
     }
     
     func nextDate() -> Date {
         var components = DateComponents()
         components.day = 1
         
-        return Calendar.current.date(byAdding: components, to: Date())!
+        var calendar = Calendar.current
+        calendar.timeZone = NSTimeZone.local
+        
+        return calendar.date(byAdding: components, to: Date())!
     }
     
     func toShortFormat(of date: Date) -> String {

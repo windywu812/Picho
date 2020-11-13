@@ -1,41 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="19H2" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Breakfast" representedClassName="Breakfast" syncable="YES" codeGenerationType="class">
-        <attribute name="food" optional="YES" attributeType="Transformable" customClassName="[String]"/>
-        <attribute name="total" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="belongTo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DailyIntake" inverseName="breakfast" inverseEntity="DailyIntake"/>
-    </entity>
-    <entity name="DailyIntake" representedClassName="DailyIntake" syncable="YES" codeGenerationType="class">
-        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="20B29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="DailyIntake" representedClassName=".DailyIntake" syncable="YES">
+        <attribute name="calorie" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="desc" attributeType="String"/>
+        <attribute name="foodId" attributeType="String"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" attributeType="String"/>
         <attribute name="saturatedFat" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="sugar" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="totalCalories" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="breakfast" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Breakfast" inverseName="belongTo" inverseEntity="Breakfast"/>
-        <relationship name="dinner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Dinner" inverseName="belongTo" inverseEntity="Dinner"/>
-        <relationship name="lunch" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Lunch" inverseName="belongTo" inverseEntity="Lunch"/>
-        <relationship name="snack" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Snack" inverseName="belongTo" inverseEntity="Snack"/>
+        <attribute name="sugars" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="time" attributeType="String"/>
     </entity>
-    <entity name="Dinner" representedClassName="Dinner" syncable="YES" codeGenerationType="class">
-        <attribute name="food" optional="YES" attributeType="Transformable" customClassName="[String]"/>
-        <attribute name="total" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="belongTo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DailyIntake" inverseName="dinner" inverseEntity="DailyIntake"/>
-    </entity>
-    <entity name="Lunch" representedClassName="Lunch" syncable="YES" codeGenerationType="class">
-        <attribute name="food" optional="YES" attributeType="Transformable" customClassName="[String]"/>
-        <attribute name="total" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="belongTo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DailyIntake" inverseName="lunch" inverseEntity="DailyIntake"/>
-    </entity>
-    <entity name="Snack" representedClassName="Snack" syncable="YES" codeGenerationType="class">
-        <attribute name="food" optional="YES" attributeType="Transformable" customClassName="[String]"/>
-        <attribute name="total" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="belongTo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DailyIntake" inverseName="snack" inverseEntity="DailyIntake"/>
+    <entity name="Favorite" representedClassName="Favorite" syncable="YES">
+        <attribute name="desc" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="isFavorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Breakfast" positionX="-63" positionY="-18" width="128" height="88"/>
-        <element name="DailyIntake" positionX="-54" positionY="-9" width="128" height="178"/>
-        <element name="Dinner" positionX="-36" positionY="9" width="128" height="88"/>
-        <element name="Lunch" positionX="-18" positionY="27" width="128" height="88"/>
-        <element name="Snack" positionX="0" positionY="45" width="128" height="88"/>
+        <element name="DailyIntake" positionX="301.48046875" positionY="157.16015625" width="128" height="164"/>
+        <element name="Favorite" positionX="306" positionY="225" width="128" height="89"/>
     </elements>
 </model>
