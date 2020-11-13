@@ -7,8 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2339FBEC255E998F00D0ABB3 /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2339FBEB255E998F00D0ABB3 /* SummaryView.swift */; };
+		2339FBEF255E99AE00D0ABB3 /* HorizontalRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2339FBEE255E99AE00D0ABB3 /* HorizontalRowView.swift */; };
+		2339FBF2255E99C300D0ABB3 /* IndicatorLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2339FBF1255E99C300D0ABB3 /* IndicatorLabelView.swift */; };
 		23414A07255CD36A00E1F48D /* WaterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23414A06255CD36A00E1F48D /* WaterViewController.swift */; };
 		23414A0A255CDE4800E1F48D /* HorizontalProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23414A09255CDE4800E1F48D /* HorizontalProgressView.swift */; };
+		2344568F255E4BB0001497DD /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2344568E255E4BB0001497DD /* ChartView.swift */; };
+		23445693255E4BD5001497DD /* LegendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23445692255E4BD5001497DD /* LegendView.swift */; };
 		23645F23255C2D5400DA5697 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23645F22255C2D5400DA5697 /* ActivityViewController.swift */; };
 		236D9C7A255D3EB500B252B5 /* InfoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236D9C79255D3EB500B252B5 /* InfoDetailViewController.swift */; };
 		2381F76E255C03D5008004DE /* FormScreen1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2381F76D255C03D5008004DE /* FormScreen1.swift */; };
@@ -77,8 +82,13 @@
 
 /* Begin PBXFileReference section */
 		047BD003AF371FA6292C078C /* Pods_Picho.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Picho.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2339FBEB255E998F00D0ABB3 /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
+		2339FBEE255E99AE00D0ABB3 /* HorizontalRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalRowView.swift; sourceTree = "<group>"; };
+		2339FBF1255E99C300D0ABB3 /* IndicatorLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorLabelView.swift; sourceTree = "<group>"; };
 		23414A06255CD36A00E1F48D /* WaterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterViewController.swift; sourceTree = "<group>"; };
 		23414A09255CDE4800E1F48D /* HorizontalProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalProgressView.swift; sourceTree = "<group>"; };
+		2344568E255E4BB0001497DD /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		23445692255E4BD5001497DD /* LegendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegendView.swift; sourceTree = "<group>"; };
 		23645F22255C2D5400DA5697 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		236D9C79255D3EB500B252B5 /* InfoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoDetailViewController.swift; sourceTree = "<group>"; };
 		2381F76D255C03D5008004DE /* FormScreen1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormScreen1.swift; sourceTree = "<group>"; };
@@ -160,6 +170,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2344568D255E4BA3001497DD /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				2344568E255E4BB0001497DD /* ChartView.swift */,
+				23445692255E4BD5001497DD /* LegendView.swift */,
+				2339FBEB255E998F00D0ABB3 /* SummaryView.swift */,
+				2339FBEE255E99AE00D0ABB3 /* HorizontalRowView.swift */,
+				2339FBF1255E99C300D0ABB3 /* IndicatorLabelView.swift */,
+			);
+			name = Components;
+			sourceTree = "<group>";
+		};
 		23645F21255C2D3400DA5697 /* DetailViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -376,6 +398,7 @@
 			isa = PBXGroup;
 			children = (
 				23FEBA55255BDD75001EA146 /* HistoryViewController.swift */,
+				2344568D255E4BA3001497DD /* Components */,
 			);
 			name = HistoryScreen;
 			sourceTree = "<group>";
@@ -560,6 +583,7 @@
 				23FEBA5C255BDDB2001EA146 /* FoodInputViewController.swift in Sources */,
 				23414A07255CD36A00E1F48D /* WaterViewController.swift in Sources */,
 				23FEB9EE255BDA8F001EA146 /* CharacterSet+Utils.swift in Sources */,
+				23445693255E4BD5001497DD /* LegendView.swift in Sources */,
 				23FEB9F7255BDAA2001EA146 /* String+Utils.swift in Sources */,
 				23FEBA1D255BDBB4001EA146 /* UIView+Extensions.swift in Sources */,
 				2381F778255C03E3008004DE /* FormScreen4.swift in Sources */,
@@ -606,12 +630,15 @@
 				23645F23255C2D5400DA5697 /* ActivityViewController.swift in Sources */,
 				238C9417255BEC2D00591791 /* StringOptional+Extensions.swift in Sources */,
 				23FEB9F4255BDA9C001EA146 /* URLComponents+Utils.swift in Sources */,
+				2339FBEF255E99AE00D0ABB3 /* HorizontalRowView.swift in Sources */,
+				2339FBF2255E99C300D0ABB3 /* IndicatorLabelView.swift in Sources */,
 				A28A5B01255BD410007E66FA /* Picho.xcdatamodeld in Sources */,
 				23FEBA5F255BDDE6001EA146 /* NSAttributedString+Extensions.swift in Sources */,
 				2381F772255C03DB008004DE /* FormScreen2.swift in Sources */,
 				23FEBA3B255BDCA6001EA146 /* CircularProgressView.swift in Sources */,
 				23FEBA56255BDD75001EA146 /* HistoryViewController.swift in Sources */,
 				23FEB9E2255BDA79001EA146 /* FatSecretError.swift in Sources */,
+				2344568F255E4BB0001497DD /* ChartView.swift in Sources */,
 				23FEBA4D255BDD49001EA146 /* ProfileViewModel.swift in Sources */,
 				23FEB9D9255BDA53001EA146 /* FatSecretParams.swift in Sources */,
 				23FEBA46255BDCBC001EA146 /* PichoCardView.swift in Sources */,
@@ -620,6 +647,7 @@
 				23FEBA50255BDD51001EA146 /* ProfileViewController.swift in Sources */,
 				23FEB9E5255BDA7D001EA146 /* Serving.swift in Sources */,
 				A28A5AF9255BD410007E66FA /* SceneDelegate.swift in Sources */,
+				2339FBEC255E998F00D0ABB3 /* SummaryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
