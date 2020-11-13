@@ -8,5 +8,5 @@
 import Foundation
 
 struct NotificationKey {
-    let dailyIntakeKey = "\(Bundle.main.bundleIdentifier ?? "").dailyintake"
+    static let dailyIntakeKey = "\(Bundle.main.bundleIdentifier ?? "").dailyintake"
 }

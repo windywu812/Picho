@@ -62,6 +62,7 @@
 		23FEBA5F255BDDE6001EA146 /* NSAttributedString+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA5E255BDDE6001EA146 /* NSAttributedString+Extensions.swift */; };
 		23FEBA62255BDF3A001EA146 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA61255BDF3A001EA146 /* NotificationViewController.swift */; };
 		23FEBA69255BE00C001EA146 /* MealCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA68255BE00C001EA146 /* MealCellView.swift */; };
+		26AF6A3E255E545A0045877C /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AF6A3D255E545A0045877C /* NotificationService.swift */; };
 		26D0532D255D43B200D3C09A /* NotificationKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D0532C255D43B200D3C09A /* NotificationKey.swift */; };
 		6BE5482A823830922085C9A8 /* Pods_Picho.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 047BD003AF371FA6292C078C /* Pods_Picho.framework */; };
 		A28A5AF7255BD410007E66FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A5AF6255BD410007E66FA /* AppDelegate.swift */; };
@@ -129,6 +130,7 @@
 		23FEBA5E255BDDE6001EA146 /* NSAttributedString+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Extensions.swift"; sourceTree = "<group>"; };
 		23FEBA61255BDF3A001EA146 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		23FEBA68255BE00C001EA146 /* MealCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealCellView.swift; sourceTree = "<group>"; };
+		26AF6A3D255E545A0045877C /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		26D0532C255D43B200D3C09A /* NotificationKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationKey.swift; sourceTree = "<group>"; };
 		49A721B55AC962597415D463 /* Pods-Picho.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Picho.release.xcconfig"; path = "Target Support Files/Pods-Picho/Pods-Picho.release.xcconfig"; sourceTree = "<group>"; };
 		A28A5AF3255BD410007E66FA /* Picho.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Picho.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -276,6 +278,7 @@
 				23FEBA0F255BDB48001EA146 /* CoreDataService.swift */,
 				23FEBA12255BDB50001EA146 /* HealtKitService.swift */,
 				23FEBA15255BDB55001EA146 /* UserDefaultService.swift */,
+				26AF6A3D255E545A0045877C /* NotificationService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -554,6 +557,7 @@
 				23FEB9EB255BDA85001EA146 /* Search.swift in Sources */,
 				23FEB9D6255BDA49001EA146 /* FatSecretCredentials.swift in Sources */,
 				23FEBA31255BDC7A001EA146 /* MainProgressView.swift in Sources */,
+				26AF6A3E255E545A0045877C /* NotificationService.swift in Sources */,
 				A28A5AFB255BD410007E66FA /* MainViewController.swift in Sources */,
 				23FEBA10255BDB48001EA146 /* CoreDataService.swift in Sources */,
 				23FEB9F1255BDA94001EA146 /* Array+Utils.swift in Sources */,

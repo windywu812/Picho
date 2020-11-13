@@ -37,6 +37,8 @@ class FoodDetailScreen: UITableViewController {
     
     let healthStore = HKHealthStore()
     
+    var isAddShown = true
+    
     var foodDescription: String = ""
     var foodName: String = ""
     var foodId: String = "" {
@@ -99,7 +101,7 @@ class FoodDetailScreen: UITableViewController {
         nutritionHeader.addSubview(servingLabel)
         
         navigationItem.title = "Nasi Lemak"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .done, target: self, action: #selector(handleAdd))
+        navigationItem.rightBarButtonItem = isAddShown ? UIBarButtonItem(title: "Add", style: .done, target: self, action: #selector(handleAdd)) : nil
         
         setupFavorite()
         
@@ -163,8 +165,11 @@ class FoodDetailScreen: UITableViewController {
         if !mainAmounts.isEmpty {
             CoreDataService.shared.addDailyIntake(id: UUID(), foodId: foodId, name: foodName, description: foodDescription, calorie: calorieNutrition, saturatedFat: mainAmounts[0], sugars: mainAmounts[1], time: eatingTime)
         }
-
-        self.navigationController?.popToRootViewController(animated: true)
+        
+        NotificationService.shared.post()
+        
+        dismiss(animated: true, completion: nil)
+//        self.navigationController?.popToRootViewController(animated: true)
     }
 
     private func fetchingFood() {

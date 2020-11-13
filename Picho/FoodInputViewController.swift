@@ -36,6 +36,8 @@ class FoodInputViewController: UIViewController {
         setupLayout()
         fetchData()
         
+        setupObservers()
+        
         navigationItem.largeTitleDisplayMode = .never
         title = eatingTime.rawValue.capitalized
     }
@@ -100,10 +102,20 @@ class FoodInputViewController: UIViewController {
         )
     }
     
+    private func setupObservers() {
+        let name = Notification.Name(rawValue: NotificationKey.dailyIntakeKey)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadData(_:)), name: name, object: nil)
+    }
+    
     private func fetchData() {
         CoreDataService.shared.getDailyIntake(time: eatingTime, date: Date()) { intakes in
             self.foods = intakes
         }
+        tableView.reloadData()
+    }
+    
+    @objc private func reloadData(_ notification:Notification) {
+        fetchData()
     }
     
     @objc private func handleAdd() {
@@ -122,6 +134,7 @@ extension FoodInputViewController: UITableViewDelegate {
         foodVC.foodId = food.foodId ?? ""
         foodVC.foodDescription = food.description
         foodVC.foodName = food.name ?? ""
+        foodVC.isAddShown = false
         
         let vc = UINavigationController(rootViewController: foodVC)
         self.navigationController?.present(vc, animated: true, completion: nil)
@@ -130,7 +143,12 @@ extension FoodInputViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction(style: .destructive, title: nil) { (action, view, bool) in
-            print("deleted")
+            let food = self.foods[indexPath.row]
+            if let id = food.id {
+                CoreDataService.shared.deleteDailyIntake(id)
+                NotificationService.shared.post()
+            }
+            tableView.reloadData()
         }
         action.image = UIImage(systemName: "trash.fill")
         let swipe = UISwipeActionsConfiguration(actions: [action])

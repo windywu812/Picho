@@ -18,9 +18,14 @@ class MealCellView: UIView {
     
     var eatingTime: EatTime = .breakfast
     
-    func setData(detail: String, totalCalorie: Double) {
-        detaiLabel.text = detail
-        totalCalorieLabel.text = "\(totalCalorie)"
+    func setData(foods: [DailyIntake]) {
+        let mappedFoods = foods.map { $0.name ?? "" }
+        let mappedCalories = foods.map { $0.calorie }
+        let loggedFoods = mappedFoods.joined(separator: "\n")
+        let loggedCalories = mappedCalories.reduce(0.0, +)
+        
+        detaiLabel.text = loggedFoods
+        totalCalorieLabel.text = "\(Int(loggedCalories)) cal"
     }
     
     init(frame: CGRect = .zero,

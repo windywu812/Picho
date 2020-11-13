@@ -30,8 +30,13 @@ class MealsTodayView: UIView {
         super.init(frame: frame)
         
         fetchDailyIntake()
+        setupObservers()
         setupView()
         setupLayout()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     private func setupView() {
@@ -62,6 +67,56 @@ class MealsTodayView: UIView {
         addSubview(snackCard)
     }
     
+    private func setupLayout() {
+        title.setConstraint(
+            topAnchor: topAnchor,
+            leadingAnchor: leadingAnchor)
+        
+        let mainStack = UIStackView(arrangedSubviews: [breakFastCard, lunchCard, dinnerCard, snackCard])
+        mainStack.spacing = 16
+        mainStack.axis = .vertical
+        addSubview(mainStack)
+        
+        mainStack.setConstraint(
+            topAnchor: title.bottomAnchor, topAnchorConstant: 16,
+            bottomAnchor: bottomAnchor,
+            leadingAnchor: leadingAnchor,
+            trailingAnchor: trailingAnchor)
+        
+        breakFastCard.setConstraint(heighAnchorConstant: 140)
+        lunchCard.setConstraint(heighAnchorConstant: 140)
+        dinnerCard.setConstraint(heighAnchorConstant: 140)
+        snackCard.setConstraint(heighAnchorConstant: 140)
+    }
+    
+    @objc private func setupObservers() {
+        let name = Notification.Name(rawValue: NotificationKey.dailyIntakeKey)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadDailyIntake(_:)), name: name, object: nil)
+    }
+    
+    @objc private func reloadDailyIntake(_ notification: Notification) {
+        fetchDailyIntake()
+        breakFastCard.setData(foods: breakfasts)
+        lunchCard.setData(foods: lunches)
+        dinnerCard.setData(foods: dinners)
+        snackCard.setData(foods: snacks)
+    }
+    
+    @objc private func fetchDailyIntake() {
+        CoreDataService.shared.getDailyIntake(time: .breakfast, date: Date()) { intakes in
+            self.breakfasts = intakes
+        }
+        CoreDataService.shared.getDailyIntake(time: .lunch, date: Date()) { intakes in
+            self.lunches = intakes
+        }
+        CoreDataService.shared.getDailyIntake(time: .dinner, date: Date()) { intakes in
+            self.dinners = intakes
+        }
+        CoreDataService.shared.getDailyIntake(time: .snacks, date: Date()) { intakes in
+            self.snacks = intakes
+        }
+    }
+    
     @objc private func handleBreakfast(sender: UITapGestureRecognizer) {
         let vc = FoodInputViewController()
         vc.eatingTime = .breakfast
@@ -84,43 +139,6 @@ class MealsTodayView: UIView {
         let vc = FoodInputViewController()
         vc.eatingTime = .snacks
         rootView.navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    private func fetchDailyIntake() {
-        CoreDataService.shared.getDailyIntake(time: .breakfast, date: Date()) { intakes in
-            self.breakfasts = intakes
-        }
-        CoreDataService.shared.getDailyIntake(time: .lunch, date: Date()) { intakes in
-            self.lunches = intakes
-        }
-        CoreDataService.shared.getDailyIntake(time: .dinner, date: Date()) { intakes in
-            self.dinners = intakes
-        }
-        CoreDataService.shared.getDailyIntake(time: .snacks, date: Date()) { intakes in
-            self.snacks = intakes
-        }
-    }
-    
-    private func setupLayout() {
-        title.setConstraint(
-            topAnchor: topAnchor,
-            leadingAnchor: leadingAnchor)
-        
-        let mainStack = UIStackView(arrangedSubviews: [breakFastCard, lunchCard, dinnerCard, snackCard])
-        mainStack.spacing = 16
-        mainStack.axis = .vertical
-        addSubview(mainStack)
-        
-        mainStack.setConstraint(
-            topAnchor: title.bottomAnchor, topAnchorConstant: 16,
-            bottomAnchor: bottomAnchor,
-            leadingAnchor: leadingAnchor,
-            trailingAnchor: trailingAnchor)
-        
-        breakFastCard.setConstraint(heighAnchorConstant: 140)
-        lunchCard.setConstraint(heighAnchorConstant: 140)
-        dinnerCard.setConstraint(heighAnchorConstant: 140)
-        snackCard.setConstraint(heighAnchorConstant: 140)
     }
     
     required init?(coder: NSCoder) {
