@@ -32,6 +32,9 @@
 		238C9409255BEB1900591791 /* FoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238C9408255BEB1900591791 /* FoodCell.swift */; };
 		238C9412255BEBAF00591791 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238C9411255BEBAF00591791 /* DetailCell.swift */; };
 		238C9417255BEC2D00591791 /* StringOptional+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238C9416255BEC2D00591791 /* StringOptional+Extensions.swift */; };
+		23DC2B3B255EB70A00025434 /* FoodHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC2B3A255EB70A00025434 /* FoodHistoryCell.swift */; };
+		23DC2B3E255EB73600025434 /* FoodHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC2B3D255EB73600025434 /* FoodHistory.swift */; };
+		23DC2B41255EB75700025434 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC2B40255EB75700025434 /* HeaderView.swift */; };
 		23FEB9D2255BDA40001EA146 /* FatSecretClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9D1255BDA40001EA146 /* FatSecretClient.swift */; };
 		23FEB9D6255BDA49001EA146 /* FatSecretCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9D5255BDA49001EA146 /* FatSecretCredentials.swift */; };
 		23FEB9D9255BDA53001EA146 /* FatSecretParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9D8255BDA53001EA146 /* FatSecretParams.swift */; };
@@ -107,6 +110,9 @@
 		238C9408255BEB1900591791 /* FoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCell.swift; sourceTree = "<group>"; };
 		238C9411255BEBAF00591791 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
 		238C9416255BEC2D00591791 /* StringOptional+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StringOptional+Extensions.swift"; sourceTree = "<group>"; };
+		23DC2B3A255EB70A00025434 /* FoodHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodHistoryCell.swift; sourceTree = "<group>"; };
+		23DC2B3D255EB73600025434 /* FoodHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodHistory.swift; sourceTree = "<group>"; };
+		23DC2B40255EB75700025434 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		23FEB9D1255BDA40001EA146 /* FatSecretClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FatSecretClient.swift; sourceTree = "<group>"; };
 		23FEB9D5255BDA49001EA146 /* FatSecretCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FatSecretCredentials.swift; sourceTree = "<group>"; };
 		23FEB9D8255BDA53001EA146 /* FatSecretParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FatSecretParams.swift; sourceTree = "<group>"; };
@@ -178,6 +184,9 @@
 				2339FBEB255E998F00D0ABB3 /* SummaryView.swift */,
 				2339FBEE255E99AE00D0ABB3 /* HorizontalRowView.swift */,
 				2339FBF1255E99C300D0ABB3 /* IndicatorLabelView.swift */,
+				23DC2B3D255EB73600025434 /* FoodHistory.swift */,
+				23DC2B3A255EB70A00025434 /* FoodHistoryCell.swift */,
+				23DC2B40255EB75700025434 /* HeaderView.swift */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -580,6 +589,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23DC2B3E255EB73600025434 /* FoodHistory.swift in Sources */,
 				23FEBA5C255BDDB2001EA146 /* FoodInputViewController.swift in Sources */,
 				23414A07255CD36A00E1F48D /* WaterViewController.swift in Sources */,
 				23FEB9EE255BDA8F001EA146 /* CharacterSet+Utils.swift in Sources */,
@@ -619,9 +629,11 @@
 				23FEBA69255BE00C001EA146 /* MealCellView.swift in Sources */,
 				23FEBA02255BDB06001EA146 /* Color.swift in Sources */,
 				2381F794255C057D008004DE /* UITextfield+Extensions.swift in Sources */,
+				23DC2B3B255EB70A00025434 /* FoodHistoryCell.swift in Sources */,
 				2381F787255C0416008004DE /* DescriptionScreen2.swift in Sources */,
 				23FEBA0C255BDB42001EA146 /* NetworkService.swift in Sources */,
 				238C9412255BEBAF00591791 /* DetailCell.swift in Sources */,
+				23DC2B41255EB75700025434 /* HeaderView.swift in Sources */,
 				23FEBA16255BDB55001EA146 /* UserDefaultService.swift in Sources */,
 				2381F78A255C0419008004DE /* DescriptionScreen3.swift in Sources */,
 				23FEBA3F255BDCAE001EA146 /* SmallCircularProgressView.swift in Sources */,
