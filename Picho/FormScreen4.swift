@@ -116,6 +116,46 @@ class FormScreen4: UIViewController {
             heighAnchorConstant: 50)
         
         getStartedBtn.addTarget(self, action: #selector(handleSave), for: .touchUpInside)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification: )), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        // call the 'keyboardWillHide' function when the view controlelr receive notification that keyboard is going to be hidden
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification: )), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    private var activeTextField: UITextField?
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+
+      guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+
+        // if keyboard size is not available for some reason, dont do anything
+        return
+      }
+
+      var shouldMoveViewUp = false
+
+      // if active text field is not nil
+      if let activeTextField = activeTextField {
+
+        let bottomOfTextField = activeTextField.convert(activeTextField.bounds, to: self.view).maxY;
+        
+        let topOfKeyboard = self.view.frame.height - keyboardSize.height
+
+        // if the bottom of Textfield is below the top of keyboard, move up
+        if bottomOfTextField > topOfKeyboard {
+          shouldMoveViewUp = true
+        }
+      }
+
+      if(shouldMoveViewUp) {
+        self.view.frame.origin.y = 0 - keyboardSize.height
+      }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        // move back the root view origin to zero
+        self.view.frame.origin.y = 0
     }
     
     @objc func handleSave(){
@@ -136,14 +176,18 @@ class FormScreen4: UIViewController {
 
 extension FormScreen4: UITextFieldDelegate {
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.activeTextField = textField
+    }
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
-                
+        
         if textField.tag == 0 {
             weight = textField.text ?? ""
         } else {
             height = textField.text ?? ""
         }
-         
+        
         if !height.isEmpty && !weight.isEmpty {
             getStartedBtn.backgroundColor = Color.green
             getStartedBtn.tintColor = .white
@@ -153,6 +197,8 @@ extension FormScreen4: UITextFieldDelegate {
             getStartedBtn.tintColor = Color.green
             getStartedBtn.isEnabled = false
         }
+        
+        self.activeTextField = nil
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
