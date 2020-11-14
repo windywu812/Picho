@@ -10,6 +10,7 @@ import UIKit
 class FormScreen5: UIViewController {
     
     private var isChecked = false
+    private var getStartedBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,11 +83,12 @@ class FormScreen5: UIViewController {
             leadingAnchor: view.layoutMarginsGuide.leadingAnchor, leadingAnchorConstant: 16,
             trailingAnchor: view.layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: -16)
         
-        let getStartedBtn = UIButton()
+        getStartedBtn = UIButton()
         getStartedBtn.setTitle("LET’S DO THIS!", for: .normal)
         getStartedBtn.isEnabled = false
         getStartedBtn.layer.cornerRadius =  6
-        getStartedBtn.backgroundColor = Color.green
+        getStartedBtn.backgroundColor = Color.lightGreen
+        getStartedBtn.tintColor = Color.green
         getStartedBtn.addTarget(self, action: #selector(handleSave), for: .touchUpInside)
         
         view.addSubview(getStartedBtn)
@@ -101,13 +103,20 @@ class FormScreen5: UIViewController {
         isChecked.toggle()
         if isChecked {
             sender.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+            getStartedBtn.backgroundColor = Color.green
+            getStartedBtn.tintColor = .white
+            getStartedBtn.isEnabled = true
         } else{
             sender.setImage(UIImage(systemName: "circle"), for: .normal)
+            getStartedBtn.backgroundColor = Color.lightGreen
+            getStartedBtn.tintColor = Color.green
+            getStartedBtn.isEnabled = false
         }
     }
     
     @objc private func handleSave() {
         let vc = UINavigationController(rootViewController: MainViewController())
+        vc.modalPresentationStyle = .fullScreen
         UserDefaultService.hasLaunched = true
         present(vc, animated: true, completion: nil)
     }

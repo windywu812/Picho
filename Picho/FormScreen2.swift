@@ -67,8 +67,11 @@ class FormScreen2: UIViewController {
         
         getStartedBtn.setTitle("Continue", for: .normal)
         getStartedBtn.layer.cornerRadius =  6
-        getStartedBtn.backgroundColor = Color.green
+        getStartedBtn.backgroundColor = Color.lightGreen
+        getStartedBtn.tintColor = Color.green
+        getStartedBtn.isEnabled = false
         view.addSubview(getStartedBtn)
+        
         getStartedBtn.setConstraint(
             bottomAnchor: view.safeAreaLayoutGuide.bottomAnchor, bottomAnchorConstant: -32,
             leadingAnchor: view.layoutMarginsGuide.leadingAnchor, leadingAnchorConstant: 16,
@@ -80,7 +83,6 @@ class FormScreen2: UIViewController {
      
     @objc func handleSaveName() {
         UserDefaultService.firstName = nameTextField.text!
-     
         rootView?.setView(index: 2)
     }
     
@@ -90,6 +92,19 @@ class FormScreen2: UIViewController {
 }
 
 extension FormScreen2: UITextFieldDelegate {
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let text = textField.text else { return }
+        if text.isEmpty {
+            getStartedBtn.backgroundColor = Color.lightGreen
+            getStartedBtn.tintColor = Color.green
+            getStartedBtn.isEnabled = false
+        } else {
+            getStartedBtn.backgroundColor = Color.green
+            getStartedBtn.tintColor = .white
+            getStartedBtn.isEnabled = true
+        }
+    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()

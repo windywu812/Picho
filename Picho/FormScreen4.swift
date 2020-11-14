@@ -11,6 +11,7 @@ class FormScreen4: UIViewController {
     
     let weightTextField = UITextField()
     let heightTextField = UITextField()
+    var getStartedBtn: UIButton!
     var rootView : PageControlForm?
     
     override func viewDidLoad() {
@@ -55,12 +56,14 @@ class FormScreen4: UIViewController {
         weightLabel.setFont(text: "Weight(KG)", size: 16, weight: .bold)
         
         weightTextField.layer.cornerRadius = 6
-        weightTextField.placeholder = "Gender"
+        weightTextField.placeholder = "Weight"
         weightTextField.layer.borderColor = Color.green.cgColor
         weightTextField.layer.borderWidth = 2.0
         weightTextField.setConstraint(heighAnchorConstant: 50)
         weightTextField.addPadding(padding: .equalSpacing(10))
+        weightTextField.keyboardType = .numberPad
         weightTextField.delegate = self
+        weightTextField.tag = 0
         
         let stackWeight = UIStackView(arrangedSubviews: [weightLabel, weightTextField])
         stackWeight.axis = .vertical
@@ -80,8 +83,10 @@ class FormScreen4: UIViewController {
         heightTextField.layer.cornerRadius = 6
         heightTextField.layer.borderColor = Color.green.cgColor
         heightTextField.layer.borderWidth = 2.0
-        heightTextField.placeholder = "Age"
+        heightTextField.placeholder = "Height"
         heightTextField.delegate = self
+        heightTextField.tag = 1
+        heightTextField.keyboardType = .numberPad
         heightTextField.setConstraint(heighAnchorConstant: 50)
         
         let stackHeight = UIStackView(arrangedSubviews: [heightLabel, heightTextField])
@@ -96,10 +101,12 @@ class FormScreen4: UIViewController {
         
         heightTextField.setConstraint(heighAnchorConstant: 50)
         
-        let getStartedBtn = UIButton()
+        getStartedBtn = UIButton()
         getStartedBtn.setTitle("Continue", for: .normal)
         getStartedBtn.layer.cornerRadius =  6
-        getStartedBtn.backgroundColor = Color.green
+        getStartedBtn.backgroundColor = Color.lightGreen
+        getStartedBtn.tintColor = Color.green
+        getStartedBtn.isEnabled = false
         view.addSubview(getStartedBtn)
         
         getStartedBtn.setConstraint(
@@ -122,9 +129,31 @@ class FormScreen4: UIViewController {
         view.endEditing(true)
     }
     
+    var height = ""
+    var weight = ""
+    
 }
 
 extension FormScreen4: UITextFieldDelegate {
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+                
+        if textField.tag == 0 {
+            weight = textField.text ?? ""
+        } else {
+            height = textField.text ?? ""
+        }
+         
+        if !height.isEmpty && !weight.isEmpty {
+            getStartedBtn.backgroundColor = Color.green
+            getStartedBtn.tintColor = .white
+            getStartedBtn.isEnabled = true
+        } else {
+            getStartedBtn.backgroundColor = Color.lightGreen
+            getStartedBtn.tintColor = Color.green
+            getStartedBtn.isEnabled = false
+        }
+    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()

@@ -9,10 +9,11 @@ import UIKit
 
 class FormScreen3: UIViewController {
     
-    var gender = ["Male","Female"]
+    let genders = ["Male", "Female"]
     let genderTextField = UITextField()
     let ageTextField = UITextField()
     let pickerView = UIPickerView()
+    var getStartedBtn = UIButton()
     var rootView : PageControlForm?
     
     override func viewDidLoad() {
@@ -69,6 +70,8 @@ class FormScreen3: UIViewController {
         genderTextField.layer.borderColor = Color.green.cgColor
         genderTextField.layer.borderWidth = 2.0
         genderTextField.addPadding(padding: .equalSpacing(10))
+        genderTextField.delegate = self
+        genderTextField.tag = 0
         view.addSubview(genderTextField)
         
         genderTextField.setConstraint(
@@ -84,6 +87,7 @@ class FormScreen3: UIViewController {
         ageTextField.placeholder = "Age"
         ageTextField.delegate = self
         ageTextField.keyboardType = .numberPad
+        ageTextField.tag = 1
         view.addSubview(ageTextField)
         
         ageTextField.setConstraint(
@@ -92,10 +96,12 @@ class FormScreen3: UIViewController {
             trailingAnchor: view.layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: -16,
             heighAnchorConstant: 50)
         
-        let getStartedBtn = UIButton()
+        getStartedBtn = UIButton()
         getStartedBtn.setTitle("Continue", for: .normal)
         getStartedBtn.layer.cornerRadius =  5
-        getStartedBtn.backgroundColor = Color.green
+        getStartedBtn.backgroundColor = Color.lightGreen
+        getStartedBtn.tintColor = Color.green
+        getStartedBtn.isEnabled = false
         view.addSubview(getStartedBtn)
         
         getStartedBtn.setConstraint(
@@ -118,6 +124,9 @@ class FormScreen3: UIViewController {
         self.view.endEditing(true)
     }
     
+    var gender: String = ""
+    var age: String = ""
+    
 }
 
 extension FormScreen3 :  UIPickerViewDelegate, UIPickerViewDataSource {
@@ -127,11 +136,11 @@ extension FormScreen3 :  UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return gender.count
+        return genders.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return gender[row]
+        return genders[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
@@ -139,13 +148,36 @@ extension FormScreen3 :  UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        genderTextField.text = gender[row]
+        genderTextField.text = genders[row]
     }
+    
+    
     
 }
 
 extension FormScreen3: UITextFieldDelegate {
-
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+                
+        if textField.tag == 0 {
+            gender = textField.text ?? ""
+        } else {
+            age = textField.text ?? ""
+        }
+         
+        print(gender, age)
+        
+        if !gender.isEmpty && !age.isEmpty {
+            getStartedBtn.backgroundColor = Color.green
+            getStartedBtn.tintColor = .white
+            getStartedBtn.isEnabled = true
+        } else {
+            getStartedBtn.backgroundColor = Color.lightGreen
+            getStartedBtn.tintColor = Color.green
+            getStartedBtn.isEnabled = false
+        }
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
