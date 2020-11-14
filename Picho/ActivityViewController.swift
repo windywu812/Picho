@@ -81,7 +81,7 @@ class ActivityCard: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = Color.activityRed
+        backgroundColor = Color.red
         layer.cornerRadius = 8
         
         activityLabel = UILabel()
