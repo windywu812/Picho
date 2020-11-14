@@ -20,7 +20,7 @@ class FormScreen5: UIViewController {
         view.addSubview(imageview)
         imageview.translatesAutoresizingMaskIntoConstraints = false
         imageview.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        imageview.topAnchor.constraint(equalTo: view.topAnchor,constant: 20).isActive = true
+        imageview.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 20).isActive = true
         imageview.widthAnchor.constraint(equalToConstant: 95).isActive = true
         imageview.heightAnchor.constraint(equalToConstant: 115).isActive = true
         
@@ -77,7 +77,7 @@ class FormScreen5: UIViewController {
         
         let getStartedBtn = UIButton()
         getStartedBtn.setTitle("LET’S DO THIS!", for: .normal)
-        getStartedBtn.isEnabled = false
+       
         getStartedBtn.layer.cornerRadius =  5
         getStartedBtn.backgroundColor = Color.green
         getStartedBtn.addTarget(self, action: #selector(handleTap), for: .touchUpInside)
@@ -93,18 +93,23 @@ class FormScreen5: UIViewController {
         isChecked = !isChecked
         if isChecked {
             sender.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
-            sender.isEnabled = true
+          
         }
         else{
             sender.setImage(UIImage(systemName: "circle"), for: .normal)
-            sender.isEnabled = false
+           
         }
     }
     
     @objc private func handleTap() {
+        print("tap")
+       
+                  
         let vc = UINavigationController(rootViewController: MainViewController())
         UserDefaultService.hasLaunched = true
-        present(vc, animated: true, completion: nil)
+//        present(vc, animated: true, completion: nil)
+        navigationController?.pushViewController(vc, animated: true)
+        return
     }
     
 }

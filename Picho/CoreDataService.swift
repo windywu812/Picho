@@ -23,6 +23,7 @@ class CoreDataService {
     
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
+    // MARK: - Daily Intake
     func getDailyIntake(with request: NSFetchRequest<DailyIntake> = DailyIntake.fetchRequest(), time: EatTime? = nil, date: Date? = nil, completion: @escaping ([DailyIntake]) -> Void) {
         
         var timePredicate = NSPredicate(value: true)
@@ -64,16 +65,60 @@ class CoreDataService {
         intake.date = date
         intake.time = time.rawValue
 
-        save(context: context)
+        saveDailyIntake(context: context)
     }
     
     func deleteDailyIntake(with request: NSFetchRequest<DailyIntake> = DailyIntake.fetchRequest(), _ id: UUID) {
-        request.predicate = NSPredicate(format: "\(CoreDataConstant.id) = %@", id as CVarArg)
+        request.predicate = NSPredicate(format: "id = %@", id as CVarArg)
         
-        save(context: context, deleted: true)
+        saveDailyIntake(context: context, deleted: true)
     }
     
-    private func save(with request: NSFetchRequest<DailyIntake> = DailyIntake.fetchRequest(), context: NSManagedObjectContext, deleted: Bool = false) {
+    private func saveDailyIntake(with request: NSFetchRequest<DailyIntake> = DailyIntake.fetchRequest(), context: NSManagedObjectContext, deleted: Bool = false) {
+        
+        do {
+            if deleted {
+                let dataToDelete = try context.fetch(request)[0] as NSManagedObject
+                context.delete(dataToDelete)
+            }
+            try context.save()
+            
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    
+    // MARK: - Favorite
+    func getFavorite(with request: NSFetchRequest<Favorite> = Favorite.fetchRequest(), completion: @escaping ([Favorite]) -> Void) {
+        
+        do {
+            let favorites = try context.fetch(request)
+            completion(favorites)
+        } catch {
+            print(error.localizedDescription)
+            completion([])
+        }
+        
+    }
+    
+    func addFavorite(id: String, name: String, description: String) {
+        
+        let favorite = Favorite(context: context)
+        favorite.id = id
+        favorite.name = name
+        favorite.desc = description
+
+        saveFavorite(context: context)
+    }
+    
+    func deleteFavorite(with request: NSFetchRequest<Favorite> = Favorite.fetchRequest(), _ id: String) {
+        request.predicate = NSPredicate(format: "\(CoreDataConstant.id) = %@", id as CVarArg)
+        
+        saveFavorite(context: context, deleted: true)
+    }
+    
+    private func saveFavorite(with request: NSFetchRequest<Favorite> = Favorite.fetchRequest(), context: NSManagedObjectContext, deleted: Bool = false) {
         
         do {
             if deleted {
