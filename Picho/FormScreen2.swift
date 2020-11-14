@@ -9,79 +9,91 @@ import UIKit
 
 class FormScreen2: UIViewController {
     
-    let label1 = UILabel()
-    let label2 = UILabel()
+    let titleLabel = UILabel()
+    let descLabel = UILabel()
     let nameTextField = UITextField()
     let getStartedBtn = UIButton()
    
-    var rootViewS2 : PageControlForm?
+    var rootView: PageControlForm?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        setupView()
-    }
- 
-    func setupView() {
-        view.backgroundColor = .white
         
-        let image = UIImage(named: "mascot")
-        let imageview:UIImageView = UIImageView()
-        imageview.contentMode = UIView.ContentMode.scaleToFill
-        imageview.image = image
+        view.backgroundColor = Color.background
+        
+        let imageview = UIImageView()
+        imageview.contentMode = .scaleToFill
+        imageview.image = UIImage(named: "mascot")
         view.addSubview(imageview)
         
-        imageview.translatesAutoresizingMaskIntoConstraints = false
-        imageview.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        imageview.topAnchor.constraint(equalTo: view.topAnchor,constant: 100).isActive = true
-        imageview.widthAnchor.constraint(equalToConstant: 95).isActive = true
-        imageview.heightAnchor.constraint(equalToConstant: 115).isActive = true
+        imageview.setConstraint(
+            topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 80,
+            centerXAnchor: view.centerXAnchor,
+            heighAnchorConstant: 115, widthAnchorConstant: 95)
         
-        label1.text = "Nice to meet you!"
-        label1.font = UIFont.boldSystemFont(ofSize: 25.0)
-        label1.textAlignment = .center
-        view.addSubview(label1)
-        label1.setConstraint(topAnchor: imageview.bottomAnchor,topAnchorConstant: 20,
-                             leadingAnchor: view.layoutMarginsGuide.leadingAnchor,leadingAnchorConstant: 40,
-                             trailingAnchor: view.layoutMarginsGuide.trailingAnchor,trailingAnchorConstant: -40)
+        titleLabel.text = "Nice to meet you!"
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 24.0)
+        titleLabel.textAlignment = .center
+        view.addSubview(titleLabel)
         
+        titleLabel.setConstraint(
+            topAnchor: imageview.bottomAnchor,topAnchorConstant: 24,
+            leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
+            trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
         
-        label2.text = "Picho will be your buddy throughout this journey, tell him your name so you can get to know each other!"
-        label2.font = UIFont.systemFont(ofSize: 17)
-        label2.numberOfLines = 0
-        label2.textAlignment = .center
-        view.addSubview(label2)
-        label2.setConstraint(topAnchor: label1.bottomAnchor,topAnchorConstant: 20,
-                             leadingAnchor: view.layoutMarginsGuide.leadingAnchor,leadingAnchorConstant: 40,
-                             trailingAnchor: view.layoutMarginsGuide.trailingAnchor,trailingAnchorConstant: -40)
+        descLabel.text = "Picho will be your buddy throughout this journey, tell him your name so you can get to know each other!"
+        descLabel.numberOfLines = 0
+        descLabel.textAlignment = .center
+        view.addSubview(descLabel)
         
+        descLabel.setConstraint(
+            topAnchor: titleLabel.bottomAnchor,topAnchorConstant: 24,
+            leadingAnchor: view.layoutMarginsGuide.leadingAnchor,leadingAnchorConstant: 16,
+            trailingAnchor: view.layoutMarginsGuide.trailingAnchor,trailingAnchorConstant: -16)
         
-        nameTextField.layer.cornerRadius = 10.0
+        nameTextField.layer.cornerRadius = 6
         nameTextField.layer.borderColor = Color.green.cgColor
         nameTextField.layer.borderWidth = 2.0
         nameTextField.addPadding(padding: .equalSpacing(10))
         nameTextField.placeholder = "Your Name"
+        nameTextField.delegate = self
         view.addSubview(nameTextField)
-        nameTextField.setConstraint(topAnchor: label2.bottomAnchor,topAnchorConstant: 50,centerXAnchor: view.centerXAnchor,heighAnchorConstant: 50, widthAnchorConstant: 299)
         
+        nameTextField.setConstraint(
+            topAnchor: descLabel.bottomAnchor, topAnchorConstant: 50,
+            leadingAnchor: view.layoutMarginsGuide.leadingAnchor, leadingAnchorConstant: 16,
+            trailingAnchor: view.layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: -16,
+            heighAnchorConstant: 50)
         
         getStartedBtn.setTitle("Continue", for: .normal)
-        getStartedBtn.layer.cornerRadius =  5
+        getStartedBtn.layer.cornerRadius =  6
         getStartedBtn.backgroundColor = Color.green
         view.addSubview(getStartedBtn)
-        getStartedBtn.translatesAutoresizingMaskIntoConstraints = false
-        getStartedBtn.topAnchor.constraint(equalTo: view.bottomAnchor, constant: -150).isActive = true
-        getStartedBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        getStartedBtn.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        getStartedBtn.widthAnchor.constraint(equalToConstant: 270).isActive = true
+        getStartedBtn.setConstraint(
+            bottomAnchor: view.safeAreaLayoutGuide.bottomAnchor, bottomAnchorConstant: -32,
+            leadingAnchor: view.layoutMarginsGuide.leadingAnchor, leadingAnchorConstant: 16,
+            trailingAnchor: view.layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: -16,
+            heighAnchorConstant: 50)
         
         getStartedBtn.addTarget(self, action: #selector(handleSaveName), for: .touchUpInside)
-        
-        
     }
-    @objc func handleSaveName(){
+     
+    @objc func handleSaveName() {
         UserDefaultService.firstName = nameTextField.text!
      
-        rootViewS2?.setView(index: 2)
+        rootView?.setView(index: 2)
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+}
+
+extension FormScreen2: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
 }
