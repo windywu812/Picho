@@ -7,7 +7,14 @@
 
 import UIKit
 
+
 class MainProgressView: UIView {
+    
+    var cal : Float = 0.0
+    var satFatIntake : Float = 0.0
+    var satFatLef : Float = 0.0
+    var sugarIntake : Float = 0.0
+    var sugarLef : Float = 0.0
     
     private let satFatLabel: UILabel
     private let satFatLeft: UILabel
@@ -45,7 +52,7 @@ class MainProgressView: UIView {
         
         backgroundColor = .white
         layer.cornerRadius = 16
-        
+        print(cal)
         setupCalorie()
         setupSatFat()
         setupSugar()
@@ -74,7 +81,7 @@ class MainProgressView: UIView {
             weight: .bold)
         
         totalCalorieLabel.setFont(
-            text: "from 2400 cal/day",
+            text: "from \(cal) cal/day",
             size: 13,
             color: .secondaryLabel)
         
@@ -103,12 +110,12 @@ class MainProgressView: UIView {
             weight: .bold)
         
         satFatTotalLabel.setFont(
-            text: "from 25g/day",
+            text: "from \(satFatIntake)/day",
             size: 13,
             color: .secondaryLabel)
         
         satFatLeft.setFont(
-            text: "3g left", size: 13)
+            text: "\(satFatLef)g left", size: 13)
         
         satFatStack = UIStackView(
             arrangedSubviews: [satFatLabel,
@@ -135,12 +142,12 @@ class MainProgressView: UIView {
             weight: .bold)
         
         sugarTotalLabel.setFont(
-            text: "from 36g/day",
+            text: "from \(sugarIntake)/day",
             size: 13,
             color: .secondaryLabel)
         
         sugarLeft.setFont(
-            text: "15g left", size: 13)
+            text: "\(sugarLef)g left", size: 13)
         
         let mainStack = UIStackView(
             arrangedSubviews: [sugarLabel,

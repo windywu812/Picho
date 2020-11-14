@@ -38,9 +38,14 @@ class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        
+    
+        
         mainProgressView.calorieProgress.animate(value: Float(calorieLeft), total:Float(calorieIntake))
         mainProgressView.sugarProgress.animate(value: Float(sugarLeft), total: Float(sugarIntake))
         mainProgressView.satFatProgress.animate(value: Float(satFatLeft), total: Float(saturatedFatIntake))
+        
+        
     }
     
     override func viewDidLoad() {
@@ -48,8 +53,10 @@ class MainViewController: UIViewController {
         
         navigationItem.title = "Today"
         
-//        checkUser()
+        checkUser()
        
+  
+        
         countCalorie()
         fetchData()
         setupScrollView()
@@ -58,6 +65,9 @@ class MainViewController: UIViewController {
         setupActivity()
         setupMealTodayView()
         setupGesture()
+        
+      
+     
     }
     
     private func checkUser() {
@@ -109,7 +119,7 @@ class MainViewController: UIViewController {
                 self.calorieLeft = self.calorieIntake - calorie.reduce(0.0, +)
                 self.satFatLeft = self.saturatedFatIntake - satFat.reduce(0.0, +)
                 self.sugarLeft = self.sugarIntake - sugar.reduce(0.0, +)
-              
+                print(self.sugarLeft)
             }
         }
         
@@ -152,6 +162,13 @@ class MainViewController: UIViewController {
         mainProgressView = MainProgressView()
         mainProgressView.rootView = self
         scrollView.addSubview(mainProgressView)
+        
+        mainProgressView.cal = Float(calorieIntake)
+        mainProgressView.satFatIntake = Float(saturatedFatIntake)
+        mainProgressView.satFatLef = Float(satFatLeft)
+        mainProgressView.sugarIntake = Float(sugarIntake)
+        mainProgressView.sugarLef = Float(sugarLeft)
+        
         
         mainProgressView.setConstraint(
             topAnchor: scrollView.topAnchor, topAnchorConstant: 16,

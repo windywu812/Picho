@@ -107,8 +107,9 @@ class FormScreen5: UIViewController {
                   
         let vc = UINavigationController(rootViewController: MainViewController())
         UserDefaultService.hasLaunched = true
-//        present(vc, animated: true, completion: nil)
-        navigationController?.pushViewController(vc, animated: true)
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
+  
         return
     }
     
