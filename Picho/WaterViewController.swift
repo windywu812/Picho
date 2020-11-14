@@ -57,7 +57,7 @@ class WaterViewController: UIViewController {
         view.addSubview(waterProgress)
         
         infoLabel = UILabel()
-        infoLabel.setFont(text: "Need more water", size: 17, weight: .bold, color: Color.red)
+        infoLabel.setFont(text: "Need more water", size: 17, weight: .bold, color: Color.activityRed)
         view.addSubview(infoLabel)
         
         let layout = UICollectionViewFlowLayout()

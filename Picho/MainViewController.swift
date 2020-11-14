@@ -141,7 +141,7 @@ class MainViewController: UIViewController {
             labelText: "Activity",
             detailText: "🔥 300cal",
             iconImage: UIImage(),
-            background: Color.red)
+            background: Color.activityRed)
         activityCardView.setConstraint(heighAnchorConstant: 46)
         
         activityStack = UIStackView(arrangedSubviews: [waterCardView, activityCardView])
