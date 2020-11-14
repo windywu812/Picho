@@ -78,9 +78,9 @@
 		26D0532D255D43B200D3C09A /* NotificationKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D0532C255D43B200D3C09A /* NotificationKey.swift */; };
 		26F98137255EDA9E00774F94 /* DailyIntake+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F98133255EDA9E00774F94 /* DailyIntake+CoreDataClass.swift */; };
 		26F98138255EDA9E00774F94 /* DailyIntake+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F98134255EDA9E00774F94 /* DailyIntake+CoreDataProperties.swift */; };
-		26F98139255EDA9E00774F94 /* Favorite+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F98135255EDA9E00774F94 /* Favorite+CoreDataClass.swift */; };
-		26F9813A255EDA9E00774F94 /* Favorite+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F98136255EDA9E00774F94 /* Favorite+CoreDataProperties.swift */; };
 		26F98151255EE1C400774F94 /* NotificationName+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F98150255EE1C400774F94 /* NotificationName+Extensions.swift */; };
+		26F98157255F0E1900774F94 /* Favorite+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F98155255F0E1900774F94 /* Favorite+CoreDataClass.swift */; };
+		26F98158255F0E1900774F94 /* Favorite+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F98156255F0E1900774F94 /* Favorite+CoreDataProperties.swift */; };
 		6BE5482A823830922085C9A8 /* Pods_Picho.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 047BD003AF371FA6292C078C /* Pods_Picho.framework */; };
 		A28A5AF7255BD410007E66FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A5AF6255BD410007E66FA /* AppDelegate.swift */; };
 		A28A5AF9255BD410007E66FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A5AF8255BD410007E66FA /* SceneDelegate.swift */; };
@@ -165,9 +165,9 @@
 		26D0532C255D43B200D3C09A /* NotificationKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationKey.swift; sourceTree = "<group>"; };
 		26F98133255EDA9E00774F94 /* DailyIntake+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DailyIntake+CoreDataClass.swift"; sourceTree = "<group>"; };
 		26F98134255EDA9E00774F94 /* DailyIntake+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DailyIntake+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		26F98135255EDA9E00774F94 /* Favorite+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Favorite+CoreDataClass.swift"; sourceTree = "<group>"; };
-		26F98136255EDA9E00774F94 /* Favorite+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Favorite+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		26F98150255EE1C400774F94 /* NotificationName+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+Extensions.swift"; sourceTree = "<group>"; };
+		26F98155255F0E1900774F94 /* Favorite+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Favorite+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		26F98156255F0E1900774F94 /* Favorite+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Favorite+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		49A721B55AC962597415D463 /* Pods-Picho.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Picho.release.xcconfig"; path = "Target Support Files/Pods-Picho/Pods-Picho.release.xcconfig"; sourceTree = "<group>"; };
 		A28A5AF3255BD410007E66FA /* Picho.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Picho.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A28A5AF6255BD410007E66FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -450,10 +450,10 @@
 		26F98128255ED9E000774F94 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				26F98155255F0E1900774F94 /* Favorite+CoreDataClass.swift */,
+				26F98156255F0E1900774F94 /* Favorite+CoreDataProperties.swift */,
 				26F98133255EDA9E00774F94 /* DailyIntake+CoreDataClass.swift */,
 				26F98134255EDA9E00774F94 /* DailyIntake+CoreDataProperties.swift */,
-				26F98135255EDA9E00774F94 /* Favorite+CoreDataClass.swift */,
-				26F98136255EDA9E00774F94 /* Favorite+CoreDataProperties.swift */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -479,8 +479,8 @@
 		A28A5AF5255BD410007E66FA /* Picho */ = {
 			isa = PBXGroup;
 			children = (
-				26F98128255ED9E000774F94 /* CoreData */,
 				A28A5B38255C29F4007E66FA /* Picho.entitlements */,
+				26F98128255ED9E000774F94 /* CoreData */,
 				23FEB9D0255BDA35001EA146 /* FatSecretSwift */,
 				23FEB9FC255BDAED001EA146 /* Base */,
 				23FEBA07255BDB16001EA146 /* Constants */,
@@ -654,18 +654,17 @@
 				23FEBA34255BDC81001EA146 /* HorizontalView.swift in Sources */,
 				2381F790255C0428008004DE /* PageControlDescription.swift in Sources */,
 				23FEB9FE255BDAF3001EA146 /* AppCoordinator.swift in Sources */,
+				26F98157255F0E1900774F94 /* Favorite+CoreDataClass.swift in Sources */,
 				23FEB9DF255BDA72001EA146 /* SearchedFood.swift in Sources */,
 				26F98137255EDA9E00774F94 /* DailyIntake+CoreDataClass.swift in Sources */,
 				2381F77B255C03E7008004DE /* FormScreen5.swift in Sources */,
 				26F98151255EE1C400774F94 /* NotificationName+Extensions.swift in Sources */,
 				23FEBA53255BDD59001EA146 /* Value1Cell.swift in Sources */,
 				238C9405255BEB0C00591791 /* FoodSearchViewController.swift in Sources */,
-				26F98139255EDA9E00774F94 /* Favorite+CoreDataClass.swift in Sources */,
 				23FEBA37255BDC87001EA146 /* MealTodayView.swift in Sources */,
 				23414A0A255CDE4800E1F48D /* HorizontalProgressView.swift in Sources */,
 				2381F78D255C041E008004DE /* DescriptionScreen4.swift in Sources */,
 				23FEB9DC255BDA6C001EA146 /* APIKey.swift in Sources */,
-				26F9813A255EDA9E00774F94 /* Favorite+CoreDataProperties.swift in Sources */,
 				23FEB9D2255BDA40001EA146 /* FatSecretClient.swift in Sources */,
 				23FEB9E8255BDA81001EA146 /* Food.swift in Sources */,
 				2381F775255C03DF008004DE /* FormScreen3.swift in Sources */,
@@ -703,6 +702,7 @@
 				2381F76E255C03D5008004DE /* FormScreen1.swift in Sources */,
 				23FEBA50255BDD51001EA146 /* ProfileViewController.swift in Sources */,
 				26F98138255EDA9E00774F94 /* DailyIntake+CoreDataProperties.swift in Sources */,
+				26F98158255F0E1900774F94 /* Favorite+CoreDataProperties.swift in Sources */,
 				23FEB9E5255BDA7D001EA146 /* Serving.swift in Sources */,
 				A28A5AF9255BD410007E66FA /* SceneDelegate.swift in Sources */,
 				2339FBEC255E998F00D0ABB3 /* SummaryView.swift in Sources */,
