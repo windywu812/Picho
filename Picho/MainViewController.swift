@@ -11,41 +11,30 @@ import HealthKit
 class MainViewController: UIViewController {
     
     private var scrollView: UIScrollView!
-    
     private var mainProgressView: MainProgressView!
     private var pichoCardView: PichoCardView!
-    
     private var waterCardView: HorizontalView!
     private var activityCardView: HorizontalView!
     private var activityStack: UIStackView!
+    private var mealTodayView: MealsTodayView!
     
     private var calorieIntake : Double = 0.0
     private var saturatedFatIntake : Double = 0.0
     private var sugarIntake : Double = 0.0
-    private var mealTodayView: MealsTodayView!
     
     private var calorieLeft : Double = 0.0
     private var satFatLeft : Double = 0.0
     private var sugarLeft : Double = 0.0
     
-    let age = Double(UserDefaultService.age)
-    let weight = Double(UserDefaultService.weight)
-    let height = Double(UserDefaultService.height)
+    private let age = Double(UserDefaultService.age)
+    private let weight = Double(UserDefaultService.weight)
+    private let height = Double(UserDefaultService.height)
   
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
-    
-        
-        mainProgressView.calorieProgress.animate(value: Float(calorieLeft), total:Float(calorieIntake))
-        mainProgressView.sugarProgress.animate(value: Float(sugarLeft), total: Float(sugarIntake))
-        mainProgressView.satFatProgress.animate(value: Float(satFatLeft), total: Float(saturatedFatIntake))
-        
-        
+ 
+        fetchData()
+        passData()
     }
     
     override func viewDidLoad() {
@@ -53,21 +42,15 @@ class MainViewController: UIViewController {
         
         navigationItem.title = "Today"
         
-        checkUser()
-       
-  
-        
+//        checkUser()
         countCalorie()
-        fetchData()
+
         setupScrollView()
         setupMainProgress()
         setupPichoCard()
         setupActivity()
         setupMealTodayView()
         setupGesture()
-        
-      
-     
     }
     
     private func checkUser() {
@@ -78,7 +61,23 @@ class MainViewController: UIViewController {
             present(vc, animated: true)
         }
     }
-    private func countCalorie(){
+    
+    private func passData() {
+//        mainProgressView.calorieProgress.animate(value: Float(calorieLeft), total:Float(calorieIntake))
+        mainProgressView.sugarProgress.animate(value: Float(sugarLeft), total: Float(sugarIntake))
+        mainProgressView.satFatProgress.animate(value: Float(satFatLeft), total: Float(saturatedFatIntake))
+        
+        mainProgressView.calorieProgress.animate(value: Float(calorieLeft), total: Float(calorieIntake))
+        
+        mainProgressView.setupView(
+            totalCalorie: Float(calorieIntake),
+            totalSatFat: Float(saturatedFatIntake),
+            satFatLeftAmount: Float(satFatLeft),
+            totalSugar: Float(sugarIntake),
+            sugarLeftAmount: Float(sugarLeft))
+    }
+    
+    private func countCalorie() {
         if UserDefaultService.gender == "Male" {
             calorieIntake = (10 * weight!) + (6.25 * height!) - (5 * age!) + 5
             saturatedFatIntake = (calorieIntake / 10) / 9
@@ -89,28 +88,20 @@ class MainViewController: UIViewController {
             saturatedFatIntake = (calorieIntake / 10) / 9
             sugarIntake = (calorieIntake / 10) / 4
         }
-        
-       
     }
     
-    private func fetchData(){
-        if HealthKitService.shared.checkAuthorization(){
+    private func fetchData() {
+        if HealthKitService.shared.checkAuthorization() {
             HealthKitService.shared.fetchCalorie { (totalCal) in
-                print("calorie :\(totalCal)")
                 self.calorieLeft = self.calorieIntake - totalCal
-                print(self.calorieLeft)
             }
             HealthKitService.shared.fetchSaturatedFat { (totalFat) in
-                print("sat fat intake :\(self.saturatedFatIntake)")
                 self.satFatLeft = self.saturatedFatIntake - totalFat
-                print(self.satFatLeft)
             }
             HealthKitService.shared.fetchSugar { (totalSugar) in
-                print("sugar intake :\(self.sugarIntake)")
                 self.sugarLeft = self.sugarIntake - totalSugar
-                print(self.sugarLeft)
             }
-        }else{
+        } else {
             CoreDataService.shared.getDailyIntake { (intakes) in
                 let calorie = intakes.map { $0.calorie }
                 let satFat = intakes.map { $0.saturatedFat }
@@ -119,12 +110,9 @@ class MainViewController: UIViewController {
                 self.calorieLeft = self.calorieIntake - calorie.reduce(0.0, +)
                 self.satFatLeft = self.saturatedFatIntake - satFat.reduce(0.0, +)
                 self.sugarLeft = self.sugarIntake - sugar.reduce(0.0, +)
-                print(self.sugarLeft)
             }
         }
         
-       
-       
     }
     
     private func setupGesture() {
@@ -145,6 +133,15 @@ class MainViewController: UIViewController {
         navigationController?.present(vc, animated: true, completion: nil)
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+}
+
+// MARK: Setup View
+extension MainViewController {
+    
     private func setupScrollView() {
         scrollView = UIScrollView()
         scrollView.backgroundColor = Color.background
@@ -162,14 +159,7 @@ class MainViewController: UIViewController {
         mainProgressView = MainProgressView()
         mainProgressView.rootView = self
         scrollView.addSubview(mainProgressView)
-        
-        mainProgressView.cal = Float(calorieIntake)
-        mainProgressView.satFatIntake = Float(saturatedFatIntake)
-        mainProgressView.satFatLef = Float(satFatLeft)
-        mainProgressView.sugarIntake = Float(sugarIntake)
-        mainProgressView.sugarLef = Float(sugarLeft)
-        
-        
+            
         mainProgressView.setConstraint(
             topAnchor: scrollView.topAnchor, topAnchorConstant: 16,
             leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
@@ -231,4 +221,3 @@ class MainViewController: UIViewController {
     }
     
 }
-
