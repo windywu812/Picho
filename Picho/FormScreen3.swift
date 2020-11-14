@@ -16,6 +16,9 @@ class FormScreen3: UIViewController {
     var getStartedBtn = UIButton()
     var rootView : PageControlForm?
     
+    private var gender: String = ""
+    private var age: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         pickGender()
@@ -124,9 +127,6 @@ class FormScreen3: UIViewController {
         self.view.endEditing(true)
     }
     
-    var gender: String = ""
-    var age: String = ""
-    
 }
 
 extension FormScreen3 :  UIPickerViewDelegate, UIPickerViewDataSource {
@@ -151,21 +151,17 @@ extension FormScreen3 :  UIPickerViewDelegate, UIPickerViewDataSource {
         genderTextField.text = genders[row]
     }
     
-    
-    
 }
 
 extension FormScreen3: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-                
+        
         if textField.tag == 0 {
             gender = textField.text ?? ""
         } else {
             age = textField.text ?? ""
         }
-         
-        print(gender, age)
         
         if !gender.isEmpty && !age.isEmpty {
             getStartedBtn.backgroundColor = Color.green

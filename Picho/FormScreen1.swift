@@ -9,7 +9,7 @@ import UIKit
 
 class FormScreen1: UIViewController {
     
-    var rootViewS1 : PageControlForm?
+    var rootView : PageControlForm?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,8 +64,6 @@ class FormScreen1: UIViewController {
     }
     
     @objc func handleSave() {
-        print("okeeee")
-        
-        rootViewS1?.setView(index: 1)
+        rootView?.setView(index: 1)
     }
 }

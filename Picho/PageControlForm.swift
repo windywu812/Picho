@@ -23,7 +23,7 @@ class PageControlForm: UIPageViewController {
         view.backgroundColor = Color.background
         
         let formScreen1 = FormScreen1()
-        formScreen1.rootViewS1 = self
+        formScreen1.rootView = self
         
         let formScreen2 = FormScreen2()
         formScreen2.rootView = self
