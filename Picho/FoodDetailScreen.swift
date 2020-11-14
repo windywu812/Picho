@@ -148,19 +148,19 @@ class FoodDetailScreen: UITableViewController {
     }
 
     @objc private func handleAdd() {
-//        NetworkService.shared.getFood(id: foodId) { food in
-//            switch food {
-//            case .success(let food):
-//                guard let servings = food.servings?.first else { return }
-//
-//                HealthKitService.addData(sugar: Double(servings.saturatedFat ?? "0") ?? 0, date: Date(), type: .dietaryFatSaturated, unit: HKUnit.gram())
-//                HealthKitService.addData(sugar: Double(servings.sugar ?? "0") ?? 0, date: Date(), type: .dietarySugar, unit: HKUnit.gram())
-//                HealthKitService.addData(sugar: Double(servings.calories ?? "0") ?? 0, date: Date(), type: .dietaryEnergyConsumed, unit: HKUnit.smallCalorie())
-//
-//            case .failure(let err):
-//                print(err.localizedDescription)
-//            }
-//        }
+        NetworkService.shared.getFood(id: foodId) { food in
+            switch food {
+            case .success(let food):
+                guard let servings = food.servings?.first else { return }
+
+                HealthKitService.shared.addData(sugar: Double(servings.saturatedFat ?? "0") ?? 0, date: Date(), type: .dietaryFatSaturated, unit: HKUnit.gram())
+                HealthKitService.shared.addData(sugar: Double(servings.sugar ?? "0") ?? 0, date: Date(), type: .dietarySugar, unit: HKUnit.gram())
+                HealthKitService.shared.addData(sugar: Double(servings.calories ?? "0") ?? 0, date: Date(), type: .dietaryEnergyConsumed, unit: HKUnit.smallCalorie())
+                print("aman")
+            case .failure(let err):
+                print(err.localizedDescription)
+            }
+        }
         
         if !mainAmounts.isEmpty {
             CoreDataService.shared.addDailyIntake(id: UUID(), foodId: foodId, name: foodName, description: foodDescription, calorie: calorieNutrition, saturatedFat: mainAmounts[0], sugars: mainAmounts[1], time: eatingTime)

@@ -9,21 +9,22 @@ import UIKit
 import HealthKit
 
 class HealthKitService {
+    static let shared = HealthKitService()
     
-    static func authorization() {
-        
-        let healthStore = HKHealthStore()
-        
-        let HealthKitTypesToRead : Set <HKObjectType> = [
-            HKQuantityType.quantityType(forIdentifier: .dietaryFatSaturated)!,
-            HKQuantityType.quantityType(forIdentifier: .dietarySugar)!,
-            HKQuantityType.quantityType(forIdentifier: .dietaryEnergyConsumed)!,
-        ]
-        let healthKitTypesToWrite : Set<HKSampleType> = [
-            HKQuantityType.quantityType(forIdentifier: .dietaryFatSaturated)!,
-            HKQuantityType.quantityType(forIdentifier: .dietarySugar)!,
-            HKQuantityType.quantityType(forIdentifier: .dietaryEnergyConsumed)!,
-        ]
+    private let healthStore = HKHealthStore()
+    
+    private let HealthKitTypesToRead : Set <HKObjectType> = [
+        HKQuantityType.quantityType(forIdentifier: .dietaryFatSaturated)!,
+        HKQuantityType.quantityType(forIdentifier: .dietarySugar)!,
+        HKQuantityType.quantityType(forIdentifier: .dietaryEnergyConsumed)!,
+    ]
+    private let healthKitTypesToWrite : Set<HKSampleType> = [
+        HKQuantityType.quantityType(forIdentifier: .dietaryFatSaturated)!,
+        HKQuantityType.quantityType(forIdentifier: .dietarySugar)!,
+        HKQuantityType.quantityType(forIdentifier: .dietaryEnergyConsumed)!,
+    ]
+    
+    func authorization() {
         
         if !HKHealthStore.isHealthDataAvailable() {
             print("Error occured")
@@ -37,17 +38,10 @@ class HealthKitService {
                 print("Success")
             }
         }
-        healthStore.requestAuthorization(toShare: healthKitTypesToWrite, read: HealthKitTypesToRead){ (success, error) in
-            if !success {
-                print("error")
-            } else {
-                print("Success")
-            }
-        }
         
     }
     
-    static func addData(sugar: Double,
+     func addData(sugar: Double,
                             date: Date,
                             type: HKQuantityTypeIdentifier,
                             unit: HKUnit) {
@@ -68,7 +62,7 @@ class HealthKitService {
         }
     }
     
-    static func fetchCalorie(completion: @escaping (Double) -> Void) {
+     func fetchCalorie(completion: @escaping (Double) -> Void) {
         
         guard let energyType = HKSampleType.quantityType(forIdentifier: .dietaryEnergyConsumed) else { return }
         let start = Calendar.current.date(byAdding: .day, value: -1, to: .distantPast)!
@@ -91,7 +85,7 @@ class HealthKitService {
         HKHealthStore().execute(energyQuery)
     }
     
-    static func fetchSaturatedFat(completion: @escaping (Double) -> Void) {
+     func fetchSaturatedFat(completion: @escaping (Double) -> Void) {
         
         guard let energyType = HKSampleType.quantityType(forIdentifier: .dietaryFatSaturated) else {
             print("Sample type not available")
@@ -118,7 +112,7 @@ class HealthKitService {
         HKHealthStore().execute(energyQuery)
     }
     
-    static func fetchSugar(completion: @escaping (Double) -> Void) {
+     func fetchSugar(completion: @escaping (Double) -> Void) {
         
         guard let energyType = HKSampleType.quantityType(forIdentifier: .dietarySugar) else {
             print("Sample type not available")
@@ -143,7 +137,7 @@ class HealthKitService {
         HKHealthStore().execute(energyQuery)
     }
     
-    static func fetchActivity(completion: @escaping (Double) -> Void) {
+     func fetchActivity(completion: @escaping (Double) -> Void) {
         
         guard let dataType = HKSampleType.quantityType(forIdentifier: .activeEnergyBurned) else {
             print("Sampe type not available")
@@ -166,6 +160,14 @@ class HealthKitService {
         }
         
         HKHealthStore().execute(query)
+    }
+    
+    func checkAuthorization() -> Bool {
+        var isSucceed = false
+        healthStore.requestAuthorization(toShare: healthKitTypesToWrite, read: HealthKitTypesToRead){ (success, error) in
+            isSucceed = success
+        }
+        return isSucceed
     }
     
 }
