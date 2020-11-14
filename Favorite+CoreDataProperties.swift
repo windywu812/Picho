@@ -2,7 +2,7 @@
 //  Favorite+CoreDataProperties.swift
 //  Picho
 //
-//  Created by Wendy Kurniawan on 13/11/20.
+//  Created by Wendy Kurniawan on 14/11/20.
 //
 //
 
@@ -18,7 +18,6 @@ extension Favorite {
 
     @NSManaged public var desc: String?
     @NSManaged public var id: String?
-    @NSManaged public var isFavorite: Bool
     @NSManaged public var name: String?
 
 }
