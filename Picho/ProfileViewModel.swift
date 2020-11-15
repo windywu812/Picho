@@ -25,6 +25,7 @@ class ProfileViewModel {
         isSync.toggle()
         
         if value {
+            UserDefaultService.isSyncHealthKit = isSync
             HealthKitService.shared.authorization()
         }
     }
