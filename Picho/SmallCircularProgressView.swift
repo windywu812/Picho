@@ -12,12 +12,24 @@ class SmallCircularProgressView: UIView {
     private let shapeLayer: CAShapeLayer
     
     override init(frame: CGRect) {
-        
         shapeLayer = CAShapeLayer()
-        
         super.init(frame: frame)
-         
         setupLayer()
+    }
+    
+    func animate(value: Float, total: Float) {
+        let animation = CABasicAnimation(keyPath: "strokeEnd")
+        animation.toValue = (total - value) / total
+        animation.duration = 2
+        animation.fromValue = 0
+        animation.fillMode = .forwards
+        animation.isRemovedOnCompletion = false
+        
+        if total - value / total > 1 {
+            shapeLayer.strokeColor = Color.red.cgColor
+        }
+        
+        shapeLayer.add(animation, forKey: "progressAnimation")
     }
     
     private func setupLayer() {
@@ -44,16 +56,6 @@ class SmallCircularProgressView: UIView {
         shapeLayer.fillColor = UIColor.clear.cgColor
         layer.addSublayer(shapeLayer)
         
-    }
-    
-    func animate(value: Float, total: Float) {
-        let animation = CABasicAnimation(keyPath: "strokeEnd")
-        animation.toValue = (total - value) / total
-        animation.duration = 2
-        animation.fromValue = 0
-        animation.fillMode = .forwards
-        animation.isRemovedOnCompletion = false
-        shapeLayer.add(animation, forKey: "progressAnimation")
     }
     
     required init?(coder: NSCoder) {

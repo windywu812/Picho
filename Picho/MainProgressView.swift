@@ -38,8 +38,8 @@ class MainProgressView: UIView {
         sugarTotalLabel.text = "from \(String(format: "%.01f", totalSugar)) g/day"
         satFatTotalLabel.text = "from \(String(format: "%.01f", totalSatFat)) g/day"
         
-        sugarLeft.text = "\(String(format: "%.01f", sugarLeftAmount))g"
-        satFatLeft.text = "\(String(format: "%.01f", satFatLeftAmount))g"
+        sugarLeft.text = "\(String(format: "%.01f", -sugarLeftAmount + totalSugar))g"
+        satFatLeft.text = "\(String(format: "%.01f", -satFatLeftAmount + totalSatFat))g"
     }
     
     override init(frame: CGRect) {

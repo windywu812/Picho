@@ -65,7 +65,6 @@ class MainViewController: UIViewController {
     private func passData() {
         mainProgressView.sugarProgress.animate(value: Float(sugarLeft), total: Float(sugarIntake))
         mainProgressView.satFatProgress.animate(value: Float(satFatLeft), total: Float(saturatedFatIntake))
-        
         mainProgressView.calorieProgress.animate(value: Float(calorieLeft), total: Float(calorieIntake))
         
         mainProgressView.setupView(
