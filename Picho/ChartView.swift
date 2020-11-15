@@ -141,17 +141,21 @@ class CustomDatePicker: UIPickerView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private var date: (String, Int) = ("January", 2020)
+    
 }
 
 extension CustomDatePicker: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
-        let date: (String, Int) = (months[row], years[row])
-        
-        DispatchQueue.main.async {
-            NotificationCenter.default.post(name: .dateChanged, object: date)
+        if component == 0 {
+            date.0 = months[row]
+        } else {
+            date.1 = years[row]
         }
+        
+        NotificationCenter.default.post(name: .dateChanged, object: date)
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
