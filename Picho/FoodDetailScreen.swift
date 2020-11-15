@@ -49,7 +49,7 @@ class FoodDetailScreen: UITableViewController {
     
     var eatingTime: EatTime = .breakfast
     
-    private var isFavorite: Bool = false
+    var isFavorite: Bool = false
     
     override init(style: UITableView.Style = .grouped) {
         super.init(style: style)
@@ -61,6 +61,7 @@ class FoodDetailScreen: UITableViewController {
         setupLabel()
         setupView()
         setupLayout()
+        fetchingFavorite()
     }
     
     private func setupLabel() {
@@ -142,8 +143,18 @@ class FoodDetailScreen: UITableViewController {
         navigationItem.leftBarButtonItem = favoriteBarButton
     }
     
+    private func checkFavorite () {
+        if !isFavorite {
+            CoreDataService.shared.addFavorite(id: foodId, name: foodName, description: foodDescription)
+        } else {
+            CoreDataService.shared.deleteFavorite(foodId)
+        }
+        NotificationService.shared.post(with: NotificationKey.favoriteKey)
+    }
+    
     @objc private func handleFavoriteAdd() {
-        isFavorite = !isFavorite
+        checkFavorite()
+        isFavorite.toggle()
         setupFavorite()
     }
 
@@ -211,6 +222,13 @@ class FoodDetailScreen: UITableViewController {
                 print(err.localizedDescription)
             }
         }
+    }
+    
+    private func fetchingFavorite() {
+        CoreDataService.shared.getFavorite(for: foodId) { favorites in
+            self.isFavorite = !favorites.isEmpty
+        }
+        setupFavorite()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {

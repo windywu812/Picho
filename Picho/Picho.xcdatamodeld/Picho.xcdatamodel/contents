@@ -14,11 +14,10 @@
     <entity name="Favorite" representedClassName="Favorite" syncable="YES">
         <attribute name="desc" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="String"/>
-        <attribute name="isFavorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
     </entity>
     <elements>
         <element name="DailyIntake" positionX="301.48046875" positionY="157.16015625" width="128" height="164"/>
-        <element name="Favorite" positionX="306" positionY="225" width="128" height="89"/>
+        <element name="Favorite" positionX="306" positionY="225" width="128" height="74"/>
     </elements>
 </model>
