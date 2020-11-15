@@ -90,7 +90,11 @@ class CoreDataService {
     
     
     // MARK: - Favorite
-    func getFavorite(with request: NSFetchRequest<Favorite> = Favorite.fetchRequest(), completion: @escaping ([Favorite]) -> Void) {
+    func getFavorite(with request: NSFetchRequest<Favorite> = Favorite.fetchRequest(), for id: String? = nil, completion: @escaping ([Favorite]) -> Void) {
+        
+        if let id = id {
+            request.predicate = NSPredicate(format: "id = %@", id as CVarArg)
+        }
         
         do {
             let favorites = try context.fetch(request)
