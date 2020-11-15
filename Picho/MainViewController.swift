@@ -42,7 +42,7 @@ class MainViewController: UIViewController {
         
         navigationItem.title = "Today"
         
-//        checkUser()
+        checkUser()
         countCalorie()
 
         setupScrollView()
@@ -63,7 +63,6 @@ class MainViewController: UIViewController {
     }
     
     private func passData() {
-//        mainProgressView.calorieProgress.animate(value: Float(calorieLeft), total:Float(calorieIntake))
         mainProgressView.sugarProgress.animate(value: Float(sugarLeft), total: Float(sugarIntake))
         mainProgressView.satFatProgress.animate(value: Float(satFatLeft), total: Float(saturatedFatIntake))
         
