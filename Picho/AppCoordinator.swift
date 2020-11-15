@@ -39,7 +39,13 @@ class AppCoordinator {
         window.backgroundColor = Color.background
         window.overrideUserInterfaceStyle = .light
         window.makeKeyAndVisible()
-        window.rootViewController = tabBar
+        
+        if UserDefaultService.hasLaunched {
+            window.rootViewController = tabBar
+        } else {
+            window.rootViewController = PageControlDescription()
+        }
+        
     }
     
     private func setupHomeVC() {

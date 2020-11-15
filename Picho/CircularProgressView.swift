@@ -69,9 +69,9 @@ class CircularProgressView: UIView {
             color: Color.green)
         
         let animation = CABasicAnimation(keyPath: "strokeEnd")
-        animation.toValue = value / total
-        animation.duration = 2
         animation.fromValue = 0
+        animation.toValue = (total - value) / total
+        animation.duration = 2
         animation.fillMode = .forwards
         animation.isRemovedOnCompletion = false
         shapeLayer.add(animation, forKey: "progressAnimation")
