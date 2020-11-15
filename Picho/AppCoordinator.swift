@@ -28,11 +28,11 @@ class AppCoordinator {
         window.overrideUserInterfaceStyle = .light
         window.makeKeyAndVisible()
         
-        if UserDefaultService.hasLaunched {
+//        if UserDefaultService.hasLaunched {
             window.rootViewController = tabBar
-        } else {
-            window.rootViewController = PageControlDescription()
-        }
+//        } else {
+//            window.rootViewController = PageControlDescription()
+//        }
         
     }
     

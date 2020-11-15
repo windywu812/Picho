@@ -38,7 +38,7 @@ class FoodHistory: UITableView {
 extension FoodHistory: UITableViewDelegate, UITableViewDataSource {
    
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -48,6 +48,8 @@ extension FoodHistory: UITableViewDelegate, UITableViewDataSource {
         case 1:
             return 2
         case 2:
+            return 1
+        case 3:
             return 1
         default:
             return 0
@@ -70,6 +72,10 @@ extension FoodHistory: UITableViewDelegate, UITableViewDataSource {
         case 2:
             if indexPath.row == 0 {
                 cell.setupCell(imageIcon: "dinner", labelText: "Dinner", calorie: 431, sugar: 21, satFat: 13, isHead: true)
+            }
+        case 3:
+            if indexPath.row == 0 {
+                cell.setupCell(imageIcon: "snacks", labelText: "Snack", calorie: 431, sugar: 21, satFat: 13, isHead: true)
             }
         default:
             break

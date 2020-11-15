@@ -8,7 +8,7 @@
 import CoreData
 import UIKit
 
-struct CoreDataConstant {
+struct DailyIntakeConstant {
     static let entityName = "DailyIntake"
     static let time = "time"
     static let date = "date"
@@ -30,13 +30,13 @@ class CoreDataService {
         var datePredicate = NSPredicate(value: true)
         
         if let time = time?.rawValue {
-            timePredicate = NSPredicate(format: "\(CoreDataConstant.time) = %@", time as CVarArg)
+            timePredicate = NSPredicate(format: "\(DailyIntakeConstant.time) = %@", time as CVarArg)
         }
         
         if let date = date {
             let dateFrom = date.startOfTheDay()
             let dateTo = date.startOfTheDay().endDate()
-            datePredicate = NSPredicate(format: "\(CoreDataConstant.date) >= %@ AND \(CoreDataConstant.date) <= %@",
+            datePredicate = NSPredicate(format: "\(DailyIntakeConstant.date) >= %@ AND \(DailyIntakeConstant.date) <= %@",
                         dateFrom as CVarArg,  dateTo as CVarArg)
         }
         
@@ -51,6 +51,45 @@ class CoreDataService {
         }
         
     }
+    
+//    func getMaxDailyIntake(with request: NSFetchRequest<DailyIntake> = DailyIntake.fetchRequest(), completion: @escaping ([DailyIntake]) -> Void) {
+////        request.predicate = NSPredicate(format: "@count")
+////        request.propertiesToGroupBy = ["foodId"]
+//
+//        do {
+//            let intakes = try context.fetch(request)
+//            completion(intakes)
+//        } catch {
+//            print(error.localizedDescription)
+//            completion([])
+//        }
+//    }
+    
+//    func getMaxDailyIntake(request: NSFetchRequest<NSDictionary> = NSFetchRequest<NSDictionary>(entityName: DailyIntakeConstant.entityName), time eatingTime: EatTime, completion: @escaping ([NSDictionary]) -> Void) {
+//        let groupArgument = NSExpression(forKeyPath: "foodId")
+//        let expression = NSExpression(forFunction: "count:", arguments: [groupArgument])
+//        
+//        let countDesc = NSExpressionDescription()
+//        countDesc.expression = expression
+//        countDesc.name = "count"
+//        countDesc.expressionResultType = .integer64AttributeType
+//        
+//        request.returnsObjectsAsFaults = false
+//        request.propertiesToGroupBy = ["foodId"]
+//        request.propertiesToFetch = ["foodId", countDesc]
+//        request.resultType = .dictionaryResultType
+//        
+//        request.havingPredicate = NSPredicate(format: "\(DailyIntakeConstant.time) = %@", eatingTime.rawValue)
+//        
+//        do {
+//            let intakes = try context.fetch(request)
+//            completion(intakes)
+//        } catch {
+//            print(error.localizedDescription)
+//            completion([])
+//        }
+//        
+//    }
     
     func addDailyIntake(id: UUID, foodId: String, name: String, description: String, calorie: Double, saturatedFat: Double, sugars: Double, date: Date = Date(), time: EatTime) {
         
@@ -117,7 +156,7 @@ class CoreDataService {
     }
     
     func deleteFavorite(with request: NSFetchRequest<Favorite> = Favorite.fetchRequest(), _ id: String) {
-        request.predicate = NSPredicate(format: "\(CoreDataConstant.id) = %@", id as CVarArg)
+        request.predicate = NSPredicate(format: "\(DailyIntakeConstant.id) = %@", id as CVarArg)
         
         saveFavorite(context: context, deleted: true)
     }

@@ -19,9 +19,15 @@ class HistoryViewController: UIViewController {
     private var indicator: IndicatorLabelView!
     private var foodHistory: FoodHistory!
     
+    private var breakfasts: [DailyIntake] = []
+    private var lunches: [DailyIntake] = []
+    private var dinners: [DailyIntake] = []
+    private var snacks: [DailyIntake] = []
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
+        fetchConsumption()
         chartView.chartView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
     }
     
@@ -39,6 +45,47 @@ class HistoryViewController: UIViewController {
     
     @objc private func handleDismiss() {
         view.endEditing(true)
+    }
+    
+    private func fetchConsumption() {
+//        CoreDataService.shared.getDailyIntake(time: .breakfast) { intakes in
+//            intakes
+//        }
+        CoreDataService.shared.getDailyIntake(time: .breakfast) { intakes in
+            let groupedIntakes = Dictionary(grouping: intakes) { intake -> String? in
+                return intake.date?.convertToString()
+            }
+
+//            let mappedCalories = groupedIntakes.mapValues { intakes in
+//                intakes.map { intake in
+//                    intake.calorie
+//                }
+//            }
+//
+//            guard let mappedCalorie = mappedCalories.values.first else {
+//                return
+//            }
+//
+//            let sumCalorie = mappedCalorie.reduce(0.0, +)
+//            let totalCalorie = mappedCalorie.count
+//            let calorie = sumCalorie / Double(totalCalorie)
+//            print(calorie)
+            
+            let mappedCalories = groupedIntakes.mapValues { intakes in
+                intakes.map { intake in
+                    intake.name
+                }
+            }
+            
+            guard let mappedCalorie = mappedCalories.values.first else {
+                return
+            }
+            
+            let array = mappedCalorie.map { ($0, 1) }
+            let counts = Dictionary(array, uniquingKeysWith: +)
+            
+            print(counts.first)
+        }
     }
     
     private func setupView() {
