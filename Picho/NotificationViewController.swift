@@ -59,12 +59,14 @@ class NotificationViewController: UIViewController {
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(endEditting))
         view.addGestureRecognizer(tap)
+        view.backgroundColor = Color.background
     }
     
     private func setupTableView() {
         tableView = UITableView(frame: .zero, style: .grouped)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.backgroundColor = Color.background
         tableView.register(Value1Cell.self, forCellReuseIdentifier: Value1Cell.reuseIdentifier)
         view.addSubview(tableView)
         

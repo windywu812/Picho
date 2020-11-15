@@ -53,6 +53,15 @@ extension UITextField {
         self.inputView = datePicker
         self.addPadding(padding: .equalSpacing(5))
     }
+    
+    func removeBorder(tag: Int, text: String) {
+        self.tag = tag
+        self.text = text
+        self.textAlignment = .right
+        self.borderStyle = .none
+        self.keyboardType = .numberPad
+    }
+    
 }
 
 extension UIDatePicker {

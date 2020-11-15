@@ -53,6 +53,8 @@
 	<string>Reading data just for a test.</string>
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>Writing data just for a test.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Need access your camera to take a photo</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

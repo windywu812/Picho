@@ -79,10 +79,11 @@ class FormScreen2: UIViewController {
             heighAnchorConstant: 50)
         
         getStartedBtn.addTarget(self, action: #selector(handleSaveName), for: .touchUpInside)
+        
     }
      
     @objc func handleSaveName() {
-        UserDefaultService.firstName = nameTextField.text!
+        UserDefaultService.name = nameTextField.text!
         rootView?.setView(index: 2)
     }
     
