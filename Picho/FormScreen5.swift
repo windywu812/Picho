@@ -25,7 +25,7 @@ class FormScreen5: UIViewController {
             topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 80,
             centerXAnchor: view.centerXAnchor,
             heighAnchorConstant: 115, widthAnchorConstant: 95)
-        
+       
         let label1 = UILabel()
         label1.text = "Great!"
         label1.font = UIFont.boldSystemFont(ofSize: 24.0)
@@ -120,7 +120,7 @@ class FormScreen5: UIViewController {
         UserDefaultService.hasLaunched = true
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
-  
+ 
         return
     }
     

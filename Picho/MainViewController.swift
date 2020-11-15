@@ -26,6 +26,14 @@ class MainViewController: UIViewController {
     private var satFatLeft : Double = 0.0
     private var sugarLeft : Double = 0.0
     
+    let age = Double(UserDefaultService.age)
+    let weight = Double(UserDefaultService.weight)
+    let height = Double(UserDefaultService.height)
+  
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     private let age = Double(UserDefaultService.age)
     private let weight = Double(UserDefaultService.weight)
     private let height = Double(UserDefaultService.height)
@@ -111,7 +119,6 @@ class MainViewController: UIViewController {
                 self.sugarLeft = self.sugarIntake - sugar.reduce(0.0, +)
             }
         }
-        
     }
     
     private func setupGesture() {
