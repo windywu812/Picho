@@ -25,6 +25,8 @@ class MainViewController: UIViewController {
     private var calorieLeft : Double = 0.0
     private var satFatLeft : Double = 0.0
     private var sugarLeft : Double = 0.0
+    private var totalStep : Double = 0.0
+    private var totalWater : Double = 0.0
     
     private let age = Double(UserDefaultService.age)
     private let weight = Double(UserDefaultService.weight)
@@ -44,7 +46,7 @@ class MainViewController: UIViewController {
         
 //        checkUser()
         countCalorie()
-
+      
         setupScrollView()
         setupMainProgress()
         setupPichoCard()
@@ -91,6 +93,7 @@ class MainViewController: UIViewController {
     }
     
     private func fetchData() {
+        print(HealthKitService.shared.checkAuthorization())
         if HealthKitService.shared.checkAuthorization() {
             HealthKitService.shared.fetchCalorie { (totalCal) in
                 self.calorieLeft = self.calorieIntake - totalCal
@@ -101,6 +104,13 @@ class MainViewController: UIViewController {
             HealthKitService.shared.fetchSugar { (totalSugar) in
                 self.sugarLeft = self.sugarIntake - totalSugar
             }
+            HealthKitService.shared.fetchWater { (water) in
+                self.totalWater = water
+                print(self.totalWater)
+            }
+            HealthKitService.shared.fetchActivity { (step) in
+                self.totalStep = step
+            }
         } else {
             CoreDataService.shared.getDailyIntake { (intakes) in
                 let calorie = intakes.map { $0.calorie }
@@ -110,10 +120,17 @@ class MainViewController: UIViewController {
                 self.calorieLeft = self.calorieIntake - calorie.reduce(0.0, +)
                 self.satFatLeft = self.saturatedFatIntake - satFat.reduce(0.0, +)
                 self.sugarLeft = self.sugarIntake - sugar.reduce(0.0, +)
+                
+                
             }
+            setupActivity()
         }
         
+        
+       
+        
     }
+    
     
     private func setupGesture() {
         let tapActivity = UITapGestureRecognizer(target: self, action: #selector(handleActivity))
@@ -136,8 +153,8 @@ class MainViewController: UIViewController {
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
 }
+  
 
 // MARK: Setup View
 extension MainViewController {
@@ -186,14 +203,14 @@ extension MainViewController {
     private func setupActivity() {
         waterCardView = HorizontalView(
             labelText: "Water",
-            detailText: "💧 8 cups remaining",
+            detailText: "💧 \(Int(self.totalWater)) cups remaining",
             iconImage: UIImage(),
             background: Color.blue)
         waterCardView.setConstraint(heighAnchorConstant: 46)
-        
+       
         activityCardView = HorizontalView(
             labelText: "Activity",
-            detailText: "🔥 300cal",
+            detailText: "🔥 \(Int(self.totalStep)) Step",
             iconImage: UIImage(),
             background: Color.red)
         activityCardView.setConstraint(heighAnchorConstant: 46)

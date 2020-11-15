@@ -16,7 +16,7 @@ class ActivityViewController: UIViewController {
     private var descriptionLabel: UILabel!
     private var cardView: PichoCardView!
     private var activityCard: ActivityCard!
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,6 +28,9 @@ class ActivityViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(handleClose))
         
     }
+  
+        
+    
     
     @objc private func handleClose() {
         dismiss(animated: true, completion: nil)
@@ -73,7 +76,7 @@ class ActivityCard: UIView {
     
     private var activityLabel: UILabel!
     private var amountLabel: UILabel!
-    
+    private var totalStep : Double = 0.0
     var activity: Double = 0 {
         didSet { amountLabel.text = "\(activity)" }
     }
@@ -87,8 +90,11 @@ class ActivityCard: UIView {
         activityLabel = UILabel()
         activityLabel.setFont(text: "Activity", weight: .bold, color: .white)
         
+        HealthKitService.shared.fetchActivity { (step) in
+            self.totalStep = step
+        }
         amountLabel = UILabel()
-        amountLabel.setFont(text: "🔥 300 cal", weight: .bold, color: .white)
+        amountLabel.setFont(text: "🔥 \(Int(totalStep)) Step", weight: .bold, color: .white)
         
         let activityStack = UIStackView(arrangedSubviews: [activityLabel, amountLabel])
         activityStack.axis = .horizontal

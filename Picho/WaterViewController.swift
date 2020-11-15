@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import HealthKit
 class WaterViewController: UIViewController {
     
     let detail = """
@@ -50,14 +50,22 @@ class WaterViewController: UIViewController {
         view.addSubview(waterLabel)
         
         waterAmount = UILabel()
-        waterAmount.setFont(text: "\(totalWater) ml", size: 34, weight: .bold)
+        waterAmount.setFont(text: "\(totalWater) Cups", size: 34, weight: .bold)
+        
         view.addSubview(waterAmount)
         
         waterProgress = HorizontalProgressView(progress: totalWater)
         view.addSubview(waterProgress)
         
         infoLabel = UILabel()
-        infoLabel.setFont(text: "Need more water", size: 17, weight: .bold, color: Color.red)
+        if totalWater < 4 {
+            infoLabel.setFont(text: "Need more water", size: 17, weight: .bold, color: Color.red)
+        }
+        if totalWater > 5 {
+            
+            infoLabel.setFont(text: "Good", size: 17, weight: .bold, color: Color.green)
+        }
+        
         view.addSubview(infoLabel)
         
         let layout = UICollectionViewFlowLayout()
@@ -114,7 +122,19 @@ extension WaterViewController: UICollectionViewDelegate, UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WaterCell.reuseIdentifier, for: indexPath) as! WaterCell
-        cell.image = UIImage(named: "glass_empty")
+        
+        HealthKitService.shared.fetchWater { (glassIntake) in
+            self.totalWater = Int(glassIntake)
+        }
+        
+       let total = totalWater + 1
+        if indexPath.row <= total{
+            cell.image = UIImage(named: "glass_fill")
+        }else{
+            cell.image = UIImage(named: "glass_empty")
+            
+        }
+        
         
         return cell
     }
@@ -126,7 +146,10 @@ extension WaterViewController: UICollectionViewDelegate, UICollectionViewDataSou
                 totalWater -= 100
                 waterAmount.text = "\(totalWater) ml"
                 waterProgress.setProgress(progress: totalWater)
+                print("no")
             } else {
+                print("yes")
+                HealthKitService.shared.addData(sugar: Double(1) , date: Date(), type: .dietaryWater, unit: HKUnit.cupUS())
                 cell.image = UIImage(named: "glass_fill")
                 totalWater += 100
                 waterAmount.text = "\(totalWater) ml"
