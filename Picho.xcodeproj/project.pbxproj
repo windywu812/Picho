@@ -28,6 +28,8 @@
 		2381F78D255C041E008004DE /* DescriptionScreen4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2381F78C255C041E008004DE /* DescriptionScreen4.swift */; };
 		2381F790255C0428008004DE /* PageControlDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2381F78F255C0428008004DE /* PageControlDescription.swift */; };
 		2381F794255C057D008004DE /* UITextfield+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2381F793255C057D008004DE /* UITextfield+Extensions.swift */; };
+		23843BEA2561147600D17A44 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23843BE92561147600D17A44 /* String+Extensions.swift */; };
+		23843BED256116BA00D17A44 /* NotificationCenterServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23843BEC256116BA00D17A44 /* NotificationCenterServices.swift */; };
 		238C9405255BEB0C00591791 /* FoodSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238C9404255BEB0C00591791 /* FoodSearchViewController.swift */; };
 		238C9409255BEB1900591791 /* FoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238C9408255BEB1900591791 /* FoodCell.swift */; };
 		238C9412255BEBAF00591791 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238C9411255BEBAF00591791 /* DetailCell.swift */; };
@@ -116,6 +118,8 @@
 		2381F78C255C041E008004DE /* DescriptionScreen4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionScreen4.swift; sourceTree = "<group>"; };
 		2381F78F255C0428008004DE /* PageControlDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControlDescription.swift; sourceTree = "<group>"; };
 		2381F793255C057D008004DE /* UITextfield+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextfield+Extensions.swift"; sourceTree = "<group>"; };
+		23843BE92561147600D17A44 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		23843BEC256116BA00D17A44 /* NotificationCenterServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterServices.swift; sourceTree = "<group>"; };
 		238C9404255BEB0C00591791 /* FoodSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSearchViewController.swift; sourceTree = "<group>"; };
 		238C9408255BEB1900591791 /* FoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCell.swift; sourceTree = "<group>"; };
 		238C9411255BEBAF00591791 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
@@ -348,6 +352,7 @@
 				23FEBA12255BDB50001EA146 /* HealtKitService.swift */,
 				23FEBA15255BDB55001EA146 /* UserDefaultService.swift */,
 				26AF6A3D255E545A0045877C /* NotificationService.swift */,
+				23843BEC256116BA00D17A44 /* NotificationCenterServices.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -363,6 +368,7 @@
 				2381F793255C057D008004DE /* UITextfield+Extensions.swift */,
 				238C9416255BEC2D00591791 /* StringOptional+Extensions.swift */,
 				26F98150255EE1C400774F94 /* NotificationName+Extensions.swift */,
+				23843BE92561147600D17A44 /* String+Extensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -679,6 +685,7 @@
 				2381F794255C057D008004DE /* UITextfield+Extensions.swift in Sources */,
 				23DC2B3B255EB70A00025434 /* FoodHistoryCell.swift in Sources */,
 				2381F787255C0416008004DE /* DescriptionScreen2.swift in Sources */,
+				23843BED256116BA00D17A44 /* NotificationCenterServices.swift in Sources */,
 				23FEBA0C255BDB42001EA146 /* NetworkService.swift in Sources */,
 				238C9412255BEBAF00591791 /* DetailCell.swift in Sources */,
 				23DC2B41255EB75700025434 /* HeaderView.swift in Sources */,
@@ -697,6 +704,7 @@
 				2381F772255C03DB008004DE /* FormScreen2.swift in Sources */,
 				23FEBA3B255BDCA6001EA146 /* CircularProgressView.swift in Sources */,
 				23FEBA56255BDD75001EA146 /* HistoryViewController.swift in Sources */,
+				23843BEA2561147600D17A44 /* String+Extensions.swift in Sources */,
 				23FEB9E2255BDA79001EA146 /* FatSecretError.swift in Sources */,
 				2344568F255E4BB0001497DD /* ChartView.swift in Sources */,
 				23FEBA4D255BDD49001EA146 /* ProfileViewModel.swift in Sources */,

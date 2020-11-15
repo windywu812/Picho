@@ -7,6 +7,7 @@
 
 import UIKit
 import UserNotifications
+
 class NotificationViewController: UIViewController {
     
     let labelCell = ["Breakfast", "Lunch", "Dinner", "Snacks", "Water", "Weigh In", "Reflection"]
@@ -21,25 +22,24 @@ class NotificationViewController: UIViewController {
     private var wightInTextfield: UITextField!
     private var reflectionTextfield: UITextField!
     
-    private var timeBreakfast : Date!
-    private var timeLunch : Date!
-    private var timeDinner : Date!
-    private var timeSnacks : Date!
-    private var timeWater : Date!
-    private var timeWight : Date!
-    private var timeReflection : Date!
-    
-    var uud : String = ""
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-    }
+    private var timeBreakfast: Date?
+    private var timeLunch: Date?
+    private var timeDinner: Date?
+    private var timeSnacks: Date?
+    private var timeWater: Date?
+    private var timeWight: Date?
+    private var timeReflection: Date?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "Notifications"
         setupTableView()
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
+        
+        NotificationCenterServices.requestPermission()
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(endEditting))
+        view.addGestureRecognizer(tap)
     }
     
     private func setupTableView() {
@@ -58,174 +58,71 @@ class NotificationViewController: UIViewController {
     
     @objc func handleSwitch(sender: UISwitch) {
         
-        
-        let dateFormat = DateFormatter()
-        dateFormat.dateFormat = "HH:mm"
-        
-        let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options: [.alert,.sound]){ (granted,error) in}
-        let notificationContent = UNMutableNotificationContent()
-        
-        
-        
         switch sender.tag {
         case 0:
-            let uuidString = UUID().uuidString
-            
-            notificationContent.title = "Good morning!"
-            notificationContent.body = "Start your day with a breakfast, and don’t forget to log it! 😉"
-            let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: timeBreakfast!)
-            print(dateComponents)
-            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
-            
-            let request = UNNotificationRequest(identifier: uuidString, content: notificationContent, trigger: trigger)
-            print("1:\(uuidString)")
-            if sender.isOn == true{
-                
-                center.add(request) { (error) in
-                    
-                    self.uud = uuidString
-                    
-                }
-                print(timeBreakfast!)
-                print(dateFormat.string(from: timeBreakfast!))
-                print(sender.isOn)
-            }
-            if sender.isOn == false{
-                print("3:\(uud)")
-                center.removeDeliveredNotifications(withIdentifiers: [uud])
-                center.removePendingNotificationRequests(withIdentifiers: [uud])
-            }
+            let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: timeBreakfast ?? ("08:00").changeToDate())
+            NotificationCenterServices.setupNotification(
+                uuid: "Breakfast",
+                title: "Good morning!",
+                body: "Start your day with a breakfast, and don’t forget to log it! 😉",
+                time: dateComponent, isOn: sender.isOn)
         case 1:
-            if sender.isOn {
-                let uuidString = UUID().uuidString
-                notificationContent.title = "It’s past midday!"
-                notificationContent.body = "What did you have for lunch today?"
-                let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: timeLunch!)
-                print(dateComponents)
-                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
-                
-                let request = UNNotificationRequest(identifier: uuidString, content: notificationContent, trigger: trigger)
-                if sender.isOn == true{
-                    center.add(request) { (error) in
-                        self.uud = uuidString
-                    }
-                }
-                if sender.isOn == false{
-                    center.removeDeliveredNotifications(withIdentifiers: [uud])
-                    center.removePendingNotificationRequests(withIdentifiers: [uud])
-                }
-            }
+            let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: timeLunch ?? ("12:00").changeToDate())
+            NotificationCenterServices.setupNotification(
+                uuid: "Lunch",
+                title: "It's past midday!",
+                body: "What did you have for lunch today?",
+                time: dateComponent,
+                isOn: sender.isOn)
         case 2:
-            if sender.isOn {
-                let uuidString = UUID().uuidString
-                notificationContent.title = "Evening is here!"
-                notificationContent.body = "Have you had your dinner? Don’t forget to log it!"
-                let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: timeDinner!)
-                print(dateComponents)
-                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
-                
-                let request = UNNotificationRequest(identifier: uuidString, content: notificationContent, trigger: trigger)
-                if sender.isOn == true{
-                    center.add(request) { (error) in
-                        self.uud = uuidString
-                    }
-                }
-                if sender.isOn == false{
-                    center.removeDeliveredNotifications(withIdentifiers: [uud])
-                    center.removePendingNotificationRequests(withIdentifiers: [uud])
-                }
-            }
+            let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: timeDinner ?? ("07:00").changeToDate())
+            NotificationCenterServices.setupNotification(
+                uuid: "Dinner",
+                title: "Evening is here!",
+                body: "Have you had your dinner? Don’t forget to log it!",
+                time: dateComponents,
+                isOn: sender.isOn)
         case 3:
-            if sender.isOn {
-                let uuidString = UUID().uuidString
-                notificationContent.title = "Now is the best time for snacks."
-                notificationContent.body = "Picho loves snack time. What about you?"
-                let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: timeSnacks!)
-                print(dateComponents)
-                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
-                
-                let request = UNNotificationRequest(identifier: uuidString, content: notificationContent, trigger: trigger)
-                if sender.isOn == true{
-                    center.add(request) { (error) in
-                        self.uud = uuidString
-                    }
-                }
-                if sender.isOn == false{
-                    center.removeDeliveredNotifications(withIdentifiers: [uud])
-                    center.removePendingNotificationRequests(withIdentifiers: [uud])
-                }
-            }
+            let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: timeSnacks ?? ("16:00").changeToDate())
+            NotificationCenterServices.setupNotification(
+                uuid: "Snacks",
+                title: "Now is the best time for snacks.",
+                body: "Picho loves snack time. What about you?",
+                time: dateComponents,
+                isOn: sender.isOn)
         case 4:
-            if sender.isOn {
-                let uuidString = UUID().uuidString
-                notificationContent.title = "*Gulp* *gulp* *gulp*"
-                notificationContent.body = "Eight glasses of water a day, keeps dehydration away!"
-                let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: timeWater!)
-                print(dateComponents)
-                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
-                
-                let request = UNNotificationRequest(identifier: uuidString, content: notificationContent, trigger: trigger)
-                if sender.isOn == true{
-                    center.add(request) { (error) in
-                        self.uud = uuidString
-                    }
-                }
-                if sender.isOn == false{
-                    center.removeDeliveredNotifications(withIdentifiers: [uud])
-                    center.removePendingNotificationRequests(withIdentifiers: [uud])
-                }
-            }
+            let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: timeSnacks ?? ("12:00").changeToDate())
+            NotificationCenterServices.setupNotification(
+                uuid: "Water",
+                title: "*Gulp* *gulp* *gulp*",
+                body: "Eight glasses of water a day, keeps dehydration away!",
+                time: dateComponents,
+                isOn: sender.isOn)
         case 5:
-            if sender.isOn {
-                let uuidString = UUID().uuidString
-                notificationContent.title = "Weigh In"
-                notificationContent.body = "Have you checked your weight? "
-                let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: timeWight!)
-                print(dateComponents)
-                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
-                
-                let request = UNNotificationRequest(identifier: uuidString, content: notificationContent, trigger: trigger)
-                if sender.isOn == true{
-                    center.add(request) { (error) in
-                        self.uud = uuidString
-                    }
-                }
-                if sender.isOn == false{
-                    center.removeDeliveredNotifications(withIdentifiers: [uud])
-                    center.removePendingNotificationRequests(withIdentifiers: [uud])
-                }
-            }
+            let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: timeSnacks ?? ("12:00").changeToDate())
+            NotificationCenterServices.setupNotification(
+                uuid: "Weight In",
+                title: "Weight In",
+                body: "Have you checked your weight?",
+                time: dateComponents,
+                isOn: sender.isOn)
         case 6:
-            if sender.isOn {
-                let uuidString = UUID().uuidString
-                notificationContent.title = "Reflection"
-                notificationContent.body = "Check Your Proggress "
-                let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: timeReflection!)
-                print(dateComponents)
-                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
-                
-                let request = UNNotificationRequest(identifier: uuidString, content: notificationContent, trigger: trigger)
-                if sender.isOn == true{
-                    center.add(request) { (error) in
-                        self.uud = uuidString
-                    }
-                }
-                if sender.isOn == false{
-                    center.removeDeliveredNotifications(withIdentifiers: [uud])
-                    center.removePendingNotificationRequests(withIdentifiers: [uud])
-                }
-            }
+            let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: timeSnacks ?? ("20:00").changeToDate())
+            NotificationCenterServices.setupNotification(
+                uuid: "Reflection",
+                title: "Reflection",
+                body: "Check your progress",
+                time: dateComponents,
+                isOn: sender.isOn)
         default:
             break
         }
     }
+    
     @objc func handleDataPicker(sender: UIDatePicker) {
         
         let dateFormat = DateFormatter()
         dateFormat.dateFormat = "HH:mm"
-        
-        print(sender.tag)
         
         switch sender.tag {
         case 0:
@@ -252,19 +149,19 @@ class NotificationViewController: UIViewController {
         default:
             break
         }
-        
     }
     
-    @objc private func handleTap() {
-        view.endEditing(false)
+    @objc private func endEditting() {
+        view.endEditing(true)
     }
     
 }
 
-extension NotificationViewController: UITableViewDelegate, UITableViewDataSource {
+extension NotificationViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Value1Cell.reuseIdentifier, for: indexPath) as! Value1Cell
+        cell.selectionStyle = .none
         
         switch indexPath.section {
         case 0:
@@ -276,18 +173,14 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
                 cell.accessoryView = control
             } else {
                 let datePicker = UIDatePicker()
-                datePicker.tag = 0
-                datePicker.setupStyle()
+                datePicker.setupStyle(tag: 0)
                 datePicker.addTarget(self, action: #selector(self.handleDataPicker(sender:)), for: .valueChanged)
                 
                 breakfastTextfield = UITextField(frame: CGRect(x: 0, y: 0, width: 56, height: 30))
-                breakfastTextfield.addStyle()
-                breakfastTextfield.tag = 0
-                breakfastTextfield.text = "08:00"
-                breakfastTextfield.inputView = datePicker
+                breakfastTextfield.addStyle(tag: 0, text: "08.00", datePicker: datePicker)
                 cell.accessoryView = breakfastTextfield
+                cell.textLabel?.text = ""
             }
-            
         case 1:
             if indexPath.row == 0 {
                 cell.textLabel?.setFont(text: labelCell[1], weight: .bold)
@@ -297,16 +190,13 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
                 cell.accessoryView = control
             } else {
                 let datePicker = UIDatePicker()
-                datePicker.tag = 1
-                datePicker.setupStyle()
+                datePicker.setupStyle(tag: 1)
                 datePicker.addTarget(self, action: #selector(self.handleDataPicker(sender:)), for: .valueChanged)
                 
                 lunchTextfield = UITextField(frame: CGRect(x: 0, y: 0, width: 56, height: 30))
-                lunchTextfield.addStyle()
-                lunchTextfield.tag = 1
-                lunchTextfield.text = "12.00"
-                lunchTextfield.inputView = datePicker
+                lunchTextfield.addStyle(tag: 1, text: "12.00", datePicker: datePicker)
                 cell.accessoryView = lunchTextfield
+                cell.textLabel?.text = ""
             }
         case 2:
             if indexPath.row == 0 {
@@ -317,16 +207,13 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
                 cell.accessoryView = control
             } else {
                 let datePicker = UIDatePicker()
-                datePicker.tag = 2
-                datePicker.setupStyle()
+                datePicker.setupStyle(tag: 2)
                 datePicker.addTarget(self, action: #selector(self.handleDataPicker(sender:)), for: .valueChanged)
                 
                 dinnerTextfield = UITextField(frame: CGRect(x: 0, y: 0, width: 56, height: 30))
-                dinnerTextfield.addStyle()
-                dinnerTextfield.tag = 2
-                dinnerTextfield.text = "07.00"
-                dinnerTextfield.inputView = datePicker
+                dinnerTextfield.addStyle(tag: 2, text: "07.00", datePicker: datePicker)
                 cell.accessoryView = dinnerTextfield
+                cell.textLabel?.text = ""
             }
         case 3:
             if indexPath.row == 0 {
@@ -337,16 +224,13 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
                 cell.accessoryView = control
             } else {
                 let datePicker = UIDatePicker()
-                datePicker.tag = 3
-                datePicker.setupStyle()
+                datePicker.setupStyle(tag: 3)
                 datePicker.addTarget(self, action: #selector(self.handleDataPicker(sender:)), for: .valueChanged)
                 
                 snacksTextfield = UITextField(frame: CGRect(x: 0, y: 0, width: 56, height: 30))
-                snacksTextfield.addStyle()
-                snacksTextfield.tag = 3
-                snacksTextfield.text = "16.00"
-                snacksTextfield.inputView = datePicker
+                snacksTextfield.addStyle(tag: 3, text: "16.00", datePicker: datePicker)
                 cell.accessoryView = snacksTextfield
+                cell.textLabel?.text = ""
             }
         case 4:
             if indexPath.row == 0 {
@@ -357,16 +241,13 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
                 cell.accessoryView = control
             } else {
                 let datePicker = UIDatePicker()
-                datePicker.tag = 4
-                datePicker.setupStyle()
+                datePicker.setupStyle(tag: 4)
                 datePicker.addTarget(self, action: #selector(self.handleDataPicker(sender:)), for: .valueChanged)
                 
                 waterTextfield = UITextField(frame: CGRect(x: 0, y: 0, width: 56, height: 30))
-                waterTextfield.addStyle()
-                waterTextfield.tag = 4
-                waterTextfield.text = "12.00"
-                waterTextfield.inputView = datePicker
+                waterTextfield.addStyle(tag: 4, text: "12.00", datePicker: datePicker)
                 cell.accessoryView = waterTextfield
+                cell.textLabel?.text = ""
             }
         case 5:
             if indexPath.row == 0 {
@@ -377,16 +258,13 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
                 cell.accessoryView = control
             } else {
                 let datePicker = UIDatePicker()
-                datePicker.tag = 5
-                datePicker.setupStyle()
+                datePicker.setupStyle(tag: 5)
                 datePicker.addTarget(self, action: #selector(self.handleDataPicker(sender:)), for: .valueChanged)
                 
                 wightInTextfield = UITextField(frame: CGRect(x: 0, y: 0, width: 56, height: 30))
-                wightInTextfield.addStyle()
-                wightInTextfield.tag = 5
-                wightInTextfield.text = "12.00"
-                wightInTextfield.inputView = datePicker
+                wightInTextfield.addStyle(tag: 5, text: "12.00", datePicker: datePicker)
                 cell.accessoryView = wightInTextfield
+                cell.textLabel?.text = ""
             }
         case 6:
             if indexPath.row == 0 {
@@ -397,28 +275,44 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
                 cell.accessoryView = control
             } else {
                 let datePicker = UIDatePicker()
-                datePicker.tag = 6
-                datePicker.setupStyle()
+                datePicker.setupStyle(tag: 6)
                 datePicker.addTarget(self, action: #selector(self.handleDataPicker(sender:)), for: .valueChanged)
                 
                 reflectionTextfield = UITextField(frame: CGRect(x: 0, y: 0, width: 56, height: 30))
-                reflectionTextfield.addStyle()
-                reflectionTextfield.tag = 6
-                reflectionTextfield.text = "20.00"
-                reflectionTextfield.inputView = datePicker
+                reflectionTextfield.addStyle(tag: 6, text: "20.00", datePicker: datePicker)
                 cell.accessoryView = reflectionTextfield
+                cell.textLabel?.text = ""
             }
         default:
-            break
+            return cell
         }
         
-        if indexPath.row == 1 {
-            cell.textLabel?.text = "Remind me at"
-        }
-        cell.imageView?.image = UIImage(systemName: "person")
-        cell.selectionStyle = .none
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return "Remind me to log at"
+        default:
+            return nil
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        switch section {
+        case 5:
+            return "Weighing yourself at the same time weekly will give a more accurate weight result"
+        case 6:
+            return "Reflect on your progress at the same time weekly to understand your current habit and make an informed decision on changes to make for the coming week"
+        default:
+            return nil
+        }
+    }
+    
+}
+
+extension NotificationViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 7
@@ -429,7 +323,9 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
     }
     
 }
-extension NotificationViewController : UNUserNotificationCenterDelegate{
+
+extension NotificationViewController: UNUserNotificationCenterDelegate {
+    
     func userNotificationCenter(_ center:UNUserNotificationCenter, willPresent notification:
                                     UNNotification,withCompletionHandler completionHandler: @escaping
                                         (UNNotificationPresentationOptions) -> Void){
@@ -437,5 +333,3 @@ extension NotificationViewController : UNUserNotificationCenterDelegate{
     }
     
 }
-
-
