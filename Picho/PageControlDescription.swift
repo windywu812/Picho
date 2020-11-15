@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PageControlDescription: UIPageViewController,UIPageViewControllerDataSource,UIPageViewControllerDelegate {
+class PageControlDescription: UIPageViewController {
     
     var orderedViewControllers : [UIViewController] = []
     var pageControl = UIPageControl()
@@ -17,12 +17,10 @@ class PageControlDescription: UIPageViewController,UIPageViewControllerDataSourc
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = Color.background
         
         orderedViewControllers = [
             DescriptionScreen1(),
@@ -36,20 +34,30 @@ class PageControlDescription: UIPageViewController,UIPageViewControllerDataSourc
         if let firstViewController = orderedViewControllers.first {
             self.setViewControllers([firstViewController], direction: .forward, animated: true, completion: nil)
         }
+        
         configurePageControl()
     }
     
-    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        let pageContentViewController = pageViewController.viewControllers![0]
-        self.pageControl.currentPage = orderedViewControllers.lastIndex(of: pageContentViewController)!
-    }
-    func configurePageControl(){
+    private func configurePageControl() {
         pageControl = UIPageControl(frame: CGRect(x: 0, y: UIScreen.main.bounds.maxY - 75 , width: UIScreen.main.bounds.width, height: 50))
         pageControl.numberOfPages = orderedViewControllers.count
         pageControl.currentPage = 0
         pageControl.pageIndicatorTintColor = .tertiaryLabel
         pageControl.currentPageIndicatorTintColor = .black
-        self.view.addSubview(pageControl)
+        view.addSubview(pageControl)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+}
+
+extension PageControlDescription: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+    
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        let pageContentViewController = pageViewController.viewControllers![0]
+        self.pageControl.currentPage = orderedViewControllers.lastIndex(of: pageContentViewController)!
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
@@ -58,7 +66,7 @@ class PageControlDescription: UIPageViewController,UIPageViewControllerDataSourc
         }
         let previousIndex = viewControllerIndex - 1
         
-        guard previousIndex >= 0 else{
+        guard previousIndex >= 0 else {
             return  nil
         }
         guard orderedViewControllers.count > previousIndex else{
@@ -66,6 +74,7 @@ class PageControlDescription: UIPageViewController,UIPageViewControllerDataSourc
         }
         return orderedViewControllers[previousIndex]
     }
+    
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         guard let viewControllerIndex = orderedViewControllers.lastIndex(of: viewController) else {
             return nil

@@ -61,6 +61,7 @@ class FoodDetailScreen: UITableViewController {
         setupLabel()
         setupView()
         setupLayout()
+        fetchingFavorite()
     }
     
     private func setupLabel() {
@@ -221,6 +222,13 @@ class FoodDetailScreen: UITableViewController {
                 print(err.localizedDescription)
             }
         }
+    }
+    
+    private func fetchingFavorite() {
+        CoreDataService.shared.getFavorite(for: foodId) { favorites in
+            self.isFavorite = !favorites.isEmpty
+        }
+        setupFavorite()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {

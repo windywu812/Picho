@@ -48,7 +48,7 @@ class SmallCircularProgressView: UIView {
     
     func animate(value: Float, total: Float) {
         let animation = CABasicAnimation(keyPath: "strokeEnd")
-        animation.toValue = value / total
+        animation.toValue = (total - value) / total
         animation.duration = 2
         animation.fromValue = 0
         animation.fillMode = .forwards

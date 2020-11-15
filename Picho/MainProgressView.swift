@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class MainProgressView: UIView {
     
     private let satFatLabel: UILabel
@@ -25,6 +26,21 @@ class MainProgressView: UIView {
     let calorieProgress: CircularProgressView
     
     var rootView: UIViewController?
+    
+    func setupView(
+        totalCalorie: Float,
+        totalSatFat: Float,
+        satFatLeftAmount: Float,
+        totalSugar: Float,
+        sugarLeftAmount: Float) {
+           
+        totalCalorieLabel.text = "from \(String(format: "%.00f", totalCalorie)) cal/day"
+        sugarTotalLabel.text = "from \(String(format: "%.01f", totalSugar)) g/day"
+        satFatTotalLabel.text = "from \(String(format: "%.01f", totalSatFat)) g/day"
+        
+        sugarLeft.text = "\(String(format: "%.01f", sugarLeftAmount))g"
+        satFatLeft.text = "\(String(format: "%.01f", satFatLeftAmount))g"
+    }
     
     override init(frame: CGRect) {
         calorieLabel = UILabel()
@@ -74,7 +90,7 @@ class MainProgressView: UIView {
             weight: .bold)
         
         totalCalorieLabel.setFont(
-            text: "from 2400 cal/day",
+            text: "from \(0) cal/day",
             size: 13,
             color: .secondaryLabel)
         
@@ -103,12 +119,12 @@ class MainProgressView: UIView {
             weight: .bold)
         
         satFatTotalLabel.setFont(
-            text: "from 25g/day",
+            text: "from \(0)/day",
             size: 13,
             color: .secondaryLabel)
         
         satFatLeft.setFont(
-            text: "3g left", size: 13)
+            text: "\(0)g left", size: 13)
         
         satFatStack = UIStackView(
             arrangedSubviews: [satFatLabel,
@@ -135,12 +151,12 @@ class MainProgressView: UIView {
             weight: .bold)
         
         sugarTotalLabel.setFont(
-            text: "from 36g/day",
+            text: "from \(0)/day",
             size: 13,
             color: .secondaryLabel)
         
         sugarLeft.setFont(
-            text: "15g left", size: 13)
+            text: "\(0)g left", size: 13)
         
         let mainStack = UIStackView(
             arrangedSubviews: [sugarLabel,
