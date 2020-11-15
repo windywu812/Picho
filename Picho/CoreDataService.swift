@@ -37,7 +37,7 @@ class CoreDataService {
             let dateFrom = date.startOfTheDay()
             let dateTo = date.startOfTheDay().endDate()
             datePredicate = NSPredicate(format: "\(CoreDataConstant.date) >= %@ AND \(CoreDataConstant.date) <= %@",
-                        dateFrom as CVarArg,  dateTo as CVarArg)
+                                        dateFrom as CVarArg,  dateTo as CVarArg)
         }
         
         request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [timePredicate, datePredicate])
@@ -64,7 +64,7 @@ class CoreDataService {
         intake.sugars = sugars
         intake.date = date
         intake.time = time.rawValue
-
+        
         saveDailyIntake(context: context)
     }
     
@@ -112,7 +112,7 @@ class CoreDataService {
         favorite.id = id
         favorite.name = name
         favorite.desc = description
-
+        
         saveFavorite(context: context)
     }
     
@@ -135,4 +135,57 @@ class CoreDataService {
             print(error.localizedDescription)
         }
     }
+    
+    // MARK: Notification
+    func fetchNotificationData(completion: @escaping ([Notif]) -> ()) {
+        
+        let request = NSFetchRequest<Notif>(entityName: "Notif")
+        
+        do {
+            let results = try context.fetch(request)
+            completion(results)
+        } catch {
+            print(error.localizedDescription)
+            completion([])
+        }
+
+    }
+    
+    func addNotification(id: String, isOn: Bool, timeLabel: String) {
+        
+        if checkIfExist(id: id) {
+            let request = NSFetchRequest<Notif>(entityName: "Notif")
+            request.predicate = NSPredicate(format: "id = %@", id as CVarArg)
+            do {
+                let dataToUpdated = try context.fetch(request)[0]
+                dataToUpdated.isOn = isOn
+                dataToUpdated.timeLabel = timeLabel
+            } catch {
+                print(error.localizedDescription)
+            }
+        } else {
+            let notification = Notif(context: context)
+            notification.id = id
+            notification.isOn = isOn
+            notification.timeLabel = timeLabel
+        }
+        do {
+            try context.save()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func checkIfExist(id: String) -> Bool {
+        let request = NSFetchRequest<Notif>(entityName: "Notif")
+        request.predicate = NSPredicate(format: "id = %@", id as CVarArg)
+        do {
+            let dataToUpdated = try context.fetch(request)
+            if id == dataToUpdated.first?.id { return true }
+        } catch {
+            print(error.localizedDescription)
+        }
+        return false
+    }
+    
 }

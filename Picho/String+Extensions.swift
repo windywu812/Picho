@@ -13,5 +13,5 @@ extension String {
         dateFormat.dateFormat = "HH:mm"
         
         return dateFormat.date(from: self)!
-    }
+    }    
 }
