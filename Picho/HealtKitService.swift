@@ -186,12 +186,21 @@ class HealthKitService {
     }
     
     func checkAuthorization() -> Bool {
-        var isSucceed = false
-        healthStore.requestAuthorization(toShare: healthKitTypesToWrite, read: HealthKitTypesToRead){ (success, error) in
-            isSucceed = success
-            
+        guard
+            let satFatType = HKObjectType.quantityType(forIdentifier: .dietaryFatSaturated),
+            let sugarType = HKObjectType.quantityType(forIdentifier: .dietarySugar),
+            let energyType = HKObjectType.quantityType(forIdentifier: .dietaryEnergyConsumed),
+            let waterType = HKObjectType.quantityType(forIdentifier: .dietaryWater) else {
+            return false
         }
-        return isSucceed
+        
+        let isSatFatAuth = healthStore.authorizationStatus(for: satFatType) == .sharingAuthorized
+        let isSugarAuth = healthStore.authorizationStatus(for: sugarType) == .sharingAuthorized
+        let isEnergyAuth = healthStore.authorizationStatus(for: energyType) == .sharingAuthorized
+        let isWaterAuth = healthStore.authorizationStatus(for: waterType) == .sharingAuthorized
+        
+        return isSatFatAuth && isSugarAuth && isEnergyAuth && isWaterAuth
+        
     }
     
 }
