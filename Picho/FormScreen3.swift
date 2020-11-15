@@ -39,11 +39,18 @@ class FormScreen3: UIViewController {
         imageview.contentMode = .scaleToFill
         imageview.image = UIImage(named: "mascot")
         view.addSubview(imageview)
-        
-        imageview.setConstraint(
-            topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 80,
-            centerXAnchor: view.centerXAnchor,
-            heighAnchorConstant: 115, widthAnchorConstant: 95)
+                
+        if UIScreen.main.bounds.height < 700 {
+            imageview.setConstraint(
+                topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 16,
+                centerXAnchor: view.centerXAnchor,
+                heighAnchorConstant: 115, widthAnchorConstant: 95)
+        } else {
+            imageview.setConstraint(
+                topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 80,
+                centerXAnchor: view.centerXAnchor,
+                heighAnchorConstant: 115, widthAnchorConstant: 95)
+        }
         
         let titleLabel = UILabel()
         titleLabel.text = "I want to know more about you."
@@ -114,6 +121,10 @@ class FormScreen3: UIViewController {
             heighAnchorConstant: 50)
         
         getStartedBtn.addTarget(self, action: #selector(handleSave), for: .touchUpInside)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification: )), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification: )), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     @objc func handleSave() {
@@ -125,6 +136,34 @@ class FormScreen3: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
+    }
+    
+    private var activeTextField: UITextField?
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        
+        var shouldMoveViewUp = false
+        
+        if let activeTextField = activeTextField {
+            
+            let bottomOfTextField = activeTextField.convert(activeTextField.bounds, to: self.view).maxY;
+            
+            let topOfKeyboard = self.view.frame.height - keyboardSize.height
+            
+            if bottomOfTextField > topOfKeyboard {
+                shouldMoveViewUp = true
+            }
+        }
+        
+        if(shouldMoveViewUp) {
+            self.view.frame.origin.y = 0 - keyboardSize.height
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        self.view.frame.origin.y = 0
     }
     
 }
@@ -154,6 +193,10 @@ extension FormScreen3 :  UIPickerViewDelegate, UIPickerViewDataSource {
 }
 
 extension FormScreen3: UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.activeTextField = textField
+    }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         

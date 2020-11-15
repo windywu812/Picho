@@ -14,6 +14,9 @@ class FormScreen4: UIViewController {
     var getStartedBtn: UIButton!
     var rootView : PageControlForm?
     
+    private var height = ""
+    private var weight = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,10 +27,17 @@ class FormScreen4: UIViewController {
         imageview.image = UIImage(named: "mascot")
         view.addSubview(imageview)
         
-        imageview.setConstraint(
-            topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 80,
-            centerXAnchor: view.centerXAnchor,
-            heighAnchorConstant: 115, widthAnchorConstant: 95)
+        if UIScreen.main.bounds.height < 700 {
+            imageview.setConstraint(
+                topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 16,
+                centerXAnchor: view.centerXAnchor,
+                heighAnchorConstant: 115, widthAnchorConstant: 95)
+        } else {
+            imageview.setConstraint(
+                topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 80,
+                centerXAnchor: view.centerXAnchor,
+                heighAnchorConstant: 115, widthAnchorConstant: 95)
+        }
         
         let titleLabel = UILabel()
         titleLabel.text = "Can you tell me about your current weight and height?"
@@ -168,9 +178,6 @@ class FormScreen4: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
-    
-    var height = ""
-    var weight = ""
     
 }
 

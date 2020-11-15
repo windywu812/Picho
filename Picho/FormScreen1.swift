@@ -14,6 +14,8 @@ class FormScreen1: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print(UIDevice.current.name)
+        
         view.backgroundColor = Color.background
         
         let imageview = UIImageView()
@@ -21,10 +23,17 @@ class FormScreen1: UIViewController {
         imageview.image = UIImage(named: "mascot")
         view.addSubview(imageview)
         
-        imageview.setConstraint(
-            topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 80,
-            centerXAnchor: view.centerXAnchor,
-            heighAnchorConstant: 115, widthAnchorConstant: 95)
+        if UIScreen.main.bounds.height < 700 {
+            imageview.setConstraint(
+                topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 16,
+                centerXAnchor: view.centerXAnchor,
+                heighAnchorConstant: 115, widthAnchorConstant: 95)
+        } else {
+            imageview.setConstraint(
+                topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 80,
+                centerXAnchor: view.centerXAnchor,
+                heighAnchorConstant: 115, widthAnchorConstant: 95)
+        }
         
         let titleLabel = UILabel()
         titleLabel.text = "Picho is here to help!"

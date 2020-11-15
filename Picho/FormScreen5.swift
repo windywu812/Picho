@@ -21,10 +21,17 @@ class FormScreen5: UIViewController {
         imageview.image = UIImage(named: "mascot")
         view.addSubview(imageview)
         
-        imageview.setConstraint(
-            topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 80,
-            centerXAnchor: view.centerXAnchor,
-            heighAnchorConstant: 115, widthAnchorConstant: 95)
+        if UIScreen.main.bounds.height < 700 {
+            imageview.setConstraint(
+                topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 16,
+                centerXAnchor: view.centerXAnchor,
+                heighAnchorConstant: 115, widthAnchorConstant: 95)
+        } else {
+            imageview.setConstraint(
+                topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 80,
+                centerXAnchor: view.centerXAnchor,
+                heighAnchorConstant: 115, widthAnchorConstant: 95)
+        }
        
         let label1 = UILabel()
         label1.text = "Great!"
