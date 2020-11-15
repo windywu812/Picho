@@ -115,10 +115,9 @@ class FormScreen5: UIViewController {
     }
     
     @objc private func handleSave() {
-        let vc = UINavigationController(rootViewController: MainViewController())
+        let vc = TabBarController()
         vc.modalPresentationStyle = .fullScreen
         UserDefaultService.hasLaunched = true
-        vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
  
         return

@@ -32,6 +32,7 @@
 		238C9409255BEB1900591791 /* FoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238C9408255BEB1900591791 /* FoodCell.swift */; };
 		238C9412255BEBAF00591791 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238C9411255BEBAF00591791 /* DetailCell.swift */; };
 		238C9417255BEC2D00591791 /* StringOptional+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238C9416255BEC2D00591791 /* StringOptional+Extensions.swift */; };
+		239D53C62560F011009112AF /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239D53C52560F011009112AF /* TabBarController.swift */; };
 		23DC2B3B255EB70A00025434 /* FoodHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC2B3A255EB70A00025434 /* FoodHistoryCell.swift */; };
 		23DC2B3E255EB73600025434 /* FoodHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC2B3D255EB73600025434 /* FoodHistory.swift */; };
 		23DC2B41255EB75700025434 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC2B40255EB75700025434 /* HeaderView.swift */; };
@@ -119,6 +120,7 @@
 		238C9408255BEB1900591791 /* FoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCell.swift; sourceTree = "<group>"; };
 		238C9411255BEBAF00591791 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
 		238C9416255BEC2D00591791 /* StringOptional+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StringOptional+Extensions.swift"; sourceTree = "<group>"; };
+		239D53C52560F011009112AF /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		23DC2B3A255EB70A00025434 /* FoodHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodHistoryCell.swift; sourceTree = "<group>"; };
 		23DC2B3D255EB73600025434 /* FoodHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodHistory.swift; sourceTree = "<group>"; };
 		23DC2B40255EB75700025434 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
@@ -323,6 +325,7 @@
 				A28A5AF6255BD410007E66FA /* AppDelegate.swift */,
 				A28A5AF8255BD410007E66FA /* SceneDelegate.swift */,
 				23FEB9FD255BDAF3001EA146 /* AppCoordinator.swift */,
+				239D53C52560F011009112AF /* TabBarController.swift */,
 			);
 			name = Base;
 			sourceTree = "<group>";
@@ -660,6 +663,7 @@
 				2381F77B255C03E7008004DE /* FormScreen5.swift in Sources */,
 				26F98151255EE1C400774F94 /* NotificationName+Extensions.swift in Sources */,
 				23FEBA53255BDD59001EA146 /* Value1Cell.swift in Sources */,
+				239D53C62560F011009112AF /* TabBarController.swift in Sources */,
 				238C9405255BEB0C00591791 /* FoodSearchViewController.swift in Sources */,
 				23FEBA37255BDC87001EA146 /* MealTodayView.swift in Sources */,
 				23414A0A255CDE4800E1F48D /* HorizontalProgressView.swift in Sources */,

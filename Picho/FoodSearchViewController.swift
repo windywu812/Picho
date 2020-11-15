@@ -10,21 +10,16 @@ import Combine
 
 class FoodSearchViewController: UIViewController {
     
+    @Published private var foods: [SearchedFood] = []
     private var searchBar: UISearchBar!
     private var tableView: UITableView!
     private var segmentedControl: UISegmentedControl!
     private var currentSegment = 0
     private var cancelable = Set<AnyCancellable>()
-    
-    var eatingTime: EatTime =  .breakfast
-    
-    @Published private var foods: [SearchedFood] = []
     private var favorites: [Favorite] = []
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
+    var eatingTime: EatTime =  .breakfast
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -137,6 +132,11 @@ class FoodSearchViewController: UIViewController {
         }
         tableView.reloadData()
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
 }
 
 extension FoodSearchViewController: UITableViewDataSource, UITableViewDelegate {
@@ -164,7 +164,7 @@ extension FoodSearchViewController: UITableViewDataSource, UITableViewDelegate {
         case 1:
             cell.configureCell(foodName: favorites[indexPath.row].name ?? "", description: favorites[indexPath.row].desc ?? "")
         default:
-            return cell
+            break
         }
 
         return cell
@@ -184,20 +184,15 @@ extension FoodSearchViewController: UITableViewDataSource, UITableViewDelegate {
             let food = favorites[indexPath.row]
             foodVC.foodId = food.id ?? ""
             foodVC.foodName = food.name ?? ""
-            foodVC.foodDescription = food.description
+            foodVC.foodDescription = food.desc ?? ""
             foodVC.isFavorite = true
             foodVC.eatingTime = eatingTime
         default:
-            let food = foods[indexPath.row]
-            foodVC.foodId = food.id
-            foodVC.foodName = food.name
-            foodVC.foodDescription = food.description
-            foodVC.eatingTime = eatingTime
+            break
         }
         
         let vc = UINavigationController(rootViewController: foodVC)
         self.navigationController?.present(vc, animated: true, completion: nil)
-        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 }
