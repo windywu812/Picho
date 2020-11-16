@@ -13,6 +13,10 @@ class HorizontalView: UIView {
     private let detail: UILabel
     private let icon: UIImageView
     
+    func setupView(amount: Int) {
+        label.text = "💧 \(amount) cups remaining"
+    }
+    
     init(frame: CGRect = .zero,
          labelText: String,
          detailText: String,

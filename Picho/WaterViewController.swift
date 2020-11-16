@@ -10,8 +10,7 @@ import UIKit
 import HealthKit
 
 protocol GetDataDelegate {
-    func getWater(water: Int)
-    
+    func sendWater(water: Int)
 }
 
 class WaterViewController: UIViewController {
@@ -28,7 +27,7 @@ class WaterViewController: UIViewController {
     private var waterProgress: HorizontalProgressView!
     private var infoLabel: UILabel!
     private var waterCollectionView: UICollectionView!
-    var delegateWater : GetDataDelegate?
+    var delegate : GetDataDelegate?
     private var totalWater: Int = 0
     
     override func viewDidLoad() {
@@ -123,10 +122,11 @@ class WaterViewController: UIViewController {
         HealthKitService.shared.fetchWater { (glassIntake) in
             self.totalWater = Int(glassIntake)
             
+            self.delegate?.sendWater(water: Int(glassIntake))
+            
             DispatchQueue.main.async { [self] in
                 self.waterAmount.text = "\(totalWater) Cups"
                 self.waterProgress.setProgress(progress: totalWater)
-                self.delegateWater?.getWater(water: Int(glassIntake))
                 if totalWater > 5 {
                     self.infoLabel.setFont(text: "Good", size: 17, weight: .bold, color: Color.green)
                 }

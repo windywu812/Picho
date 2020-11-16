@@ -70,10 +70,8 @@ class MainViewController: UIViewController {
     }
     
     private func passData() {
-//        mainProgressView.calorieProgress.animate(value: Float(calorieLeft), total:Float(calorieIntake))
         mainProgressView.sugarProgress.animate(value: Float(sugarLeft), total: Float(sugarIntake))
         mainProgressView.satFatProgress.animate(value: Float(satFatLeft), total: Float(saturatedFatIntake))
-        
         mainProgressView.calorieProgress.animate(value: Float(calorieLeft), total: Float(calorieIntake))
         
         mainProgressView.setupView(
@@ -129,23 +127,25 @@ class MainViewController: UIViewController {
     }
     private func setupGesture() {
         let tapActivity = UITapGestureRecognizer(target: self, action: #selector(handleActivity))
+        activityCardView.isUserInteractionEnabled = true
         activityCardView.addGestureRecognizer(tapActivity)
         
         let tapWater = UITapGestureRecognizer(target: self, action: #selector(handleWater))
+        waterCardView.isUserInteractionEnabled = true
         waterCardView.addGestureRecognizer(tapWater)
     }
     
     @objc private func handleActivity() {
         let vc = UINavigationController(rootViewController: ActivityViewController())
-        navigationController?.present(vc, animated: true, completion: nil)
+        navigationController?.present(vc, animated: true)
     }
     
     @objc private func handleWater() {
         let vc = WaterViewController()
-        vc.delegateWater = self
+        vc.delegate = self
         
         let navController = UINavigationController(rootViewController: vc)
-        navigationController?.present(navController, animated: true, completion: nil)
+        navigationController?.present(navController, animated: true)
     }
     
     deinit {
@@ -157,10 +157,10 @@ class MainViewController: UIViewController {
 // MARK: Setup View
 extension MainViewController : GetDataDelegate {
     
-    func getWater(water: Int) {
-        
-       
+    func sendWater(water: Int) {
+        waterCardView.setupView(amount: water)
     }
+    
     private func setupScrollView() {
         scrollView = UIScrollView()
         scrollView.backgroundColor = Color.background
