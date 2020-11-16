@@ -9,12 +9,10 @@ import UIKit
 
 class FormScreen1: UIViewController {
     
-    var rootView : PageControlForm?
+    var rootView: PageControlForm?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print(UIDevice.current.name)
         
         view.backgroundColor = Color.background
         

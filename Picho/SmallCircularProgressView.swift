@@ -25,7 +25,8 @@ class SmallCircularProgressView: UIView {
         animation.fillMode = .forwards
         animation.isRemovedOnCompletion = false
         
-        if total - value / total > 1 {
+        
+        if (total - value) / total > 1 {
             shapeLayer.strokeColor = Color.red.cgColor
         }
         
