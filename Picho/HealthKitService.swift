@@ -17,11 +17,15 @@ class HealthKitService {
         HKQuantityType.quantityType(forIdentifier: .dietaryFatSaturated)!,
         HKQuantityType.quantityType(forIdentifier: .dietarySugar)!,
         HKQuantityType.quantityType(forIdentifier: .dietaryEnergyConsumed)!,
+        HKQuantityType.quantityType(forIdentifier: .dietaryWater)!,
+        HKObjectType.quantityType(forIdentifier: .stepCount)!
     ]
     private let healthKitTypesToWrite : Set<HKSampleType> = [
         HKQuantityType.quantityType(forIdentifier: .dietaryFatSaturated)!,
         HKQuantityType.quantityType(forIdentifier: .dietarySugar)!,
         HKQuantityType.quantityType(forIdentifier: .dietaryEnergyConsumed)!,
+        HKQuantityType.quantityType(forIdentifier: .dietaryWater)!,
+        HKObjectType.quantityType(forIdentifier: .stepCount)!
     ]
     
     func authorization() {
@@ -65,8 +69,8 @@ class HealthKitService {
      func fetchCalorie(completion: @escaping (Double) -> Void) {
         
         guard let energyType = HKSampleType.quantityType(forIdentifier: .dietaryEnergyConsumed) else { return }
-        let start = Calendar.current.date(byAdding: .day, value: -1, to: .distantPast)!
-        let last24hPredicate = HKQuery.predicateForSamples(withStart: start, end: Date(), options: .strictEndDate)
+
+        let last24hPredicate = HKQuery.predicateForSamples(withStart: Date().startOfTheDay(), end: Date(), options: .strictEndDate)
         
         let energyQuery = HKSampleQuery(sampleType: energyType,
                                         predicate: last24hPredicate,
@@ -84,7 +88,28 @@ class HealthKitService {
         
         HKHealthStore().execute(energyQuery)
     }
-    
+    func fetchWater(completion: @escaping (Double) -> Void) {
+       
+       guard let energyType = HKSampleType.quantityType(forIdentifier: .dietaryWater) else { return }
+       
+        let last24hPredicate = HKQuery.predicateForSamples(withStart: Date().startOfTheDay(), end: Date(), options: .strictEndDate)
+       
+       let energyQuery = HKSampleQuery(sampleType: energyType,
+                                       predicate: last24hPredicate,
+                                       limit: HKObjectQueryNoLimit,
+                                       sortDescriptors: nil) {
+           (query, sample, error) in
+           
+           guard error == nil,
+                 let quantitySamples = sample as? [HKQuantitySample] else { return }
+           
+           let totalCalories = quantitySamples.reduce(0.0) { $0 + $1.quantity.doubleValue(for: HKUnit.cupUS()) }
+           
+           completion(totalCalories)
+       }
+       
+       HKHealthStore().execute(energyQuery)
+   }
      func fetchSaturatedFat(completion: @escaping (Double) -> Void) {
         
         guard let energyType = HKSampleType.quantityType(forIdentifier: .dietaryFatSaturated) else {
@@ -118,8 +143,8 @@ class HealthKitService {
             print("Sample type not available")
             return
         }
-        let start = Calendar.current.date(byAdding: .day, value: -1, to: .distantPast)!
-        let last24hPredicate = HKQuery.predicateForSamples(withStart: start, end: Date(), options: .strictEndDate)
+       
+        let last24hPredicate = HKQuery.predicateForSamples(withStart: Date().startOfTheDay(), end: Date(), options: .strictEndDate)
         
         let energyQuery = HKSampleQuery(sampleType: energyType,
                                         predicate: last24hPredicate,
@@ -139,13 +164,13 @@ class HealthKitService {
     
      func fetchActivity(completion: @escaping (Double) -> Void) {
         
-        guard let dataType = HKSampleType.quantityType(forIdentifier: .activeEnergyBurned) else {
+        guard let dataType = HKSampleType.quantityType(forIdentifier: .stepCount) else {
             print("Sampe type not available")
             return
         }
         
-        let start = Date().startOfTheDay()
-        let last24Predicate = HKQuery.predicateForSamples(withStart: start, end: Date(), options: .strictEndDate)
+       
+        let last24Predicate = HKQuery.predicateForSamples(withStart: Date().startOfTheDay(), end: Date(), options: .strictEndDate)
         
         let query = HKSampleQuery(sampleType: dataType,
                                   predicate: last24Predicate,
@@ -154,7 +179,7 @@ class HealthKitService {
             guard error == nil,
                   let quantitySamples = sample as? [HKQuantitySample] else { return }
             
-            let totalEneryBurned = quantitySamples.reduce(0.0) { $0 + $1.quantity.doubleValue(for: HKUnit.gram()) }
+            let totalEneryBurned = quantitySamples.reduce(0.0) { $0 + $1.quantity.doubleValue(for: HKUnit.count()) }
           
             completion(totalEneryBurned)
         }
@@ -163,11 +188,21 @@ class HealthKitService {
     }
     
     func checkAuthorization() -> Bool {
-        var isSucceed = false
-        healthStore.requestAuthorization(toShare: healthKitTypesToWrite, read: HealthKitTypesToRead){ (success, error) in
-            isSucceed = success
+        guard
+            let satFatType = HKObjectType.quantityType(forIdentifier: .dietaryFatSaturated),
+            let sugarType = HKObjectType.quantityType(forIdentifier: .dietarySugar),
+            let energyType = HKObjectType.quantityType(forIdentifier: .dietaryEnergyConsumed),
+            let waterType = HKObjectType.quantityType(forIdentifier: .dietaryWater) else {
+            return false
         }
-        return isSucceed
+        
+        let isSatFatAuth = healthStore.authorizationStatus(for: satFatType) == .sharingAuthorized
+        let isSugarAuth = healthStore.authorizationStatus(for: sugarType) == .sharingAuthorized
+        let isEnergyAuth = healthStore.authorizationStatus(for: energyType) == .sharingAuthorized
+        let isWaterAuth = healthStore.authorizationStatus(for: waterType) == .sharingAuthorized
+        
+        return isSatFatAuth && isSugarAuth && isEnergyAuth && isWaterAuth
+        
     }
     
 }
