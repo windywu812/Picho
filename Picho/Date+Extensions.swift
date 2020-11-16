@@ -9,6 +9,12 @@ import Foundation
 
 extension Date {
     
+    func changeToString() -> String {
+        let dateFormat = DateFormatter()
+        dateFormat.dateFormat = "HH:mm"
+        return dateFormat.string(from: self)
+    }
+    
     func startOfTheDay() -> Date {
         var calendar = Calendar.current
         calendar.timeZone = NSTimeZone(forSecondsFromGMT: 0) as TimeZone

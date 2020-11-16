@@ -28,13 +28,13 @@ class AppCoordinator {
         window.overrideUserInterfaceStyle = .light
         window.makeKeyAndVisible()
         
-//        if UserDefaultService.hasLaunched {
+        if UserDefaultService.hasLaunched {
             window.rootViewController = tabBar
         } else {
             window.rootViewController = PageControlDescription()
             let labelCells = ["Breakfast", "Lunch", "Dinner", "Snacks", "Water", "Weigh In", "Reflection"]
             let timeLabels = ["08:00", "12:00", "19:00", "16:00", "12:00", "12:00", "20:00"]
-            
+
             for index in 0..<7 {
                 CoreDataService.shared.addNotification(id: labelCells[index], isOn: false, timeLabel: timeLabels[index])
             }
