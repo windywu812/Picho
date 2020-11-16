@@ -132,12 +132,7 @@ class WaterViewController: UIViewController {
                 }
             }
         }
-
-        
     }
-    
-    
-    
 }
 
 extension WaterViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -171,7 +166,6 @@ extension WaterViewController: UICollectionViewDelegate, UICollectionViewDataSou
                 waterProgress.setProgress(progress: totalWater)
                 
             } else {
-                
                 HealthKitService.shared.addData(sugar: Double(1) , date: Date(), type: .dietaryWater, unit: HKUnit.cupUS())
                 cell.image = UIImage(named: "glass_fill")
                 totalWater += 1

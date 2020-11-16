@@ -14,8 +14,17 @@ class HorizontalView: UIView {
     private let icon: UIImageView
     
     func setupView(amount: Int) {
-        label.text = "💧 \(amount) cups remaining"
+        DispatchQueue.main.async {
+            let remaining = 15 - amount
+            self.detail.text = "💧 \(remaining) cups remaining"
+        }
     }
+    func setupViewActivity(amount: Int) {
+        DispatchQueue.main.async {
+            self.detail.text = "🔥 \(amount) Step"
+        }
+    }
+    
     
     init(frame: CGRect = .zero,
          labelText: String,

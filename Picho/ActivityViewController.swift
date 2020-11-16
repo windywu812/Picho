@@ -6,6 +6,9 @@
 //
 
 import UIKit
+protocol GetDataActivityDelegate {
+    func sendStep(steps: Int)
+}
 
 class ActivityViewController: UIViewController {
     
@@ -16,7 +19,7 @@ class ActivityViewController: UIViewController {
     private var descriptionLabel: UILabel!
     private var cardView: PichoCardView!
     private var activityCard: ActivityCard!
-   
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,8 +31,8 @@ class ActivityViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(handleClose))
         
     }
-  
-        
+    
+    
     
     
     @objc private func handleClose() {
@@ -76,6 +79,7 @@ class ActivityCard: UIView {
     
     private var activityLabel: UILabel!
     private var amountLabel: UILabel!
+    var delegate : GetDataActivityDelegate?
     private var totalStep : Double = 0.0
     var activity: Double = 0 {
         didSet { amountLabel.text = "\(activity)" }
@@ -90,6 +94,7 @@ class ActivityCard: UIView {
         activityLabel = UILabel()
         HealthKitService.shared.fetchActivity { (step) in
             self.totalStep = step
+            self.delegate?.sendStep(steps: Int(step))
             DispatchQueue.main.async{[self] in
                 amountLabel.text = "🔥 \(Int(totalStep)) Step"
             }
@@ -110,8 +115,8 @@ class ActivityCard: UIView {
             trailingAnchor: layoutMarginsGuide.trailingAnchor,
             centerYAnchor: centerYAnchor)
     }
-  
-     
+    
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

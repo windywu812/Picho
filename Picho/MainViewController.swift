@@ -136,8 +136,11 @@ class MainViewController: UIViewController {
     }
     
     @objc private func handleActivity() {
-        let vc = UINavigationController(rootViewController: ActivityViewController())
-        navigationController?.present(vc, animated: true)
+        let vc = ActivityCard()
+        vc.delegate = self
+        
+        let navController = UINavigationController(rootViewController: ActivityViewController())
+        navigationController?.present(navController, animated: true)
     }
     
     @objc private func handleWater() {
@@ -155,8 +158,10 @@ class MainViewController: UIViewController {
   
 
 // MARK: Setup View
-extension MainViewController : GetDataDelegate {
-    
+extension MainViewController : GetDataDelegate , GetDataActivityDelegate {
+    func sendStep(steps: Int) {
+        activityCardView.setupViewActivity(amount: steps)
+    }
     func sendWater(water: Int) {
         waterCardView.setupView(amount: water)
     }
