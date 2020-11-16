@@ -8,81 +8,157 @@
 import UIKit
 import Charts
 
-class HistoryViewController: UIViewController, ChartViewDelegate {
+class HistoryViewController: UIViewController {
     
-    private var chartView: LineChartView!
+    private let viewModel = HistoryViewModel()
+    
+    private var scrollView: UIScrollView!
+    private var chartView: ChartView!
+    private var sugarLegend: LegendView!
+    private var satFatLegend: LegendView!
+    private var timeLabel: UILabel!
+    private var summaryView: SummaryView!
+    private var indicator: IndicatorLabelView!
+    private var foodHistory: FoodHistoryTableView!
+    
+    private var breakfasts: [DailyIntake] = []
+    private var lunches: [DailyIntake] = []
+    private var dinners: [DailyIntake] = []
+    private var snacks: [DailyIntake] = []
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        setupChart()
+        chartView.lineChartView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
+        chartView.dataWeekPerMonth = viewModel.getDataWeekofMonth(in: Date().month)
+        chartView.setupChartData()
+        
+        fetchConsupmtionPerWeek(week: 1)
+    }
+    
+    private func fetchConsupmtionPerWeek(month: Int = Date().month, week: Int) {
+        let formatterWithoutYear = DateFormatter()
+        formatterWithoutYear.dateFormat = "dd MMM"
+        
+        let firstDateOfWeek = formatterWithoutYear.string(from: viewModel.getDataWeekofMonth(in: month)[week]?.first?.date ?? Date())
+        let lastDataOfWeek = formatterWithoutYear.string(from: viewModel.getDataWeekofMonth(in: month)[week]?.last?.date ?? Date())
+        
+        timeLabel.text = "\(firstDateOfWeek) - \(lastDataOfWeek)"
+        
+        chartView.dataWeekPerMonth = viewModel.getDataWeekofMonth(in: month)
+        chartView.setupChartData()
+        
+        summaryView.setupSummary(data: viewModel.getDataWeekofMonth(in: month)[week] ?? [])
+        foodHistory.setupConsumption(data: viewModel.getDataWeekofMonth(in: month)[week] ?? [])
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupChart()
         navigationItem.title = "Progress"
+        
+        setupView()
+        setupLayout()
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleDismiss))
+        view.addGestureRecognizer(tap)
     }
     
-    private func setupChart() {
-        chartView = LineChartView()
-        chartView.delegate = self
-        chartView.doubleTapToZoomEnabled = false
-        chartView.backgroundColor = .white
-        chartView.legend.enabled = false
-        view.addSubview(chartView)
-        
-        // Grid
-        chartView.rightAxis.enabled = false
-        chartView.xAxis.labelPosition = .bottom
-        chartView.xAxis.drawGridLinesEnabled = false
-        chartView.xAxis.labelTextColor = UIColor.secondaryLabel
-        chartView.leftAxis.labelTextColor = UIColor.secondaryLabel
-        chartView.xAxis.labelFont = .systemFont(ofSize: 14)
-
-        // Label
-        chartView.leftAxis.labelFont = .systemFont(ofSize: 14)
-        chartView.leftAxis.gridColor = .clear
-        chartView.leftAxis.axisMinimum = 0
-        
-        chartView.setConstraint(
-            topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 16,
-            leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
-            trailingAnchor: view.layoutMarginsGuide.trailingAnchor,
-            heighAnchorConstant: 336)
-        
-        let sugarEntry = (0..<5).map { (i) -> ChartDataEntry in
-            return ChartDataEntry(x: Double(i), y: Double(Int.random(in: 100...500)))
-        }
-        
-        let sugarData = LineChartDataSet(entries: sugarEntry)
-        sugarData.setColor(Color.green)
-        sugarData.lineWidth = 2
-        sugarData.circleRadius = 5
-        sugarData.circleColors = [Color.green]
-        sugarData.drawCircleHoleEnabled = false
-        sugarData.drawValuesEnabled = false
-        
-        let satFatEntry = (0..<5).map { (i) -> ChartDataEntry in
-            return ChartDataEntry(x: Double(i), y: Double(Int.random(in: 100...500)))
-        }
-        
-        let satFatData = LineChartDataSet(entries: satFatEntry)
-        satFatData.setColor(Color.yellow)
-        satFatData.lineWidth = 2
-        satFatData.circleRadius = 5
-        satFatData.circleColors = [Color.yellow]
-        satFatData.drawCircleHoleEnabled = false
-        satFatData.drawValuesEnabled = false
-        
-        let data: LineChartData = LineChartData(dataSets: [sugarData, satFatData])
-        chartView.data = data
-        chartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: ["1", "2", "3", "4", "5"])
-        chartView.xAxis.axisMinimum = 0
-        chartView.xAxis.granularity = 1
-        chartView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
+    @objc private func handleDismiss() {
+        view.endEditing(true)
     }
     
 }
 
+extension HistoryViewController: ChartSeletedDelegate {
+
+    func sendDate(date: (Int, Int)) {
+        fetchConsupmtionPerWeek(month: date.0, week: 1)
+    }
+    
+    func selectedChart(month: Int, week: Int) {
+        fetchConsupmtionPerWeek(month: month, week: week + 1)
+    }
+    
+}
+
+extension HistoryViewController {
+    
+    private func setupView() {
+        
+        scrollView = UIScrollView()
+        scrollView.showsVerticalScrollIndicator = false
+        view.addSubview(scrollView)
+        
+        chartView = ChartView()
+        chartView.delegate = self
+        chartView.viewModel = viewModel
+        chartView.layer.cornerRadius = 16
+        scrollView.addSubview(chartView)
+        
+        sugarLegend = LegendView(text: "Sugar", color: Color.green)
+        satFatLegend = LegendView(text: "Saturated Fat", color: Color.yellow)
+        
+        timeLabel = UILabel()
+        timeLabel.setFont(text: "2 Nov - 8 Nov", size: 22, weight: .bold)
+        
+        summaryView = SummaryView()
+        indicator = IndicatorLabelView()
+        foodHistory = FoodHistoryTableView()
+        
+        scrollView.addSubview(timeLabel)
+        scrollView.addSubview(satFatLegend)
+        scrollView.addSubview(sugarLegend)
+        scrollView.addSubview(summaryView)
+        scrollView.addSubview(indicator)
+        scrollView.addSubview(foodHistory)
+    }
+    
+    private func setupLayout() {
+        scrollView.setConstraint(
+            topAnchor: view.safeAreaLayoutGuide.topAnchor,
+            bottomAnchor: view.safeAreaLayoutGuide.bottomAnchor,
+            leadingAnchor: view.leadingAnchor,
+            trailingAnchor: view.trailingAnchor)
+        
+        chartView.setConstraint(
+            topAnchor: scrollView.topAnchor, topAnchorConstant: 16,
+            leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
+            trailingAnchor: view.layoutMarginsGuide.trailingAnchor,
+            heighAnchorConstant: 336)
+        
+        sugarLegend.setConstraint(
+            topAnchor: chartView.bottomAnchor, topAnchorConstant: 8,
+            leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
+            heighAnchorConstant: 44,
+            widthAnchorConstant: UIScreen.main.bounds.width / 2 - 24)
+        
+        satFatLegend.setConstraint(
+            topAnchor: chartView.bottomAnchor, topAnchorConstant: 8,
+            leadingAnchor: sugarLegend.trailingAnchor, leadingAnchorConstant: 8,
+            trailingAnchor: view.layoutMarginsGuide.trailingAnchor,
+            heighAnchorConstant: 44)
+        
+        timeLabel.setConstraint(
+            topAnchor: sugarLegend.bottomAnchor, topAnchorConstant: 24,
+            leadingAnchor: view.layoutMarginsGuide.leadingAnchor)
+        
+        summaryView.setConstraint(
+            topAnchor: timeLabel.bottomAnchor, topAnchorConstant: 16,
+            leadingAnchor: view.leadingAnchor,
+            trailingAnchor: view.trailingAnchor,
+            heighAnchorConstant: 44 * 3)
+        
+        indicator.setConstraint(
+            topAnchor: summaryView.bottomAnchor, topAnchorConstant: 24,
+            leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
+            trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
+
+        foodHistory.setConstraint(
+            topAnchor: indicator.bottomAnchor, topAnchorConstant: 24,
+            bottomAnchor: scrollView.bottomAnchor, bottomAnchorConstant: -24,
+            leadingAnchor: view.leadingAnchor,
+            trailingAnchor: view.trailingAnchor)
+    }
+    
+}

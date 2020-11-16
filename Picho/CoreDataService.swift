@@ -8,8 +8,9 @@
 import CoreData
 import UIKit
 
-struct CoreDataConstant {
+struct DailyIntakeConstant {
     static let entityName = "DailyIntake"
+    static let time = "time"
     static let date = "date"
     static let saturatedFat = "saturatedFat"
     static let sugar = "sugar"
@@ -20,125 +21,210 @@ class CoreDataService {
     
     static let shared = CoreDataService()
     
-    private let moc = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    func getDailyIntake(completion: @escaping ([DailyIntake]) -> ()) {
-        let fetch = NSFetchRequest<DailyIntake>(entityName: CoreDataConstant.entityName)
+    // MARK: - Daily Intake
+    func getDailyIntake(with request: NSFetchRequest<DailyIntake> = DailyIntake.fetchRequest(), time: EatTime? = nil, date: Date? = nil, completion: @escaping ([DailyIntake]) -> Void) {
+        
+        var timePredicate = NSPredicate(value: true)
+        var datePredicate = NSPredicate(value: true)
+        
+        if let time = time?.rawValue {
+            timePredicate = NSPredicate(format: "\(DailyIntakeConstant.time) = %@", time as CVarArg)
+        }
+        
+        if let date = date {
+            let dateFrom = date.startOfTheDay()
+            let dateTo = date.startOfTheDay().endDate()
+            datePredicate = NSPredicate(format: "\(DailyIntakeConstant.date) >= %@ AND \(DailyIntakeConstant.date) <= %@",
+                        dateFrom as CVarArg,  dateTo as CVarArg)
+        }
+        
+        request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [timePredicate, datePredicate])
         
         do {
-            let result = try moc.fetch(fetch)
-            completion(result)
-        } catch let err {
-            print(err.localizedDescription)
+            let intakes = try context.fetch(request)
+            completion(intakes)
+        } catch {
+            print(error.localizedDescription)
             completion([])
         }
         
     }
     
-    func createDailyIntake(id: UUID, fat: Double, calories: Int, sugar: Double, date: Date) {
+//    func getMaxDailyIntake(with request: NSFetchRequest<DailyIntake> = DailyIntake.fetchRequest(), completion: @escaping ([DailyIntake]) -> Void) {
+////        request.predicate = NSPredicate(format: "@count")
+////        request.propertiesToGroupBy = ["foodId"]
+//
+//        do {
+//            let intakes = try context.fetch(request)
+//            completion(intakes)
+//        } catch {
+//            print(error.localizedDescription)
+//            completion([])
+//        }
+//    }
+    
+//    func getMaxDailyIntake(request: NSFetchRequest<NSDictionary> = NSFetchRequest<NSDictionary>(entityName: DailyIntakeConstant.entityName), time eatingTime: EatTime, completion: @escaping ([NSDictionary]) -> Void) {
+//        let groupArgument = NSExpression(forKeyPath: "foodId")
+//        let expression = NSExpression(forFunction: "count:", arguments: [groupArgument])
+//        
+//        let countDesc = NSExpressionDescription()
+//        countDesc.expression = expression
+//        countDesc.name = "count"
+//        countDesc.expressionResultType = .integer64AttributeType
+//        
+//        request.returnsObjectsAsFaults = false
+//        request.propertiesToGroupBy = ["foodId"]
+//        request.propertiesToFetch = ["foodId", countDesc]
+//        request.resultType = .dictionaryResultType
+//        
+//        request.havingPredicate = NSPredicate(format: "\(DailyIntakeConstant.time) = %@", eatingTime.rawValue)
+//        
+//        do {
+//            let intakes = try context.fetch(request)
+//            completion(intakes)
+//        } catch {
+//            print(error.localizedDescription)
+//            completion([])
+//        }
+//        
+//    }
+    
+    func addDailyIntake(id: UUID, foodId: String, name: String, description: String, calorie: Double, saturatedFat: Double, sugars: Double, date: Date = Date(), time: EatTime) {
         
-        let dailyIntake = DailyIntake(context: moc)
-        dailyIntake.id = id
-        dailyIntake.saturatedFat = fat
-        dailyIntake.totalCalories = Int64(calories)
-        dailyIntake.sugar = sugar
-        dailyIntake.date = date
+        let intake = DailyIntake(context: context)
+        intake.id = id
+        intake.foodId = foodId
+        intake.desc = description
+        intake.name = name
+        intake.calorie = calorie
+        intake.saturatedFat = saturatedFat
+        intake.sugars = sugars
+        intake.date = date
+        intake.time = time.rawValue
         
-        do {
-            try moc.save()
-        } catch let err {
-            print(err.localizedDescription)
-        }
+        saveDailyIntake(context: context)
     }
     
-    func updateDailyIntake(fat: Double, calories: Int, sugar: Double, date: Date) {
+    func deleteDailyIntake(with request: NSFetchRequest<DailyIntake> = DailyIntake.fetchRequest(), _ id: UUID) {
+        request.predicate = NSPredicate(format: "id = %@", id as CVarArg)
         
-        guard let dailyIntake = getCurrentDay(date: date) else { return }
-        dailyIntake.saturatedFat = fat
-        dailyIntake.totalCalories = Int64(calories)
-        dailyIntake.sugar = sugar
-        dailyIntake.date = date
-        
-        do {
-            try moc.save()
-        } catch let err {
-            print(err.localizedDescription)
-        }
+        saveDailyIntake(context: context, deleted: true)
     }
     
-    func getCurrentDay(date: Date) -> DailyIntake? {
-        
-        let fetchRequest = NSFetchRequest<DailyIntake>(entityName: CoreDataConstant.entityName)
-        fetchRequest.predicate = NSPredicate(
-            format: "\(CoreDataConstant.date) >= %@ AND \(CoreDataConstant.date) <= %@",
-            date.startOfTheDay() as CVarArg,  date as CVarArg)
-        fetchRequest.fetchLimit = 1
+    private func saveDailyIntake(with request: NSFetchRequest<DailyIntake> = DailyIntake.fetchRequest(), context: NSManagedObjectContext, deleted: Bool = false) {
         
         do {
-            let result = try moc.fetch(fetchRequest)
-            return result.first
-        } catch let err {
-            print(err.localizedDescription)
-        }
-        
-        return nil
-    }
-    
-    func addFood(foodName: String, date: Date, eatingTime: EatTime, calorie: Int) {
-        
-        if let today = getCurrentDay(date: date) {
+            if deleted {
+                let dataToDelete = try context.fetch(request)[0] as NSManagedObject
+                context.delete(dataToDelete)
+            }
+            try context.save()
             
-            switch eatingTime {
-            case .breakfast:
-                if today.breakfast == nil {
-                    let breakfast = Breakfast(context: moc)
-                    breakfast.food = [foodName]
-                    breakfast.total = Int64(calorie)
-                    today.breakfast = breakfast
-                } else {
-                    today.breakfast?.food?.append(foodName)
-                    today.breakfast?.total = Int64(calorie)
-                }
-            case .lunch:
-                if today.lunch == nil {
-                    let lunch = Lunch(context: moc)
-                    lunch.food = [foodName]
-                    today.lunch = lunch
-                } else {
-                    today.lunch?.food?.append(foodName)
-                    today.lunch?.total = Int64(calorie)
-                }
-            case .dinner:
-                if today.dinner == nil {
-                    let dinner = Dinner(context: moc)
-                    dinner.food = [foodName]
-                    today.dinner = dinner
-                } else {
-                    today.dinner?.food?.append(foodName)
-                    today.dinner?.total = Int64(calorie)
-                }
-            case .snack:
-                if today.snack == nil {
-                    let snack = Snack(context: moc)
-                    snack.food = [foodName]
-                    today.snack = snack
-                } else {
-                    today.snack?.food?.append(foodName)
-                    today.snack?.total = Int64(calorie)
-                }
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    
+    // MARK: - Favorite
+    func getFavorite(with request: NSFetchRequest<Favorite> = Favorite.fetchRequest(), for id: String? = nil, completion: @escaping ([Favorite]) -> Void) {
+        
+        if let id = id {
+            request.predicate = NSPredicate(format: "id = %@", id as CVarArg)
+        }
+        
+        do {
+            let favorites = try context.fetch(request)
+            completion(favorites)
+        } catch {
+            print(error.localizedDescription)
+            completion([])
+        }
+        
+    }
+    
+    func addFavorite(id: String, name: String, description: String) {
+        
+        let favorite = Favorite(context: context)
+        favorite.id = id
+        favorite.name = name
+        favorite.desc = description
+        
+        saveFavorite(context: context)
+    }
+    
+    func deleteFavorite(with request: NSFetchRequest<Favorite> = Favorite.fetchRequest(), _ id: String) {
+        request.predicate = NSPredicate(format: "\(DailyIntakeConstant.id) = %@", id as CVarArg)
+        
+        saveFavorite(context: context, deleted: true)
+    }
+    
+    private func saveFavorite(with request: NSFetchRequest<Favorite> = Favorite.fetchRequest(), context: NSManagedObjectContext, deleted: Bool = false) {
+        
+        do {
+            if deleted {
+                let dataToDelete = try context.fetch(request)[0] as NSManagedObject
+                context.delete(dataToDelete)
+            }
+            try context.save()
+            
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    // MARK: Notification
+    func fetchNotificationData(completion: @escaping ([Notif]) -> ()) {
+        
+        let request = NSFetchRequest<Notif>(entityName: "Notif")
+        
+        do {
+            let results = try context.fetch(request)
+            completion(results)
+        } catch {
+            print(error.localizedDescription)
+            completion([])
+        }
+
+    }
+    
+    func addNotification(id: String, isOn: Bool, timeLabel: String) {
+        
+        if checkIfExist(id: id) {
+            let request = NSFetchRequest<Notif>(entityName: "Notif")
+            request.predicate = NSPredicate(format: "id = %@", id as CVarArg)
+            do {
+                let dataToUpdated = try context.fetch(request)[0]
+                dataToUpdated.isOn = isOn
+                dataToUpdated.timeLabel = timeLabel
+            } catch {
+                print(error.localizedDescription)
             }
         } else {
-            
-            CoreDataService.shared.createDailyIntake(id: UUID(), fat: 0, calories: 0, sugar: 0, date: Date())
-            CoreDataService.shared.addFood(foodName: foodName, date: date, eatingTime: eatingTime, calorie: calorie)
+            let notification = Notif(context: context)
+            notification.id = id
+            notification.isOn = isOn
+            notification.timeLabel = timeLabel
         }
-        
         do {
-            try moc.save()
-        } catch let err {
-            print(err.localizedDescription)
+            try context.save()
+        } catch {
+            print(error.localizedDescription)
         }
+    }
+    
+    func checkIfExist(id: String) -> Bool {
+        let request = NSFetchRequest<Notif>(entityName: "Notif")
+        request.predicate = NSPredicate(format: "id = %@", id as CVarArg)
+        do {
+            let dataToUpdated = try context.fetch(request)
+            if id == dataToUpdated.first?.id { return true }
+        } catch {
+            print(error.localizedDescription)
+        }
+        return false
     }
     
 }
-

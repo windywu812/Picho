@@ -10,13 +10,13 @@ import Foundation
 class UserDefaultService {
     
     static private let hasLaunchKey = "hasLaunchKey"
-    static private let firstNameKey = "firstNameKey"
-    static private let lastNameKey = "lastNameKey"
+    static private let nameKey = "nameKey"
     static private let genderKey = "genderKey"
     static private let ageKey = "ageKey"
     static private let heightKey = "heightKey"
     static private let weightKey = "weightKey"
     static private let isSyncHealthKitKey = "isSyncHealthKitKey"
+    static let photoProfileKey = "photoKey"
  
     static var hasLaunched: Bool {
         get {
@@ -27,21 +27,12 @@ class UserDefaultService {
         }
     }
     
-    static var firstName: String {
+    static var name: String {
         get {
-            return UserDefaults.standard.string(forKey: firstNameKey) ?? ""
+            return UserDefaults.standard.string(forKey: nameKey) ?? ""
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: firstNameKey)
-        }
-    }
-   
-    static var lastName: String {
-        get {
-            return UserDefaults.standard.string(forKey: lastNameKey) ?? ""
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: lastNameKey)
+            UserDefaults.standard.set(newValue, forKey: nameKey)
         }
     }
     

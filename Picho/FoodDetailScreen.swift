@@ -17,6 +17,7 @@ class FoodDetailScreen: UITableViewController {
     private var calorieLabel: UILabel!
     private var calorieAmount: UILabel!
     
+    private var calorieNutrition = 0.0
     private var mainNutritions: [String] = []
     private var fatNutritions: [String] = []
     private var cholesterolNutritions: [String] = []
@@ -35,14 +36,18 @@ class FoodDetailScreen: UITableViewController {
     private var amounts: [[Double]] = []
     
     let healthStore = HKHealthStore()
-        
+    
+    var isAddShown = true
+    
+    var foodDescription: String = ""
+    var foodName: String = ""
     var foodId: String = "" {
         didSet {
             fetchingFood()
         }
     }
     
-    var foodName: String = ""
+    var eatingTime: EatTime = .breakfast
     
     var isFavorite: Bool = false
     
@@ -56,6 +61,7 @@ class FoodDetailScreen: UITableViewController {
         setupLabel()
         setupView()
         setupLayout()
+        fetchingFavorite()
     }
     
     private func setupLabel() {
@@ -96,7 +102,7 @@ class FoodDetailScreen: UITableViewController {
         nutritionHeader.addSubview(servingLabel)
         
         navigationItem.title = "Nasi Lemak"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .done, target: self, action: #selector(handleAdd))
+        navigationItem.rightBarButtonItem = isAddShown ? UIBarButtonItem(title: "Add", style: .done, target: self, action: #selector(handleAdd)) : nil
         
         setupFavorite()
         
@@ -137,8 +143,18 @@ class FoodDetailScreen: UITableViewController {
         navigationItem.leftBarButtonItem = favoriteBarButton
     }
     
+    private func checkFavorite () {
+        if !isFavorite {
+            CoreDataService.shared.addFavorite(id: foodId, name: foodName, description: foodDescription)
+        } else {
+            CoreDataService.shared.deleteFavorite(foodId)
+        }
+        NotificationService.shared.post(with: NotificationKey.favoriteKey)
+    }
+    
     @objc private func handleFavoriteAdd() {
-        isFavorite = !isFavorite
+        checkFavorite()
+        isFavorite.toggle()
         setupFavorite()
     }
 
@@ -148,18 +164,22 @@ class FoodDetailScreen: UITableViewController {
             case .success(let food):
                 guard let servings = food.servings?.first else { return }
 
-                HealthKitService.addData(sugar: Double(servings.saturatedFat ?? "0") ?? 0, date: Date(), type: .dietaryFatSaturated, unit: HKUnit.gram())
-                HealthKitService.addData(sugar: Double(servings.sugar ?? "0") ?? 0, date: Date(), type: .dietarySugar, unit: HKUnit.gram())
-                HealthKitService.addData(sugar: Double(servings.calories ?? "0") ?? 0, date: Date(), type: .dietaryEnergyConsumed, unit: HKUnit.smallCalorie())
-
+                HealthKitService.shared.addData(sugar: Double(servings.saturatedFat ?? "0") ?? 0, date: Date(), type: .dietaryFatSaturated, unit: HKUnit.gram())
+                HealthKitService.shared.addData(sugar: Double(servings.sugar ?? "0") ?? 0, date: Date(), type: .dietarySugar, unit: HKUnit.gram())
+                HealthKitService.shared.addData(sugar: Double(servings.calories ?? "0") ?? 0, date: Date(), type: .dietaryEnergyConsumed, unit: HKUnit.smallCalorie())
+                print("aman")
             case .failure(let err):
                 print(err.localizedDescription)
             }
         }
-
-        CoreDataService.shared.addFood(foodName: foodName, date: Date(), eatingTime: .breakfast, calorie: Int(calorieAmount.text ?? "0") ?? 0)
-
-        self.navigationController?.popToRootViewController(animated: true)
+        
+        if !mainAmounts.isEmpty {
+            CoreDataService.shared.addDailyIntake(id: UUID(), foodId: foodId, name: foodName, description: foodDescription, calorie: calorieNutrition, saturatedFat: mainAmounts[0], sugars: mainAmounts[1], time: eatingTime)
+        }
+        
+        NotificationService.shared.post()
+        
+        dismiss(animated: true, completion: nil)
     }
 
     private func fetchingFood() {
@@ -170,6 +190,9 @@ class FoodDetailScreen: UITableViewController {
                 
                 DispatchQueue.main.async {
                     self.navigationItem.title = self.foodName
+                    
+                    self.calorieNutrition = servings.calories.convertToDouble()
+                    self.calorieAmount.text = String(self.calorieNutrition)
                     
                     self.mainAmounts.append(servings.saturatedFat.convertToDouble())
                     self.mainAmounts.append(servings.sugar.convertToDouble())
@@ -201,6 +224,13 @@ class FoodDetailScreen: UITableViewController {
         }
     }
     
+    private func fetchingFavorite() {
+        CoreDataService.shared.getFavorite(for: foodId) { favorites in
+            self.isFavorite = !favorites.isEmpty
+        }
+        setupFavorite()
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return nutritions.count
     }
@@ -212,7 +242,7 @@ class FoodDetailScreen: UITableViewController {
         case 2:
             return nutritionHeader
         default:
-            return UIView()
+            return nil
         }
     }
     

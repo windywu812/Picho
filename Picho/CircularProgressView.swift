@@ -12,6 +12,29 @@ class CircularProgressView: UIView {
     private let shapeLayer: CAShapeLayer
     private let calorieLabel: UILabel
     
+    func animate(value: Float, total: Float) {
+        
+        if value < 0 {
+            calorieLabel.setFont(
+                text: "\(-Int(value - total))", size: 28,
+                weight: .bold,
+                color: Color.green)
+        } else {
+            calorieLabel.setFont(
+                text: "\(Int(value))", size: 28,
+                weight: .bold,
+                color: Color.green)
+        }
+        
+        let animation = CABasicAnimation(keyPath: "strokeEnd")
+        animation.fromValue = 0
+        animation.toValue = (total - value) / total
+        animation.duration = 2
+        animation.fillMode = .forwards
+        animation.isRemovedOnCompletion = false
+        shapeLayer.add(animation, forKey: "progressAnimation")
+    }
+    
     override init(frame: CGRect) {
         
         shapeLayer = CAShapeLayer()
@@ -59,22 +82,6 @@ class CircularProgressView: UIView {
         shapeLayer.strokeStart = 0
         shapeLayer.fillColor = UIColor.clear.cgColor
         layer.addSublayer(shapeLayer)
-    }
-    
-    func animate(value: Float, total: Float) {
-        
-        calorieLabel.setFont(
-            text: "\(Int(value))", size: 28,
-            weight: .bold,
-            color: Color.green)
-        
-        let animation = CABasicAnimation(keyPath: "strokeEnd")
-        animation.toValue = value / total
-        animation.duration = 2
-        animation.fromValue = 0
-        animation.fillMode = .forwards
-        animation.isRemovedOnCompletion = false
-        shapeLayer.add(animation, forKey: "progressAnimation")
     }
     
     required init?(coder: NSCoder) {

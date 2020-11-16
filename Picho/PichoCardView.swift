@@ -62,7 +62,8 @@ class PichoCardView: UIView {
     }
     
     @objc private func handleTap(sender: UIButton) {
-        print("Tap")
+        let modalVC = DetailSugarNSatFat()
+        rootView.present(modalVC, animated: true, completion: nil)
     }
     
     private func setupLayout() {

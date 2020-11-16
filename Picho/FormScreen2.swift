@@ -9,60 +9,149 @@ import UIKit
 
 class FormScreen2: UIViewController {
     
+    let titleLabel = UILabel()
+    let descLabel = UILabel()
+    let nameTextField = UITextField()
+    let getStartedBtn = UIButton()
+   
+    var rootView: PageControlForm?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = .white
         
-        let image = UIImage(named: "mascot")
-        let imageview:UIImageView = UIImageView()
-        imageview.contentMode = UIView.ContentMode.scaleToFill
-        imageview.image = image
+        view.backgroundColor = Color.background
+        
+        let imageview = UIImageView()
+        imageview.contentMode = .scaleToFill
+        imageview.image = UIImage(named: "mascot")
         view.addSubview(imageview)
-        imageview.translatesAutoresizingMaskIntoConstraints = false
-        imageview.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        imageview.topAnchor.constraint(equalTo: view.topAnchor,constant: 100).isActive = true
-        imageview.widthAnchor.constraint(equalToConstant: 95).isActive = true
-        imageview.heightAnchor.constraint(equalToConstant: 115).isActive = true
         
-        let label1 = UILabel()
-        label1.text = "Nice to meet you!"
-        label1.font = UIFont.boldSystemFont(ofSize: 25.0)
-        label1.textAlignment = .center
-        view.addSubview(label1)
-        label1.setConstraint(topAnchor: imageview.bottomAnchor,topAnchorConstant: 20,
-                             leadingAnchor: view.layoutMarginsGuide.leadingAnchor,leadingAnchorConstant: 40,
-                             trailingAnchor: view.layoutMarginsGuide.trailingAnchor,trailingAnchorConstant: -40)
+        if UIScreen.main.bounds.height < 700 {
+            imageview.setConstraint(
+                topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 16,
+                centerXAnchor: view.centerXAnchor,
+                heighAnchorConstant: 115, widthAnchorConstant: 95)
+        } else {
+            imageview.setConstraint(
+                topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 80,
+                centerXAnchor: view.centerXAnchor,
+                heighAnchorConstant: 115, widthAnchorConstant: 95)
+        }
         
-        let label2 = UILabel()
-        label2.text = "Picho will be your buddy throughout this journey, tell him your name so you can get to know each other!"
-        label2.font = UIFont.systemFont(ofSize: 17)
-        label2.numberOfLines = 0
-        label2.textAlignment = .center
-        view.addSubview(label2)
-        label2.setConstraint(topAnchor: label1.bottomAnchor,topAnchorConstant: 20,
-                             leadingAnchor: view.layoutMarginsGuide.leadingAnchor,leadingAnchorConstant: 40,
-                             trailingAnchor: view.layoutMarginsGuide.trailingAnchor,trailingAnchorConstant: -40)
+        titleLabel.text = "Nice to meet you!"
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 24.0)
+        titleLabel.textAlignment = .center
+        view.addSubview(titleLabel)
         
-        let nameTextField = UITextField()
-        nameTextField.layer.cornerRadius = 10.0
+        titleLabel.setConstraint(
+            topAnchor: imageview.bottomAnchor,topAnchorConstant: 24,
+            leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
+            trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
+        
+        descLabel.text = "Picho will be your buddy throughout this journey, tell him your name so you can get to know each other!"
+        descLabel.numberOfLines = 0
+        descLabel.textAlignment = .center
+        view.addSubview(descLabel)
+        
+        descLabel.setConstraint(
+            topAnchor: titleLabel.bottomAnchor,topAnchorConstant: 24,
+            leadingAnchor: view.layoutMarginsGuide.leadingAnchor,leadingAnchorConstant: 16,
+            trailingAnchor: view.layoutMarginsGuide.trailingAnchor,trailingAnchorConstant: -16)
+        
+        nameTextField.layer.cornerRadius = 6
         nameTextField.layer.borderColor = Color.green.cgColor
         nameTextField.layer.borderWidth = 2.0
         nameTextField.addPadding(padding: .equalSpacing(10))
         nameTextField.placeholder = "Your Name"
+        nameTextField.delegate = self
         view.addSubview(nameTextField)
-        nameTextField.setConstraint(topAnchor: label2.bottomAnchor,topAnchorConstant: 50,centerXAnchor: view.centerXAnchor,heighAnchorConstant: 50, widthAnchorConstant: 299)
         
-        let getStartedBtn = UIButton()
-        getStartedBtn.setTitle("Hi Picho", for: .normal)
-        getStartedBtn.layer.cornerRadius =  5
-        getStartedBtn.backgroundColor = Color.green
+        nameTextField.setConstraint(
+            topAnchor: descLabel.bottomAnchor, topAnchorConstant: 50,
+            leadingAnchor: view.layoutMarginsGuide.leadingAnchor, leadingAnchorConstant: 16,
+            trailingAnchor: view.layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: -16,
+            heighAnchorConstant: 50)
+        
+        getStartedBtn.setTitle("Continue", for: .normal)
+        getStartedBtn.layer.cornerRadius =  6
+        getStartedBtn.backgroundColor = Color.lightGreen
+        getStartedBtn.tintColor = Color.green
+        getStartedBtn.isEnabled = false
         view.addSubview(getStartedBtn)
-        getStartedBtn.translatesAutoresizingMaskIntoConstraints = false
-        getStartedBtn.topAnchor.constraint(equalTo: view.bottomAnchor, constant: -150).isActive = true
-        getStartedBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        getStartedBtn.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        getStartedBtn.widthAnchor.constraint(equalToConstant: 270).isActive = true
         
+        getStartedBtn.setConstraint(
+            bottomAnchor: view.safeAreaLayoutGuide.bottomAnchor, bottomAnchorConstant: -32,
+            leadingAnchor: view.layoutMarginsGuide.leadingAnchor, leadingAnchorConstant: 16,
+            trailingAnchor: view.layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: -16,
+            heighAnchorConstant: 50)
+        
+        getStartedBtn.addTarget(self, action: #selector(handleSaveName), for: .touchUpInside)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification: )), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification: )), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
+    
+    private var activeTextField: UITextField?
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        
+        var shouldMoveViewUp = false
+        
+        if let activeTextField = activeTextField {
+            
+            let bottomOfTextField = activeTextField.convert(activeTextField.bounds, to: self.view).maxY;
+            
+            let topOfKeyboard = self.view.frame.height - keyboardSize.height
+            
+            if bottomOfTextField > topOfKeyboard {
+                shouldMoveViewUp = true
+            }
+        }
+        
+        if(shouldMoveViewUp) {
+            self.view.frame.origin.y = 0 - keyboardSize.height
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        self.view.frame.origin.y = 0
+    }
+     
+    @objc func handleSaveName() {
+        UserDefaultService.name = nameTextField.text!
+        rootView?.setView(index: 2)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+}
+
+extension FormScreen2: UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.activeTextField = textField
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let text = textField.text else { return }
+        if text.isEmpty {
+            getStartedBtn.backgroundColor = Color.lightGreen
+            getStartedBtn.tintColor = Color.green
+            getStartedBtn.isEnabled = false
+        } else {
+            getStartedBtn.backgroundColor = Color.green
+            getStartedBtn.tintColor = .white
+            getStartedBtn.isEnabled = true
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
 }

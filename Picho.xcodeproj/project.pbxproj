@@ -7,8 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2339FBEC255E998F00D0ABB3 /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2339FBEB255E998F00D0ABB3 /* SummaryView.swift */; };
+		2339FBEF255E99AE00D0ABB3 /* HorizontalRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2339FBEE255E99AE00D0ABB3 /* HorizontalRowView.swift */; };
+		2339FBF2255E99C300D0ABB3 /* IndicatorLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2339FBF1255E99C300D0ABB3 /* IndicatorLabelView.swift */; };
 		23414A07255CD36A00E1F48D /* WaterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23414A06255CD36A00E1F48D /* WaterViewController.swift */; };
 		23414A0A255CDE4800E1F48D /* HorizontalProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23414A09255CDE4800E1F48D /* HorizontalProgressView.swift */; };
+		2344568F255E4BB0001497DD /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2344568E255E4BB0001497DD /* ChartView.swift */; };
+		23445693255E4BD5001497DD /* LegendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23445692255E4BD5001497DD /* LegendView.swift */; };
 		23645F23255C2D5400DA5697 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23645F22255C2D5400DA5697 /* ActivityViewController.swift */; };
 		236D9C7A255D3EB500B252B5 /* InfoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236D9C79255D3EB500B252B5 /* InfoDetailViewController.swift */; };
 		2381F76E255C03D5008004DE /* FormScreen1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2381F76D255C03D5008004DE /* FormScreen1.swift */; };
@@ -23,10 +28,18 @@
 		2381F78D255C041E008004DE /* DescriptionScreen4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2381F78C255C041E008004DE /* DescriptionScreen4.swift */; };
 		2381F790255C0428008004DE /* PageControlDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2381F78F255C0428008004DE /* PageControlDescription.swift */; };
 		2381F794255C057D008004DE /* UITextfield+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2381F793255C057D008004DE /* UITextfield+Extensions.swift */; };
+		23843BEA2561147600D17A44 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23843BE92561147600D17A44 /* String+Extensions.swift */; };
+		23843BED256116BA00D17A44 /* NotificationCenterServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23843BEC256116BA00D17A44 /* NotificationCenterServices.swift */; };
 		238C9405255BEB0C00591791 /* FoodSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238C9404255BEB0C00591791 /* FoodSearchViewController.swift */; };
 		238C9409255BEB1900591791 /* FoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238C9408255BEB1900591791 /* FoodCell.swift */; };
 		238C9412255BEBAF00591791 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238C9411255BEBAF00591791 /* DetailCell.swift */; };
 		238C9417255BEC2D00591791 /* StringOptional+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238C9416255BEC2D00591791 /* StringOptional+Extensions.swift */; };
+		239D53C62560F011009112AF /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239D53C52560F011009112AF /* TabBarController.swift */; };
+		23A8C536256233D400D06F5D /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A8C535256233D400D06F5D /* HistoryViewModel.swift */; };
+		23DC2B3B255EB70A00025434 /* FoodHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC2B3A255EB70A00025434 /* FoodHistoryCell.swift */; };
+		23DC2B3E255EB73600025434 /* FoodHistoryTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC2B3D255EB73600025434 /* FoodHistoryTableView.swift */; };
+		23DC2B41255EB75700025434 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC2B40255EB75700025434 /* HeaderView.swift */; };
+		23EC0D91256149010084154F /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23EC0D90256149010084154F /* ProfileEditViewController.swift */; };
 		23FEB9D2255BDA40001EA146 /* FatSecretClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9D1255BDA40001EA146 /* FatSecretClient.swift */; };
 		23FEB9D6255BDA49001EA146 /* FatSecretCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9D5255BDA49001EA146 /* FatSecretCredentials.swift */; };
 		23FEB9D9255BDA53001EA146 /* FatSecretParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9D8255BDA53001EA146 /* FatSecretParams.swift */; };
@@ -45,7 +58,7 @@
 		23FEBA05255BDB10001EA146 /* EatingTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA04255BDB10001EA146 /* EatingTime.swift */; };
 		23FEBA0C255BDB42001EA146 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA0B255BDB42001EA146 /* NetworkService.swift */; };
 		23FEBA10255BDB48001EA146 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA0F255BDB48001EA146 /* CoreDataService.swift */; };
-		23FEBA13255BDB50001EA146 /* HealtKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA12255BDB50001EA146 /* HealtKitService.swift */; };
+		23FEBA13255BDB50001EA146 /* HealthKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA12255BDB50001EA146 /* HealthKitService.swift */; };
 		23FEBA16255BDB55001EA146 /* UserDefaultService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA15255BDB55001EA146 /* UserDefaultService.swift */; };
 		23FEBA1D255BDBB4001EA146 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA1C255BDBB4001EA146 /* UIView+Extensions.swift */; };
 		23FEBA21255BDBBB001EA146 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA20255BDBBB001EA146 /* Date+Extensions.swift */; };
@@ -66,6 +79,16 @@
 		23FEBA5F255BDDE6001EA146 /* NSAttributedString+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA5E255BDDE6001EA146 /* NSAttributedString+Extensions.swift */; };
 		23FEBA62255BDF3A001EA146 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA61255BDF3A001EA146 /* NotificationViewController.swift */; };
 		23FEBA69255BE00C001EA146 /* MealCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA68255BE00C001EA146 /* MealCellView.swift */; };
+		26AF6A3E255E545A0045877C /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AF6A3D255E545A0045877C /* NotificationService.swift */; };
+		26D0532D255D43B200D3C09A /* NotificationKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D0532C255D43B200D3C09A /* NotificationKey.swift */; };
+		26E42A7E2562614A000E239C /* HistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E42A7D2562614A000E239C /* HistoryModel.swift */; };
+		26E42A8A25628798000E239C /* HealthKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E42A8925628798000E239C /* HealthKitService.swift */; };
+		26E42AA825628EC5000E239C /* IntakesArray+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E42AA725628EC5000E239C /* IntakesArray+Extensions.swift */; };
+		26F98137255EDA9E00774F94 /* DailyIntake+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F98133255EDA9E00774F94 /* DailyIntake+CoreDataClass.swift */; };
+		26F98138255EDA9E00774F94 /* DailyIntake+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F98134255EDA9E00774F94 /* DailyIntake+CoreDataProperties.swift */; };
+		26F98151255EE1C400774F94 /* NotificationName+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F98150255EE1C400774F94 /* NotificationName+Extensions.swift */; };
+		26F98157255F0E1900774F94 /* Favorite+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F98155255F0E1900774F94 /* Favorite+CoreDataClass.swift */; };
+		26F98158255F0E1900774F94 /* Favorite+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F98156255F0E1900774F94 /* Favorite+CoreDataProperties.swift */; };
 		6BE5482A823830922085C9A8 /* Pods_Picho.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 047BD003AF371FA6292C078C /* Pods_Picho.framework */; };
 		A28A5AF7255BD410007E66FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A5AF6255BD410007E66FA /* AppDelegate.swift */; };
 		A28A5AF9255BD410007E66FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A5AF8255BD410007E66FA /* SceneDelegate.swift */; };
@@ -73,12 +96,19 @@
 		A28A5B01255BD410007E66FA /* Picho.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A28A5AFF255BD410007E66FA /* Picho.xcdatamodeld */; };
 		A28A5B03255BD412007E66FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A28A5B02255BD412007E66FA /* Assets.xcassets */; };
 		A28A5B06255BD412007E66FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A28A5B04255BD412007E66FA /* LaunchScreen.storyboard */; };
+		A28A5B3A255C29F5007E66FA /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A28A5B39255C29F5007E66FA /* HealthKit.framework */; };
+		A28A5B41255CE519007E66FA /* DetailSugarNSatFat.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A5B40255CE519007E66FA /* DetailSugarNSatFat.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		047BD003AF371FA6292C078C /* Pods_Picho.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Picho.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2339FBEB255E998F00D0ABB3 /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
+		2339FBEE255E99AE00D0ABB3 /* HorizontalRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalRowView.swift; sourceTree = "<group>"; };
+		2339FBF1255E99C300D0ABB3 /* IndicatorLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorLabelView.swift; sourceTree = "<group>"; };
 		23414A06255CD36A00E1F48D /* WaterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterViewController.swift; sourceTree = "<group>"; };
 		23414A09255CDE4800E1F48D /* HorizontalProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalProgressView.swift; sourceTree = "<group>"; };
+		2344568E255E4BB0001497DD /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		23445692255E4BD5001497DD /* LegendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegendView.swift; sourceTree = "<group>"; };
 		23645F22255C2D5400DA5697 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		236D9C79255D3EB500B252B5 /* InfoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoDetailViewController.swift; sourceTree = "<group>"; };
 		2381F76D255C03D5008004DE /* FormScreen1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormScreen1.swift; sourceTree = "<group>"; };
@@ -93,10 +123,18 @@
 		2381F78C255C041E008004DE /* DescriptionScreen4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionScreen4.swift; sourceTree = "<group>"; };
 		2381F78F255C0428008004DE /* PageControlDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControlDescription.swift; sourceTree = "<group>"; };
 		2381F793255C057D008004DE /* UITextfield+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextfield+Extensions.swift"; sourceTree = "<group>"; };
+		23843BE92561147600D17A44 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		23843BEC256116BA00D17A44 /* NotificationCenterServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterServices.swift; sourceTree = "<group>"; };
 		238C9404255BEB0C00591791 /* FoodSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSearchViewController.swift; sourceTree = "<group>"; };
 		238C9408255BEB1900591791 /* FoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCell.swift; sourceTree = "<group>"; };
 		238C9411255BEBAF00591791 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
 		238C9416255BEC2D00591791 /* StringOptional+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StringOptional+Extensions.swift"; sourceTree = "<group>"; };
+		239D53C52560F011009112AF /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		23A8C535256233D400D06F5D /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
+		23DC2B3A255EB70A00025434 /* FoodHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodHistoryCell.swift; sourceTree = "<group>"; };
+		23DC2B3D255EB73600025434 /* FoodHistoryTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodHistoryTableView.swift; sourceTree = "<group>"; };
+		23DC2B40255EB75700025434 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		23EC0D90256149010084154F /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		23FEB9D1255BDA40001EA146 /* FatSecretClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FatSecretClient.swift; sourceTree = "<group>"; };
 		23FEB9D5255BDA49001EA146 /* FatSecretCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FatSecretCredentials.swift; sourceTree = "<group>"; };
 		23FEB9D8255BDA53001EA146 /* FatSecretParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FatSecretParams.swift; sourceTree = "<group>"; };
@@ -115,7 +153,7 @@
 		23FEBA04255BDB10001EA146 /* EatingTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EatingTime.swift; sourceTree = "<group>"; };
 		23FEBA0B255BDB42001EA146 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		23FEBA0F255BDB48001EA146 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
-		23FEBA12255BDB50001EA146 /* HealtKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealtKitService.swift; sourceTree = "<group>"; };
+		23FEBA12255BDB50001EA146 /* HealthKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitService.swift; sourceTree = "<group>"; };
 		23FEBA15255BDB55001EA146 /* UserDefaultService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultService.swift; sourceTree = "<group>"; };
 		23FEBA1C255BDBB4001EA146 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		23FEBA20255BDBBB001EA146 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
@@ -136,6 +174,16 @@
 		23FEBA5E255BDDE6001EA146 /* NSAttributedString+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Extensions.swift"; sourceTree = "<group>"; };
 		23FEBA61255BDF3A001EA146 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		23FEBA68255BE00C001EA146 /* MealCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealCellView.swift; sourceTree = "<group>"; };
+		26AF6A3D255E545A0045877C /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		26D0532C255D43B200D3C09A /* NotificationKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationKey.swift; sourceTree = "<group>"; };
+		26E42A7D2562614A000E239C /* HistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryModel.swift; sourceTree = "<group>"; };
+		26E42A8925628798000E239C /* HealthKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitService.swift; sourceTree = "<group>"; };
+		26E42AA725628EC5000E239C /* IntakesArray+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IntakesArray+Extensions.swift"; sourceTree = "<group>"; };
+		26F98133255EDA9E00774F94 /* DailyIntake+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DailyIntake+CoreDataClass.swift"; sourceTree = "<group>"; };
+		26F98134255EDA9E00774F94 /* DailyIntake+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DailyIntake+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		26F98150255EE1C400774F94 /* NotificationName+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+Extensions.swift"; sourceTree = "<group>"; };
+		26F98155255F0E1900774F94 /* Favorite+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Favorite+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		26F98156255F0E1900774F94 /* Favorite+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Favorite+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		49A721B55AC962597415D463 /* Pods-Picho.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Picho.release.xcconfig"; path = "Target Support Files/Pods-Picho/Pods-Picho.release.xcconfig"; sourceTree = "<group>"; };
 		A28A5AF3255BD410007E66FA /* Picho.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Picho.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A28A5AF6255BD410007E66FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -145,6 +193,9 @@
 		A28A5B02255BD412007E66FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A28A5B05255BD412007E66FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A28A5B07255BD412007E66FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A28A5B38255C29F4007E66FA /* Picho.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Picho.entitlements; sourceTree = "<group>"; };
+		A28A5B39255C29F5007E66FA /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		A28A5B40255CE519007E66FA /* DetailSugarNSatFat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSugarNSatFat.swift; sourceTree = "<group>"; };
 		DF51C23FDE764A8B4E5209B0 /* Pods-Picho.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Picho.debug.xcconfig"; path = "Target Support Files/Pods-Picho/Pods-Picho.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -154,12 +205,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				6BE5482A823830922085C9A8 /* Pods_Picho.framework in Frameworks */,
+				A28A5B3A255C29F5007E66FA /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2344568D255E4BA3001497DD /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				2344568E255E4BB0001497DD /* ChartView.swift */,
+				23445692255E4BD5001497DD /* LegendView.swift */,
+				2339FBEB255E998F00D0ABB3 /* SummaryView.swift */,
+				2339FBEE255E99AE00D0ABB3 /* HorizontalRowView.swift */,
+				2339FBF1255E99C300D0ABB3 /* IndicatorLabelView.swift */,
+				23DC2B3D255EB73600025434 /* FoodHistoryTableView.swift */,
+				23DC2B3A255EB70A00025434 /* FoodHistoryCell.swift */,
+				23DC2B40255EB75700025434 /* HeaderView.swift */,
+			);
+			name = Components;
+			sourceTree = "<group>";
+		};
 		23645F21255C2D3400DA5697 /* DetailViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -272,6 +339,7 @@
 				A28A5AF6255BD410007E66FA /* AppDelegate.swift */,
 				A28A5AF8255BD410007E66FA /* SceneDelegate.swift */,
 				23FEB9FD255BDAF3001EA146 /* AppCoordinator.swift */,
+				239D53C52560F011009112AF /* TabBarController.swift */,
 			);
 			name = Base;
 			sourceTree = "<group>";
@@ -281,6 +349,7 @@
 			children = (
 				23FEBA01255BDB06001EA146 /* Color.swift */,
 				23FEBA04255BDB10001EA146 /* EatingTime.swift */,
+				26D0532C255D43B200D3C09A /* NotificationKey.swift */,
 			);
 			name = Constants;
 			sourceTree = "<group>";
@@ -290,9 +359,11 @@
 			children = (
 				23FEBA0B255BDB42001EA146 /* NetworkService.swift */,
 				23FEBA0F255BDB48001EA146 /* CoreDataService.swift */,
-				23FEBA12255BDB50001EA146 /* HealtKitService.swift */,
+				23FEBA12255BDB50001EA146 /* HealthKitService.swift */,
 				23FEBA15255BDB55001EA146 /* UserDefaultService.swift */,
-				238C9416255BEC2D00591791 /* StringOptional+Extensions.swift */,
+				26AF6A3D255E545A0045877C /* NotificationService.swift */,
+				23843BEC256116BA00D17A44 /* NotificationCenterServices.swift */,
+				26E42A8925628798000E239C /* HealthKitService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -306,6 +377,9 @@
 				23FEBA26255BDBCA001EA146 /* UILabel+Extensions.swift */,
 				23FEBA5E255BDDE6001EA146 /* NSAttributedString+Extensions.swift */,
 				2381F793255C057D008004DE /* UITextfield+Extensions.swift */,
+				238C9416255BEC2D00591791 /* StringOptional+Extensions.swift */,
+				26F98150255EE1C400774F94 /* NotificationName+Extensions.swift */,
+				23843BE92561147600D17A44 /* String+Extensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -367,6 +441,7 @@
 			isa = PBXGroup;
 			children = (
 				23FEBA58255BDD90001EA146 /* FoodDetailScreen.swift */,
+				A28A5B40255CE519007E66FA /* DetailSugarNSatFat.swift */,
 				238C9414255BEBB500591791 /* Cells */,
 			);
 			name = FoodDetailScreen;
@@ -375,7 +450,10 @@
 		23FEBA4A255BDD06001EA146 /* HistoryScreen */ = {
 			isa = PBXGroup;
 			children = (
+				23A8C535256233D400D06F5D /* HistoryViewModel.swift */,
 				23FEBA55255BDD75001EA146 /* HistoryViewController.swift */,
+				26E42A7D2562614A000E239C /* HistoryModel.swift */,
+				2344568D255E4BA3001497DD /* Components */,
 			);
 			name = HistoryScreen;
 			sourceTree = "<group>";
@@ -385,10 +463,29 @@
 			children = (
 				23FEBA4C255BDD49001EA146 /* ProfileViewModel.swift */,
 				23FEBA4F255BDD51001EA146 /* ProfileViewController.swift */,
-				23FEBA52255BDD59001EA146 /* Value1Cell.swift */,
+				23EC0D90256149010084154F /* ProfileEditViewController.swift */,
 				23FEBA61255BDF3A001EA146 /* NotificationViewController.swift */,
+				23FEBA52255BDD59001EA146 /* Value1Cell.swift */,
 			);
 			name = ProfileScreen;
+			sourceTree = "<group>";
+		};
+		26E42AA525628DEA000E239C /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		26F98128255ED9E000774F94 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				26F98155255F0E1900774F94 /* Favorite+CoreDataClass.swift */,
+				26F98156255F0E1900774F94 /* Favorite+CoreDataProperties.swift */,
+				26F98133255EDA9E00774F94 /* DailyIntake+CoreDataClass.swift */,
+				26F98134255EDA9E00774F94 /* DailyIntake+CoreDataProperties.swift */,
+			);
+			name = CoreData;
 			sourceTree = "<group>";
 		};
 		A28A5AEA255BD410007E66FA = {
@@ -398,6 +495,7 @@
 				A28A5AF4255BD410007E66FA /* Products */,
 				D6663EF5AF51E1CE43F841C8 /* Pods */,
 				C59C51F3F5CAC9CDBE9448C0 /* Frameworks */,
+				26E42AA525628DEA000E239C /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -412,6 +510,9 @@
 		A28A5AF5255BD410007E66FA /* Picho */ = {
 			isa = PBXGroup;
 			children = (
+				26E42AA725628EC5000E239C /* IntakesArray+Extensions.swift */,
+				A28A5B38255C29F4007E66FA /* Picho.entitlements */,
+				26F98128255ED9E000774F94 /* CoreData */,
 				23FEB9D0255BDA35001EA146 /* FatSecretSwift */,
 				23FEB9FC255BDAED001EA146 /* Base */,
 				23FEBA07255BDB16001EA146 /* Constants */,
@@ -430,6 +531,7 @@
 		C59C51F3F5CAC9CDBE9448C0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A28A5B39255C29F5007E66FA /* HealthKit.framework */,
 				047BD003AF371FA6292C078C /* Pods_Picho.framework */,
 			);
 			name = Frameworks;
@@ -557,13 +659,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23DC2B3E255EB73600025434 /* FoodHistoryTableView.swift in Sources */,
 				23FEBA5C255BDDB2001EA146 /* FoodInputViewController.swift in Sources */,
+				23A8C536256233D400D06F5D /* HistoryViewModel.swift in Sources */,
 				23414A07255CD36A00E1F48D /* WaterViewController.swift in Sources */,
 				23FEB9EE255BDA8F001EA146 /* CharacterSet+Utils.swift in Sources */,
+				23445693255E4BD5001497DD /* LegendView.swift in Sources */,
 				23FEB9F7255BDAA2001EA146 /* String+Utils.swift in Sources */,
 				23FEBA1D255BDBB4001EA146 /* UIView+Extensions.swift in Sources */,
 				2381F778255C03E3008004DE /* FormScreen4.swift in Sources */,
 				23FEBA21255BDBBB001EA146 /* Date+Extensions.swift in Sources */,
+				26E42A8A25628798000E239C /* HealthKitService.swift in Sources */,
 				2381F783255C0412008004DE /* DescriptionScreen1.swift in Sources */,
 				2381F77E255C03F1008004DE /* PageControlForm.swift in Sources */,
 				23FEBA62255BDF3A001EA146 /* NotificationViewController.swift in Sources */,
@@ -572,17 +678,24 @@
 				236D9C7A255D3EB500B252B5 /* InfoDetailViewController.swift in Sources */,
 				23FEB9EB255BDA85001EA146 /* Search.swift in Sources */,
 				23FEB9D6255BDA49001EA146 /* FatSecretCredentials.swift in Sources */,
+				A28A5B41255CE519007E66FA /* DetailSugarNSatFat.swift in Sources */,
 				23FEBA31255BDC7A001EA146 /* MainProgressView.swift in Sources */,
+				26AF6A3E255E545A0045877C /* NotificationService.swift in Sources */,
 				A28A5AFB255BD410007E66FA /* MainViewController.swift in Sources */,
 				23FEBA10255BDB48001EA146 /* CoreDataService.swift in Sources */,
 				23FEB9F1255BDA94001EA146 /* Array+Utils.swift in Sources */,
-				23FEBA13255BDB50001EA146 /* HealtKitService.swift in Sources */,
+				23FEBA13255BDB50001EA146 /* HealthKitService.swift in Sources */,
 				23FEBA34255BDC81001EA146 /* HorizontalView.swift in Sources */,
 				2381F790255C0428008004DE /* PageControlDescription.swift in Sources */,
 				23FEB9FE255BDAF3001EA146 /* AppCoordinator.swift in Sources */,
+				26F98157255F0E1900774F94 /* Favorite+CoreDataClass.swift in Sources */,
 				23FEB9DF255BDA72001EA146 /* SearchedFood.swift in Sources */,
+				26F98137255EDA9E00774F94 /* DailyIntake+CoreDataClass.swift in Sources */,
 				2381F77B255C03E7008004DE /* FormScreen5.swift in Sources */,
+				26F98151255EE1C400774F94 /* NotificationName+Extensions.swift in Sources */,
 				23FEBA53255BDD59001EA146 /* Value1Cell.swift in Sources */,
+				23EC0D91256149010084154F /* ProfileEditViewController.swift in Sources */,
+				239D53C62560F011009112AF /* TabBarController.swift in Sources */,
 				238C9405255BEB0C00591791 /* FoodSearchViewController.swift in Sources */,
 				23FEBA37255BDC87001EA146 /* MealTodayView.swift in Sources */,
 				23414A0A255CDE4800E1F48D /* HorizontalProgressView.swift in Sources */,
@@ -592,12 +705,17 @@
 				23FEB9E8255BDA81001EA146 /* Food.swift in Sources */,
 				2381F775255C03DF008004DE /* FormScreen3.swift in Sources */,
 				23FEBA59255BDD90001EA146 /* FoodDetailScreen.swift in Sources */,
+				26D0532D255D43B200D3C09A /* NotificationKey.swift in Sources */,
+				26E42A7E2562614A000E239C /* HistoryModel.swift in Sources */,
 				23FEBA69255BE00C001EA146 /* MealCellView.swift in Sources */,
 				23FEBA02255BDB06001EA146 /* Color.swift in Sources */,
 				2381F794255C057D008004DE /* UITextfield+Extensions.swift in Sources */,
+				23DC2B3B255EB70A00025434 /* FoodHistoryCell.swift in Sources */,
 				2381F787255C0416008004DE /* DescriptionScreen2.swift in Sources */,
+				23843BED256116BA00D17A44 /* NotificationCenterServices.swift in Sources */,
 				23FEBA0C255BDB42001EA146 /* NetworkService.swift in Sources */,
 				238C9412255BEBAF00591791 /* DetailCell.swift in Sources */,
+				23DC2B41255EB75700025434 /* HeaderView.swift in Sources */,
 				23FEBA16255BDB55001EA146 /* UserDefaultService.swift in Sources */,
 				2381F78A255C0419008004DE /* DescriptionScreen3.swift in Sources */,
 				23FEBA3F255BDCAE001EA146 /* SmallCircularProgressView.swift in Sources */,
@@ -606,20 +724,28 @@
 				23645F23255C2D5400DA5697 /* ActivityViewController.swift in Sources */,
 				238C9417255BEC2D00591791 /* StringOptional+Extensions.swift in Sources */,
 				23FEB9F4255BDA9C001EA146 /* URLComponents+Utils.swift in Sources */,
+				2339FBEF255E99AE00D0ABB3 /* HorizontalRowView.swift in Sources */,
+				2339FBF2255E99C300D0ABB3 /* IndicatorLabelView.swift in Sources */,
 				A28A5B01255BD410007E66FA /* Picho.xcdatamodeld in Sources */,
 				23FEBA5F255BDDE6001EA146 /* NSAttributedString+Extensions.swift in Sources */,
 				2381F772255C03DB008004DE /* FormScreen2.swift in Sources */,
 				23FEBA3B255BDCA6001EA146 /* CircularProgressView.swift in Sources */,
 				23FEBA56255BDD75001EA146 /* HistoryViewController.swift in Sources */,
+				23843BEA2561147600D17A44 /* String+Extensions.swift in Sources */,
 				23FEB9E2255BDA79001EA146 /* FatSecretError.swift in Sources */,
+				2344568F255E4BB0001497DD /* ChartView.swift in Sources */,
 				23FEBA4D255BDD49001EA146 /* ProfileViewModel.swift in Sources */,
 				23FEB9D9255BDA53001EA146 /* FatSecretParams.swift in Sources */,
 				23FEBA46255BDCBC001EA146 /* PichoCardView.swift in Sources */,
 				A28A5AF7255BD410007E66FA /* AppDelegate.swift in Sources */,
 				2381F76E255C03D5008004DE /* FormScreen1.swift in Sources */,
+				26E42AA825628EC5000E239C /* IntakesArray+Extensions.swift in Sources */,
 				23FEBA50255BDD51001EA146 /* ProfileViewController.swift in Sources */,
+				26F98138255EDA9E00774F94 /* DailyIntake+CoreDataProperties.swift in Sources */,
+				26F98158255F0E1900774F94 /* Favorite+CoreDataProperties.swift in Sources */,
 				23FEB9E5255BDA7D001EA146 /* Serving.swift in Sources */,
 				A28A5AF9255BD410007E66FA /* SceneDelegate.swift in Sources */,
+				2339FBEC255E998F00D0ABB3 /* SummaryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -759,6 +885,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Picho/Picho.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S9J6B4A78J;
 				INFOPLIST_FILE = Picho/Info.plist;
@@ -780,6 +907,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Picho/Picho.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S9J6B4A78J;
 				INFOPLIST_FILE = Picho/Info.plist;

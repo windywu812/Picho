@@ -5,11 +5,11 @@
 //  Created by Windy on 08/11/20.
 //
 
-import Foundation
+import UIKit
 
 class ProfileViewModel {
     
-    var fullName: [String] = []
+    var fullName: String = ""
     var secondSection: [String] = []
     var isSync: Bool = false
     var imageProfile: String = ""
@@ -25,14 +25,13 @@ class ProfileViewModel {
         isSync.toggle()
         
         if value {
-            HealthKitService.authorization()
+            UserDefaultService.isSyncHealthKit = isSync
+            HealthKitService.shared.authorization()
         }
     }
     
-    private func fetchUserDefault() {
-        fullName = [
-            UserDefaultService.firstName,
-            UserDefaultService.lastName]
+    func fetchUserDefault() {
+        fullName = UserDefaultService.name
         
         secondSection = [
             UserDefaultService.gender,
@@ -43,5 +42,20 @@ class ProfileViewModel {
         
         isSync = UserDefaultService.isSyncHealthKit
     }
+    
+    func savePic(image: UIImage, key: String) {
+        if let pngRepresentation = image.pngData() {
+            UserDefaults.standard.set(pngRepresentation, forKey: key)
+        }
+    }
+    
+    func getPic(forKey key: String) -> UIImage? {
+        if let imageData = UserDefaults.standard.object(forKey: key) as? Data,
+            let image = UIImage(data: imageData) {
+            return image
+        }
+        return nil
+    }
+    
     
 }
