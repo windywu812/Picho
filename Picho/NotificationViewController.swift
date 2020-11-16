@@ -8,7 +8,7 @@
 import UIKit
 import UserNotifications
 class NotificationViewController: UIViewController {
-   
+    
     let labelCell = ["Breakfast", "Lunch", "Dinner", "Snacks", "Water", "Weigh In", "Reflection"]
     
     private var tableView: UITableView!
@@ -57,15 +57,15 @@ class NotificationViewController: UIViewController {
     }
     
     @objc func handleSwitch(sender: UISwitch) {
-     
+        
         
         let dateFormat = DateFormatter()
         dateFormat.dateFormat = "HH:mm"
-       
+        
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.alert,.sound]){ (granted,error) in}
         let notificationContent = UNMutableNotificationContent()
-       
+        
         
         
         switch sender.tag {
@@ -83,7 +83,7 @@ class NotificationViewController: UIViewController {
             if sender.isOn == true{
                 
                 center.add(request) { (error) in
-                   
+                    
                     self.uud = uuidString
                     
                 }
@@ -108,7 +108,7 @@ class NotificationViewController: UIViewController {
                 let request = UNNotificationRequest(identifier: uuidString, content: notificationContent, trigger: trigger)
                 if sender.isOn == true{
                     center.add(request) { (error) in
-                    self.uud = uuidString
+                        self.uud = uuidString
                     }
                 }
                 if sender.isOn == false{
@@ -128,7 +128,7 @@ class NotificationViewController: UIViewController {
                 let request = UNNotificationRequest(identifier: uuidString, content: notificationContent, trigger: trigger)
                 if sender.isOn == true{
                     center.add(request) { (error) in
-                    self.uud = uuidString
+                        self.uud = uuidString
                     }
                 }
                 if sender.isOn == false{
@@ -148,7 +148,7 @@ class NotificationViewController: UIViewController {
                 let request = UNNotificationRequest(identifier: uuidString, content: notificationContent, trigger: trigger)
                 if sender.isOn == true{
                     center.add(request) { (error) in
-                    self.uud = uuidString
+                        self.uud = uuidString
                     }
                 }
                 if sender.isOn == false{
@@ -168,7 +168,7 @@ class NotificationViewController: UIViewController {
                 let request = UNNotificationRequest(identifier: uuidString, content: notificationContent, trigger: trigger)
                 if sender.isOn == true{
                     center.add(request) { (error) in
-                    self.uud = uuidString
+                        self.uud = uuidString
                     }
                 }
                 if sender.isOn == false{
@@ -188,7 +188,7 @@ class NotificationViewController: UIViewController {
                 let request = UNNotificationRequest(identifier: uuidString, content: notificationContent, trigger: trigger)
                 if sender.isOn == true{
                     center.add(request) { (error) in
-                    self.uud = uuidString
+                        self.uud = uuidString
                     }
                 }
                 if sender.isOn == false{
@@ -208,7 +208,7 @@ class NotificationViewController: UIViewController {
                 let request = UNNotificationRequest(identifier: uuidString, content: notificationContent, trigger: trigger)
                 if sender.isOn == true{
                     center.add(request) { (error) in
-                    self.uud = uuidString
+                        self.uud = uuidString
                     }
                 }
                 if sender.isOn == false{
@@ -258,7 +258,7 @@ class NotificationViewController: UIViewController {
     @objc private func handleTap() {
         view.endEditing(false)
     }
-   
+    
 }
 
 extension NotificationViewController: UITableViewDelegate, UITableViewDataSource {
@@ -287,7 +287,7 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
                 breakfastTextfield.inputView = datePicker
                 cell.accessoryView = breakfastTextfield
             }
-        
+            
         case 1:
             if indexPath.row == 0 {
                 cell.textLabel?.setFont(text: labelCell[1], weight: .bold)
@@ -419,7 +419,7 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
         cell.selectionStyle = .none
         return cell
     }
-
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 7
     }
@@ -430,12 +430,12 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
     
 }
 extension NotificationViewController : UNUserNotificationCenterDelegate{
-       func userNotificationCenter(_ center:UNUserNotificationCenter, willPresent notification:
-           UNNotification,withCompletionHandler completionHandler: @escaping
-           (UNNotificationPresentationOptions) -> Void){
-           completionHandler([.sound,.alert])
-       }
-
-   }
+    func userNotificationCenter(_ center:UNUserNotificationCenter, willPresent notification:
+                                    UNNotification,withCompletionHandler completionHandler: @escaping
+                                        (UNNotificationPresentationOptions) -> Void){
+        completionHandler([.sound,.alert])
+    }
+    
+}
 
 

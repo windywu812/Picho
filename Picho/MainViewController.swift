@@ -48,8 +48,7 @@ class MainViewController: UIViewController {
         
         navigationItem.title = "Today"
         
-//        checkUser()
-        
+        checkUser()
         countCalorie()
       
         setupScrollView()

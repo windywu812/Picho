@@ -2,7 +2,7 @@
 //  Favorite+CoreDataClass.swift
 //  Picho
 //
-//  Created by Wendy Kurniawan on 13/11/20.
+//  Created by Wendy Kurniawan on 14/11/20.
 //
 //
 

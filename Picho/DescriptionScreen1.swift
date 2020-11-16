@@ -12,7 +12,7 @@ class DescriptionScreen1: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
+        view.backgroundColor = Color.background
         
         let image = UIImage(named: "1")
         
@@ -44,7 +44,6 @@ class DescriptionScreen1: UIViewController {
         label2.setConstraint(topAnchor: label1.bottomAnchor,topAnchorConstant: 20,
                              leadingAnchor: view.layoutMarginsGuide.leadingAnchor,leadingAnchorConstant: 20,
                              trailingAnchor: view.layoutMarginsGuide.trailingAnchor,trailingAnchorConstant: -20)
-        
     }
     
 }

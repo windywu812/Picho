@@ -9,100 +9,120 @@ import UIKit
 
 class FormScreen3: UIViewController {
     
-    var gender = ["Male","Female"]
+    let genders = ["Male", "Female"]
     let genderTextField = UITextField()
     let ageTextField = UITextField()
     let pickerView = UIPickerView()
-    var rootViewS3 : PageControlForm?
+    var getStartedBtn = UIButton()
+    var rootView : PageControlForm?
+    
+    private var gender: String = ""
+    private var age: String = ""
+    
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         pickGender()
         setupView()
-        
     }
     
-    func pickGender(){
+    func pickGender() {
         pickerView.delegate?.pickerView?(pickerView, didSelectRow: 0, inComponent: 0)
         pickerView.delegate = self
         pickerView.dataSource = self
         genderTextField.inputView = pickerView
     }
     
-    func setupView(){
-        view.backgroundColor = .white
+    func setupView() {
+        view.backgroundColor = Color.background
         
-        let image = UIImage(named: "mascot")
-        let imageview:UIImageView = UIImageView()
-        imageview.contentMode = UIView.ContentMode.scaleToFill
-        imageview.image = image
+        let imageview = UIImageView()
+        imageview.contentMode = .scaleToFill
+        imageview.image = UIImage(named: "mascot")
         view.addSubview(imageview)
-        imageview.translatesAutoresizingMaskIntoConstraints = false
-        imageview.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        imageview.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32).isActive = true
-        imageview.widthAnchor.constraint(equalToConstant: 95).isActive = true
-        imageview.heightAnchor.constraint(equalToConstant: 115).isActive = true
         
-        let label1 = UILabel()
-        label1.text = "I want to know more about you."
-        label1.font = UIFont.boldSystemFont(ofSize: 25.0)
-        label1.textAlignment = .center
-        label1.numberOfLines = 0
-        view.addSubview(label1)
-        label1.setConstraint(topAnchor: imageview.bottomAnchor,topAnchorConstant: 20,
-                             leadingAnchor: view.layoutMarginsGuide.leadingAnchor,leadingAnchorConstant: 30,
-                             trailingAnchor: view.layoutMarginsGuide.trailingAnchor,trailingAnchorConstant: -30)
+        imageview.setConstraint(
+            topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 80,
+            centerXAnchor: view.centerXAnchor,
+            heighAnchorConstant: 115, widthAnchorConstant: 95)
         
-        let label2 = UILabel()
-        label2.text = "Different age and gender have different calories needs, also fat and sugar intake. Tell Picho yours so he can help you calculate!"
-        label2.font = UIFont.systemFont(ofSize: 17)
-        label2.numberOfLines = 0
-        label2.textAlignment = .center
-        view.addSubview(label2)
-        label2.setConstraint(topAnchor: label1.bottomAnchor,topAnchorConstant: 20,
-                             leadingAnchor: view.layoutMarginsGuide.leadingAnchor,leadingAnchorConstant: 40,
-                             trailingAnchor: view.layoutMarginsGuide.trailingAnchor,trailingAnchorConstant: -40)
+        let titleLabel = UILabel()
+        titleLabel.text = "I want to know more about you."
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 24.0)
+        titleLabel.textAlignment = .center
+        titleLabel.numberOfLines = 0
+        view.addSubview(titleLabel)
         
-        genderTextField.layer.cornerRadius = 10.0
+        titleLabel.setConstraint(
+            topAnchor: imageview.bottomAnchor,topAnchorConstant: 24,
+            leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
+            trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
+        
+        let descLabel = UILabel()
+        descLabel.text = "Different age and gender have different calories needs, also fat and sugar intake. Tell Picho yours so he can help you calculate!"
+        descLabel.numberOfLines = 0
+        descLabel.textAlignment = .center
+        view.addSubview(descLabel)
+        
+        descLabel.setConstraint(
+            topAnchor: titleLabel.bottomAnchor,topAnchorConstant: 24,
+            leadingAnchor: view.layoutMarginsGuide.leadingAnchor,leadingAnchorConstant: 16,
+            trailingAnchor: view.layoutMarginsGuide.trailingAnchor,trailingAnchorConstant: -16)
+        
+        genderTextField.layer.cornerRadius = 6
         genderTextField.placeholder = "Gender"
         genderTextField.layer.borderColor = Color.green.cgColor
         genderTextField.layer.borderWidth = 2.0
         genderTextField.addPadding(padding: .equalSpacing(10))
+        genderTextField.delegate = self
+        genderTextField.tag = 0
         view.addSubview(genderTextField)
-        genderTextField.setConstraint(topAnchor: label2.bottomAnchor,topAnchorConstant: 50,centerXAnchor: view.centerXAnchor,heighAnchorConstant: 50, widthAnchorConstant: 299)
         
-       
+        genderTextField.setConstraint(
+            topAnchor: descLabel.bottomAnchor, topAnchorConstant: 50,
+            leadingAnchor: view.layoutMarginsGuide.leadingAnchor, leadingAnchorConstant: 16,
+            trailingAnchor: view.layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: -16,
+            heighAnchorConstant: 50)
+        
         ageTextField.addPadding(padding: .equalSpacing(10))
-        ageTextField.layer.cornerRadius = 10.0
+        ageTextField.layer.cornerRadius = 6
         ageTextField.layer.borderColor = Color.green.cgColor
         ageTextField.layer.borderWidth = 2.0
         ageTextField.placeholder = "Age"
+        ageTextField.delegate = self
+        ageTextField.keyboardType = .numberPad
+        ageTextField.tag = 1
         view.addSubview(ageTextField)
-        ageTextField.setConstraint(topAnchor: genderTextField.bottomAnchor,topAnchorConstant: 50,centerXAnchor: view.centerXAnchor,heighAnchorConstant: 50, widthAnchorConstant: 299)
         
-        let getStartedBtn = UIButton()
+        ageTextField.setConstraint(
+            topAnchor: genderTextField.bottomAnchor, topAnchorConstant: 36,
+            leadingAnchor: view.layoutMarginsGuide.leadingAnchor, leadingAnchorConstant: 16,
+            trailingAnchor: view.layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: -16,
+            heighAnchorConstant: 50)
+        
+        getStartedBtn = UIButton()
         getStartedBtn.setTitle("Continue", for: .normal)
         getStartedBtn.layer.cornerRadius =  5
-        getStartedBtn.backgroundColor = Color.green
+        getStartedBtn.backgroundColor = Color.lightGreen
+        getStartedBtn.tintColor = Color.green
+        getStartedBtn.isEnabled = false
         view.addSubview(getStartedBtn)
-        getStartedBtn.translatesAutoresizingMaskIntoConstraints = false
-        getStartedBtn.topAnchor.constraint(equalTo: ageTextField.bottomAnchor, constant: 50).isActive = true
-        getStartedBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        getStartedBtn.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        getStartedBtn.widthAnchor.constraint(equalToConstant: 270).isActive = true
+        
+        getStartedBtn.setConstraint(
+            bottomAnchor: view.safeAreaLayoutGuide.bottomAnchor, bottomAnchorConstant: -32,
+            leadingAnchor: view.layoutMarginsGuide.leadingAnchor, leadingAnchorConstant: 16,
+            trailingAnchor: view.layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: -16,
+            heighAnchorConstant: 50)
         
         getStartedBtn.addTarget(self, action: #selector(handleSave), for: .touchUpInside)
     }
-    @objc func handleSave(){
-        print("okeeee")
+    
+    @objc func handleSave() {
         UserDefaultService.gender = genderTextField.text!
         UserDefaultService.age = ageTextField.text!
         
-        rootViewS3?.setView(index: 3)
-        
-            
-        
+        rootView?.setView(index: 3)
     }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
@@ -111,25 +131,52 @@ class FormScreen3: UIViewController {
 
 extension FormScreen3 :  UIPickerViewDelegate, UIPickerViewDataSource {
     
-    public func numberOfComponents(in pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
-    public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return gender.count
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return genders.count
     }
-    public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return gender[row]
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return genders[row]
     }
-    public func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
-        return 100.0
+    
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        return 50.0
     }
-    public func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        return 60.0
-    }
-    public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        genderTextField.text = gender[row]
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        genderTextField.text = genders[row]
     }
     
 }
 
+extension FormScreen3: UITextFieldDelegate {
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        if textField.tag == 0 {
+            gender = textField.text ?? ""
+        } else {
+            age = textField.text ?? ""
+        }
+        
+        if !gender.isEmpty && !age.isEmpty {
+            getStartedBtn.backgroundColor = Color.green
+            getStartedBtn.tintColor = .white
+            getStartedBtn.isEnabled = true
+        } else {
+            getStartedBtn.backgroundColor = Color.lightGreen
+            getStartedBtn.tintColor = Color.green
+            getStartedBtn.isEnabled = false
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+}
