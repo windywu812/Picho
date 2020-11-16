@@ -5,6 +5,8 @@
 //  Created by Muhammad Rasyid khaikal on 02/11/20.
 //
 
+
+
 import UIKit
 import HealthKit
 
@@ -32,6 +34,8 @@ class MainViewController: UIViewController {
     private let weight = Double(UserDefaultService.weight)
     private let height = Double(UserDefaultService.height)
   
+   
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
  
@@ -45,6 +49,7 @@ class MainViewController: UIViewController {
         navigationItem.title = "Today"
         
 //        checkUser()
+        
         countCalorie()
       
         setupScrollView()
@@ -93,7 +98,6 @@ class MainViewController: UIViewController {
     }
     
     private func fetchData() {
-        print(HealthKitService.shared.checkAuthorization())
         if HealthKitService.shared.checkAuthorization() {
             HealthKitService.shared.fetchCalorie { (totalCal) in
                 self.calorieLeft = self.calorieIntake - totalCal
@@ -106,7 +110,6 @@ class MainViewController: UIViewController {
             }
             HealthKitService.shared.fetchWater { (water) in
                 self.totalWater = water
-                print(self.totalWater)
             }
             HealthKitService.shared.fetchActivity { (step) in
                 self.totalStep = step
@@ -120,18 +123,10 @@ class MainViewController: UIViewController {
                 self.calorieLeft = self.calorieIntake - calorie.reduce(0.0, +)
                 self.satFatLeft = self.saturatedFatIntake - satFat.reduce(0.0, +)
                 self.sugarLeft = self.sugarIntake - sugar.reduce(0.0, +)
-                
-                
             }
             setupActivity()
         }
-        
-        
-       
-        
     }
-    
-    
     private func setupGesture() {
         let tapActivity = UITapGestureRecognizer(target: self, action: #selector(handleActivity))
         activityCardView.addGestureRecognizer(tapActivity)
@@ -146,8 +141,11 @@ class MainViewController: UIViewController {
     }
     
     @objc private func handleWater() {
-        let vc = UINavigationController(rootViewController: WaterViewController())
-        navigationController?.present(vc, animated: true, completion: nil)
+        let vc = WaterViewController()
+        vc.delegateWater = self
+        
+        let navController = UINavigationController(rootViewController: vc)
+        navigationController?.present(navController, animated: true, completion: nil)
     }
     
     deinit {
@@ -157,8 +155,12 @@ class MainViewController: UIViewController {
   
 
 // MARK: Setup View
-extension MainViewController {
+extension MainViewController : GetDataDelegate {
     
+    func getWater(water: Int) {
+        
+       
+    }
     private func setupScrollView() {
         scrollView = UIScrollView()
         scrollView.backgroundColor = Color.background
@@ -201,9 +203,10 @@ extension MainViewController {
     }
     
     private func setupActivity() {
+       
         waterCardView = HorizontalView(
             labelText: "Water",
-            detailText: "💧 \(Int(self.totalWater)) cups remaining",
+            detailText: "💧 0 cups remaining",
             iconImage: UIImage(),
             background: Color.blue)
         waterCardView.setConstraint(heighAnchorConstant: 46)

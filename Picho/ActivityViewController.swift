@@ -88,13 +88,17 @@ class ActivityCard: UIView {
         layer.cornerRadius = 8
         
         activityLabel = UILabel()
-        activityLabel.setFont(text: "Activity", weight: .bold, color: .white)
-        
         HealthKitService.shared.fetchActivity { (step) in
             self.totalStep = step
+            DispatchQueue.main.async{[self] in
+                amountLabel.text = "🔥 \(Int(totalStep)) Step"
+            }
         }
+        activityLabel.setFont(text: "Activity", weight: .bold, color: .white)
         amountLabel = UILabel()
-        amountLabel.setFont(text: "🔥 \(Int(totalStep)) Step", weight: .bold, color: .white)
+        
+        self.amountLabel.setFont(text: "🔥 \(Int(totalStep)) Step", weight: .bold, color: .white)
+        
         
         let activityStack = UIStackView(arrangedSubviews: [activityLabel, amountLabel])
         activityStack.axis = .horizontal
@@ -106,6 +110,7 @@ class ActivityCard: UIView {
             trailingAnchor: layoutMarginsGuide.trailingAnchor,
             centerYAnchor: centerYAnchor)
     }
+  
      
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

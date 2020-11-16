@@ -5,8 +5,15 @@
 //  Created by Windy on 12/11/20.
 //
 
+
 import UIKit
 import HealthKit
+
+protocol GetDataDelegate {
+    func getWater(water: Int)
+    
+}
+
 class WaterViewController: UIViewController {
     
     let detail = """
@@ -21,14 +28,15 @@ class WaterViewController: UIViewController {
     private var waterProgress: HorizontalProgressView!
     private var infoLabel: UILabel!
     private var waterCollectionView: UICollectionView!
-    
+    var delegateWater : GetDataDelegate?
     private var totalWater: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        fetch()
         setupView()
         setupLayout()
+        
     }
     
     @objc private func handleDone() {
@@ -36,6 +44,8 @@ class WaterViewController: UIViewController {
     }
     
     private func setupView() {
+        
+        
         navigationItem.title = "Water"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(handleDone))
         view.backgroundColor = Color.background
@@ -50,6 +60,8 @@ class WaterViewController: UIViewController {
         view.addSubview(waterLabel)
         
         waterAmount = UILabel()
+        
+        
         waterAmount.setFont(text: "\(totalWater) Cups", size: 34, weight: .bold)
         
         view.addSubview(waterAmount)
@@ -58,13 +70,8 @@ class WaterViewController: UIViewController {
         view.addSubview(waterProgress)
         
         infoLabel = UILabel()
-        if totalWater < 4 {
-            infoLabel.setFont(text: "Need more water", size: 17, weight: .bold, color: Color.red)
-        }
-        if totalWater > 5 {
-            
-            infoLabel.setFont(text: "Good", size: 17, weight: .bold, color: Color.green)
-        }
+        
+        infoLabel.setFont(text: "Need more water", size: 17, weight: .bold, color: Color.red)
         
         view.addSubview(infoLabel)
         
@@ -110,11 +117,31 @@ class WaterViewController: UIViewController {
             bottomAnchor: view.safeAreaLayoutGuide.bottomAnchor, bottomAnchorConstant: -32,
             leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
             trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
+        
     }
+    func fetch(){
+        HealthKitService.shared.fetchWater { (glassIntake) in
+            self.totalWater = Int(glassIntake)
+            
+            DispatchQueue.main.async { [self] in
+                self.waterAmount.text = "\(totalWater) Cups"
+                self.waterProgress.setProgress(progress: totalWater)
+                self.delegateWater?.getWater(water: Int(glassIntake))
+                if totalWater > 5 {
+                    self.infoLabel.setFont(text: "Good", size: 17, weight: .bold, color: Color.green)
+                }
+            }
+        }
+
+        
+    }
+    
+    
     
 }
 
 extension WaterViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 14
@@ -123,12 +150,8 @@ extension WaterViewController: UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WaterCell.reuseIdentifier, for: indexPath) as! WaterCell
         
-        HealthKitService.shared.fetchWater { (glassIntake) in
-            self.totalWater = Int(glassIntake)
-        }
         
-       let total = totalWater + 1
-        if indexPath.row <= total{
+        if indexPath.row < totalWater {
             cell.image = UIImage(named: "glass_fill")
         }else{
             cell.image = UIImage(named: "glass_empty")
@@ -143,16 +166,16 @@ extension WaterViewController: UICollectionViewDelegate, UICollectionViewDataSou
         if let cell = collectionView.cellForItem(at: indexPath) as? WaterCell {
             if cell.image == UIImage(named: "glass_fill") {
                 cell.image = UIImage(named: "glass_empty")
-                totalWater -= 100
-                waterAmount.text = "\(totalWater) ml"
+                totalWater -= 1
+                waterAmount.text = "\(totalWater) Cups"
                 waterProgress.setProgress(progress: totalWater)
-                print("no")
+                
             } else {
-                print("yes")
+                
                 HealthKitService.shared.addData(sugar: Double(1) , date: Date(), type: .dietaryWater, unit: HKUnit.cupUS())
                 cell.image = UIImage(named: "glass_fill")
-                totalWater += 100
-                waterAmount.text = "\(totalWater) ml"
+                totalWater += 1
+                waterAmount.text = "\(totalWater) Cups"
                 waterProgress.setProgress(progress: totalWater)
             }
         }
