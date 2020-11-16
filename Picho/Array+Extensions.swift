@@ -27,7 +27,7 @@ extension Array {
             container += daily.calorie
         }
         
-        return container / Double(data.count)
+        return data.count > 0 ? container / Double(data.count) : 0.0
     }
     
     func getAverageSugar() -> Double {
@@ -38,7 +38,7 @@ extension Array {
             container += daily.sugars
         }
         
-        return container
+        return data.count > 0 ? container / Double(data.count) : 0.0
     }
     
     func getAverageSatFat() -> Double {
@@ -48,7 +48,8 @@ extension Array {
         data.forEach { (daily) in
             container += daily.saturatedFat
         }
-        return container
+        
+        return data.count > 0 ? container / Double(data.count) : 0.0
     }
     
 }

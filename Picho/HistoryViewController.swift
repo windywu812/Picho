@@ -8,39 +8,6 @@
 import UIKit
 import Charts
 
-class HistoryViewModel {
-    
-    var allHistoryData: [Int: [DailyIntake]] = [:]
-    
-    init() {
-        fetchData()
-    }
-    
-    func fetchData() {
-        CoreDataService.shared.getDailyIntake { [weak self] (intakes) in
-            self?.allHistoryData = Dictionary(grouping: intakes, by: { ($0.date?.month ?? 0) })
-        }
-    }
-    
-    func getDataWeekofMonth(in month: Int) -> [Int?: [DailyIntake]] {
-        /// Get data in one month
-        let dataByMonth = allHistoryData[month]
-        /// Get data in all weeks in one month
-        let groupMyWeek = Dictionary(grouping: dataByMonth ?? [], by: { $0.date?.weekOfMonth })
-        return groupMyWeek
-    }
-    
-    // MARK: Dummy Data Sets
-//        for i in -90...0 {
-//            CoreDataService.shared.addDailyIntake(id: UUID(), foodId: "FoodId", name: "FoodName", description: "FoodDescription", calorie: Double(Int.random(in: 0...300)), saturatedFat: Double(Int.random(in: 0...300)), sugars: Double(Int.random(in: 0...300)), date: Date().add(i), time: .breakfast)
-//            CoreDataService.shared.addDailyIntake(id: UUID(), foodId: "FoodId", name: "FoodName", description: "FoodDescription", calorie: Double(Int.random(in: 0...300)), saturatedFat: Double(Int.random(in: 0...300)), sugars: Double(Int.random(in: 0...300)), date: Date().add(i), time: .lunch)
-//            CoreDataService.shared.addDailyIntake(id: UUID(), foodId: "FoodId", name: "FoodName", description: "FoodDescription", calorie: Double(Int.random(in: 0...300)), saturatedFat: Double(Int.random(in: 0...300)), sugars: Double(Int.random(in: 0...300)), date: Date().add(i), time: .dinner)
-//            CoreDataService.shared.addDailyIntake(id: UUID(), foodId: "FoodId", name: "FoodName", description: "FoodDescription", calorie: Double(Int.random(in: 0...300)), saturatedFat: Double(Int.random(in: 0...300)), sugars: Double(Int.random(in: 0...300)), date: Date().add(i), time: .snacks)
-//        }
-    
-    
-}
-
 class HistoryViewController: UIViewController {
     
     private let viewModel = HistoryViewModel()
@@ -73,8 +40,8 @@ class HistoryViewController: UIViewController {
         let formatterWithoutYear = DateFormatter()
         formatterWithoutYear.dateFormat = "dd MMM"
         
-        let firstDateOfWeek = formatterWithoutYear.string(from: viewModel.getDataWeekofMonth(in: 10)[week]?.first?.date ?? Date())
-        let lastDataOfWeek = formatterWithoutYear.string(from: viewModel.getDataWeekofMonth(in: 10)[week]?.last?.date ?? Date())
+        let firstDateOfWeek = formatterWithoutYear.string(from: viewModel.getDataWeekofMonth(in: month)[week]?.first?.date ?? Date())
+        let lastDataOfWeek = formatterWithoutYear.string(from: viewModel.getDataWeekofMonth(in: month)[week]?.last?.date ?? Date())
         
         timeLabel.text = "\(firstDateOfWeek) - \(lastDataOfWeek)"
         
@@ -103,13 +70,13 @@ class HistoryViewController: UIViewController {
 }
 
 extension HistoryViewController: ChartSeletedDelegate {
-    
+
     func sendDate(date: (Int, Int)) {
         fetchConsupmtionPerWeek(month: date.0, week: 1)
     }
     
-    func selectedChart(week: Int) {
-        fetchConsupmtionPerWeek(week: week + 1)
+    func selectedChart(month: Int, week: Int) {
+        fetchConsupmtionPerWeek(month: month, week: week + 1)
     }
     
 }
