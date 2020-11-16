@@ -10,6 +10,7 @@ import Charts
 
 protocol ChartSeletedDelegate {
     func selectedChart(week: Int)
+    func sendDate(date: (Int, Int))
 }
 
 class ChartView: UIView, ChartViewDelegate {
@@ -53,7 +54,7 @@ class ChartView: UIView, ChartViewDelegate {
         satFatData.highlightColor = Color.yellow
         
         let axisValue = (0..<dataWeekPerMonth.keys.count).map { (week) -> String in
-            return "\(week + 1)w"
+            return "w\(week + 1)"
         }
         
         let data: LineChartData = LineChartData(dataSets: [sugarData, satFatData])
@@ -74,7 +75,7 @@ class ChartView: UIView, ChartViewDelegate {
     
     func setupLabel() {
         timeRangeLabel = UITextField()
-        timeRangeLabel.text = "November 2020"
+        timeRangeLabel.text = "\(Date().convertIntToMonth(month: Date().month)) \(Date().year)"
         timeRangeLabel.textColor = Color.green
         timeRangeLabel.layer.borderWidth = 1
         timeRangeLabel.layer.borderColor = Color.green.cgColor
@@ -82,7 +83,6 @@ class ChartView: UIView, ChartViewDelegate {
         timeRangeLabel.layer.cornerRadius = 8
         
         let datePicker = CustomDatePicker()
-        
         timeRangeLabel.inputView = datePicker
         NotificationCenter.default.addObserver(self, selector: #selector(handleDate(notification:)), name: .dateChanged, object: nil)
         addSubview(timeRangeLabel)
@@ -122,11 +122,14 @@ class ChartView: UIView, ChartViewDelegate {
     
     @objc private func handleDate(notification: Notification) {
         let data = notification.object as! (String, Int)
-        print(data)
+        
+        timeRangeLabel.text = "\(data.0) \(data.1)"
+        delegate?.sendDate(date: (data.0.convertIntToMonth(), data.1))
     }
     
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
-        print("x: \(entry.x), y: \(entry.y)")
+
+        print(entry.x , entry.y)
         delegate?.selectedChart(week: Int(entry.x))
     }
     
@@ -140,6 +143,7 @@ class CustomDatePicker: UIPickerView {
     
     private var months: [String] = []
     private var years: [Int] = []
+    private var date: (String, Int) = ("January", 2020)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -157,8 +161,6 @@ class CustomDatePicker: UIPickerView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    private var date: (String, Int) = ("January", 2020)
     
 }
 

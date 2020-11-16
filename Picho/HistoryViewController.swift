@@ -78,6 +78,9 @@ class HistoryViewController: UIViewController {
         
         timeLabel.text = "\(firstDateOfWeek) - \(lastDataOfWeek)"
         
+        chartView.dataWeekPerMonth = viewModel.getDataWeekofMonth(in: month)
+        chartView.setupChartData()
+        
         summaryView.setupSummary(data: viewModel.getDataWeekofMonth(in: month)[week] ?? [])
     }
     
@@ -92,7 +95,27 @@ class HistoryViewController: UIViewController {
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleDismiss))
         view.addGestureRecognizer(tap)
     }
+    
+    @objc private func handleDismiss() {
+        view.endEditing(true)
+    }
+    
+}
 
+extension HistoryViewController: ChartSeletedDelegate {
+    
+    func sendDate(date: (Int, Int)) {
+        fetchConsupmtionPerWeek(month: date.0, week: 1)
+    }
+    
+    func selectedChart(week: Int) {
+        fetchConsupmtionPerWeek(week: week + 1)
+    }
+    
+}
+
+extension HistoryViewController {
+    
     private func setupView() {
         
         scrollView = UIScrollView()
@@ -170,17 +193,4 @@ class HistoryViewController: UIViewController {
             trailingAnchor: view.trailingAnchor)
     }
     
-    @objc private func handleDismiss() {
-        view.endEditing(true)
-    }
-    
 }
-
-extension HistoryViewController: ChartSeletedDelegate {
-    
-    func selectedChart(week: Int) {
-        fetchConsupmtionPerWeek(week: week + 1)
-    }
-    
-}
-

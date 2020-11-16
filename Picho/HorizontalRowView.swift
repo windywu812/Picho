@@ -16,9 +16,9 @@ class HorizontalRowView: UIView {
     func setupView(labelText: String, amountText: Double, icon: String) {
         label.text = labelText
         if labelText.contains(find: "Calories") {
-            amountLabel.text = "\(amountText) cal"
+            amountLabel.text = "\(String(format: "%.02f", amountText)) cal"
         } else {
-            amountLabel.text = "\(amountText) g"
+            amountLabel.text = "\(String(format: "%.02f", amountText)) g"
         }
         imageLabel.image = UIImage(named: icon)
     }

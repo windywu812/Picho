@@ -49,7 +49,6 @@ extension Date {
         return dateFormatter.string(from: date)
     }
     
-    
     var year: Int {
         return Calendar.current.component(.year, from: self)
     }
@@ -60,14 +59,6 @@ extension Date {
     
     var weekOfMonth: Int {
         return Calendar.current.component(.weekOfMonth, from: self)
-    }
-    
-    var weekAndYear: DateComponents {
-        return Calendar.current.dateComponents([.weekOfYear, .year], from: self)
-    }
-    
-    var weekDay: Int {
-        return Calendar.current.component(.weekday, from: self)
     }
     
     var startOfDay: Date {
@@ -86,6 +77,37 @@ extension Date {
         let cal = Calendar.current
         
         return cal.date(byAdding: .day, value: x, to: Date())!
+    }
+    
+    func convertIntToMonth(month: Int) -> String {
+        switch month {
+        case 1:
+            return "January"
+        case 2:
+            return "February"
+        case 3:
+            return "March"
+        case 4:
+            return "April"
+        case 5:
+            return "May"
+        case 6:
+            return "June"
+        case 7:
+            return "July"
+        case 8:
+            return "August"
+        case 9:
+            return "September"
+        case 10:
+            return "October"
+        case 11:
+            return "November"
+        case 12:
+            return "December"
+        default:
+            return ""
+        }
     }
     
 }
