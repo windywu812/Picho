@@ -49,6 +49,7 @@ class HistoryViewController: UIViewController {
         chartView.setupChartData()
         
         summaryView.setupSummary(data: viewModel.getDataWeekofMonth(in: month)[week] ?? [])
+        foodHistory.setupConsumption(data: viewModel.getDataWeekofMonth(in: month)[week] ?? [])
     }
     
     override func viewDidLoad() {

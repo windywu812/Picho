@@ -9,6 +9,11 @@ import UIKit
 
 class FoodHistory: UITableView {
     
+    private var breakfasts: [DailyIntake] = []
+    private var lunches: [DailyIntake] = []
+    private var dinners: [DailyIntake] = []
+    private var snacks: [DailyIntake] = []
+    
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: .grouped)
         
@@ -27,6 +32,17 @@ class FoodHistory: UITableView {
         
         setConstraint(
             heighAnchorConstant: CGFloat(totalHeight))
+    }
+    
+    func setupConsumption(data: [DailyIntake]) {
+        breakfasts = data.groupByTime(on: .breakfast)
+        lunches = data.groupByTime(on: .lunch)
+        dinners = data.groupByTime(on: .dinner)
+        snacks = data.groupByTime(on: .snacks)
+        
+        let breakfastGroup = breakfasts.groupByMax()
+        
+        
     }
     
     required init?(coder: NSCoder) {

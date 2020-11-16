@@ -7,6 +7,10 @@
 
 import Foundation
 
+enum Nutrition {
+    case calorie, sugar, satFat
+}
+
 extension Array {
     
     func convertToString() -> String {
@@ -19,37 +23,51 @@ extension Array {
         return container
     }
     
-    func getAverageCalorie() -> Double {
+    func getAverage(of nutrition: Nutrition) -> Double {
         let data = self as! [DailyIntake]
         
         var container: Double = 0.0
-        data.forEach { (daily) in
-            container += daily.calorie
+        
+        switch nutrition {
+        case .calorie:
+            data.forEach { (daily) in
+                container += daily.calorie
+            }
+        case .sugar:
+            data.forEach { (daily) in
+                container += daily.sugars
+            }
+        case .satFat:
+            data.forEach { (daily) in
+                container += daily.saturatedFat
+            }
         }
         
         return data.count > 0 ? container / Double(data.count) : 0.0
     }
     
-    func getAverageSugar() -> Double {
+    func groupByTime(on time: EatTime) -> [DailyIntake] {
         let data = self as! [DailyIntake]
-        
-        var container: Double = 0.0
-        data.forEach { (daily) in
-            container += daily.sugars
-        }
-        
-        return data.count > 0 ? container / Double(data.count) : 0.0
+        return data.filter { $0.time == time.rawValue }
     }
     
-    func getAverageSatFat() -> Double {
+    func groupByMax() -> [String?: [DailyIntake]] {
+        let maximumCons = self.getMax()
+        let group = self.groupById()
+        
+        return group.filter { maximumCons.keys.contains($0.key) }
+    }
+    
+    func getMax() -> [String?: Int] {
         let data = self as! [DailyIntake]
-        
-        var container: Double = 0.0
-        data.forEach { (daily) in
-            container += daily.saturatedFat
-        }
-        
-        return data.count > 0 ? container / Double(data.count) : 0.0
+        let group = Dictionary(grouping: data) { $0.foodId }.mapValues { $0.count }
+        let greatest = group.filter { $0.value == group.values.max() }
+        return greatest
+    }
+    
+    func groupById() -> [String?: [DailyIntake]] {
+        let data = self as! [DailyIntake]
+        return Dictionary(grouping: data) { $0.foodId }
     }
     
 }
