@@ -10,6 +10,8 @@ import Charts
 
 class HistoryViewController: UIViewController {
     
+    private let viewModel = HistoryViewModel()
+    
     private var scrollView: UIScrollView!
     private var chartView: ChartView!
     private var sugarLegend: LegendView!
@@ -17,12 +19,37 @@ class HistoryViewController: UIViewController {
     private var timeLabel: UILabel!
     private var summaryView: SummaryView!
     private var indicator: IndicatorLabelView!
-    private var foodHistory: FoodHistory!
+    private var foodHistory: FoodHistoryTableView!
+    
+    private var breakfasts: [DailyIntake] = []
+    private var lunches: [DailyIntake] = []
+    private var dinners: [DailyIntake] = []
+    private var snacks: [DailyIntake] = []
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        chartView.chartView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
+        chartView.lineChartView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
+        chartView.dataWeekPerMonth = viewModel.getDataWeekofMonth(in: Date().month)
+        chartView.setupChartData()
+        
+        fetchConsupmtionPerWeek(week: 1)
+    }
+    
+    private func fetchConsupmtionPerWeek(month: Int = Date().month, week: Int) {
+        let formatterWithoutYear = DateFormatter()
+        formatterWithoutYear.dateFormat = "dd MMM"
+        
+        let firstDateOfWeek = formatterWithoutYear.string(from: viewModel.getDataWeekofMonth(in: month)[week]?.first?.date ?? Date())
+        let lastDataOfWeek = formatterWithoutYear.string(from: viewModel.getDataWeekofMonth(in: month)[week]?.last?.date ?? Date())
+        
+        timeLabel.text = "\(firstDateOfWeek) - \(lastDataOfWeek)"
+        
+        chartView.dataWeekPerMonth = viewModel.getDataWeekofMonth(in: month)
+        chartView.setupChartData()
+        
+        summaryView.setupSummary(data: viewModel.getDataWeekofMonth(in: month)[week] ?? [])
+        foodHistory.setupConsumption(data: viewModel.getDataWeekofMonth(in: month)[week] ?? [])
     }
     
     override func viewDidLoad() {
@@ -41,6 +68,22 @@ class HistoryViewController: UIViewController {
         view.endEditing(true)
     }
     
+}
+
+extension HistoryViewController: ChartSeletedDelegate {
+
+    func sendDate(date: (Int, Int)) {
+        fetchConsupmtionPerWeek(month: date.0, week: 1)
+    }
+    
+    func selectedChart(month: Int, week: Int) {
+        fetchConsupmtionPerWeek(month: month, week: week + 1)
+    }
+    
+}
+
+extension HistoryViewController {
+    
     private func setupView() {
         
         scrollView = UIScrollView()
@@ -48,6 +91,8 @@ class HistoryViewController: UIViewController {
         view.addSubview(scrollView)
         
         chartView = ChartView()
+        chartView.delegate = self
+        chartView.viewModel = viewModel
         chartView.layer.cornerRadius = 16
         scrollView.addSubview(chartView)
         
@@ -56,11 +101,10 @@ class HistoryViewController: UIViewController {
         
         timeLabel = UILabel()
         timeLabel.setFont(text: "2 Nov - 8 Nov", size: 22, weight: .bold)
+        
         summaryView = SummaryView()
-        
         indicator = IndicatorLabelView()
-        
-        foodHistory = FoodHistory()
+        foodHistory = FoodHistoryTableView()
         
         scrollView.addSubview(timeLabel)
         scrollView.addSubview(satFatLegend)
@@ -118,4 +162,3 @@ class HistoryViewController: UIViewController {
     }
     
 }
-

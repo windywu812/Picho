@@ -33,7 +33,7 @@ class IndicatorLabelView: UIView {
         greenLabel.setFont(text: "Within ±10% of allowance", size: 13, color: .secondaryLabel)
         
         yellowLabel = UILabel()
-        yellowLabel.setFont(text: "Within 210% of allowance", size: 13, color: .secondaryLabel)
+        yellowLabel.setFont(text: "Within ±10% of allowance", size: 13, color: .secondaryLabel)
         
         redLabel = UILabel()
         redLabel.setFont(text: "Within ±30% of allowance", size: 13, color: .secondaryLabel)
