@@ -160,10 +160,7 @@ extension WaterViewController: UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) as? WaterCell {
             if cell.image == UIImage(named: "glass_fill") {
-                cell.image = UIImage(named: "glass_empty")
-                totalWater -= 1
-                waterAmount.text = "\(totalWater) Cups"
-                waterProgress.setProgress(progress: totalWater)
+                cell.isUserInteractionEnabled = false
                 
             } else {
                 HealthKitService.shared.addData(sugar: Double(1) , date: Date(), type: .dietaryWater, unit: HKUnit.cupUS())
