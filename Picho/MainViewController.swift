@@ -5,6 +5,8 @@
 //  Created by Muhammad Rasyid khaikal on 02/11/20.
 //
 
+
+
 import UIKit
 import HealthKit
 
@@ -25,11 +27,15 @@ class MainViewController: UIViewController {
     private var calorieLeft : Double = 0.0
     private var satFatLeft : Double = 0.0
     private var sugarLeft : Double = 0.0
+    private var totalStep : Double = 0.0
+    private var totalWater : Double = 0.0
     
     private let age = Double(UserDefaultService.age)
     private let weight = Double(UserDefaultService.weight)
     private let height = Double(UserDefaultService.height)
   
+   
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
  
@@ -44,7 +50,7 @@ class MainViewController: UIViewController {
         
         checkUser()
         countCalorie()
-
+      
         setupScrollView()
         setupMainProgress()
         setupPichoCard()
@@ -65,7 +71,6 @@ class MainViewController: UIViewController {
     private func passData() {
         mainProgressView.sugarProgress.animate(value: Float(sugarLeft), total: Float(sugarIntake))
         mainProgressView.satFatProgress.animate(value: Float(satFatLeft), total: Float(saturatedFatIntake))
-        
         mainProgressView.calorieProgress.animate(value: Float(calorieLeft), total: Float(calorieIntake))
         
         mainProgressView.setupView(
@@ -100,6 +105,12 @@ class MainViewController: UIViewController {
             HealthKitService.shared.fetchSugar { (totalSugar) in
                 self.sugarLeft = self.sugarIntake - totalSugar
             }
+            HealthKitService.shared.fetchWater { (water) in
+                self.totalWater = water
+            }
+            HealthKitService.shared.fetchActivity { (step) in
+                self.totalStep = step
+            }
         } else {
             CoreDataService.shared.getDailyIntake { (intakes) in
                 let calorie = intakes.map { $0.calorie }
@@ -110,35 +121,49 @@ class MainViewController: UIViewController {
                 self.satFatLeft = self.saturatedFatIntake - satFat.reduce(0.0, +)
                 self.sugarLeft = self.sugarIntake - sugar.reduce(0.0, +)
             }
+            setupActivity()
         }
     }
-    
     private func setupGesture() {
         let tapActivity = UITapGestureRecognizer(target: self, action: #selector(handleActivity))
+        activityCardView.isUserInteractionEnabled = true
         activityCardView.addGestureRecognizer(tapActivity)
         
         let tapWater = UITapGestureRecognizer(target: self, action: #selector(handleWater))
+        waterCardView.isUserInteractionEnabled = true
         waterCardView.addGestureRecognizer(tapWater)
     }
     
     @objc private func handleActivity() {
-        let vc = UINavigationController(rootViewController: ActivityViewController())
-        navigationController?.present(vc, animated: true, completion: nil)
+        let vc = ActivityCard()
+        vc.delegate = self
+        
+        let navController = UINavigationController(rootViewController: ActivityViewController())
+        navigationController?.present(navController, animated: true)
     }
     
     @objc private func handleWater() {
-        let vc = UINavigationController(rootViewController: WaterViewController())
-        navigationController?.present(vc, animated: true, completion: nil)
+        let vc = WaterViewController()
+        vc.delegate = self
+        
+        let navController = UINavigationController(rootViewController: vc)
+        navigationController?.present(navController, animated: true)
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
 }
+  
 
 // MARK: Setup View
-extension MainViewController {
+extension MainViewController : GetDataDelegate , GetDataActivityDelegate {
+    func sendStep(steps: Int) {
+        activityCardView.setupViewActivity(amount: steps)
+    }
+    func sendWater(water: Int) {
+        waterCardView.setupView(amount: water)
+    }
     
     private func setupScrollView() {
         scrollView = UIScrollView()
@@ -182,16 +207,17 @@ extension MainViewController {
     }
     
     private func setupActivity() {
+       
         waterCardView = HorizontalView(
             labelText: "Water",
-            detailText: "💧 8 cups remaining",
+            detailText: "💧 0 cups remaining",
             iconImage: UIImage(),
             background: Color.blue)
         waterCardView.setConstraint(heighAnchorConstant: 46)
-        
+       
         activityCardView = HorizontalView(
             labelText: "Activity",
-            detailText: "🔥 300cal",
+            detailText: "🔥 \(Int(self.totalStep)) Step",
             iconImage: UIImage(),
             background: Color.red)
         activityCardView.setConstraint(heighAnchorConstant: 46)

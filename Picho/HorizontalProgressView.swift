@@ -15,7 +15,7 @@ class HorizontalProgressView: UIView {
     func setProgress(progress: Int) {
         
         guard let rect = rect else { return }
-        let progress = Double(progress) / 1400
+        let progress = Double(progress) / 14
         let progressRect = CGRect(origin: .zero, size: CGSize(width: rect.width * CGFloat(progress), height: rect.height))
         progressLayer.frame = progressRect
     }

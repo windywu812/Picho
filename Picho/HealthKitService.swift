@@ -17,15 +17,13 @@ class HealthKitService {
         HKQuantityType.quantityType(forIdentifier: .dietaryFatSaturated)!,
         HKQuantityType.quantityType(forIdentifier: .dietarySugar)!,
         HKQuantityType.quantityType(forIdentifier: .dietaryEnergyConsumed)!,
-        HKQuantityType.quantityType(forIdentifier: .dietaryWater)!,
-        HKObjectType.quantityType(forIdentifier: .stepCount)!
+        HKQuantityType.quantityType(forIdentifier: .dietaryWater)!
     ]
     private let healthKitTypesToWrite : Set<HKSampleType> = [
         HKQuantityType.quantityType(forIdentifier: .dietaryFatSaturated)!,
         HKQuantityType.quantityType(forIdentifier: .dietarySugar)!,
         HKQuantityType.quantityType(forIdentifier: .dietaryEnergyConsumed)!,
-        HKQuantityType.quantityType(forIdentifier: .dietaryWater)!,
-        HKObjectType.quantityType(forIdentifier: .stepCount)!
+        HKQuantityType.quantityType(forIdentifier: .dietaryWater)!
     ]
     
     func authorization() {
