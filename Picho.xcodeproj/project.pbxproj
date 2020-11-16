@@ -35,7 +35,7 @@
 		239D53C62560F011009112AF /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239D53C52560F011009112AF /* TabBarController.swift */; };
 		23A8C536256233D400D06F5D /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A8C535256233D400D06F5D /* HistoryViewModel.swift */; };
 		23DC2B3B255EB70A00025434 /* FoodHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC2B3A255EB70A00025434 /* FoodHistoryCell.swift */; };
-		23DC2B3E255EB73600025434 /* FoodHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC2B3D255EB73600025434 /* FoodHistory.swift */; };
+		23DC2B3E255EB73600025434 /* FoodHistoryTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC2B3D255EB73600025434 /* FoodHistoryTableView.swift */; };
 		23DC2B41255EB75700025434 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC2B40255EB75700025434 /* HeaderView.swift */; };
 		23FEB9D2255BDA40001EA146 /* FatSecretClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9D1255BDA40001EA146 /* FatSecretClient.swift */; };
 		23FEB9D6255BDA49001EA146 /* FatSecretCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9D5255BDA49001EA146 /* FatSecretCredentials.swift */; };
@@ -126,7 +126,7 @@
 		239D53C52560F011009112AF /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		23A8C535256233D400D06F5D /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
 		23DC2B3A255EB70A00025434 /* FoodHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodHistoryCell.swift; sourceTree = "<group>"; };
-		23DC2B3D255EB73600025434 /* FoodHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodHistory.swift; sourceTree = "<group>"; };
+		23DC2B3D255EB73600025434 /* FoodHistoryTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodHistoryTableView.swift; sourceTree = "<group>"; };
 		23DC2B40255EB75700025434 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		23FEB9D1255BDA40001EA146 /* FatSecretClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FatSecretClient.swift; sourceTree = "<group>"; };
 		23FEB9D5255BDA49001EA146 /* FatSecretCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FatSecretCredentials.swift; sourceTree = "<group>"; };
@@ -212,7 +212,7 @@
 				2339FBEB255E998F00D0ABB3 /* SummaryView.swift */,
 				2339FBEE255E99AE00D0ABB3 /* HorizontalRowView.swift */,
 				2339FBF1255E99C300D0ABB3 /* IndicatorLabelView.swift */,
-				23DC2B3D255EB73600025434 /* FoodHistory.swift */,
+				23DC2B3D255EB73600025434 /* FoodHistoryTableView.swift */,
 				23DC2B3A255EB70A00025434 /* FoodHistoryCell.swift */,
 				23DC2B40255EB75700025434 /* HeaderView.swift */,
 			);
@@ -639,7 +639,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				23DC2B3E255EB73600025434 /* FoodHistory.swift in Sources */,
+				23DC2B3E255EB73600025434 /* FoodHistoryTableView.swift in Sources */,
 				23FEBA5C255BDDB2001EA146 /* FoodInputViewController.swift in Sources */,
 				23A8C536256233D400D06F5D /* HistoryViewModel.swift in Sources */,
 				23414A07255CD36A00E1F48D /* WaterViewController.swift in Sources */,

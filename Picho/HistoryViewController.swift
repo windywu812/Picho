@@ -19,7 +19,7 @@ class HistoryViewController: UIViewController {
     private var timeLabel: UILabel!
     private var summaryView: SummaryView!
     private var indicator: IndicatorLabelView!
-    private var foodHistory: FoodHistory!
+    private var foodHistory: FoodHistoryTableView!
     
     private var breakfasts: [DailyIntake] = []
     private var lunches: [DailyIntake] = []
@@ -104,7 +104,7 @@ extension HistoryViewController {
         
         summaryView = SummaryView()
         indicator = IndicatorLabelView()
-        foodHistory = FoodHistory()
+        foodHistory = FoodHistoryTableView()
         
         scrollView.addSubview(timeLabel)
         scrollView.addSubview(satFatLegend)
