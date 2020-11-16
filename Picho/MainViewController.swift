@@ -11,30 +11,30 @@ import HealthKit
 class MainViewController: UIViewController {
     
     private var scrollView: UIScrollView!
-    
     private var mainProgressView: MainProgressView!
     private var pichoCardView: PichoCardView!
-    
     private var waterCardView: HorizontalView!
     private var activityCardView: HorizontalView!
     private var activityStack: UIStackView!
-    private var calorieIntake : Double = 0.0
-    private var saturatedFatIntake : Double = 0.0
     private var mealTodayView: MealsTodayView!
     
-    let age = Double(UserDefaultService.age)
-    let weight = Double(UserDefaultService.weight)
-    let height = Double(UserDefaultService.height)
-  
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
+    private var calorieIntake : Double = 0.0
+    private var saturatedFatIntake : Double = 0.0
+    private var sugarIntake : Double = 0.0
     
+    private var calorieLeft : Double = 0.0
+    private var satFatLeft : Double = 0.0
+    private var sugarLeft : Double = 0.0
+    
+    private let age = Double(UserDefaultService.age)
+    private let weight = Double(UserDefaultService.weight)
+    private let height = Double(UserDefaultService.height)
+  
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        mainProgressView.calorieProgress.animate(value: 2400, total: 2400)
-        mainProgressView.sugarProgress.animate(value: 36, total: 36)
-        mainProgressView.satFatProgress.animate(value: 25, total: 25)
+ 
+        fetchData()
+        passData()
     }
     
     override func viewDidLoad() {
@@ -42,8 +42,9 @@ class MainViewController: UIViewController {
         
         navigationItem.title = "Today"
         
-        checkUser()
-      
+//        checkUser()
+        countCalorie()
+
         setupScrollView()
         setupMainProgress()
         setupPichoCard()
@@ -60,16 +61,58 @@ class MainViewController: UIViewController {
             present(vc, animated: true)
         }
     }
-    private func countCalorie(){
+    
+    private func passData() {
+        mainProgressView.sugarProgress.animate(value: Float(sugarLeft), total: Float(sugarIntake))
+        mainProgressView.satFatProgress.animate(value: Float(satFatLeft), total: Float(saturatedFatIntake))
+        
+        mainProgressView.calorieProgress.animate(value: Float(calorieLeft), total: Float(calorieIntake))
+        
+        mainProgressView.setupView(
+            totalCalorie: Float(calorieIntake),
+            totalSatFat: Float(saturatedFatIntake),
+            satFatLeftAmount: Float(satFatLeft),
+            totalSugar: Float(sugarIntake),
+            sugarLeftAmount: Float(sugarLeft))
+    }
+    
+    private func countCalorie() {
         if UserDefaultService.gender == "Male" {
             calorieIntake = (10 * weight!) + (6.25 * height!) - (5 * age!) + 5
             saturatedFatIntake = (calorieIntake / 10) / 9
+            sugarIntake = (calorieIntake / 10) / 4
         }
         if UserDefaultService.gender == "Female" {
             calorieIntake = (10 * weight!) + (6.25 * height!) - (5 * age!) - 161
             saturatedFatIntake = (calorieIntake / 10) / 9
+            sugarIntake = (calorieIntake / 10) / 4
         }
     }
+    
+    private func fetchData() {
+        if HealthKitService.shared.checkAuthorization() {
+            HealthKitService.shared.fetchCalorie { (totalCal) in
+                self.calorieLeft = self.calorieIntake - totalCal
+            }
+            HealthKitService.shared.fetchSaturatedFat { (totalFat) in
+                self.satFatLeft = self.saturatedFatIntake - totalFat
+            }
+            HealthKitService.shared.fetchSugar { (totalSugar) in
+                self.sugarLeft = self.sugarIntake - totalSugar
+            }
+        } else {
+            CoreDataService.shared.getDailyIntake { (intakes) in
+                let calorie = intakes.map { $0.calorie }
+                let satFat = intakes.map { $0.saturatedFat }
+                let sugar = intakes.map { $0.sugars }
+                
+                self.calorieLeft = self.calorieIntake - calorie.reduce(0.0, +)
+                self.satFatLeft = self.saturatedFatIntake - satFat.reduce(0.0, +)
+                self.sugarLeft = self.sugarIntake - sugar.reduce(0.0, +)
+            }
+        }
+    }
+    
     private func setupGesture() {
         let tapActivity = UITapGestureRecognizer(target: self, action: #selector(handleActivity))
         activityCardView.addGestureRecognizer(tapActivity)
@@ -88,6 +131,15 @@ class MainViewController: UIViewController {
         navigationController?.present(vc, animated: true, completion: nil)
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+}
+
+// MARK: Setup View
+extension MainViewController {
+    
     private func setupScrollView() {
         scrollView = UIScrollView()
         scrollView.backgroundColor = Color.background
@@ -105,7 +157,7 @@ class MainViewController: UIViewController {
         mainProgressView = MainProgressView()
         mainProgressView.rootView = self
         scrollView.addSubview(mainProgressView)
-        
+            
         mainProgressView.setConstraint(
             topAnchor: scrollView.topAnchor, topAnchorConstant: 16,
             leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
@@ -167,4 +219,3 @@ class MainViewController: UIViewController {
     }
     
 }
-

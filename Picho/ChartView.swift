@@ -8,75 +8,27 @@
 import UIKit
 import Charts
 
+protocol ChartSeletedDelegate {
+    func selectedChart(month: Int, week: Int)
+    func sendDate(date: (Int, Int))
+}
+
 class ChartView: UIView, ChartViewDelegate {
     
-    var chartView: LineChartView!
+    var viewModel: HistoryViewModel?
+    var lineChartView: LineChartView!
     var timeRangeLabel: UITextField!
+    var dataWeekPerMonth: [Int?: [DailyIntake]] = [:]
+    var delegate: ChartSeletedDelegate?
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        setupLabel()
-        setupChart()
-        backgroundColor = .white
-        layer.cornerRadius = 16
-        
-    }
-    
-    @objc private func handleDate(notification: Notification) {
-        let data = notification.object as! (String, Int)
-        print(data)
-    }
-    
-    func setupLabel() {
-        timeRangeLabel = UITextField()
-        timeRangeLabel.text = "November 2020"
-        timeRangeLabel.textColor = Color.green
-        timeRangeLabel.layer.borderWidth = 1
-        timeRangeLabel.layer.borderColor = Color.green.cgColor
-        timeRangeLabel.textAlignment = .center
-        timeRangeLabel.layer.cornerRadius = 8
-        
-        let datePicker = CustomDatePicker()
-        
-        timeRangeLabel.inputView = datePicker
-        NotificationCenter.default.addObserver(self, selector: #selector(handleDate(notification:)), name: .dateChanged, object: nil)
-        addSubview(timeRangeLabel)
-        
-        timeRangeLabel.setConstraint(
-            topAnchor: topAnchor, topAnchorConstant: 16,
-            leadingAnchor: leadingAnchor, leadingAnchorConstant: 16,
-            heighAnchorConstant: 32, widthAnchorConstant: 140)
-    }
-    
-    func setupChart() {
-        chartView = LineChartView()
-        chartView.delegate = self
-        chartView.doubleTapToZoomEnabled = false
-        chartView.legend.enabled = false
-        addSubview(chartView)
-        
-        // Grid
-        chartView.rightAxis.enabled = false
-        chartView.xAxis.labelPosition = .bottom
-        chartView.xAxis.drawGridLinesEnabled = false
-        chartView.xAxis.labelTextColor = UIColor.secondaryLabel
-        chartView.leftAxis.labelTextColor = UIColor.secondaryLabel
-        chartView.xAxis.labelFont = .systemFont(ofSize: 14)
+    private var selectedMonth = Date().month
 
-        // Label
-        chartView.leftAxis.labelFont = .systemFont(ofSize: 14)
-        chartView.leftAxis.gridColor = .clear
-        chartView.leftAxis.axisMinimum = 0
+    func setupChartData() {
         
-        chartView.setConstraint(
-            topAnchor: timeRangeLabel.bottomAnchor, topAnchorConstant: 16,
-            bottomAnchor: bottomAnchor, bottomAnchorConstant: -8,
-            leadingAnchor: leadingAnchor, leadingAnchorConstant: 8,
-            trailingAnchor: trailingAnchor, trailingAnchorConstant: -8)
-        
-        let sugarEntry = (0..<5).map { (i) -> ChartDataEntry in
-            return ChartDataEntry(x: Double(i), y: Double(Int.random(in: 100...500)))
+        let sugarEntry = (0..<dataWeekPerMonth.keys.count).map { (week) -> ChartDataEntry in
+            return ChartDataEntry(
+                x: Double(week),
+                y: Double(dataWeekPerMonth[week + 1]?.getAverage(of: .sugar) ?? 0))
         }
         
         let sugarData = LineChartDataSet(entries: sugarEntry)
@@ -88,8 +40,10 @@ class ChartView: UIView, ChartViewDelegate {
         sugarData.drawValuesEnabled = false
         sugarData.highlightColor = Color.green
         
-        let satFatEntry = (0..<5).map { (i) -> ChartDataEntry in
-            return ChartDataEntry(x: Double(i), y: Double(Int.random(in: 100...500)))
+        let satFatEntry = (0..<dataWeekPerMonth.keys.count).map { (week) -> ChartDataEntry in
+            return ChartDataEntry(
+                x: Double(week),
+                y: Double(dataWeekPerMonth[week + 1]?.getAverage(of: .satFat) ?? 0))
         }
         
         let satFatData = LineChartDataSet(entries: satFatEntry)
@@ -101,16 +55,85 @@ class ChartView: UIView, ChartViewDelegate {
         satFatData.drawValuesEnabled = false
         satFatData.highlightColor = Color.yellow
         
+        let axisValue = (0..<dataWeekPerMonth.keys.count).map { (week) -> String in
+            return "w\(week + 1)"
+        }
+        
         let data: LineChartData = LineChartData(dataSets: [sugarData, satFatData])
-        chartView.data = data
-        chartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: ["1", "2", "3", "4", "5"])
-        chartView.xAxis.axisMinimum = 0
-        chartView.xAxis.granularity = 1
-        chartView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
+        lineChartView.data = data
+        lineChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: axisValue)
+        lineChartView.xAxis.axisMinimum = 0
+        lineChartView.xAxis.granularity = 1
+    }
+  
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        setupLabel()
+        setupChart()
+        backgroundColor = .white
+        layer.cornerRadius = 16
+    }
+    
+    func setupLabel() {
+        timeRangeLabel = UITextField()
+        timeRangeLabel.text = "\(Date().convertIntToMonth(month: Date().month)) \(Date().year)"
+        timeRangeLabel.textColor = Color.green
+        timeRangeLabel.layer.borderWidth = 1
+        timeRangeLabel.layer.borderColor = Color.green.cgColor
+        timeRangeLabel.textAlignment = .center
+        timeRangeLabel.layer.cornerRadius = 8
+        
+        let datePicker = CustomDatePicker()
+        timeRangeLabel.inputView = datePicker
+        NotificationCenter.default.addObserver(self, selector: #selector(handleDate(notification:)), name: .dateChanged, object: nil)
+        addSubview(timeRangeLabel)
+        
+        timeRangeLabel.setConstraint(
+            topAnchor: topAnchor, topAnchorConstant: 16,
+            leadingAnchor: leadingAnchor, leadingAnchorConstant: 16,
+            heighAnchorConstant: 32, widthAnchorConstant: 140)
+    }
+    
+    func setupChart() {
+        lineChartView = LineChartView()
+        lineChartView.delegate = self
+        lineChartView.doubleTapToZoomEnabled = false
+        lineChartView.legend.enabled = false
+        addSubview(lineChartView)
+        
+        // Grid
+        lineChartView.rightAxis.enabled = false
+        lineChartView.xAxis.labelPosition = .bottom
+        lineChartView.xAxis.drawGridLinesEnabled = false
+        lineChartView.xAxis.labelTextColor = UIColor.secondaryLabel
+        lineChartView.leftAxis.labelTextColor = UIColor.secondaryLabel
+        lineChartView.xAxis.labelFont = .systemFont(ofSize: 14)
+
+        // Label
+        lineChartView.leftAxis.labelFont = .systemFont(ofSize: 14)
+        lineChartView.leftAxis.gridColor = .clear
+        lineChartView.leftAxis.axisMinimum = 0
+        
+        lineChartView.setConstraint(
+            topAnchor: timeRangeLabel.bottomAnchor, topAnchorConstant: 16,
+            bottomAnchor: bottomAnchor, bottomAnchorConstant: -8,
+            leadingAnchor: leadingAnchor, leadingAnchorConstant: 8,
+            trailingAnchor: trailingAnchor, trailingAnchorConstant: -8)
+    }
+    
+    @objc private func handleDate(notification: Notification) {
+        let data = notification.object as! (String, Int)
+        
+        timeRangeLabel.text = "\(data.0) \(data.1)"
+        delegate?.sendDate(date: (data.0.convertIntToMonth(), data.1))
+        
+        selectedMonth = data.0.convertIntToMonth()
     }
     
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
-        print("Tap")
+
+        delegate?.selectedChart(month: selectedMonth, week: Int(entry.x))
     }
     
     required init?(coder: NSCoder) {
@@ -123,6 +146,7 @@ class CustomDatePicker: UIPickerView {
     
     private var months: [String] = []
     private var years: [Int] = []
+    private var date: (String, Int) = ("January", 2020)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -147,11 +171,13 @@ extension CustomDatePicker: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
-        let date: (String, Int) = (months[row], years[row])
-        
-        DispatchQueue.main.async {
-            NotificationCenter.default.post(name: .dateChanged, object: date)
+        if component == 0 {
+            date.0 = months[row]
+        } else {
+            date.1 = years[row]
         }
+        
+        NotificationCenter.default.post(name: .dateChanged, object: date)
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

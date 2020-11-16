@@ -21,7 +21,7 @@ extension Date {
         calendar.timeZone = NSTimeZone(forSecondsFromGMT: 0) as TimeZone
         return calendar.startOfDay(for: self)
     }
-
+    
     func endDate() -> Date {
         var components = DateComponents()
         components.day = 1
@@ -47,6 +47,67 @@ extension Date {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         return dateFormatter.string(from: date)
+    }
+    
+    var year: Int {
+        return Calendar.current.component(.year, from: self)
+    }
+    
+    var month: Int {
+        return Calendar.current.component(.month, from: self)
+    }
+    
+    var weekOfMonth: Int {
+        return Calendar.current.component(.weekOfMonth, from: self)
+    }
+    
+    var startOfDay: Date {
+        return Calendar.current.startOfDay(for: self)
+    }
+    
+    var endOfDay: Date {
+        var component = DateComponents()
+        component.day = 1
+        component.second = -1
+        
+        return Calendar.current.date(byAdding: component, to: Date().startOfDay)!
+    }
+    
+    func add(_ x: Int) -> Date {
+        let cal = Calendar.current
+        
+        return cal.date(byAdding: .day, value: x, to: Date())!
+    }
+    
+    func convertIntToMonth(month: Int) -> String {
+        switch month {
+        case 1:
+            return "January"
+        case 2:
+            return "February"
+        case 3:
+            return "March"
+        case 4:
+            return "April"
+        case 5:
+            return "May"
+        case 6:
+            return "June"
+        case 7:
+            return "July"
+        case 8:
+            return "August"
+        case 9:
+            return "September"
+        case 10:
+            return "October"
+        case 11:
+            return "November"
+        case 12:
+            return "December"
+        default:
+            return ""
+        }
     }
     
 }
