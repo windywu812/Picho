@@ -34,13 +34,13 @@ class MainViewController: UIViewController {
     private let weight = Double(UserDefaultService.weight)
     private let height = Double(UserDefaultService.height)
   
-   
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
  
         fetchData()
         passData()
+        waterCardView.setupViewWater(amount: Int(totalWater))
+        activityCardView.setupViewActivity(amount: Int(totalStep))
     }
     
     override func viewDidLoad() {
@@ -50,13 +50,13 @@ class MainViewController: UIViewController {
         
         checkUser()
         countCalorie()
+        fetchData()
       
         setupScrollView()
         setupMainProgress()
         setupPichoCard()
         setupActivity()
         setupMealTodayView()
-        setupGesture()
     }
     
     private func checkUser() {
@@ -121,33 +121,19 @@ class MainViewController: UIViewController {
                 self.satFatLeft = self.saturatedFatIntake - satFat.reduce(0.0, +)
                 self.sugarLeft = self.sugarIntake - sugar.reduce(0.0, +)
             }
-            setupActivity()
         }
     }
-    private func setupGesture() {
-        let tapActivity = UITapGestureRecognizer(target: self, action: #selector(handleActivity))
-        activityCardView.isUserInteractionEnabled = true
-        activityCardView.addGestureRecognizer(tapActivity)
-        
-        let tapWater = UITapGestureRecognizer(target: self, action: #selector(handleWater))
-        waterCardView.isUserInteractionEnabled = true
-        waterCardView.addGestureRecognizer(tapWater)
+      
+    @objc private func handleWater(sender: UITapGestureRecognizer) {
+        let vc =  WaterViewController()
+        vc.delegate = self
+        navigationController?.present(UINavigationController(rootViewController: vc), animated: true)
     }
     
-    @objc private func handleActivity() {
-        let vc = ActivityCard()
-        vc.delegate = self
-        
-        let navController = UINavigationController(rootViewController: ActivityViewController())
-        navigationController?.present(navController, animated: true)
-    }
-    
-    @objc private func handleWater() {
-        let vc = WaterViewController()
-        vc.delegate = self
-        
-        let navController = UINavigationController(rootViewController: vc)
-        navigationController?.present(navController, animated: true)
+    @objc private func handleActivity(sender: UITapGestureRecognizer) {
+        let activity = ActivityCard()
+        activity.delegate = self
+        navigationController?.present(UINavigationController(rootViewController: ActivityViewController()), animated: true)
     }
     
     deinit {
@@ -158,11 +144,12 @@ class MainViewController: UIViewController {
 
 // MARK: Setup View
 extension MainViewController : GetDataDelegate , GetDataActivityDelegate {
+    
     func sendStep(steps: Int) {
         activityCardView.setupViewActivity(amount: steps)
     }
     func sendWater(water: Int) {
-        waterCardView.setupView(amount: water)
+        waterCardView.setupViewWater(amount: water)
     }
     
     private func setupScrollView() {
@@ -213,6 +200,8 @@ extension MainViewController : GetDataDelegate , GetDataActivityDelegate {
             detailText: "💧 0 cups remaining",
             iconImage: UIImage(),
             background: Color.blue)
+        let tapWater = UITapGestureRecognizer(target: self, action: #selector(handleWater(sender:)))
+        waterCardView.addGestureRecognizer(tapWater)
         waterCardView.setConstraint(heighAnchorConstant: 46)
        
         activityCardView = HorizontalView(
@@ -221,6 +210,8 @@ extension MainViewController : GetDataDelegate , GetDataActivityDelegate {
             iconImage: UIImage(),
             background: Color.red)
         activityCardView.setConstraint(heighAnchorConstant: 46)
+        let tapActivity = UITapGestureRecognizer(target: self, action: #selector(handleActivity(sender:)))
+        activityCardView.addGestureRecognizer(tapActivity)
         
         activityStack = UIStackView(arrangedSubviews: [waterCardView, activityCardView])
         activityStack.spacing = 16

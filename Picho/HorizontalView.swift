@@ -13,7 +13,7 @@ class HorizontalView: UIView {
     private let detail: UILabel
     private let icon: UIImageView
     
-    func setupView(amount: Int) {
+    func setupViewWater(amount: Int) {
         DispatchQueue.main.async {
             let remaining = 15 - amount
             self.detail.text = "💧 \(remaining) cups remaining"

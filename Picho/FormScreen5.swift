@@ -118,6 +118,7 @@ class FormScreen5: UIViewController {
         let vc = TabBarController()
         vc.modalPresentationStyle = .fullScreen
         UserDefaultService.hasLaunched = true
+        HealthKitService.shared.authorization()
         present(vc, animated: true, completion: nil)
  
         return
