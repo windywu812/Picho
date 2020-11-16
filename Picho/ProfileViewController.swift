@@ -10,7 +10,7 @@ import UIKit
 class ProfileViewController: UIViewController {
     
     private var imageProfile: UIImageView!
-    private var editButton: UIButton!
+    private var nameLabel: UILabel!
     private var tableView: UITableView!
     private var scrollView: UIScrollView!
     
@@ -20,15 +20,25 @@ class ProfileViewController: UIViewController {
         super.viewWillAppear(true)
         
         viewModel.fetchUserDefault()
+        if viewModel.getPic(forKey: UserDefaultService.photoProfileKey) == nil {
+            imageProfile.image = UIImage(systemName: "person.circle")
+        } else {
+            imageProfile.image = viewModel.getPic(forKey: UserDefaultService.photoProfileKey)
+        }
+        tableView.reloadData()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.title = "Profile"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(handleEdit))
         setupView()
         setupTableView()
-        view.backgroundColor = Color.background
+    }
+    
+    @objc private func handleEdit() {
+        navigationController?.pushViewController(ProfileEditViewController(), animated: true)
     }
     
     private func setupView() {
@@ -44,11 +54,7 @@ class ProfileViewController: UIViewController {
             trailingAnchor: view.safeAreaLayoutGuide.trailingAnchor)
         
         imageProfile = UIImageView()
-        //        imageProfile.image = UIImage(named: viewModel.imageProfile)
-        imageProfile.layer.borderWidth = 5
-        imageProfile.layer.borderColor = Color.green.cgColor
-        imageProfile.backgroundColor = .secondaryLabel
-        imageProfile.layer.cornerRadius = 60
+       
         scrollView.addSubview(imageProfile)
         
         imageProfile.setConstraint(
@@ -56,13 +62,14 @@ class ProfileViewController: UIViewController {
             centerXAnchor: view.centerXAnchor,
             heighAnchorConstant: 120, widthAnchorConstant: 120)
         
-        editButton = UIButton(type: .system)
-        editButton.setAttributedTitle(NSAttributedString.bodyFont(text: "Edit", color: Color.green), for: .normal)
-        editButton.layer.cornerRadius = 8
-        editButton.backgroundColor = Color.background
-        scrollView.addSubview(editButton)
+        nameLabel = UILabel()
+        nameLabel.setFont(text: viewModel.fullName, size: 24, weight: .bold)
+        nameLabel.textAlignment = .center
+        nameLabel.layer.cornerRadius = 8
+        nameLabel.backgroundColor = Color.background
+        scrollView.addSubview(nameLabel)
         
-        editButton.setConstraint(
+        nameLabel.setConstraint(
             topAnchor: imageProfile.bottomAnchor, topAnchorConstant: 32,
             centerXAnchor: view.centerXAnchor,
             heighAnchorConstant: 35, widthAnchorConstant: 106)
@@ -74,6 +81,7 @@ class ProfileViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.isScrollEnabled = false
+        tableView.backgroundColor = Color.background
         scrollView.addSubview(tableView)
         
         let safeArea = view.safeAreaLayoutGuide
@@ -82,10 +90,10 @@ class ProfileViewController: UIViewController {
         for section in 0..<tableView.numberOfSections {
             totalRow += tableView.numberOfRows(inSection: section)
         }
-        let totalHeight = 40 * tableView.numberOfSections + totalRow * 51
+        let totalHeight = 40 * tableView.numberOfSections + totalRow * 44
                 
         tableView.setConstraint(
-            topAnchor: editButton.bottomAnchor, topAnchorConstant: 0,
+            topAnchor: nameLabel.bottomAnchor, topAnchorConstant: 0,
             bottomAnchor: scrollView.bottomAnchor, bottomAnchorConstant: 0,
             leadingAnchor: safeArea.leadingAnchor, leadingAnchorConstant: 0,
             trailingAnchor: safeArea.trailingAnchor, trailingAnchorConstant: 0,
@@ -101,16 +109,14 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return 1
-        case 1:
             return 4
-        case 2:
+        case 1:
             return 2
         default:
             return 0
@@ -123,11 +129,16 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch indexPath.section {
         case 0:
-            cell.textLabel?.text = viewModel.fullName[indexPath.row]
-        case 1:
             cell.textLabel?.text = viewModel.secondSectionLabel[indexPath.row]
+            if indexPath.row == 2 {
+                cell.detailTextLabel?.text = "\(viewModel.secondSection[2]) cm"
+                break
+            } else if indexPath.row == 3 {
+                cell.detailTextLabel?.text = "\(viewModel.secondSection[3]) kg"
+                break
+            }
             cell.detailTextLabel?.text = viewModel.secondSection[indexPath.row]
-        case 2:
+        case 1:
             cell.textLabel?.text = viewModel.thirdSectionLabel[indexPath.row]
             if indexPath.row == 0 {
                 let control = UISwitch()
@@ -145,7 +156,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 2 {
+        if indexPath.section == 1 {
             if indexPath.row == 1 {
                 let vc = NotificationViewController()
                 navigationController?.pushViewController(vc, animated: true)

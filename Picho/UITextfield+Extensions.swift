@@ -43,17 +43,31 @@ extension UITextField {
         }
     }
     
-    func addStyle() {
+    func addStyle(tag: Int, text: String, datePicker: UIDatePicker) {
+        self.tag = tag
+        self.text = text
         self.layer.cornerRadius = 5.0
         self.layer.borderColor = Color.green.cgColor
         self.layer.borderWidth = 2.0
+        self.textAlignment = .center
+        self.inputView = datePicker
         self.addPadding(padding: .equalSpacing(5))
     }
+    
+    func removeBorder(tag: Int, text: String) {
+        self.tag = tag
+        self.text = text
+        self.textAlignment = .right
+        self.borderStyle = .none
+        self.keyboardType = .numberPad
+    }
+    
 }
 
 extension UIDatePicker {
     
-    func setupStyle() {
+    func setupStyle(tag: Int) {
+        self.tag = tag
         if #available(iOS 13.4, *) {
             self.preferredDatePickerStyle = .wheels
             self.datePickerMode = .time

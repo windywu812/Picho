@@ -9,13 +9,6 @@ import Foundation
 
 extension Date {
     
-    func convertToString() -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "EEEE, dd MMM yyyy"
-        
-        return formatter.string(from: self)
-    }
-    
     func startOfTheDay() -> Date {
         var calendar = Calendar.current
         calendar.timeZone = NSTimeZone(forSecondsFromGMT: 0) as TimeZone
@@ -47,6 +40,12 @@ extension Date {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         return dateFormatter.string(from: date)
+    }
+    
+    func changeToString() -> String {
+        let dateFormat = DateFormatter()
+        dateFormat.dateFormat = "HH:mm"
+        return dateFormat.string(from: self)
     }
     
 }
