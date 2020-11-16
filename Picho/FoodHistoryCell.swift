@@ -44,19 +44,16 @@ class FoodHistoryCell: UITableViewCell {
         icon = UIImageView()
         
         foodNameLabel = UILabel()
-        foodNameLabel.text = "Nasi Lemak"
         
         calorieLabel = UILabel()
-        calorieLabel.text = "432 cal"
         
         satFatLabel = UILabel()
-        satFatLabel.setFont(text: "Saturated Fat - 9g", color: .secondaryLabel)
+        satFatLabel.textColor = .secondaryLabel
         
         sugarLabel = UILabel()
-        sugarLabel.setFont(text: "Sugar - 9g", color: .secondaryLabel)
+        sugarLabel.textColor = .secondaryLabel
         
         howOftenLabel = UILabel()
-        howOftenLabel.text = "7 times"
         
         let titleStack = UIStackView(arrangedSubviews: [icon, foodNameLabel])
         titleStack.spacing = 4

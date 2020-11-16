@@ -28,7 +28,7 @@ class ChartView: UIView, ChartViewDelegate {
         let sugarEntry = (0..<dataWeekPerMonth.keys.count).map { (week) -> ChartDataEntry in
             return ChartDataEntry(
                 x: Double(week),
-                y: Double(dataWeekPerMonth[week + 1]?.getAverageSugar() ?? 0))
+                y: Double(dataWeekPerMonth[week + 1]?.getAverage(of: .sugar) ?? 0))
         }
         
         let sugarData = LineChartDataSet(entries: sugarEntry)
@@ -43,7 +43,7 @@ class ChartView: UIView, ChartViewDelegate {
         let satFatEntry = (0..<dataWeekPerMonth.keys.count).map { (week) -> ChartDataEntry in
             return ChartDataEntry(
                 x: Double(week),
-                y: Double(dataWeekPerMonth[week + 1]?.getAverageSatFat() ?? 0))
+                y: Double(dataWeekPerMonth[week + 1]?.getAverage(of: .satFat) ?? 0))
         }
         
         let satFatData = LineChartDataSet(entries: satFatEntry)

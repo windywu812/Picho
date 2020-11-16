@@ -16,15 +16,15 @@ class SummaryView: UIView {
     func setupSummary(data: [DailyIntake]) {
         averageCalorie.setupView(
             labelText: "Average Calories",
-            amountText: data.getAverageCalorie(),
+            amountText: data.getAverage(of: .calorie),
             icon: "green_indicator")
         averageSugar.setupView(
             labelText: "Average Sugar",
-            amountText: data.getAverageSugar(),
+            amountText: data.getAverage(of: .sugar),
             icon: "red_indicator")
         averageSatFat.setupView(
             labelText: "Average Saturated Fat",
-            amountText: data.getAverageSatFat(),
+            amountText: data.getAverage(of: .satFat),
             icon: "yellow_indicator")
     }
     
