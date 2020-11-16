@@ -8,7 +8,42 @@
 import UIKit
 import Charts
 
+class HistoryViewModel {
+    
+    var allHistoryData: [Int: [DailyIntake]] = [:]
+    
+    init() {
+        fetchData()
+    }
+    
+    func fetchData() {
+        CoreDataService.shared.getDailyIntake { [weak self] (intakes) in
+            self?.allHistoryData = Dictionary(grouping: intakes, by: { ($0.date?.month ?? 0) })
+        }
+    }
+    
+    func getDataWeekofMonth(in month: Int) -> [Int?: [DailyIntake]] {
+        /// Get data in one month
+        let dataByMonth = allHistoryData[month]
+        /// Get data in all weeks in one month
+        let groupMyWeek = Dictionary(grouping: dataByMonth ?? [], by: { $0.date?.weekOfMonth })
+        return groupMyWeek
+    }
+    
+    // MARK: Dummy Data Sets
+//        for i in -90...0 {
+//            CoreDataService.shared.addDailyIntake(id: UUID(), foodId: "FoodId", name: "FoodName", description: "FoodDescription", calorie: Double(Int.random(in: 0...300)), saturatedFat: Double(Int.random(in: 0...300)), sugars: Double(Int.random(in: 0...300)), date: Date().add(i), time: .breakfast)
+//            CoreDataService.shared.addDailyIntake(id: UUID(), foodId: "FoodId", name: "FoodName", description: "FoodDescription", calorie: Double(Int.random(in: 0...300)), saturatedFat: Double(Int.random(in: 0...300)), sugars: Double(Int.random(in: 0...300)), date: Date().add(i), time: .lunch)
+//            CoreDataService.shared.addDailyIntake(id: UUID(), foodId: "FoodId", name: "FoodName", description: "FoodDescription", calorie: Double(Int.random(in: 0...300)), saturatedFat: Double(Int.random(in: 0...300)), sugars: Double(Int.random(in: 0...300)), date: Date().add(i), time: .dinner)
+//            CoreDataService.shared.addDailyIntake(id: UUID(), foodId: "FoodId", name: "FoodName", description: "FoodDescription", calorie: Double(Int.random(in: 0...300)), saturatedFat: Double(Int.random(in: 0...300)), sugars: Double(Int.random(in: 0...300)), date: Date().add(i), time: .snacks)
+//        }
+    
+    
+}
+
 class HistoryViewController: UIViewController {
+    
+    private let viewModel = HistoryViewModel()
     
     private var scrollView: UIScrollView!
     private var chartView: ChartView!
@@ -27,8 +62,23 @@ class HistoryViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        fetchConsumption()
-        chartView.chartView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
+        chartView.lineChartView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
+        chartView.dataWeekPerMonth = viewModel.getDataWeekofMonth(in: Date().month)
+        chartView.setupChartData()
+        
+        fetchConsupmtionPerWeek(week: 1)
+    }
+    
+    private func fetchConsupmtionPerWeek(month: Int = Date().month, week: Int) {
+        let formatterWithoutYear = DateFormatter()
+        formatterWithoutYear.dateFormat = "dd MMM"
+        
+        let firstDateOfWeek = formatterWithoutYear.string(from: viewModel.getDataWeekofMonth(in: 10)[week]?.first?.date ?? Date())
+        let lastDataOfWeek = formatterWithoutYear.string(from: viewModel.getDataWeekofMonth(in: 10)[week]?.last?.date ?? Date())
+        
+        timeLabel.text = "\(firstDateOfWeek) - \(lastDataOfWeek)"
+        
+        summaryView.setupSummary(data: viewModel.getDataWeekofMonth(in: month)[week] ?? [])
     }
     
     override func viewDidLoad() {
@@ -42,52 +92,7 @@ class HistoryViewController: UIViewController {
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleDismiss))
         view.addGestureRecognizer(tap)
     }
-    
-    @objc private func handleDismiss() {
-        view.endEditing(true)
-    }
-    
-    private func fetchConsumption() {
-//        CoreDataService.shared.getDailyIntake(time: .breakfast) { intakes in
-//            intakes
-//        }
-        CoreDataService.shared.getDailyIntake(time: .breakfast) { intakes in
-            let groupedIntakes = Dictionary(grouping: intakes) { intake -> String? in
-                return intake.date?.convertToString()
-            }
 
-//            let mappedCalories = groupedIntakes.mapValues { intakes in
-//                intakes.map { intake in
-//                    intake.calorie
-//                }
-//            }
-//
-//            guard let mappedCalorie = mappedCalories.values.first else {
-//                return
-//            }
-//
-//            let sumCalorie = mappedCalorie.reduce(0.0, +)
-//            let totalCalorie = mappedCalorie.count
-//            let calorie = sumCalorie / Double(totalCalorie)
-//            print(calorie)
-            
-            let mappedCalories = groupedIntakes.mapValues { intakes in
-                intakes.map { intake in
-                    intake.name
-                }
-            }
-            
-            guard let mappedCalorie = mappedCalories.values.first else {
-                return
-            }
-            
-            let array = mappedCalorie.map { ($0, 1) }
-            let counts = Dictionary(array, uniquingKeysWith: +)
-            
-            print(counts.first)
-        }
-    }
-    
     private func setupView() {
         
         scrollView = UIScrollView()
@@ -95,6 +100,8 @@ class HistoryViewController: UIViewController {
         view.addSubview(scrollView)
         
         chartView = ChartView()
+        chartView.delegate = self
+        chartView.viewModel = viewModel
         chartView.layer.cornerRadius = 16
         scrollView.addSubview(chartView)
         
@@ -103,10 +110,9 @@ class HistoryViewController: UIViewController {
         
         timeLabel = UILabel()
         timeLabel.setFont(text: "2 Nov - 8 Nov", size: 22, weight: .bold)
+        
         summaryView = SummaryView()
-        
         indicator = IndicatorLabelView()
-        
         foodHistory = FoodHistory()
         
         scrollView.addSubview(timeLabel)
@@ -162,6 +168,18 @@ class HistoryViewController: UIViewController {
             bottomAnchor: scrollView.bottomAnchor, bottomAnchorConstant: -24,
             leadingAnchor: view.leadingAnchor,
             trailingAnchor: view.trailingAnchor)
+    }
+    
+    @objc private func handleDismiss() {
+        view.endEditing(true)
+    }
+    
+}
+
+extension HistoryViewController: ChartSeletedDelegate {
+    
+    func selectedChart(week: Int) {
+        fetchConsupmtionPerWeek(week: week + 1)
     }
     
 }

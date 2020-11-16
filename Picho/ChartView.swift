@@ -8,11 +8,61 @@
 import UIKit
 import Charts
 
+protocol ChartSeletedDelegate {
+    func selectedChart(week: Int)
+}
+
 class ChartView: UIView, ChartViewDelegate {
     
-    var chartView: LineChartView!
+    var viewModel: HistoryViewModel?
+    var lineChartView: LineChartView!
     var timeRangeLabel: UITextField!
+    var dataWeekPerMonth: [Int?: [DailyIntake]] = [:]
+    var delegate: ChartSeletedDelegate?
     
+    func setupChartData() {
+        
+        let sugarEntry = (0..<dataWeekPerMonth.keys.count).map { (week) -> ChartDataEntry in
+            return ChartDataEntry(
+                x: Double(week),
+                y: Double(dataWeekPerMonth[week + 1]?.getAverageSugar() ?? 0))
+        }
+        
+        let sugarData = LineChartDataSet(entries: sugarEntry)
+        sugarData.setColor(Color.green)
+        sugarData.lineWidth = 2
+        sugarData.circleRadius = 5
+        sugarData.circleColors = [Color.green]
+        sugarData.drawCircleHoleEnabled = false
+        sugarData.drawValuesEnabled = false
+        sugarData.highlightColor = Color.green
+        
+        let satFatEntry = (0..<dataWeekPerMonth.keys.count).map { (week) -> ChartDataEntry in
+            return ChartDataEntry(
+                x: Double(week),
+                y: Double(dataWeekPerMonth[week + 1]?.getAverageSatFat() ?? 0))
+        }
+        
+        let satFatData = LineChartDataSet(entries: satFatEntry)
+        satFatData.setColor(Color.yellow)
+        satFatData.lineWidth = 2
+        satFatData.circleRadius = 5
+        satFatData.circleColors = [Color.yellow]
+        satFatData.drawCircleHoleEnabled = false
+        satFatData.drawValuesEnabled = false
+        satFatData.highlightColor = Color.yellow
+        
+        let axisValue = (0..<dataWeekPerMonth.keys.count).map { (week) -> String in
+            return "\(week + 1)w"
+        }
+        
+        let data: LineChartData = LineChartData(dataSets: [sugarData, satFatData])
+        lineChartView.data = data
+        lineChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: axisValue)
+        lineChartView.xAxis.axisMinimum = 0
+        lineChartView.xAxis.granularity = 1
+    }
+  
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -20,12 +70,6 @@ class ChartView: UIView, ChartViewDelegate {
         setupChart()
         backgroundColor = .white
         layer.cornerRadius = 16
-        
-    }
-    
-    @objc private func handleDate(notification: Notification) {
-        let data = notification.object as! (String, Int)
-        print(data)
     }
     
     func setupLabel() {
@@ -50,67 +94,40 @@ class ChartView: UIView, ChartViewDelegate {
     }
     
     func setupChart() {
-        chartView = LineChartView()
-        chartView.delegate = self
-        chartView.doubleTapToZoomEnabled = false
-        chartView.legend.enabled = false
-        addSubview(chartView)
+        lineChartView = LineChartView()
+        lineChartView.delegate = self
+        lineChartView.doubleTapToZoomEnabled = false
+        lineChartView.legend.enabled = false
+        addSubview(lineChartView)
         
         // Grid
-        chartView.rightAxis.enabled = false
-        chartView.xAxis.labelPosition = .bottom
-        chartView.xAxis.drawGridLinesEnabled = false
-        chartView.xAxis.labelTextColor = UIColor.secondaryLabel
-        chartView.leftAxis.labelTextColor = UIColor.secondaryLabel
-        chartView.xAxis.labelFont = .systemFont(ofSize: 14)
+        lineChartView.rightAxis.enabled = false
+        lineChartView.xAxis.labelPosition = .bottom
+        lineChartView.xAxis.drawGridLinesEnabled = false
+        lineChartView.xAxis.labelTextColor = UIColor.secondaryLabel
+        lineChartView.leftAxis.labelTextColor = UIColor.secondaryLabel
+        lineChartView.xAxis.labelFont = .systemFont(ofSize: 14)
 
         // Label
-        chartView.leftAxis.labelFont = .systemFont(ofSize: 14)
-        chartView.leftAxis.gridColor = .clear
-        chartView.leftAxis.axisMinimum = 0
+        lineChartView.leftAxis.labelFont = .systemFont(ofSize: 14)
+        lineChartView.leftAxis.gridColor = .clear
+        lineChartView.leftAxis.axisMinimum = 0
         
-        chartView.setConstraint(
+        lineChartView.setConstraint(
             topAnchor: timeRangeLabel.bottomAnchor, topAnchorConstant: 16,
             bottomAnchor: bottomAnchor, bottomAnchorConstant: -8,
             leadingAnchor: leadingAnchor, leadingAnchorConstant: 8,
             trailingAnchor: trailingAnchor, trailingAnchorConstant: -8)
-        
-        let sugarEntry = (0..<5).map { (i) -> ChartDataEntry in
-            return ChartDataEntry(x: Double(i), y: Double(Int.random(in: 100...500)))
-        }
-        
-        let sugarData = LineChartDataSet(entries: sugarEntry)
-        sugarData.setColor(Color.green)
-        sugarData.lineWidth = 2
-        sugarData.circleRadius = 5
-        sugarData.circleColors = [Color.green]
-        sugarData.drawCircleHoleEnabled = false
-        sugarData.drawValuesEnabled = false
-        sugarData.highlightColor = Color.green
-        
-        let satFatEntry = (0..<5).map { (i) -> ChartDataEntry in
-            return ChartDataEntry(x: Double(i), y: Double(Int.random(in: 100...500)))
-        }
-        
-        let satFatData = LineChartDataSet(entries: satFatEntry)
-        satFatData.setColor(Color.yellow)
-        satFatData.lineWidth = 2
-        satFatData.circleRadius = 5
-        satFatData.circleColors = [Color.yellow]
-        satFatData.drawCircleHoleEnabled = false
-        satFatData.drawValuesEnabled = false
-        satFatData.highlightColor = Color.yellow
-        
-        let data: LineChartData = LineChartData(dataSets: [sugarData, satFatData])
-        chartView.data = data
-        chartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: ["1", "2", "3", "4", "5"])
-        chartView.xAxis.axisMinimum = 0
-        chartView.xAxis.granularity = 1
-        chartView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
+    }
+    
+    @objc private func handleDate(notification: Notification) {
+        let data = notification.object as! (String, Int)
+        print(data)
     }
     
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
-        print("Tap")
+        print("x: \(entry.x), y: \(entry.y)")
+        delegate?.selectedChart(week: Int(entry.x))
     }
     
     required init?(coder: NSCoder) {

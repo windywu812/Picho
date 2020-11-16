@@ -19,4 +19,36 @@ extension Array {
         return container
     }
     
+    func getAverageCalorie() -> Double {
+        let data = self as! [DailyIntake]
+        
+        var container: Double = 0.0
+        data.forEach { (daily) in
+            container += daily.calorie
+        }
+        
+        return container / Double(data.count)
+    }
+    
+    func getAverageSugar() -> Double {
+        let data = self as! [DailyIntake]
+        
+        var container: Double = 0.0
+        data.forEach { (daily) in
+            container += daily.sugars
+        }
+        
+        return container
+    }
+    
+    func getAverageSatFat() -> Double {
+        let data = self as! [DailyIntake]
+        
+        var container: Double = 0.0
+        data.forEach { (daily) in
+            container += daily.saturatedFat
+        }
+        return container
+    }
+    
 }

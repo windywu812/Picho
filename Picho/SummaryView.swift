@@ -13,6 +13,21 @@ class SummaryView: UIView {
     private var averageSatFat: HorizontalRowView!
     private var averageSugar: HorizontalRowView!
     
+    func setupSummary(data: [DailyIntake]) {
+        averageCalorie.setupView(
+            labelText: "Average Calories",
+            amountText: data.getAverageCalorie(),
+            icon: "green_indicator")
+        averageSugar.setupView(
+            labelText: "Average Sugar",
+            amountText: data.getAverageSugar(),
+            icon: "red_indicator")
+        averageSatFat.setupView(
+            labelText: "Average Saturated Fat",
+            amountText: data.getAverageSatFat(),
+            icon: "yellow_indicator")
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -22,13 +37,8 @@ class SummaryView: UIView {
     
     private func setupView() {
         averageCalorie = HorizontalRowView()
-        averageCalorie.setupView(labelText: "Average Calories", amountText: 2500, icon: "green_indicator")
-        
         averageSatFat = HorizontalRowView()
-        averageSatFat.setupView(labelText: "Average Saturated Fat", amountText: 28, icon: "yellow_indicator")
-        
         averageSugar = HorizontalRowView()
-        averageSugar.setupView(labelText: "Average Sugar", amountText: 53.32, icon: "red_indicator")
     }
     
     private func setupLayout() {
