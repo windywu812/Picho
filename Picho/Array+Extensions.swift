@@ -23,6 +23,47 @@ extension Array {
         return container
     }
     
+    func getHistory() -> [History] {
+        let data = self as! [DailyIntake]
+        let group = data.groupByMax()
+        let groupTimes = data.getMax()
+        var histories: [History] = []
+        for (id, intakes) in group {
+            if let id = id {
+                let name = intakes.getName(by: id)
+                let eatTimes = groupTimes[id] ?? 0
+                let totalCalorie = intakes.getSum(of: .calorie)
+                let totalSatFat = intakes.getSum(of: .satFat)
+                let totalSugar = intakes.getSum(of: .sugar)
+                histories.append(History(foodId: id, foodName: name, eatTimes: eatTimes, totalCalorie: totalCalorie, totalSatFat: totalSatFat, totalSugar: totalSugar))
+            }
+        }
+        return histories
+    }
+    
+    func getSum(of nutrition: Nutrition) -> Double {
+        let data = self as! [DailyIntake]
+        
+        var container: Double = 0.0
+        
+        switch nutrition {
+        case .calorie:
+            data.forEach { (daily) in
+                container += daily.calorie
+            }
+        case .sugar:
+            data.forEach { (daily) in
+                container += daily.sugars
+            }
+        case .satFat:
+            data.forEach { (daily) in
+                container += daily.saturatedFat
+            }
+        }
+        
+        return container 
+    }
+    
     func getAverage(of nutrition: Nutrition) -> Double {
         let data = self as! [DailyIntake]
         
@@ -68,6 +109,12 @@ extension Array {
     func groupById() -> [String?: [DailyIntake]] {
         let data = self as! [DailyIntake]
         return Dictionary(grouping: data) { $0.foodId }
+    }
+    
+    func getName(by id: String) -> String {
+        let data = self as! [DailyIntake]
+        let filtered = data.filter { $0.foodId == id }
+        return filtered.first?.name ?? ""
     }
     
 }

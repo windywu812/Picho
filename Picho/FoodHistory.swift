@@ -9,10 +9,10 @@ import UIKit
 
 class FoodHistory: UITableView {
     
-    private var breakfasts: [DailyIntake] = []
-    private var lunches: [DailyIntake] = []
-    private var dinners: [DailyIntake] = []
-    private var snacks: [DailyIntake] = []
+    private var breakfasts: [History] = []
+    private var lunches: [History] = []
+    private var dinners: [History] = []
+    private var snacks: [History] = []
     
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: .grouped)
@@ -35,14 +35,12 @@ class FoodHistory: UITableView {
     }
     
     func setupConsumption(data: [DailyIntake]) {
-        breakfasts = data.groupByTime(on: .breakfast)
-        lunches = data.groupByTime(on: .lunch)
-        dinners = data.groupByTime(on: .dinner)
-        snacks = data.groupByTime(on: .snacks)
+        breakfasts = data.groupByTime(on: .breakfast).getHistory()
+        lunches = data.groupByTime(on: .lunch).getHistory()
+        dinners = data.groupByTime(on: .dinner).getHistory()
+        snacks = data.groupByTime(on: .snacks).getHistory()
         
-        let breakfastGroup = breakfasts.groupByMax()
-        
-        
+        reloadData()
     }
     
     required init?(coder: NSCoder) {
@@ -60,13 +58,13 @@ extension FoodHistory: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return 3
+            return breakfasts.count + 1
         case 1:
-            return 2
+            return lunches.count + 1
         case 2:
-            return 1
+            return dinners.count + 1
         case 3:
-            return 1
+            return snacks.count + 1
         default:
             return 0
         }
@@ -80,6 +78,8 @@ extension FoodHistory: UITableViewDelegate, UITableViewDataSource {
         case 0:
             if indexPath.row == 0 {
                 cell.setupCell(imageIcon: "breakfast", labelText: "Breakfast", calorie: 431, sugar: 21, satFat: 13, isHead: true)
+            } else {
+                cell.setupCell(labelText: breakfast.foodName, calorie: breakfast.totalCalorie, sugar: breakfast.totalSugar, satFat: breakfast.totalSatFat, isHead: false)
             }
         case 1:
             if indexPath.row == 0 {
@@ -97,9 +97,9 @@ extension FoodHistory: UITableViewDelegate, UITableViewDataSource {
             break
         }
         
-        if indexPath.row != 0 {
-            cell.setupCell(labelText: "Nasi lemak", howOften: 8, calorie: 243, sugar: 33, satFat: 33, isHead: false)
-        }
+//        if indexPath.row != 0 {
+//            cell.setupCell(labelText: "Nasi lemak", howOften: 8, calorie: 243, sugar: 33, satFat: 33, isHead: false)
+//        }
         
         return cell
     }
