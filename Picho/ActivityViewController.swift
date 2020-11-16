@@ -111,7 +111,7 @@ class ActivityCard: UIView {
         addSubview(activityStack)
         
         activityStack.setConstraint(
-            leadingAnchor: layoutMarginsGuide.leadingAnchor, 
+            leadingAnchor: layoutMarginsGuide.leadingAnchor,
             trailingAnchor: layoutMarginsGuide.trailingAnchor,
             centerYAnchor: centerYAnchor)
     }
