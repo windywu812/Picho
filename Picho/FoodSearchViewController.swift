@@ -88,6 +88,7 @@ class FoodSearchViewController: UIViewController {
                 NetworkService.shared.searchFood(keyword: text) { (result) in
                     switch result {
                     case .success(let foods):
+//                        print(foods.first?.servings)
                         self.foods = foods
                     case .failure(let err):
                         self.foods = []
