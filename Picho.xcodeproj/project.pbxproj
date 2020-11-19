@@ -30,6 +30,7 @@
 		2381F794255C057D008004DE /* UITextfield+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2381F793255C057D008004DE /* UITextfield+Extensions.swift */; };
 		23843BEA2561147600D17A44 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23843BE92561147600D17A44 /* String+Extensions.swift */; };
 		23843BED256116BA00D17A44 /* NotificationCenterServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23843BEC256116BA00D17A44 /* NotificationCenterServices.swift */; };
+		2386AC07256623F5004D6FE9 /* JournalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2386AC06256623F5004D6FE9 /* JournalViewModel.swift */; };
 		238C9405255BEB0C00591791 /* FoodSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238C9404255BEB0C00591791 /* FoodSearchViewController.swift */; };
 		238C9409255BEB1900591791 /* FoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238C9408255BEB1900591791 /* FoodCell.swift */; };
 		238C9412255BEBAF00591791 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238C9411255BEBAF00591791 /* DetailCell.swift */; };
@@ -91,7 +92,7 @@
 		6BE5482A823830922085C9A8 /* Pods_Picho.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 047BD003AF371FA6292C078C /* Pods_Picho.framework */; };
 		A28A5AF7255BD410007E66FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A5AF6255BD410007E66FA /* AppDelegate.swift */; };
 		A28A5AF9255BD410007E66FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A5AF8255BD410007E66FA /* SceneDelegate.swift */; };
-		A28A5AFB255BD410007E66FA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A5AFA255BD410007E66FA /* MainViewController.swift */; };
+		A28A5AFB255BD410007E66FA /* JournalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28A5AFA255BD410007E66FA /* JournalViewController.swift */; };
 		A28A5B01255BD410007E66FA /* Picho.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A28A5AFF255BD410007E66FA /* Picho.xcdatamodeld */; };
 		A28A5B03255BD412007E66FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A28A5B02255BD412007E66FA /* Assets.xcassets */; };
 		A28A5B06255BD412007E66FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A28A5B04255BD412007E66FA /* LaunchScreen.storyboard */; };
@@ -124,6 +125,7 @@
 		2381F793255C057D008004DE /* UITextfield+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextfield+Extensions.swift"; sourceTree = "<group>"; };
 		23843BE92561147600D17A44 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		23843BEC256116BA00D17A44 /* NotificationCenterServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterServices.swift; sourceTree = "<group>"; };
+		2386AC06256623F5004D6FE9 /* JournalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalViewModel.swift; sourceTree = "<group>"; };
 		238C9404255BEB0C00591791 /* FoodSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSearchViewController.swift; sourceTree = "<group>"; };
 		238C9408255BEB1900591791 /* FoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCell.swift; sourceTree = "<group>"; };
 		238C9411255BEBAF00591791 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
@@ -186,7 +188,7 @@
 		A28A5AF3255BD410007E66FA /* Picho.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Picho.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A28A5AF6255BD410007E66FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A28A5AF8255BD410007E66FA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A28A5AFA255BD410007E66FA /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		A28A5AFA255BD410007E66FA /* JournalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalViewController.swift; sourceTree = "<group>"; };
 		A28A5B00255BD410007E66FA /* Picho.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Picho.xcdatamodel; sourceTree = "<group>"; };
 		A28A5B02255BD412007E66FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A28A5B05255BD412007E66FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -397,7 +399,8 @@
 		23FEBA2A255BDC09001EA146 /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
-				A28A5AFA255BD410007E66FA /* MainViewController.swift */,
+				2386AC06256623F5004D6FE9 /* JournalViewModel.swift */,
+				A28A5AFA255BD410007E66FA /* JournalViewController.swift */,
 				23FEBA2F255BDC73001EA146 /* Components */,
 				23645F21255C2D3400DA5697 /* DetailViews */,
 				23FEBA39255BDC8A001EA146 /* ReusableViews */,
@@ -677,7 +680,7 @@
 				A28A5B41255CE519007E66FA /* DetailSugarNSatFat.swift in Sources */,
 				23FEBA31255BDC7A001EA146 /* MainProgressView.swift in Sources */,
 				26AF6A3E255E545A0045877C /* NotificationService.swift in Sources */,
-				A28A5AFB255BD410007E66FA /* MainViewController.swift in Sources */,
+				A28A5AFB255BD410007E66FA /* JournalViewController.swift in Sources */,
 				23FEBA10255BDB48001EA146 /* CoreDataService.swift in Sources */,
 				23FEB9F1255BDA94001EA146 /* Array+Utils.swift in Sources */,
 				23FEBA13255BDB50001EA146 /* HealthKitService.swift in Sources */,
@@ -701,6 +704,7 @@
 				23FEB9E8255BDA81001EA146 /* Food.swift in Sources */,
 				2381F775255C03DF008004DE /* FormScreen3.swift in Sources */,
 				23FEBA59255BDD90001EA146 /* FoodDetailScreen.swift in Sources */,
+				2386AC07256623F5004D6FE9 /* JournalViewModel.swift in Sources */,
 				26D0532D255D43B200D3C09A /* NotificationKey.swift in Sources */,
 				26E42A7E2562614A000E239C /* HistoryModel.swift in Sources */,
 				23FEBA69255BE00C001EA146 /* MealCellView.swift in Sources */,

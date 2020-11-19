@@ -4,13 +4,11 @@
 //
 //  Created by Muhammad Rasyid khaikal on 02/11/20.
 //
-
-
-
 import UIKit
 import HealthKit
+import Combine
 
-class MainViewController: UIViewController {
+class JournalViewController: UIViewController {
     
     private var scrollView: UIScrollView!
     private var mainProgressView: MainProgressView!
@@ -19,28 +17,15 @@ class MainViewController: UIViewController {
     private var activityCardView: HorizontalView!
     private var activityStack: UIStackView!
     private var mealTodayView: MealsTodayView!
+    private var cancellables: Set<AnyCancellable> = []
     
-    private var calorieIntake : Double = 0.0
-    private var saturatedFatIntake : Double = 0.0
-    private var sugarIntake : Double = 0.0
+    let viewModel = JournalViewModel()
     
-    private var calorieLeft : Double = 0.0
-    private var satFatLeft : Double = 0.0
-    private var sugarLeft : Double = 0.0
-    private var totalStep : Double = 0.0
-    private var totalWater : Double = 0.0
-    
-    private let age = Double(UserDefaultService.age)
-    private let weight = Double(UserDefaultService.weight)
-    private let height = Double(UserDefaultService.height)
-  
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
  
-        fetchData()
-        passData()
-        waterCardView.setupViewWater(amount: Int(totalWater))
-        activityCardView.setupViewActivity(amount: Int(totalStep))
+        viewModel.fetchData()
+        setupProgressView()
     }
     
     override func viewDidLoad() {
@@ -48,80 +33,52 @@ class MainViewController: UIViewController {
         
         navigationItem.title = "Today"
         
-//        checkUser()
-        countCalorie()
-        fetchData()
-      
+        viewModel.checkUser(view: self)
         setupScrollView()
         setupMainProgress()
         setupPichoCard()
         setupActivity()
         setupMealTodayView()
+        bindViewModel()
     }
     
-    private func checkUser() {
-        if !UserDefaultService.hasLaunched {
-            //show onboarding
-            let vc = PageControlDescription()
-            vc.modalPresentationStyle = .fullScreen
-            present(vc, animated: true)
-        }
-    }
-    
-    private func passData() {
-        mainProgressView.sugarProgress.animate(value: Float(sugarLeft), total: Float(sugarIntake))
-        mainProgressView.satFatProgress.animate(value: Float(satFatLeft), total: Float(saturatedFatIntake))
-        mainProgressView.calorieProgress.animate(value: Float(calorieLeft), total: Float(calorieIntake))
-        
+    private func setupProgressView() {
         mainProgressView.setupView(
-            totalCalorie: Float(calorieIntake),
-            totalSatFat: Float(saturatedFatIntake),
-            satFatLeftAmount: Float(satFatLeft),
-            totalSugar: Float(sugarIntake),
-            sugarLeftAmount: Float(sugarLeft))
+            totalCalorie: Float(viewModel.calorieIntake),
+            totalSatFat: Float(viewModel.saturatedFatIntake),
+            satFatLeftAmount: Float(viewModel.satFatLeft),
+            totalSugar: Float(viewModel.sugarIntake),
+            sugarLeftAmount: Float(viewModel.sugarLeft))
     }
     
-    private func countCalorie() {
-        if UserDefaultService.gender == "Male" {
-            calorieIntake = (10 * weight!) + (6.25 * height!) - (5 * age!) + 5
-            saturatedFatIntake = (calorieIntake / 10) / 9
-            sugarIntake = (calorieIntake / 10) / 4
-        }
-        if UserDefaultService.gender == "Female" {
-            calorieIntake = (10 * weight!) + (6.25 * height!) - (5 * age!) - 161
-            saturatedFatIntake = (calorieIntake / 10) / 9
-            sugarIntake = (calorieIntake / 10) / 4
-        }
-    }
-    
-    private func fetchData() {
-        if HealthKitService.shared.checkAuthorization() {
-            HealthKitService.shared.fetchCalorie { (totalCal) in
-                self.calorieLeft = self.calorieIntake - totalCal
+    private func bindViewModel() {
+        viewModel.$calorieLeft
+            .receive(on: DispatchQueue.main)
+            .sink { (value) in
+                self.mainProgressView.calorieProgress.animate(value: Float(value), total: Float(self.viewModel.calorieIntake))
             }
-            HealthKitService.shared.fetchSaturatedFat { (totalFat) in
-                self.satFatLeft = self.saturatedFatIntake - totalFat
+            .store(in: &cancellables)
+        
+        viewModel.$satFatLeft
+            .receive(on: DispatchQueue.main)
+            .sink { (value) in
+                self.mainProgressView.satFatProgress.animate(value: Float(value), total: Float(self.viewModel.saturatedFatIntake))
             }
-            HealthKitService.shared.fetchSugar { (totalSugar) in
-                self.sugarLeft = self.sugarIntake - totalSugar
+            .store(in: &cancellables)
+        
+        viewModel.$sugarLeft
+            .receive(on: DispatchQueue.main)
+            .sink { (value) in
+                self.mainProgressView.sugarProgress.animate(value: Float(value), total: Float(self.viewModel.sugarIntake))
             }
-            HealthKitService.shared.fetchWater { (water) in
-                self.totalWater = water
+            .store(in: &cancellables)
+        
+        viewModel.$totalWater
+            .receive(on: DispatchQueue.main)
+            .sink { (value) in
+                self.waterCardView.setupView(amount: Int(value), type: .water)
             }
-            HealthKitService.shared.fetchActivity { (step) in
-                self.totalStep = step
-            }
-        } else {
-            CoreDataService.shared.getDailyIntake { (intakes) in
-                let calorie = intakes.map { $0.calorie }
-                let satFat = intakes.map { $0.saturatedFat }
-                let sugar = intakes.map { $0.sugars }
-                
-                self.calorieLeft = self.calorieIntake - calorie.reduce(0.0, +)
-                self.satFatLeft = self.saturatedFatIntake - satFat.reduce(0.0, +)
-                self.sugarLeft = self.sugarIntake - sugar.reduce(0.0, +)
-            }
-        }
+            .store(in: &cancellables)
     }
       
     @objc private func handleWater(sender: UITapGestureRecognizer) {
@@ -134,22 +91,6 @@ class MainViewController: UIViewController {
         let activity = ActivityCard()
         activity.delegate = self
         navigationController?.present(UINavigationController(rootViewController: ActivityViewController()), animated: true)
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-}
-  
-
-// MARK: Setup View
-extension MainViewController : GetDataDelegate , GetDataActivityDelegate {
-    
-    func sendStep(steps: Int) {
-        activityCardView.setupViewActivity(amount: steps)
-    }
-    func sendWater(water: Int) {
-        waterCardView.setupViewWater(amount: water)
     }
     
     private func setupScrollView() {
@@ -206,7 +147,7 @@ extension MainViewController : GetDataDelegate , GetDataActivityDelegate {
        
         activityCardView = HorizontalView(
             labelText: "Activity",
-            detailText: "🔥 \(Int(self.totalStep)) Step",
+            detailText: "🔥 \(Int(viewModel.totalStep)) Step",
             iconImage: UIImage(),
             background: Color.red)
         activityCardView.setConstraint(heighAnchorConstant: 46)
@@ -233,6 +174,18 @@ extension MainViewController : GetDataDelegate , GetDataActivityDelegate {
             bottomAnchor: scrollView.bottomAnchor, bottomAnchorConstant: -16,
             leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
             trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
+    }
+   
+}
+  
+
+extension JournalViewController: GetDataDelegate , GetDataActivityDelegate {
+    
+    func sendStep(steps: Int) {
+        activityCardView.setupView(amount: steps, type: .activity)
+    }
+    func sendWater(water: Int) {
+        waterCardView.setupView(amount: water, type: .water)
     }
     
 }
