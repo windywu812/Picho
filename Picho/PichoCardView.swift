@@ -62,8 +62,9 @@ class PichoCardView: UIView {
     }
     
     @objc private func handleTap(sender: UIButton) {
-        let modalVC = DetailSugarNSatFat()
-        rootView.present(modalVC, animated: true, completion: nil)
+        let vc = FoodInputViewController()
+        vc.eatingTime = .breakfast
+        rootView.navigationController?.pushViewController(vc, animated: true)
     }
     
     private func setupLayout() {
@@ -72,6 +73,8 @@ class PichoCardView: UIView {
         mainStack.spacing = 4
         addSubview(mainStack)
 
+        setConstraint(heighAnchorConstant: 130)
+        
         mascotImage.setConstraint(
             topAnchor: topAnchor, topAnchorConstant: 16,
             bottomAnchor: bottomAnchor, bottomAnchorConstant: -8,

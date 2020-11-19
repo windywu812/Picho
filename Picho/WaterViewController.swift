@@ -9,7 +9,7 @@
 import UIKit
 import HealthKit
 
-protocol GetDataDelegate {
+protocol WaterDelegate {
     func sendWater(water: Int)
 }
 
@@ -29,7 +29,7 @@ class WaterViewController: UIViewController {
     private var waterCollectionView: UICollectionView!
     private var totalWater: Int = 0
     
-    var delegate: GetDataDelegate?
+    var delegate: WaterDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()

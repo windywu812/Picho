@@ -6,9 +6,6 @@
 //
 
 import UIKit
-protocol GetDataActivityDelegate {
-    func sendStep(steps: Int)
-}
 
 class ActivityViewController: UIViewController {
     
@@ -17,8 +14,10 @@ class ActivityViewController: UIViewController {
     """
     
     private var descriptionLabel: UILabel!
-    private var cardView: PichoCardView!
-    private var activityCard: ActivityCard!
+    private var cardView: PichoCardView?
+    private var activityCard: HorizontalView!
+    
+    var viewModel: JournalViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,14 +28,6 @@ class ActivityViewController: UIViewController {
         setupLayout()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(handleClose))
-        
-    }
-    
-    
-    
-    
-    @objc private func handleClose() {
-        dismiss(animated: true, completion: nil)
     }
     
     private func setupView() {
@@ -47,11 +38,15 @@ class ActivityViewController: UIViewController {
         descriptionLabel.numberOfLines = 0
         view.addSubview(descriptionLabel)
         
-        cardView = PichoCardView(mascot: "mascot", title: "Activity \"Health\"", detail: "For better result, connect Picho to Apple Health", buttonText: "Connect to ❤️", rootView: self)
-        view.addSubview(cardView)
+        if !HealthKitService.shared.checkAuthorization() {
+            cardView = PichoCardView(mascot: "mascot", title: "Activity \"Health\"", detail: "For better result, connect Picho to Apple Health", buttonText: "Connect to ❤️", rootView: self)
+        }
         
-        activityCard = ActivityCard()
-        view.addSubview(activityCard)
+        activityCard = HorizontalView(
+            labelText: "Activity",
+            iconImage: UIImage(),
+            background: Color.red)
+        activityCard.setupView(amount: Int(viewModel.totalStep), type: .activity)
     }
     
     private func setupLayout() {
@@ -59,66 +54,21 @@ class ActivityViewController: UIViewController {
             topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 32,
             leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
             trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
+    
+        let stack = UIStackView(arrangedSubviews: [activityCard, cardView].compactMap({ $0 }))
+        stack.axis = .vertical
+        stack.spacing = 32
+        view.addSubview(stack)
         
-        cardView.setConstraint(
-            bottomAnchor: view.safeAreaLayoutGuide.bottomAnchor, bottomAnchorConstant: -64,
+        stack.setConstraint(
+            bottomAnchor: view.safeAreaLayoutGuide.bottomAnchor, bottomAnchorConstant: -32,
             leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
-            trailingAnchor: view.layoutMarginsGuide.trailingAnchor,
-            heighAnchorConstant: 130)
-        
-        activityCard.setConstraint(
-            bottomAnchor: cardView.topAnchor, bottomAnchorConstant: -32,
-            leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
-            trailingAnchor: view.layoutMarginsGuide.trailingAnchor,
-            heighAnchorConstant: 50)
+            trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
+    }
+    
+    @objc private func handleClose() {
+        dismiss(animated: true, completion: nil)
     }
     
 }
 
-class ActivityCard: UIView {
-    
-    private var activityLabel: UILabel!
-    private var amountLabel: UILabel!
-    var delegate : GetDataActivityDelegate?
-    private var totalStep : Double = 0.0
-    var activity: Double = 0 {
-        didSet { amountLabel.text = "\(activity)" }
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        backgroundColor = Color.red
-        layer.cornerRadius = 8
-        
-        activityLabel = UILabel()
-        HealthKitService.shared.fetchActivity { (step) in
-            self.totalStep = step
-            self.delegate?.sendStep(steps: Int(step))
-            DispatchQueue.main.async{[self] in
-                amountLabel.text = "🔥 \(Int(totalStep)) Step"
-            }
-        }
-        activityLabel.setFont(text: "Activity", weight: .bold, color: .white)
-        amountLabel = UILabel()
-        
-        self.amountLabel.setFont(text: "🔥 \(Int(totalStep)) Step", weight: .bold, color: .white)
-        
-        
-        let activityStack = UIStackView(arrangedSubviews: [activityLabel, amountLabel])
-        activityStack.axis = .horizontal
-        activityStack.distribution = .equalCentering
-        addSubview(activityStack)
-        
-        activityStack.setConstraint(
-            leadingAnchor: layoutMarginsGuide.leadingAnchor,
-            trailingAnchor: layoutMarginsGuide.trailingAnchor,
-            centerYAnchor: centerYAnchor)
-    }
-    
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-}

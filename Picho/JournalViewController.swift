@@ -95,9 +95,9 @@ class JournalViewController: UIViewController {
     }
     
     @objc private func handleActivity(sender: UITapGestureRecognizer) {
-        let activity = ActivityCard()
-        activity.delegate = self
-        navigationController?.present(UINavigationController(rootViewController: ActivityViewController()), animated: true)
+        let vc = ActivityViewController()
+        vc.viewModel = viewModel
+        navigationController?.present(UINavigationController(rootViewController: vc), animated: true)
     }
     
     private func setupScrollView() {
@@ -136,27 +136,22 @@ class JournalViewController: UIViewController {
         pichoCardView.setConstraint(
             topAnchor: mainProgressView.bottomAnchor, topAnchorConstant: 24,
             leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
-            trailingAnchor: view.layoutMarginsGuide.trailingAnchor,
-            heighAnchorConstant: 130)
+            trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
     }
     
     private func setupActivity() {
        
         waterCardView = HorizontalView(
             labelText: "Water",
-            detailText: "💧 0 cups remaining",
             iconImage: UIImage(),
             background: Color.blue)
         let tapWater = UITapGestureRecognizer(target: self, action: #selector(handleWater(sender:)))
         waterCardView.addGestureRecognizer(tapWater)
-        waterCardView.setConstraint(heighAnchorConstant: 46)
        
         activityCardView = HorizontalView(
             labelText: "Activity",
-            detailText: "🔥 \(Int(viewModel.totalStep)) Step",
             iconImage: UIImage(),
             background: Color.red)
-        activityCardView.setConstraint(heighAnchorConstant: 46)
         let tapActivity = UITapGestureRecognizer(target: self, action: #selector(handleActivity(sender:)))
         activityCardView.addGestureRecognizer(tapActivity)
         
@@ -185,11 +180,8 @@ class JournalViewController: UIViewController {
 }
   
 
-extension JournalViewController: GetDataDelegate , GetDataActivityDelegate {
+extension JournalViewController: WaterDelegate {
     
-    func sendStep(steps: Int) {
-        activityCardView.setupView(amount: steps, type: .activity)
-    }
     func sendWater(water: Int) {
         waterCardView.setupView(amount: water, type: .water)
     }

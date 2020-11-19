@@ -20,20 +20,15 @@ class HorizontalView: UIView {
     
     func setupView(amount: Int, type: Activity) {
         if type == .water {
-            DispatchQueue.main.async {
-                let remaining = 14 - amount
-                self.detail.text = "💧 \(remaining) cups remaining"
-            }
+            let remaining = 14 - amount
+            self.detail.text = "💧 \(remaining) cups remaining"
         } else {
-            DispatchQueue.main.async {
-                self.detail.text = "🔥 \(amount) Step"
-            }
+            self.detail.text = "🔥 \(amount) Step"
         }
     }
     
     init(frame: CGRect = .zero,
          labelText: String,
-         detailText: String,
          iconImage: UIImage,
          background: UIColor
     ) {
@@ -51,7 +46,9 @@ class HorizontalView: UIView {
         addSubview(label)
         
         icon.image = iconImage
-        detail.setFont(text: detailText, weight: .regular, color: .white)
+        detail.textColor = .white
+        
+        setConstraint(heighAnchorConstant: 46)
         
         label.setConstraint(
             leadingAnchor: leadingAnchor, leadingAnchorConstant: 16,
