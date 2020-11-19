@@ -5,7 +5,7 @@
 //  Created by Windy on 19/11/20.
 //
 
-import UIKit
+import Foundation
 import Combine
 
 class JournalViewModel {
@@ -56,9 +56,9 @@ class JournalViewModel {
     }
     
     private func countCalorie() {
-        let age = Double(UserDefaultService.age)
-        let weight = Double(UserDefaultService.weight)
-        let height = Double(UserDefaultService.height)
+        let age = Double(UserDefaultService.age ?? String(0))
+        let weight = Double(UserDefaultService.weight ?? String(0))
+        let height = Double(UserDefaultService.height ?? String(0))
         
         if UserDefaultService.gender == "Male" {
             calorieIntake = (10 * weight!) + (6.25 * height!) - (5 * age!) + 5
@@ -70,13 +70,5 @@ class JournalViewModel {
             sugarIntake = (calorieIntake / 10) / 4
         }
     }
-    
-    func checkUser(view: UIViewController) {
-        if !UserDefaultService.hasLaunched {
-            let vc = PageControlDescription()
-            vc.modalPresentationStyle = .fullScreen
-            view.present(vc, animated: true)
-        }
-    }
-    
+      
 }

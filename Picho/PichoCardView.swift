@@ -7,6 +7,13 @@
 
 import UIKit
 
+enum PichoCardType {
+    case syncHealhtKit
+    case breakfast
+    case lunch
+    case dinner
+}
+
 class PichoCardView: UIView {
     
     private let mascotImage: UIImageView
@@ -14,12 +21,14 @@ class PichoCardView: UIView {
     private let detailLabel: UILabel
     private let button: UIButton
     private let rootView: UIViewController
+    private let type: PichoCardType
     
     init(frame: CGRect = .zero,
          mascot: String,
          title: String,
          detail: String,
          buttonText: String,
+         type: PichoCardType,
          rootView: UIViewController
     ) {
         
@@ -27,6 +36,7 @@ class PichoCardView: UIView {
         titleLabel = UILabel()
         detailLabel = UILabel()
         button = UIButton(type: .system)
+        self.type = type
         self.rootView = rootView
         
         super.init(frame: frame)
@@ -48,7 +58,6 @@ class PichoCardView: UIView {
         
         detailLabel.setFont(
             text: detail,
-            size: 17,
             color: .white)
         detailLabel.numberOfLines = 0
         
@@ -62,9 +71,23 @@ class PichoCardView: UIView {
     }
     
     @objc private func handleTap(sender: UIButton) {
-        let vc = FoodInputViewController()
-        vc.eatingTime = .breakfast
-        rootView.navigationController?.pushViewController(vc, animated: true)
+        switch type {
+        case .breakfast:
+            let vc = FoodInputViewController()
+            vc.eatingTime = .breakfast
+            rootView.navigationController?.pushViewController(vc, animated: true)
+        case .lunch:
+            let vc = FoodInputViewController()
+            vc.eatingTime = .lunch
+            rootView.navigationController?.pushViewController(vc, animated: true)
+        case .dinner:
+            let vc = FoodInputViewController()
+            vc.eatingTime = .dinner
+            rootView.navigationController?.pushViewController(vc, animated: true)
+        case .syncHealhtKit:
+            HealthKitService.shared.authorization()
+        }
+        
     }
     
     private func setupLayout() {

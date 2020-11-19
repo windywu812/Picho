@@ -39,7 +39,13 @@ class ActivityViewController: UIViewController {
         view.addSubview(descriptionLabel)
         
         if !HealthKitService.shared.checkAuthorization() {
-            cardView = PichoCardView(mascot: "mascot", title: "Activity \"Health\"", detail: "For better result, connect Picho to Apple Health", buttonText: "Connect to ❤️", rootView: self)
+            cardView = PichoCardView(
+                mascot: "mascot",
+                title: "Activity \"Health\"",
+                detail: "For better result, connect Picho to Apple Health",
+                buttonText: "Connect to ❤️",
+                type: .syncHealhtKit,
+                rootView: self)
         }
         
         activityCard = HorizontalView(

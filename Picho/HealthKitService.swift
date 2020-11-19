@@ -35,11 +35,11 @@ class HealthKitService {
             return
         }
         
-        healthStore.requestAuthorization(toShare: healthKitTypesToWrite, read: HealthKitTypesToRead){ (success, error) in
+        healthStore.requestAuthorization(toShare: healthKitTypesToWrite, read: HealthKitTypesToRead) { (success, error) in
             if !success {
-                print("error")
+                print(error!.localizedDescription)
             } else {
-                print("Success")
+                print(success)
             }
         }
         

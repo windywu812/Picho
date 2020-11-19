@@ -31,9 +31,6 @@ class JournalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = "Today"
-        
-        viewModel.checkUser(view: self)
         setupScrollView()
         setupMainProgress()
         setupPichoCard()
@@ -87,7 +84,7 @@ class JournalViewController: UIViewController {
             }
             .store(in: &cancellables)
     }
-      
+    
     @objc private func handleWater(sender: UITapGestureRecognizer) {
         let vc =  WaterViewController()
         vc.delegate = self
@@ -101,6 +98,8 @@ class JournalViewController: UIViewController {
     }
     
     private func setupScrollView() {
+        navigationItem.title = "Today"
+        
         scrollView = UIScrollView()
         scrollView.backgroundColor = Color.background
         scrollView.showsVerticalScrollIndicator = false
@@ -130,7 +129,7 @@ class JournalViewController: UIViewController {
             title: "You haven't started!",
             detail: "Start by logging in what you eat today",
             buttonText: "Log Breakfast",
-            rootView: self)
+            type: .breakfast, rootView: self)
         scrollView.addSubview(pichoCardView)
         
         pichoCardView.setConstraint(
@@ -181,9 +180,7 @@ class JournalViewController: UIViewController {
   
 
 extension JournalViewController: WaterDelegate {
-    
     func sendWater(water: Int) {
         waterCardView.setupView(amount: water, type: .water)
     }
-    
 }
