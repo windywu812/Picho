@@ -136,7 +136,7 @@ extension FormScreen2: UITextFieldDelegate {
         self.activeTextField = textField
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
         guard let text = textField.text else { return }
         if text.isEmpty {
             getStartedBtn.backgroundColor = Color.lightGreen
