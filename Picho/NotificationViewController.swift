@@ -6,27 +6,6 @@
 //
 
 import UIKit
-import UserNotifications
-
-class NotificationViewModel {
-    
-    var notifications: [Notif] = []
-    
-    init() {
-        fetchData()
-    }
-    
-    private func fetchData() {
-        CoreDataService.shared.fetchNotificationData { (notifs) in
-            self.notifications = notifs
-        }
-    }
-    
-    func addToCoreData(id: String, timeLabel: String, isOn: Bool) {
-        CoreDataService.shared.addNotification(id: id, isOn: isOn, timeLabel: timeLabel)
-    }
-    
-}
 
 class NotificationViewController: UIViewController {
     
@@ -55,7 +34,7 @@ class NotificationViewController: UIViewController {
         title = "Notifications"
         setupTableView()
         
-        NotificationCenterServices.requestPermission()
+        viewModel.requestPermission()
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(endEditting))
         view.addGestureRecognizer(tap)
@@ -68,6 +47,7 @@ class NotificationViewController: UIViewController {
         tableView.dataSource = self
         tableView.backgroundColor = Color.background
         tableView.register(Value1Cell.self, forCellReuseIdentifier: Value1Cell.reuseIdentifier)
+        tableView.register(NotificationCell.self, forCellReuseIdentifier: NotificationCell.reuseIdentifier)
         view.addSubview(tableView)
         
         tableView.setConstraint(
@@ -82,87 +62,67 @@ class NotificationViewController: UIViewController {
         switch sender.tag {
         case 0:
             let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: timeBreakfast ?? ("08:00").changeToDate())
-            NotificationCenterServices.setupNotification(
-                uuid: "Breakfast",
+            viewModel.addNotification(
+                id: "Breakfast",
                 title: "Good morning!",
                 body: "Start your day with a breakfast, and don’t forget to log it! 😉",
-                time: dateComponent, isOn: sender.isOn)
-            viewModel.addToCoreData(
-                id: "Breakfast",
-                timeLabel: timeBreakfast?.changeToString() ?? "08:00",
-                isOn: sender.isOn)
+                time: dateComponent,
+                isOn: sender.isOn,
+                timeLabel: timeBreakfast?.changeToString() ?? "08:00")
         case 1:
             let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: timeLunch ?? ("12:00").changeToDate())
-            NotificationCenterServices.setupNotification(
-                uuid: "Lunch",
+            viewModel.addNotification(
+                id: "Lunch",
                 title: "It's past midday!",
                 body: "What did you have for lunch today?",
                 time: dateComponent,
-                isOn: sender.isOn)
-            viewModel.addToCoreData(
-                id: "Lunch",
-                timeLabel: timeLunch?.changeToString() ?? "12:00",
-                isOn: sender.isOn)
+                isOn: sender.isOn,
+                timeLabel: timeLunch?.changeToString() ?? "12:00")
         case 2:
-            let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: timeDinner ?? ("07:00").changeToDate())
-            NotificationCenterServices.setupNotification(
-                uuid: "Dinner",
+            let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: timeDinner ?? ("19:00").changeToDate())
+            viewModel.addNotification(
+                id: "Dinner",
                 title: "Evening is here!",
                 body: "Have you had your dinner? Don’t forget to log it!",
-                time: dateComponents,
-                isOn: sender.isOn)
-            viewModel.addToCoreData(
-                id: "Dinner",
-                timeLabel: timeDinner?.changeToString() ?? "19:00",
-                isOn: sender.isOn)
+                time: dateComponent,
+                isOn: sender.isOn,
+                timeLabel: timeDinner?.changeToString() ?? "19:00")
         case 3:
-            let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: timeSnacks ?? ("16:00").changeToDate())
-            NotificationCenterServices.setupNotification(
-                uuid: "Snacks",
+            let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: timeSnacks ?? ("16:00").changeToDate())
+            viewModel.addNotification(
+                id: "Snacks",
                 title: "Now is the best time for snacks.",
                 body: "Picho loves snack time. What about you?",
-                time: dateComponents,
-                isOn: sender.isOn)
-            viewModel.addToCoreData(
-                id: "Snacks",
-                timeLabel: timeSnacks?.changeToString() ?? "16:00",
-                isOn: sender.isOn)
+                time: dateComponent,
+                isOn: sender.isOn,
+                timeLabel: timeSnacks?.changeToString() ?? "16:00")
         case 4:
-            let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: timeSnacks ?? ("12:00").changeToDate())
-            NotificationCenterServices.setupNotification(
-                uuid: "Water",
+            let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: timeWater ?? ("12:00").changeToDate())
+            viewModel.addNotification(
+                id: "Water",
                 title: "*Gulp* *gulp* *gulp*",
                 body: "Eight glasses of water a day, keeps dehydration away!",
-                time: dateComponents,
-                isOn: sender.isOn)
-            viewModel.addToCoreData(
-                id: "Water",
-                timeLabel: timeBreakfast?.changeToString() ?? "12:00",
-                isOn: sender.isOn)
+                time: dateComponent,
+                isOn: sender.isOn,
+                timeLabel: timeSnacks?.changeToString() ?? "12:00")
         case 5:
-            let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: timeSnacks ?? ("12:00").changeToDate())
-            NotificationCenterServices.setupNotification(
-                uuid: "Weight In",
+            let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: timeWight ?? ("12:00").changeToDate())
+            viewModel.addNotification(
+                id: "Weight In",
                 title: "Weight In",
                 body: "Have you checked your weight?",
-                time: dateComponents,
-                isOn: sender.isOn)
-            viewModel.addToCoreData(
-                id: "Weigh In",
-                timeLabel: timeBreakfast?.changeToString() ?? "12:00",
-                isOn: sender.isOn)
+                time: dateComponent,
+                isOn: sender.isOn,
+                timeLabel: timeSnacks?.changeToString() ?? "12:00")
         case 6:
-            let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: timeSnacks ?? ("20:00").changeToDate())
-            NotificationCenterServices.setupNotification(
-                uuid: "Reflection",
+            let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: timeReflection ?? ("20:00").changeToDate())
+            viewModel.addNotification(
+                id: "Reflection",
                 title: "Reflection",
                 body: "Check your progress",
-                time: dateComponents,
-                isOn: sender.isOn)
-            viewModel.addToCoreData(
-                id: "Reflection",
-                timeLabel: timeBreakfast?.changeToString() ?? "20:00",
-                isOn: sender.isOn)
+                time: dateComponent,
+                isOn: sender.isOn,
+                timeLabel: timeSnacks?.changeToString() ?? "20:00")
         default:
             break
         }
@@ -177,24 +137,80 @@ class NotificationViewController: UIViewController {
         case 0:
             breakfastTextfield.text = dateFormat.string(from: sender.date)
             timeBreakfast = sender.date
+            let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: timeBreakfast ?? ("08:00").changeToDate())
+            viewModel.addNotification(
+                id: "Breakfast",
+                title: "Good morning!",
+                body: "Start your day with a breakfast, and don’t forget to log it! 😉",
+                time: dateComponent,
+                isOn: viewModel.notifications[0].isOn,
+                timeLabel: timeBreakfast?.changeToString() ?? "08:00")
         case 1:
             lunchTextfield.text = dateFormat.string(from: sender.date)
             timeLunch = sender.date
+            let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: timeLunch ?? ("12:00").changeToDate())
+            viewModel.addNotification(
+                id: "Lunch",
+                title: "It's past midday!",
+                body: "What did you have for lunch today?",
+                time: dateComponent,
+                isOn: viewModel.notifications[1].isOn,
+                timeLabel: timeLunch?.changeToString() ?? "12:00")
         case 2:
             dinnerTextfield.text = dateFormat.string(from: sender.date)
             timeDinner = sender.date
+            let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: timeDinner ?? ("19:00").changeToDate())
+            viewModel.addNotification(
+                id: "Dinner",
+                title: "Evening is here!",
+                body: "Have you had your dinner? Don’t forget to log it!",
+                time: dateComponent,
+                isOn: viewModel.notifications[2].isOn,
+                timeLabel: timeDinner?.changeToString() ?? "19:00")
         case 3:
             snacksTextfield.text = dateFormat.string(from: sender.date)
             timeSnacks = sender.date
+            let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: timeSnacks ?? ("16:00").changeToDate())
+            viewModel.addNotification(
+                id: "Snacks",
+                title: "Now is the best time for snacks.",
+                body: "Picho loves snack time. What about you?",
+                time: dateComponent,
+                isOn: viewModel.notifications[3].isOn,
+                timeLabel: timeSnacks?.changeToString() ?? "16:00")
         case 4:
             waterTextfield.text = dateFormat.string(from: sender.date)
             timeWater = sender.date
+            let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: timeWater ?? ("12:00").changeToDate())
+            viewModel.addNotification(
+                id: "Water",
+                title: "*Gulp* *gulp* *gulp*",
+                body: "Eight glasses of water a day, keeps dehydration away!",
+                time: dateComponent,
+                isOn: viewModel.notifications[4].isOn,
+                timeLabel: timeSnacks?.changeToString() ?? "12:00")
         case 5:
             wightInTextfield.text = dateFormat.string(from: sender.date)
             timeWight = sender.date
+            let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: timeWight ?? ("12:00").changeToDate())
+            viewModel.addNotification(
+                id: "Weight In",
+                title: "Weight In",
+                body: "Have you checked your weight?",
+                time: dateComponent,
+                isOn: viewModel.notifications[5].isOn,
+                timeLabel: timeSnacks?.changeToString() ?? "12:00")
         case 6:
             reflectionTextfield.text = dateFormat.string(from: sender.date)
             timeReflection = sender.date
+            let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: timeReflection ?? ("20:00").changeToDate())
+            viewModel.addNotification(
+                id: "Reflection",
+                title: "Reflection",
+                body: "Check your progress",
+                time: dateComponent,
+                isOn: viewModel.notifications[6].isOn,
+                timeLabel: timeSnacks?.changeToString() ?? "20:00")
         default:
             break
         }
@@ -210,17 +226,20 @@ extension NotificationViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Value1Cell.reuseIdentifier, for: indexPath) as! Value1Cell
+        let custom = tableView.dequeueReusableCell(withIdentifier: NotificationCell.reuseIdentifier, for: indexPath) as! NotificationCell
+
         cell.selectionStyle = .none
         
         switch indexPath.section {
         case 0:
             if indexPath.row == 0 {
-                cell.textLabel?.setFont(text: viewModel.notifications[0].id ?? "", weight: .bold)
+                custom.title.setFont(text: viewModel.notifications[0].id ?? "", weight: .bold)
                 let control = UISwitch()
                 control.tag = 0
                 control.addTarget(self, action: #selector(handleSwitch(sender:)), for: .valueChanged)
                 control.isOn = viewModel.notifications[0].isOn
-                cell.accessoryView = control
+                custom.accessoryView = control
+                custom.iconImage.image = UIImage(named: "breakfast")
             } else {
                 let datePicker = UIDatePicker()
                 datePicker.setupStyle(tag: 0)
@@ -228,6 +247,7 @@ extension NotificationViewController: UITableViewDelegate {
                 
                 breakfastTextfield = UITextField(frame: CGRect(x: 0, y: 0, width: 56, height: 30))
                 breakfastTextfield.addStyle(tag: 0, text: viewModel.notifications[0].timeLabel ?? "08:00", datePicker: datePicker)
+                
                 cell.accessoryView = breakfastTextfield
                 cell.textLabel?.text = ""
             }
@@ -343,7 +363,7 @@ extension NotificationViewController: UITableViewDelegate {
             return cell
         }
         
-        return cell
+        return custom
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -386,6 +406,40 @@ extension NotificationViewController: UNUserNotificationCenterDelegate {
                                     UNNotification,withCompletionHandler completionHandler: @escaping
                                         (UNNotificationPresentationOptions) -> Void){
         completionHandler([.sound,.alert])
+    }
+    
+}
+
+class NotificationCell: UITableViewCell {
+    
+    static let reuseIdentifier = "NotificationCell"
+    
+    let iconImage: UIImageView
+    let title: UILabel
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        
+        iconImage = UIImageView()
+        title = UILabel()
+        
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        iconImage.contentMode = .scaleAspectFill
+        
+        let stack = UIStackView(arrangedSubviews: [iconImage, title])
+        stack.spacing = 8
+        addSubview(stack)
+        
+        stack.setConstraint(
+            leadingAnchor: layoutMarginsGuide.leadingAnchor,
+            centerYAnchor: centerYAnchor)
+        
+        iconImage.setConstraint(
+            heighAnchorConstant: 22, widthAnchorConstant: 22)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
 }
