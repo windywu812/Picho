@@ -666,7 +666,6 @@
 				23FEBA1D255BDBB4001EA146 /* UIView+Extensions.swift in Sources */,
 				2381F778255C03E3008004DE /* FormScreen4.swift in Sources */,
 				23FEBA21255BDBBB001EA146 /* Date+Extensions.swift in Sources */,
-				26E42A8A25628798000E239C /* HealthKitService.swift in Sources */,
 				2381F783255C0412008004DE /* DescriptionScreen1.swift in Sources */,
 				2381F77E255C03F1008004DE /* PageControlForm.swift in Sources */,
 				23FEBA62255BDF3A001EA146 /* NotificationViewController.swift in Sources */,

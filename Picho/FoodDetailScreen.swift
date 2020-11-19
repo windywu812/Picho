@@ -186,8 +186,8 @@ class FoodDetailScreen: UITableViewController {
         NetworkService.shared.getFood(id: foodId) { food in
             switch food {
             case .success(let food):
+                print(food.servings ?? [])
                 guard let servings = food.servings?.first else { return }
-                
                 DispatchQueue.main.async {
                     self.navigationItem.title = self.foodName
                     

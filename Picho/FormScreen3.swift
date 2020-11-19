@@ -223,8 +223,10 @@ extension FormScreen3: UITextFieldDelegate {
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        gender = genders[0]
-        textField.text = gender
+        if textField.tag == 0 {
+            gender = genders[0]
+            textField.text = gender
+        }
         return true
     }
     
