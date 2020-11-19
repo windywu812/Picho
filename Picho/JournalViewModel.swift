@@ -10,18 +10,19 @@ import Combine
 
 class JournalViewModel {
     
-    var calorieIntake: Double = 0.0
-    var saturatedFatIntake: Double = 0.0
-    var sugarIntake: Double = 0.0
-    
     @Published var calorieLeft: Double = 0.0
     @Published var satFatLeft: Double = 0.0
     @Published var sugarLeft: Double = 0.0
     @Published var totalStep: Double = 0.0
     @Published var totalWater: Double = 0.0
     
+    var calorieIntake: Double = 0.0
+    var saturatedFatIntake: Double = 0.0
+    var sugarIntake: Double = 0.0
+    
     init() {
         countCalorie()
+        fetchData()
     }
     
     func fetchData() {

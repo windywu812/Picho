@@ -79,6 +79,13 @@ class JournalViewController: UIViewController {
                 self.waterCardView.setupView(amount: Int(value), type: .water)
             }
             .store(in: &cancellables)
+        
+        viewModel.$totalStep
+            .receive(on: DispatchQueue.main)
+            .sink { (value) in
+                self.activityCardView.setupView(amount: Int(value), type: .activity)
+            }
+            .store(in: &cancellables)
     }
       
     @objc private func handleWater(sender: UITapGestureRecognizer) {
@@ -107,8 +114,7 @@ class JournalViewController: UIViewController {
     }
     
     private func setupMainProgress() {
-        mainProgressView = MainProgressView()
-        mainProgressView.rootView = self
+        mainProgressView = MainProgressView(rootView: self, viewModel: viewModel)
         scrollView.addSubview(mainProgressView)
             
         mainProgressView.setConstraint(

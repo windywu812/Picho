@@ -25,24 +25,25 @@ class MainProgressView: UIView {
     private let totalCalorieLabel: UILabel
     let calorieProgress: CircularProgressView
     
-    var rootView: UIViewController?
+    private var rootView: UIViewController
+    private var viewModel: JournalViewModel
     
     func setupView(
         totalCalorie: Float,
         totalSatFat: Float,
         satFatLeftAmount: Float,
         totalSugar: Float,
-        sugarLeftAmount: Float) {
-           
+        sugarLeftAmount: Float
+    ) {
         totalCalorieLabel.text = "from \(String(format: "%.00f", totalCalorie)) cal/day"
         sugarTotalLabel.text = "from \(String(format: "%.01f", totalSugar)) g/day"
         satFatTotalLabel.text = "from \(String(format: "%.01f", totalSatFat)) g/day"
         
-        sugarLeft.text = "\(String(format: "%.01f", -sugarLeftAmount + totalSugar))g"
-        satFatLeft.text = "\(String(format: "%.01f", -satFatLeftAmount + totalSatFat))g"
+        sugarLeft.text = "\(String(format: "%.01f", sugarLeftAmount))g"
+        satFatLeft.text = "\(String(format: "%.01f", satFatLeftAmount))g"
     }
     
-    override init(frame: CGRect) {
+    init(frame: CGRect = .zero, rootView: UIViewController, viewModel: JournalViewModel) {
         calorieLabel = UILabel()
         totalCalorieLabel = UILabel()
         calorieProgress = CircularProgressView()
@@ -56,6 +57,9 @@ class MainProgressView: UIView {
         sugarTotalLabel = UILabel()
         sugarLeft = UILabel()
         sugarProgress = SmallCircularProgressView()
+        
+        self.rootView = rootView
+        self.viewModel = viewModel
         
         super.init(frame: frame)
         
@@ -79,8 +83,10 @@ class MainProgressView: UIView {
     }
     
     @objc private func handleTap(sender: UIButton) {
-        let vc = UINavigationController(rootViewController: InfoDetailViewController())
-        rootView?.present(vc, animated: true)
+        let vc = InfoDetailViewController()
+        vc.viewModel = viewModel
+
+        rootView.present(UINavigationController(rootViewController: vc), animated: true)
     }
     
     private func setupCalorie() {

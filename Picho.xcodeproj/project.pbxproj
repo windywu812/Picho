@@ -230,8 +230,8 @@
 		23645F21255C2D3400DA5697 /* DetailViews */ = {
 			isa = PBXGroup;
 			children = (
-				23645F22255C2D5400DA5697 /* ActivityViewController.swift */,
 				236D9C79255D3EB500B252B5 /* InfoDetailViewController.swift */,
+				23645F22255C2D5400DA5697 /* ActivityViewController.swift */,
 				23414A06255CD36A00E1F48D /* WaterViewController.swift */,
 				23414A09255CDE4800E1F48D /* HorizontalProgressView.swift */,
 			);

@@ -18,16 +18,26 @@ class InfoDetailViewController: UIViewController {
     High triglycerides cause hardening on the arteries' wall (atherosclerosis). Along with ‘bad’ cholesterol (LDL), they increase the risk of stroke, heart attack and heart disease.
     """
     
+    var viewModel: JournalViewModel!
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
         setupLayout()
+        
+        progressView.setupView(
+            totalCalorie: Float(viewModel.calorieIntake),
+            calorieLeftAmount: Float(viewModel.calorieLeft),
+            totalSatFat: Float(viewModel.saturatedFatIntake),
+            satFatLeftAmount: Float(viewModel.satFatLeft),
+            totalSugar: Float(viewModel.sugarIntake),
+            sugarLeftAmount: Float(viewModel.sugarLeft))
     }
     
     private func setupView() {
         navigationItem.title = "Detail"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(handleDone))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(handleDone))
         view.backgroundColor = Color.background
         
         scrollView = UIScrollView()
@@ -36,10 +46,6 @@ class InfoDetailViewController: UIViewController {
         
         progressView = TopProgressView()
         scrollView.addSubview(progressView)
-        
-        progressView.calorieProgress.animate(value: 454, total: 2000)
-        progressView.satFatProgress.animate(value: 12, total: 25)
-        progressView.sugarProgress.animate(value: 32, total: 36)
         
         detailLabel = UILabel()
         detailLabel.setFont(text: detailText)
@@ -90,6 +96,27 @@ class TopProgressView: UIView {
     private var sugarTotalLabel: UILabel!
     var sugarProgress: SmallCircularProgressView!
     
+    func setupView(
+        totalCalorie: Float,
+        calorieLeftAmount: Float,
+        totalSatFat: Float,
+        satFatLeftAmount: Float,
+        totalSugar: Float,
+        sugarLeftAmount: Float
+    ) {
+        sugarTotalLabel.text = "from \(String(format: "%.01f", totalSugar)) g/day"
+        satFatTotalLabel.text = "from \(String(format: "%.01f", totalSatFat)) g/day"
+        
+        sugarLeft.text = "\(String(format: "%.01f", sugarLeftAmount))g"
+        satFatLeft.text = "\(String(format: "%.01f", satFatLeftAmount))g"
+        
+        calorieTotalLabel.text = "\(Int(totalCalorie)) cal"
+        
+        calorieProgress.animate(value: Float(calorieLeftAmount), total: totalCalorie)
+        satFatProgress.animate(value: Float(satFatLeftAmount), total: totalSatFat)
+        sugarProgress.animate(value: Float(sugarLeftAmount), total: totalSugar)
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
                 
@@ -124,8 +151,8 @@ class TopProgressView: UIView {
         sugarLabel.setFont(text: "SUGAR", size: 13, weight: .bold)
         sugarLeft.setFont(text: "5g left", size: 13, weight: .bold)
         sugarTotalLabel.setFont(text: "from 36g/day", size: 13, color: .secondaryLabel)
-        addSubview(sugarProgress)
         
+        addSubview(sugarProgress)
         addSubview(satFatLabel)
         addSubview(sugarLabel)
     }
