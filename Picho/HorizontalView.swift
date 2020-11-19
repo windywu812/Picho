@@ -7,28 +7,28 @@
 
 import UIKit
 
+enum Activity {
+    case water
+    case activity
+}
+
 class HorizontalView: UIView {
     
     private let label: UILabel
     private let detail: UILabel
     private let icon: UIImageView
     
-    func setupViewWater(amount: Int) {
-        DispatchQueue.main.async {
-            let remaining = 15 - amount
+    func setupView(amount: Int, type: Activity) {
+        if type == .water {
+            let remaining = 14 - amount
             self.detail.text = "💧 \(remaining) cups remaining"
-        }
-    }
-    func setupViewActivity(amount: Int) {
-        DispatchQueue.main.async {
+        } else {
             self.detail.text = "🔥 \(amount) Step"
         }
     }
     
-    
     init(frame: CGRect = .zero,
          labelText: String,
-         detailText: String,
          iconImage: UIImage,
          background: UIColor
     ) {
@@ -46,7 +46,9 @@ class HorizontalView: UIView {
         addSubview(label)
         
         icon.image = iconImage
-        detail.setFont(text: detailText, weight: .regular, color: .white)
+        detail.textColor = .white
+        
+        setConstraint(heighAnchorConstant: 46)
         
         label.setConstraint(
             leadingAnchor: leadingAnchor, leadingAnchorConstant: 16,

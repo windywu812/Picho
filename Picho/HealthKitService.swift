@@ -35,26 +35,27 @@ class HealthKitService {
             return
         }
         
-        healthStore.requestAuthorization(toShare: healthKitTypesToWrite, read: HealthKitTypesToRead){ (success, error) in
+        healthStore.requestAuthorization(toShare: healthKitTypesToWrite, read: HealthKitTypesToRead) { (success, error) in
             if !success {
-                print("error")
+                print(error!.localizedDescription)
             } else {
-                print("Success")
+                print(success)
             }
         }
         
     }
     
-     func addData(sugar: Double,
-                            date: Date,
-                            type: HKQuantityTypeIdentifier,
-                            unit: HKUnit) {
+    func addData(amount: Double = 0.0,
+                  date: Date,
+                  type: HKQuantityTypeIdentifier,
+                  unit: HKUnit
+     ) {
         
         guard let dietType = HKQuantityType.quantityType(forIdentifier: type) else {
             fatalError("Error")
         }
         
-        let dietQuantity = HKQuantity(unit: unit, doubleValue: sugar)
+        let dietQuantity = HKQuantity(unit: unit, doubleValue: amount)
         let dietSample = HKQuantitySample(type: dietType, quantity: dietQuantity, start: date, end: date)
         
         HKHealthStore().save(dietSample) { (success, error) in

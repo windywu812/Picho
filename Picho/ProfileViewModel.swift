@@ -28,6 +28,7 @@ class ProfileViewModel {
             UserDefaultService.isSyncHealthKit = isSync
             HealthKitService.shared.authorization()
         }
+        
     }
     
     func fetchUserDefault() {
@@ -35,9 +36,9 @@ class ProfileViewModel {
         
         secondSection = [
             UserDefaultService.gender,
-            UserDefaultService.age,
-            UserDefaultService.height,
-            UserDefaultService.weight
+            UserDefaultService.age ?? String(0),
+            UserDefaultService.height ?? String(0),
+            UserDefaultService.weight ?? String(0)
         ]
         
         isSync = UserDefaultService.isSyncHealthKit

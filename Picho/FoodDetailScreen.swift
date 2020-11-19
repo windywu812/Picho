@@ -164,9 +164,9 @@ class FoodDetailScreen: UITableViewController {
             case .success(let food):
                 guard let servings = food.servings?.first else { return }
 
-                HealthKitService.shared.addData(sugar: Double(servings.saturatedFat ?? "0") ?? 0, date: Date(), type: .dietaryFatSaturated, unit: HKUnit.gram())
-                HealthKitService.shared.addData(sugar: Double(servings.sugar ?? "0") ?? 0, date: Date(), type: .dietarySugar, unit: HKUnit.gram())
-                HealthKitService.shared.addData(sugar: Double(servings.calories ?? "0") ?? 0, date: Date(), type: .dietaryEnergyConsumed, unit: HKUnit.smallCalorie())
+                HealthKitService.shared.addData(amount: Double(servings.saturatedFat ?? "0") ?? 0, date: Date(), type: .dietaryFatSaturated, unit: HKUnit.gram())
+                HealthKitService.shared.addData(amount: Double(servings.sugar ?? "0") ?? 0, date: Date(), type: .dietarySugar, unit: HKUnit.gram())
+                HealthKitService.shared.addData(amount: Double(servings.calories ?? "0") ?? 0, date: Date(), type: .dietaryEnergyConsumed, unit: HKUnit.smallCalorie())
                 print("aman")
             case .failure(let err):
                 print(err.localizedDescription)

@@ -16,6 +16,9 @@ class UserDefaultService {
     static private let heightKey = "heightKey"
     static private let weightKey = "weightKey"
     static private let isSyncHealthKitKey = "isSyncHealthKitKey"
+    static private let hasBreakfastKey = "hasBreakfastKey"
+    static private let hasLunchKey = "hasLunchKey"
+    static private let hasDinnerKey = "hasDinnerKey"
     static let photoProfileKey = "photoKey"
  
     static var hasLaunched: Bool {
@@ -45,27 +48,27 @@ class UserDefaultService {
         }
     }
     
-    static var age: String {
+    static var age: String? {
         get {
-            return UserDefaults.standard.string(forKey: ageKey) ?? ""
+            return UserDefaults.standard.string(forKey: ageKey) ?? "0"
         }
         set {
             UserDefaults.standard.set(newValue, forKey: ageKey)
         }
     }
     
-    static var height: String {
+    static var height: String? {
         get {
-            return UserDefaults.standard.string(forKey: heightKey) ?? ""
+            return UserDefaults.standard.string(forKey: heightKey) ?? "0"
         }
         set {
             UserDefaults.standard.set(newValue, forKey: heightKey)
         }
     }
     
-    static var weight: String {
+    static var weight: String? {
         get {
-            return UserDefaults.standard.string(forKey: weightKey) ?? ""
+            return UserDefaults.standard.string(forKey: weightKey) ?? "0"
         }
         set {
             UserDefaults.standard.set(newValue, forKey: weightKey)
@@ -78,6 +81,33 @@ class UserDefaultService {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: isSyncHealthKitKey)
+        }
+    }
+    
+    static var hasBreakfast: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: hasBreakfastKey)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: hasBreakfastKey)
+        }
+    }
+    
+    static var hasLunch: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: hasLunchKey)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: hasLunchKey)
+        }
+    }
+    
+    static var hasDinner: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: hasDinnerKey)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: hasDinnerKey)
         }
     }
     
