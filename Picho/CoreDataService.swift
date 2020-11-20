@@ -93,6 +93,8 @@ class CoreDataService {
     
     func addDailyIntake(id: UUID, foodId: String, name: String, description: String, calorie: Double, saturatedFat: Double, sugars: Double, date: Date = Date(), time: EatTime) {
         
+        print(id)
+        
         let intake = DailyIntake(context: context)
         intake.id = id
         intake.foodId = foodId
@@ -108,9 +110,10 @@ class CoreDataService {
     }
     
     func deleteDailyIntake(with request: NSFetchRequest<DailyIntake> = DailyIntake.fetchRequest(), _ id: UUID) {
+        print(id)
         request.predicate = NSPredicate(format: "id = %@", id as CVarArg)
         
-        saveDailyIntake(context: context, deleted: true)
+        saveDailyIntake(with: request, context: context, deleted: true)
     }
     
     private func saveDailyIntake(with request: NSFetchRequest<DailyIntake> = DailyIntake.fetchRequest(), context: NSManagedObjectContext, deleted: Bool = false) {
@@ -118,6 +121,7 @@ class CoreDataService {
         do {
             if deleted {
                 let dataToDelete = try context.fetch(request)[0] as NSManagedObject
+                print(dataToDelete)
                 context.delete(dataToDelete)
             }
             try context.save()
