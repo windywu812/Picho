@@ -198,7 +198,7 @@ extension FormScreen3: UITextFieldDelegate {
         self.activeTextField = textField
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
         
         if textField.tag == 0 {
             gender = textField.text ?? ""

@@ -187,7 +187,7 @@ extension FormScreen4: UITextFieldDelegate {
         self.activeTextField = textField
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
         
         if textField.tag == 0 {
             weight = textField.text ?? ""
