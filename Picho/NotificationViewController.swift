@@ -130,7 +130,7 @@ class NotificationViewController: UIViewController {
     @objc func handleDataPicker(sender: UIDatePicker) {
         
         let dateFormat = DateFormatter()
-        dateFormat.dateFormat = "HH:mm"
+        dateFormat.timeStyle = .short
         
         switch sender.tag {
         case 0:
@@ -242,7 +242,6 @@ extension NotificationViewController: UITableViewDelegate {
                 let datePicker = UIDatePicker()
                 datePicker.setupStyle(tag: 0)
                 datePicker.addTarget(self, action: #selector(self.handleDataPicker(sender:)), for: .valueChanged)
-                
                 
                 breakfastTextfield = UITextField(frame: CGRect(x: 0, y: 0, width: 56, height: 30))
                 breakfastTextfield.addStyle(tag: 0, text: viewModel.notifications[0].timeLabel ?? "08:00", datePicker: datePicker)
