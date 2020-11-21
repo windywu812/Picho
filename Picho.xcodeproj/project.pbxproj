@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		230F95062568D871006484C6 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230F95052568D871006484C6 /* NotificationCell.swift */; };
 		2339FBEC255E998F00D0ABB3 /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2339FBEB255E998F00D0ABB3 /* SummaryView.swift */; };
 		2339FBEF255E99AE00D0ABB3 /* HorizontalRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2339FBEE255E99AE00D0ABB3 /* HorizontalRowView.swift */; };
 		2339FBF2255E99C300D0ABB3 /* IndicatorLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2339FBF1255E99C300D0ABB3 /* IndicatorLabelView.swift */; };
@@ -37,6 +38,7 @@
 		238C9417255BEC2D00591791 /* StringOptional+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238C9416255BEC2D00591791 /* StringOptional+Extensions.swift */; };
 		239D53C62560F011009112AF /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239D53C52560F011009112AF /* TabBarController.swift */; };
 		23A8C536256233D400D06F5D /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A8C535256233D400D06F5D /* HistoryViewModel.swift */; };
+		23DB9FA52566A2FA00373874 /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DB9FA42566A2FA00373874 /* NotificationViewModel.swift */; };
 		23DC2B3B255EB70A00025434 /* FoodHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC2B3A255EB70A00025434 /* FoodHistoryCell.swift */; };
 		23DC2B3E255EB73600025434 /* FoodHistoryTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC2B3D255EB73600025434 /* FoodHistoryTableView.swift */; };
 		23DC2B41255EB75700025434 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC2B40255EB75700025434 /* HeaderView.swift */; };
@@ -102,6 +104,7 @@
 
 /* Begin PBXFileReference section */
 		047BD003AF371FA6292C078C /* Pods_Picho.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Picho.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		230F95052568D871006484C6 /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		2339FBEB255E998F00D0ABB3 /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
 		2339FBEE255E99AE00D0ABB3 /* HorizontalRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalRowView.swift; sourceTree = "<group>"; };
 		2339FBF1255E99C300D0ABB3 /* IndicatorLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorLabelView.swift; sourceTree = "<group>"; };
@@ -132,6 +135,7 @@
 		238C9416255BEC2D00591791 /* StringOptional+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StringOptional+Extensions.swift"; sourceTree = "<group>"; };
 		239D53C52560F011009112AF /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		23A8C535256233D400D06F5D /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
+		23DB9FA42566A2FA00373874 /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
 		23DC2B3A255EB70A00025434 /* FoodHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodHistoryCell.swift; sourceTree = "<group>"; };
 		23DC2B3D255EB73600025434 /* FoodHistoryTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodHistoryTableView.swift; sourceTree = "<group>"; };
 		23DC2B40255EB75700025434 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
@@ -297,6 +301,16 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
+		23DB9FA72566A30C00373874 /* NotificationScreen */ = {
+			isa = PBXGroup;
+			children = (
+				23DB9FA42566A2FA00373874 /* NotificationViewModel.swift */,
+				23FEBA61255BDF3A001EA146 /* NotificationViewController.swift */,
+				230F95052568D871006484C6 /* NotificationCell.swift */,
+			);
+			name = NotificationScreen;
+			sourceTree = "<group>";
+		};
 		23FEB9D0255BDA35001EA146 /* FatSecretSwift */ = {
 			isa = PBXGroup;
 			children = (
@@ -392,6 +406,7 @@
 				23FEBA49255BDCFE001EA146 /* FoodDetailScreen */,
 				23FEBA4A255BDD06001EA146 /* HistoryScreen */,
 				23FEBA4B255BDD0E001EA146 /* ProfileScreen */,
+				23DB9FA72566A30C00373874 /* NotificationScreen */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -464,7 +479,6 @@
 				23FEBA4C255BDD49001EA146 /* ProfileViewModel.swift */,
 				23FEBA4F255BDD51001EA146 /* ProfileViewController.swift */,
 				23EC0D90256149010084154F /* ProfileEditViewController.swift */,
-				23FEBA61255BDF3A001EA146 /* NotificationViewController.swift */,
 				23FEBA52255BDD59001EA146 /* Value1Cell.swift */,
 			);
 			name = ProfileScreen;
@@ -660,6 +674,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				23DC2B3E255EB73600025434 /* FoodHistoryTableView.swift in Sources */,
+				23DB9FA52566A2FA00373874 /* NotificationViewModel.swift in Sources */,
 				23FEBA5C255BDDB2001EA146 /* FoodInputViewController.swift in Sources */,
 				23A8C536256233D400D06F5D /* HistoryViewModel.swift in Sources */,
 				23414A07255CD36A00E1F48D /* WaterViewController.swift in Sources */,
@@ -690,6 +705,7 @@
 				26F98157255F0E1900774F94 /* Favorite+CoreDataClass.swift in Sources */,
 				23FEB9DF255BDA72001EA146 /* SearchedFood.swift in Sources */,
 				26F98137255EDA9E00774F94 /* DailyIntake+CoreDataClass.swift in Sources */,
+				230F95062568D871006484C6 /* NotificationCell.swift in Sources */,
 				2381F77B255C03E7008004DE /* FormScreen5.swift in Sources */,
 				26F98151255EE1C400774F94 /* NotificationName+Extensions.swift in Sources */,
 				23FEBA53255BDD59001EA146 /* Value1Cell.swift in Sources */,
