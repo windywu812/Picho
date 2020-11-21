@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		230F95062568D871006484C6 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230F95052568D871006484C6 /* NotificationCell.swift */; };
 		2339FBEC255E998F00D0ABB3 /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2339FBEB255E998F00D0ABB3 /* SummaryView.swift */; };
 		2339FBEF255E99AE00D0ABB3 /* HorizontalRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2339FBEE255E99AE00D0ABB3 /* HorizontalRowView.swift */; };
 		2339FBF2255E99C300D0ABB3 /* IndicatorLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2339FBF1255E99C300D0ABB3 /* IndicatorLabelView.swift */; };
@@ -103,6 +104,7 @@
 
 /* Begin PBXFileReference section */
 		047BD003AF371FA6292C078C /* Pods_Picho.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Picho.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		230F95052568D871006484C6 /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		2339FBEB255E998F00D0ABB3 /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
 		2339FBEE255E99AE00D0ABB3 /* HorizontalRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalRowView.swift; sourceTree = "<group>"; };
 		2339FBF1255E99C300D0ABB3 /* IndicatorLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorLabelView.swift; sourceTree = "<group>"; };
@@ -304,6 +306,7 @@
 			children = (
 				23DB9FA42566A2FA00373874 /* NotificationViewModel.swift */,
 				23FEBA61255BDF3A001EA146 /* NotificationViewController.swift */,
+				230F95052568D871006484C6 /* NotificationCell.swift */,
 			);
 			name = NotificationScreen;
 			sourceTree = "<group>";
@@ -702,6 +705,7 @@
 				26F98157255F0E1900774F94 /* Favorite+CoreDataClass.swift in Sources */,
 				23FEB9DF255BDA72001EA146 /* SearchedFood.swift in Sources */,
 				26F98137255EDA9E00774F94 /* DailyIntake+CoreDataClass.swift in Sources */,
+				230F95062568D871006484C6 /* NotificationCell.swift in Sources */,
 				2381F77B255C03E7008004DE /* FormScreen5.swift in Sources */,
 				26F98151255EE1C400774F94 /* NotificationName+Extensions.swift in Sources */,
 				23FEBA53255BDD59001EA146 /* Value1Cell.swift in Sources */,
