@@ -15,7 +15,7 @@ class NotificationCell: UITableViewCell {
     let title: UILabel
     
     func setupEmptyState() {
-        iconImage.image = UIImage(named: "")
+        iconImage.image = UIImage()
         title.text = ""
     }
     
