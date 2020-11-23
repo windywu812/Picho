@@ -12,20 +12,21 @@ class JournalViewController: UIViewController {
     
     private var scrollView: UIScrollView!
     private var mainProgressView: MainProgressView!
-    private var pichoCardView: PichoCardView!
+    private var pichoCardView: PichoCardView?
     private var waterCardView: HorizontalView!
     private var activityCardView: HorizontalView!
     private var activityStack: UIStackView!
     private var mealTodayView: MealsTodayView!
     private var cancellables: Set<AnyCancellable> = []
     
-    let viewModel = JournalViewModel()
+    private let viewModel = JournalViewModel()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
- 
+        
         viewModel.fetchData()
         setupProgressView()
+        setupPicho()
     }
     
     override func viewDidLoad() {
@@ -33,7 +34,7 @@ class JournalViewController: UIViewController {
         
         setupScrollView()
         setupMainProgress()
-        setupPichoCard()
+        setupPicho()
         setupActivity()
         setupMealTodayView()
         bindViewModel()
@@ -85,18 +86,6 @@ class JournalViewController: UIViewController {
             .store(in: &cancellables)
     }
     
-    @objc private func handleWater(sender: UITapGestureRecognizer) {
-        let vc =  WaterViewController()
-        vc.delegate = self
-        navigationController?.present(UINavigationController(rootViewController: vc), animated: true)
-    }
-    
-    @objc private func handleActivity(sender: UITapGestureRecognizer) {
-        let vc = ActivityViewController()
-        vc.viewModel = viewModel
-        navigationController?.present(UINavigationController(rootViewController: vc), animated: true)
-    }
-    
     private func setupScrollView() {
         navigationItem.title = "Today"
         
@@ -115,7 +104,7 @@ class JournalViewController: UIViewController {
     private func setupMainProgress() {
         mainProgressView = MainProgressView(rootView: self, viewModel: viewModel)
         scrollView.addSubview(mainProgressView)
-            
+        
         mainProgressView.setConstraint(
             topAnchor: scrollView.topAnchor, topAnchorConstant: 16,
             leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
@@ -123,30 +112,60 @@ class JournalViewController: UIViewController {
             heighAnchorConstant: 206)
     }
     
-    private func setupPichoCard() {
-        pichoCardView = PichoCardView(
-            mascot: "mascot_sad",
-            title: "You haven't started!",
-            detail: "Start by logging in what you eat today",
-            buttonText: "Log Breakfast",
-            type: .breakfast, rootView: self)
-        scrollView.addSubview(pichoCardView)
+    private func setupPicho() {
+        UserDefaultService.hasBreakfast = false
+        if Date() < Date().getBreakfast().date! {
+            pichoCardView = PichoCardView(
+                mascot: "mascot_sad",
+                title: "Morning, Fred!",
+                detail: "Hope you've had a good night's sleep",
+                buttonText: "Log Breakfast",
+                type: .breakfast, rootView: self)
+        } else if Date() > Date().getBreakfast().date! {
+            if !UserDefaultService.hasBreakfast {
+                pichoCardView = PichoCardView(
+                    mascot: "mascot_sad",
+                    title: "You haven't started!",
+                    detail: "Start by logging in what you eat today",
+                    buttonText: "Log Breakfast",
+                    type: .breakfast, rootView: self)
+            } else {
+                pichoCardView = nil
+            }
+        } else if Date() > Date().getLunch().date! {
+            if !UserDefaultService.hasLunch {
+                pichoCardView = PichoCardView(
+                    mascot: "mascot_sad",
+                    title: "Lunchie!",
+                    detail: "Psst.. I heard lunch is a great place to be",
+                    buttonText: "Log Lunch",
+                    type: .lunch, rootView: self)
+            } else {
+                pichoCardView = nil
+            }
+        } else if Date() > Date().getDinner().date! {
+            if !UserDefaultService.hasDinner {
+                pichoCardView = PichoCardView(
+                    mascot: "mascot_sad",
+                    title: "Din din!",
+                    detail: "What a day it has been, don't forget to log your dinner",
+                    buttonText: "Log Dinner",
+                    type: .dinner, rootView: self)
+            } else {
+                pichoCardView = nil
+            }
+        }
         
-        pichoCardView.setConstraint(
-            topAnchor: mainProgressView.bottomAnchor, topAnchorConstant: 24,
-            leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
-            trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
     }
     
     private func setupActivity() {
-       
         waterCardView = HorizontalView(
             labelText: "Water",
             iconImage: UIImage(),
             background: Color.blue)
         let tapWater = UITapGestureRecognizer(target: self, action: #selector(handleWater(sender:)))
         waterCardView.addGestureRecognizer(tapWater)
-       
+        
         activityCardView = HorizontalView(
             labelText: "Activity",
             iconImage: UIImage(),
@@ -154,13 +173,13 @@ class JournalViewController: UIViewController {
         let tapActivity = UITapGestureRecognizer(target: self, action: #selector(handleActivity(sender:)))
         activityCardView.addGestureRecognizer(tapActivity)
         
-        activityStack = UIStackView(arrangedSubviews: [waterCardView, activityCardView])
+        activityStack = UIStackView(arrangedSubviews: [pichoCardView, waterCardView, activityCardView].compactMap({ $0 }))
         activityStack.spacing = 16
         activityStack.axis = .vertical
         scrollView.addSubview(activityStack)
         
         activityStack.setConstraint(
-            topAnchor: pichoCardView.bottomAnchor, topAnchorConstant: 16,
+            topAnchor: mainProgressView.bottomAnchor, topAnchorConstant: 24,
             leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
             trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
     }
@@ -175,9 +194,21 @@ class JournalViewController: UIViewController {
             leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
             trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
     }
-   
+    
+    @objc private func handleWater(sender: UITapGestureRecognizer) {
+        let vc =  WaterViewController()
+        vc.delegate = self
+        navigationController?.present(UINavigationController(rootViewController: vc), animated: true)
+    }
+    
+    @objc private func handleActivity(sender: UITapGestureRecognizer) {
+        let vc = ActivityViewController()
+        vc.viewModel = viewModel
+        navigationController?.present(UINavigationController(rootViewController: vc), animated: true)
+    }
+    
 }
-  
+
 
 extension JournalViewController: WaterDelegate {
     func sendWater(water: Int) {

@@ -72,7 +72,7 @@ class CircularProgressView: UIView {
         trackLayer.fillColor = UIColor.clear.cgColor
         trackLayer.lineCap = .round
         trackLayer.strokeColor = Color.grey.cgColor
-        trackLayer.lineWidth = 6
+        trackLayer.lineWidth = 8
         layer.addSublayer(trackLayer)
         
         shapeLayer.lineCap = .round
