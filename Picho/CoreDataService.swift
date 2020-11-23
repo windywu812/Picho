@@ -231,4 +231,51 @@ class CoreDataService {
         return false
     }
     
+    // MARK: - Water
+    func getWater(with request: NSFetchRequest<WaterIntake> = WaterIntake.fetchRequest(), for id: String? = nil, completion: @escaping ([WaterIntake]) -> Void) {
+        
+        if let id = id {
+            request.predicate = NSPredicate(format: "id = %@", id as CVarArg)
+        }
+        
+        do {
+            let intakes = try context.fetch(request)
+            completion(intakes)
+        } catch {
+            print(error.localizedDescription)
+            completion([])
+        }
+        
+    }
+    
+    func addWater(id: UUID, amount: Double = 1.0, date: Date = Date()) {
+        
+        let water = WaterIntake(context: context)
+        water.id = id
+        water.amount = amount
+        water.date = date
+        
+        saveWater(context: context)
+    }
+    
+    func deleteWater(with request: NSFetchRequest<WaterIntake> = WaterIntake.fetchRequest(), _ id: String) {
+        request.predicate = NSPredicate(format: "\(DailyIntakeConstant.id) = %@", id as CVarArg)
+        
+        saveFavorite(context: context, deleted: true)
+    }
+    
+    private func saveWater(with request: NSFetchRequest<WaterIntake> = WaterIntake.fetchRequest(), context: NSManagedObjectContext, deleted: Bool = false) {
+        
+        do {
+            if deleted {
+                let dataToDelete = try context.fetch(request)[0] as NSManagedObject
+                context.delete(dataToDelete)
+            }
+            try context.save()
+            
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
 }

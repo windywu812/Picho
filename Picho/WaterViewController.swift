@@ -40,14 +40,28 @@ class WaterViewController: UIViewController {
     }
     
     func fetch() {
-        HealthKitService.shared.fetchWater { (glassIntake) in
-            self.totalWater = Int(glassIntake)
+        CoreDataService.shared.getWater { intakes in
+            self.totalWater = Int(intakes.map({ $0.amount }).reduce(0.0, +))
                         
             DispatchQueue.main.async {
                 self.waterAmount.text = "\(self.totalWater) Cups"
                 self.waterProgress.setProgress(progress: self.totalWater)
                 if self.totalWater > 5 {
                     self.infoLabel.setFont(text: "Good", weight: .bold, color: Color.green)
+                }
+            }
+        }
+        
+        if HealthKitService.shared.checkAuthorization() {
+            HealthKitService.shared.fetchWater { (glassIntake) in
+                self.totalWater = Int(glassIntake)
+                            
+                DispatchQueue.main.async {
+                    self.waterAmount.text = "\(self.totalWater) Cups"
+                    self.waterProgress.setProgress(progress: self.totalWater)
+                    if self.totalWater > 5 {
+                        self.infoLabel.setFont(text: "Good", weight: .bold, color: Color.green)
+                    }
                 }
             }
         }
@@ -154,10 +168,15 @@ extension WaterViewController: UICollectionViewDelegate, UICollectionViewDataSou
                 cell.isUserInteractionEnabled = false
             } else {
                 HealthKitService.shared.addData(amount: 1, date: Date(), type: .dietaryWater, unit: HKUnit.cupUS())
+                
+                CoreDataService.shared.addWater(id: UUID())
+                
                 cell.image = UIImage(named: "glass_fill")
                 totalWater += 1
                 waterAmount.text = "\(totalWater) Cups"
                 waterProgress.setProgress(progress: totalWater)
+                
+                
             }
         }
     }

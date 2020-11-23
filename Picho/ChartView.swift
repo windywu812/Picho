@@ -25,7 +25,7 @@ class ChartView: UIView, ChartViewDelegate {
 
     func setupChartData() {
         
-        guard let max = dataWeekPerMonth.keys.max(by: { ($0 ?? 0) < ($1 ?? 0) }) else { return }
+        guard let max = dataWeekPerMonth.keys.max(by: { ($0 ?? 0) <= ($1 ?? 0) }) else { return }
         
         let sugarEntry = (0..<max!).map { (week) -> ChartDataEntry in
             return ChartDataEntry(
