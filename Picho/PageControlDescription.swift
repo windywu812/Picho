@@ -42,8 +42,8 @@ class PageControlDescription: UIPageViewController {
         pageControl = UIPageControl(frame: CGRect(x: 0, y: UIScreen.main.bounds.maxY - 75 , width: UIScreen.main.bounds.width, height: 50))
         pageControl.numberOfPages = orderedViewControllers.count
         pageControl.currentPage = 0
-        pageControl.pageIndicatorTintColor = .tertiaryLabel
-        pageControl.currentPageIndicatorTintColor = .black
+        pageControl.pageIndicatorTintColor = Color.lightGreen
+        pageControl.currentPageIndicatorTintColor = Color.green
         view.addSubview(pageControl)
     }
     
