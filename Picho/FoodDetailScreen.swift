@@ -164,16 +164,21 @@ class FoodDetailScreen: UITableViewController {
             case .success(let food):
                 guard let servings = food.servings?.first else { return }
 
-                HealthKitService.shared.addData(amount: Double(servings.saturatedFat ?? "0") ?? 0, date: Date(), type: .dietaryFatSaturated, unit: HKUnit.gram())
-                HealthKitService.shared.addData(amount: Double(servings.sugar ?? "0") ?? 0, date: Date(), type: .dietarySugar, unit: HKUnit.gram())
-                HealthKitService.shared.addData(amount: Double(servings.calories ?? "0") ?? 0, date: Date(), type: .dietaryEnergyConsumed, unit: HKUnit.smallCalorie())
+                let idSatFat = HealthKitService.shared.addData(amount: Double(servings.saturatedFat ?? "0") ?? 0, date: Date(), type: .dietaryFatSaturated, unit: HKUnit.gram())
+                let idSugar = HealthKitService.shared.addData(amount: Double(servings.sugar ?? "0") ?? 0, date: Date(), type: .dietarySugar, unit: HKUnit.gram())
+                let idCalorie = HealthKitService.shared.addData(amount: Double(servings.calories ?? "0") ?? 0, date: Date(), type: .dietaryEnergyConsumed, unit: HKUnit.smallCalorie())
+                
+                CoreDataService.shared.addDailyIntake(id: UUID(), foodId: self.foodId, name: self.foodName, description: self.foodDescription, calorie: self.calorieNutrition, saturatedFat: self.mainAmounts[0], sugars: self.mainAmounts[1], idCalorie: idCalorie, idSugar: idSugar, idSatFat: idSatFat, time: self.eatingTime)
+                
+                
+                
                 print("aman")
             case .failure(let err):
                 print(err.localizedDescription)
             }
         }
         
-        if !mainAmounts.isEmpty {
+        if !HealthKitService.shared.checkAuthorization() {
             CoreDataService.shared.addDailyIntake(id: UUID(), foodId: foodId, name: foodName, description: foodDescription, calorie: calorieNutrition, saturatedFat: mainAmounts[0], sugars: mainAmounts[1], time: eatingTime)
         }
         

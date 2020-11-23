@@ -49,7 +49,7 @@ class HealthKitService {
                   date: Date,
                   type: HKQuantityTypeIdentifier,
                   unit: HKUnit
-     ) {
+    ) -> UUID {
         
         guard let dietType = HKQuantityType.quantityType(forIdentifier: type) else {
             fatalError("Error")
@@ -65,6 +65,7 @@ class HealthKitService {
                 print("Successfully saved")
             }
         }
+        return dietSample.uuid
     }
     
      func fetchCalorie(completion: @escaping (Double) -> Void) {
