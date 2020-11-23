@@ -169,8 +169,7 @@ class FoodDetailScreen: UITableViewController {
                 let idCalorie = HealthKitService.shared.addData(amount: Double(servings.calories ?? "0") ?? 0, date: Date(), type: .dietaryEnergyConsumed, unit: HKUnit.smallCalorie())
                 
                 CoreDataService.shared.addDailyIntake(id: UUID(), foodId: self.foodId, name: self.foodName, description: self.foodDescription, calorie: self.calorieNutrition, saturatedFat: self.mainAmounts[0], sugars: self.mainAmounts[1], idCalorie: idCalorie, idSugar: idSugar, idSatFat: idSatFat, time: self.eatingTime)
-                
-                
+        
                 
                 print("aman")
             case .failure(let err):
