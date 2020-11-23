@@ -26,14 +26,14 @@ class HistoryViewController: UIViewController {
     private var dinners: [DailyIntake] = []
     private var snacks: [DailyIntake] = []
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
         chartView.lineChartView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
         chartView.dataWeekPerMonth = viewModel.getDataWeekofMonth(in: Date().month)
         chartView.setupChartData()
         
-        fetchConsupmtionPerWeek(week: 1)
+        fetchConsupmtionPerWeek(week: Date().weekOfMonth)
     }
     
     private func fetchConsupmtionPerWeek(month: Int = Date().month, week: Int) {
@@ -42,12 +42,10 @@ class HistoryViewController: UIViewController {
         
         let firstDateOfWeek = formatterWithoutYear.string(from: viewModel.getDataWeekofMonth(in: month)[week]?.first?.date ?? Date())
         let lastDataOfWeek = formatterWithoutYear.string(from: viewModel.getDataWeekofMonth(in: month)[week]?.last?.date ?? Date())
-        
+
         timeLabel.text = "\(firstDateOfWeek) - \(lastDataOfWeek)"
-        
         chartView.dataWeekPerMonth = viewModel.getDataWeekofMonth(in: month)
         chartView.setupChartData()
-        
         summaryView.setupSummary(data: viewModel.getDataWeekofMonth(in: month)[week] ?? [])
         foodHistory.setupConsumption(data: viewModel.getDataWeekofMonth(in: month)[week] ?? [])
     }

@@ -25,7 +25,9 @@ class ChartView: UIView, ChartViewDelegate {
 
     func setupChartData() {
         
-        let sugarEntry = (0..<dataWeekPerMonth.keys.count).map { (week) -> ChartDataEntry in
+        guard let max = dataWeekPerMonth.keys.max(by: { ($0 ?? 0) < ($1 ?? 0) }) else { return }
+        
+        let sugarEntry = (0..<max!).map { (week) -> ChartDataEntry in
             return ChartDataEntry(
                 x: Double(week),
                 y: Double(dataWeekPerMonth[week + 1]?.getAverage(of: .sugar) ?? 0))
@@ -40,7 +42,7 @@ class ChartView: UIView, ChartViewDelegate {
         sugarData.drawValuesEnabled = false
         sugarData.highlightColor = Color.green
         
-        let satFatEntry = (0..<dataWeekPerMonth.keys.count).map { (week) -> ChartDataEntry in
+        let satFatEntry = (0..<max!).map { (week) -> ChartDataEntry in
             return ChartDataEntry(
                 x: Double(week),
                 y: Double(dataWeekPerMonth[week + 1]?.getAverage(of: .satFat) ?? 0))
@@ -55,7 +57,7 @@ class ChartView: UIView, ChartViewDelegate {
         satFatData.drawValuesEnabled = false
         satFatData.highlightColor = Color.yellow
         
-        let axisValue = (0..<dataWeekPerMonth.keys.count).map { (week) -> String in
+        let axisValue = (0..<max!).map { (week) -> String in
             return "w\(week + 1)"
         }
         
