@@ -53,7 +53,8 @@ class DescriptionScreen4: UIViewController {
         
         let getStartedBtn = UIButton()
         getStartedBtn.setTitle("Get Started", for: .normal)
-        getStartedBtn.layer.cornerRadius =  5
+        getStartedBtn.titleLabel?.font = .boldSystemFont(ofSize: 16)
+        getStartedBtn.layer.cornerRadius =  10
         getStartedBtn.backgroundColor = Color.green
         view.addSubview(getStartedBtn)
         getStartedBtn.translatesAutoresizingMaskIntoConstraints = false
