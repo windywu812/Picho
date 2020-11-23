@@ -170,6 +170,7 @@ class FoodDetailScreen: UITableViewController {
                 
                 CoreDataService.shared.addDailyIntake(id: UUID(), foodId: self.foodId, name: self.foodName, description: self.foodDescription, calorie: self.calorieNutrition, saturatedFat: self.mainAmounts[0], sugars: self.mainAmounts[1], idCalorie: idCalorie, idSugar: idSugar, idSatFat: idSatFat, time: self.eatingTime)
         
+                NotificationService.shared.post()
                 
                 print("aman")
             case .failure(let err):
@@ -179,9 +180,9 @@ class FoodDetailScreen: UITableViewController {
         
         if !HealthKitService.shared.checkAuthorization() {
             CoreDataService.shared.addDailyIntake(id: UUID(), foodId: foodId, name: foodName, description: foodDescription, calorie: calorieNutrition, saturatedFat: mainAmounts[0], sugars: mainAmounts[1], time: eatingTime)
+            
+            NotificationService.shared.post()
         }
-        
-        NotificationService.shared.post()
         
         dismiss(animated: true, completion: nil)
     }

@@ -153,7 +153,8 @@ extension WaterViewController: UICollectionViewDelegate, UICollectionViewDataSou
             if cell.image == UIImage(named: "glass_fill") {
                 cell.isUserInteractionEnabled = false
             } else {
-                HealthKitService.shared.addData(amount: 1, date: Date(), type: .dietaryWater, unit: HKUnit.cupUS())
+                let water = HealthKitService.shared.addData(amount: 1, date: Date(), type: .dietaryWater, unit: HKUnit.cupUS())
+                print(water)
                 cell.image = UIImage(named: "glass_fill")
                 totalWater += 1
                 waterAmount.text = "\(totalWater) Cups"
