@@ -26,7 +26,8 @@ class JournalViewController: UIViewController {
         
         viewModel.fetchData()
         setupProgressView()
-        setupPicho()
+        setupActivity()
+        setupMealTodayView()
     }
     
     override func viewDidLoad() {
@@ -34,9 +35,6 @@ class JournalViewController: UIViewController {
         
         setupScrollView()
         setupMainProgress()
-        setupPicho()
-        setupActivity()
-        setupMealTodayView()
         bindViewModel()
     }
     
@@ -113,7 +111,7 @@ class JournalViewController: UIViewController {
     }
     
     private func setupPicho() {
-        UserDefaultService.hasBreakfast = false
+        
         if Date() < Date().getBreakfast().date! {
             pichoCardView = PichoCardView(
                 mascot: "mascot_sad",
@@ -121,7 +119,7 @@ class JournalViewController: UIViewController {
                 detail: "Hope you've had a good night's sleep",
                 buttonText: "Log Breakfast",
                 type: .breakfast, rootView: self)
-        } else if Date() > Date().getBreakfast().date! {
+        } else if Date() > Date().getBreakfast().date! && Date() < Date().getLunch().date! {
             if !UserDefaultService.hasBreakfast {
                 pichoCardView = PichoCardView(
                     mascot: "mascot_sad",
@@ -132,7 +130,7 @@ class JournalViewController: UIViewController {
             } else {
                 pichoCardView = nil
             }
-        } else if Date() > Date().getLunch().date! {
+        } else if Date() > Date().getLunch().date! && Date() < Date().getDinner().date!  {
             if !UserDefaultService.hasLunch {
                 pichoCardView = PichoCardView(
                     mascot: "mascot_sad",
@@ -159,6 +157,11 @@ class JournalViewController: UIViewController {
     }
     
     private func setupActivity() {
+        
+        if activityStack != nil { activityStack.removeFromSuperview() }
+        
+        setupPicho()
+        
         waterCardView = HorizontalView(
             labelText: "Water",
             iconImage: UIImage(),
@@ -208,7 +211,6 @@ class JournalViewController: UIViewController {
     }
     
 }
-
 
 extension JournalViewController: WaterDelegate {
     func sendWater(water: Int) {

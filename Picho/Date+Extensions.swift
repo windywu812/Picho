@@ -13,6 +13,9 @@ extension Date {
         var dateComponent = DateComponents()
         dateComponent.hour = 8
         dateComponent.minute = 0
+        dateComponent.year = Date().year
+        dateComponent.month = Date().month
+        dateComponent.day = Date().day
         dateComponent.calendar = Calendar.current
         
         return dateComponent
@@ -22,6 +25,10 @@ extension Date {
         var dateComponent = DateComponents()
         dateComponent.hour = 12
         dateComponent.minute = 0
+        dateComponent.year = Date().year
+        dateComponent.month = Date().month
+        dateComponent.day = Date().day
+        
         dateComponent.calendar = Calendar.current
         
         return dateComponent
@@ -31,6 +38,9 @@ extension Date {
         var dateComponent = DateComponents()
         dateComponent.hour = 19
         dateComponent.minute = 0
+        dateComponent.year = Date().year
+        dateComponent.month = Date().month
+        dateComponent.day = Date().day
         dateComponent.calendar = Calendar.current
         
         return dateComponent
@@ -89,6 +99,10 @@ extension Date {
     
     var weekOfMonth: Int {
         return Calendar.current.component(.weekOfMonth, from: self)
+    }
+    
+    var day: Int {
+        return Calendar.current.component(.day, from: self)
     }
     
     var startOfDay: Date {
