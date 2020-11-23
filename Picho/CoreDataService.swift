@@ -91,7 +91,7 @@ class CoreDataService {
 //        
 //    }
     
-    func addDailyIntake(id: UUID, foodId: String, name: String, description: String, calorie: Double, saturatedFat: Double, sugars: Double, date: Date = Date(), time: EatTime) {
+    func addDailyIntake(id: UUID, foodId: String, name: String, description: String, calorie: Double, saturatedFat: Double, sugars: Double, date: Date = Date(), idCalorie: UUID? = nil, idSugar: UUID? = nil, idSatFat: UUID? = nil, time: EatTime) {
         
         print(id)
         
