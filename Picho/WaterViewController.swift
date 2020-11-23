@@ -149,17 +149,28 @@ extension WaterViewController: UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) as? WaterCell {
-            if cell.image == UIImage(named: "glass_fill") {
-                cell.isUserInteractionEnabled = false
-            } else {
-                HealthKitService.shared.addData(amount: 1, date: Date(), type: .dietaryWater, unit: HKUnit.cupUS())
-                cell.image = UIImage(named: "glass_fill")
-                totalWater += 1
-                waterAmount.text = "\(totalWater) Cups"
-                waterProgress.setProgress(progress: totalWater)
-            }
+        guard let cell = collectionView.cellForItem(at: indexPath) as? WaterCell else { return }
+        
+        let previousCell = collectionView.cellForItem(
+            at: IndexPath(row: indexPath.row == 0 ? 0 : indexPath.row - 1,
+                          section: indexPath.section)) as! WaterCell
+     
+        if previousCell.image == UIImage(named: "glass_empty") && indexPath.row != 0 {
+            return
         }
+        
+        if cell.image == UIImage(named: "glass_fill") {
+            cell.isUserInteractionEnabled = false
+        } else {
+            HealthKitService.shared.addData(amount: 1, date: Date(), type: .dietaryWater, unit: HKUnit.cupUS())
+            cell.image = UIImage(named: "glass_fill")
+            totalWater += 1
+            waterAmount.text = "\(totalWater) Cups"
+            waterProgress.setProgress(progress: totalWater)
+        }
+        
+        fetch()
+        
     }
     
 }
