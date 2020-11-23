@@ -34,7 +34,7 @@ class FormScreen5: UIViewController {
         }
        
         let label1 = UILabel()
-        label1.text = "Great!"
+        label1.text = "Awesome!"
         label1.font = UIFont.boldSystemFont(ofSize: 24.0)
         label1.textAlignment = .center
         view.addSubview(label1)
@@ -91,9 +91,10 @@ class FormScreen5: UIViewController {
             trailingAnchor: view.layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: -16)
         
         getStartedBtn = UIButton()
-        getStartedBtn.setTitle("LET’S DO THIS!", for: .normal)
+        getStartedBtn.setTitle("Continue", for: .normal)
+        getStartedBtn.titleLabel?.font = .boldSystemFont(ofSize: 16)
         getStartedBtn.isEnabled = false
-        getStartedBtn.layer.cornerRadius =  6
+        getStartedBtn.layer.cornerRadius =  10
         getStartedBtn.backgroundColor = Color.lightGreen
         getStartedBtn.tintColor = Color.green
         getStartedBtn.addTarget(self, action: #selector(handleSave), for: .touchUpInside)
