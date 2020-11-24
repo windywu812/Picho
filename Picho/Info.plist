@@ -23,9 +23,11 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Need access your camera to take a photo</string>
 	<key>NSHealthShareUsageDescription</key>
-	<string>Reading data just for a test.</string>
+	<string>Allow Picho to track calories burned from Health database. This is used to give better estimation of daily calories intake.</string>
 	<key>NSHealthUpdateUsageDescription</key>
-	<string>Writing data just for a test.</string>
+	<string>Allow meal data entered in Picho to be stored in Health database. 
+Allow meal data entered in Picho to be stored in Health database. 
+</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
