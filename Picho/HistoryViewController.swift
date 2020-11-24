@@ -33,6 +33,7 @@ class HistoryViewController: UIViewController {
         chartView.dataWeekPerMonth = viewModel.getDataWeekofMonth(in: Date().month)
         chartView.setupChartData()
         
+        viewModel.fetchData()
         fetchConsupmtionPerWeek(week: Date().weekOfMonth)
     }
     
