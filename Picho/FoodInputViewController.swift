@@ -111,7 +111,9 @@ class FoodInputViewController: UIViewController {
         CoreDataService.shared.getDailyIntake(time: eatingTime, date: Date()) { intakes in
             self.foods = intakes
         }
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
     @objc private func reloadFetching(_ notification:Notification) {

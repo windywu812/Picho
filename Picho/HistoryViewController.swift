@@ -70,7 +70,10 @@ class HistoryViewController: UIViewController {
     }
     
     @objc private func reloadFetching(_ notification:Notification) {
-        foodHistory.reloadData()
+        DispatchQueue.main.async {
+            self.chartView.setupChartData()
+            self.foodHistory.reloadData()
+        }
     }
     
     @objc private func handleDismiss() {
