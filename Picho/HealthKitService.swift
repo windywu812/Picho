@@ -49,7 +49,7 @@ class HealthKitService {
                   date: Date,
                   type: HKQuantityTypeIdentifier,
                   unit: HKUnit
-     ) {
+    ) -> UUID {
         
         guard let dietType = HKQuantityType.quantityType(forIdentifier: type) else {
             fatalError("Error")
@@ -65,6 +65,7 @@ class HealthKitService {
                 print("Successfully saved")
             }
         }
+        return dietSample.uuid
     }
     
      func fetchCalorie(completion: @escaping (Double) -> Void) {
@@ -186,6 +187,53 @@ class HealthKitService {
         }
         
         HKHealthStore().execute(query)
+    }
+    
+    func fetchHealthKitSample(for healthSampleType: HKSampleType, withPredicate predicate: NSPredicate, completion: @escaping (HKSample?, Error?) -> Swift.Void) {
+        
+        let query = HKSampleQuery(sampleType: healthSampleType, predicate: predicate, limit: 1, sortDescriptors: nil) { (query, samples, error) in
+            
+            if let error = error {
+                // Handler error
+                completion(nil,error)
+            } else {
+                
+                guard let fetchedObject = samples?.first else {
+                    // Handler unexisting object
+                    completion(nil,nil)
+                    return
+                }
+                completion(fetchedObject,nil)
+            }
+        }
+        healthStore.execute(query)
+    }
+    
+    func deleteHealthData(id: UUID, type: HKQuantityTypeIdentifier, unit: HKUnit) {
+                
+        guard let healthType = HKQuantityType.quantityType(forIdentifier: type),
+              let id = UUID(uuidString: id.uuidString)
+        else {return}
+        
+        let predicate = HKQuery.predicateForObject(with: id)
+        
+        self.fetchHealthKitSample(for: healthType, withPredicate: predicate) { (fetchedObject, error) in
+            if let error = error {
+                print("error:\(error)")
+            } else {
+                guard let unwrappedFetchedObject = fetchedObject else {
+                    return
+                }
+                print("\n to be deleted: \(unwrappedFetchedObject) \n")
+                self.healthStore.delete(unwrappedFetchedObject, withCompletion: { (success, error) in
+                    if let error = error {
+                        print(error)
+                    } else {
+                        print("success")
+                    }
+                })
+            }
+        }
     }
     
     func checkAuthorization() -> Bool {

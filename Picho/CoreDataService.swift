@@ -91,9 +91,7 @@ class CoreDataService {
 //        
 //    }
     
-    func addDailyIntake(id: UUID, foodId: String, name: String, description: String, calorie: Double, saturatedFat: Double, sugars: Double, date: Date = Date(), time: EatTime) {
-        
-        print(id)
+    func addDailyIntake(id: UUID, foodId: String, name: String, description: String, calorie: Double, saturatedFat: Double, sugars: Double, date: Date = Date(), idCalorie: UUID? = nil, idSugar: UUID? = nil, idSatFat: UUID? = nil, time: EatTime) {
         
         let intake = DailyIntake(context: context)
         intake.id = id
@@ -105,6 +103,19 @@ class CoreDataService {
         intake.sugars = sugars
         intake.date = date
         intake.time = time.rawValue
+        
+        /// Save HealhKit Id
+        if let idCalorie = idCalorie {
+            intake.idCalorie = idCalorie
+        }
+        
+        if let idSugar = idSugar {
+            intake.idSugar = idSugar
+        }
+        
+        if let idSatFat = idSatFat {
+            intake.idSatFat = idSatFat
+        }
         
         saveDailyIntake(context: context)
     }
