@@ -9,8 +9,8 @@ import UIKit
 
 class HistoryViewModel {
     
-    private var allHistoryData: [Int: [DailyIntake]] = [:]
-    
+    private var historyPerYear: [Int: [DailyIntake]] = [:]
+     
     init() {
         fetchData()
 //        setDummyData()
@@ -18,14 +18,16 @@ class HistoryViewModel {
     
     func fetchData() {
         CoreDataService.shared.getDailyIntake { [weak self] (intakes) in
-            self?.allHistoryData = Dictionary(grouping: intakes, by: { ($0.date?.month ?? 0) })
+            self?.historyPerYear = Dictionary(grouping: intakes, by: { ($0.date?.year ?? 0) })
         }
     }
     
-    func getDataWeekofMonth(in month: Int) -> [Int?: [DailyIntake]] {
-        /// Get data in one month
-        let dataByMonth = allHistoryData[month]
-        /// Get data in all weeks in one month
+    func getDataWeekofMonth(in month: Int, year: Int = Date().year) -> [Int?: [DailyIntake]] {
+        
+        let dataByYear = historyPerYear[year] ?? []
+        
+        let dataByMonth = Dictionary(grouping: dataByYear, by: { ($0.date?.month ?? 0) })[month]
+        
         let groupMyWeek = Dictionary(grouping: dataByMonth ?? [], by: { $0.date?.weekOfMonth })
         
         return groupMyWeek

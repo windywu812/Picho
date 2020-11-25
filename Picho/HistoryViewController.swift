@@ -19,7 +19,6 @@ class HistoryTableViewController: UITableViewController {
     private var snacks: [History] = []
     
     private var progressView: ChartViewCell?
-    
     private var selectedMonth = Date().month
     private var selectedWeek = Date().weekOfMonth
     
@@ -31,6 +30,7 @@ class HistoryTableViewController: UITableViewController {
         super.viewWillAppear(true)
         
         viewModel.fetchData()
+        fetchConsupmtionPerWeek(week: Date().weekOfMonth)
         progressView?.chartView.lineChartView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
     }
     
@@ -41,9 +41,11 @@ class HistoryTableViewController: UITableViewController {
         
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 90
+        
         tableView.register(FoodHistoryCell.self, forCellReuseIdentifier: FoodHistoryCell.reuseIdentifier)
         tableView.register(Value1Cell.self, forCellReuseIdentifier: Value1Cell.reuseIdentifier)
         tableView.register(FoodHistoryCell.self, forCellReuseIdentifier: FoodHistoryCell.reuseIdentifier)
+        tableView.register(FoodHeaderCell.self, forCellReuseIdentifier: FoodHeaderCell.reuseIdentifier)
         
         view.backgroundColor = Color.background
         
@@ -51,15 +53,11 @@ class HistoryTableViewController: UITableViewController {
         view.addGestureRecognizer(tap)
     }
     
-    @objc private func handleDismiss() {
-        view.endEditing(true)
-    }
-    
-    private func fetchConsupmtionPerWeek(month: Int = Date().month, week: Int) {
+    private func fetchConsupmtionPerWeek(month: Int = Date().month, week: Int, year: Int = Date().year) {
         let formatterWithoutYear = DateFormatter()
         formatterWithoutYear.dateFormat = "dd MMM"
         
-        dataWeekOfMonth = viewModel.getDataWeekofMonth(in: month)[week] ?? []
+        dataWeekOfMonth = viewModel.getDataWeekofMonth(in: month, year: year)[week] ?? []
         breakfasts = dataWeekOfMonth.groupByTime(on: .breakfast).getHistory()
         lunches = dataWeekOfMonth.groupByTime(on: .lunch).getHistory()
         dinners = dataWeekOfMonth.groupByTime(on: .dinner).getHistory()
@@ -68,16 +66,11 @@ class HistoryTableViewController: UITableViewController {
         selectedMonth = month
         selectedWeek = week
         
+        progressView?.setupChart(month: selectedMonth, week: selectedWeek)
+        progressView?.chartView.lineChartView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
+        progressView?.viewModel = viewModel
+        
         tableView.reloadData()
-    }
-    
-    func selectedChart(week: Int) {
-        fetchConsupmtionPerWeek(month: selectedMonth, week: week)
-    }
-    
-    func sendDate(date: (Int, Int)) {
-        selectedMonth = date.0
-        fetchConsupmtionPerWeek(month: date.0, week: 1)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -115,93 +108,81 @@ class HistoryTableViewController: UITableViewController {
             }
             return cell
         case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: FoodHistoryCell.reuseIdentifier) as! FoodHistoryCell
-            cell.selectionStyle = .none
             if indexPath.row == 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: FoodHeaderCell.reuseIdentifier, for: indexPath) as! FoodHeaderCell
+                cell.selectionStyle = .none
                 cell.setupCell(
                     imageIcon: "breakfast",
                     labelText: "Breakfast",
                     calorie: breakfasts.reduce(0.0, { $0 + $1.totalCalorie }),
                     sugar: breakfasts.reduce(0.0, { $0 + $1.totalSugar }),
-                    satFat: breakfasts.reduce(0.0, { $0 + $1.totalSatFat }),
-                    isHead: true)
+                    satFat: breakfasts.reduce(0.0, { $0 + $1.totalSatFat }))
+                return cell
             } else {
-                cell.setupCell(
-                    labelText: breakfasts[indexPath.row - 1].foodName,
-                    howOften: breakfasts[indexPath.row - 1].eatTimes,
-                    calorie: breakfasts[indexPath.row - 1].totalCalorie,
-                    sugar: breakfasts[indexPath.row - 1].totalSugar,
-                    satFat: breakfasts[indexPath.row - 1].totalSatFat,
-                    isHead: false)
+                let cell = tableView.dequeueReusableCell(withIdentifier: FoodHistoryCell.reuseIdentifier) as! FoodHistoryCell
+                cell.selectionStyle = .none
+                cell.setupCell(history: breakfasts[indexPath.row - 1])
+                return cell
             }
-            return cell
         case 2:
-            let cell = tableView.dequeueReusableCell(withIdentifier: FoodHistoryCell.reuseIdentifier) as! FoodHistoryCell
-            cell.selectionStyle = .none
             if indexPath.row == 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: FoodHeaderCell.reuseIdentifier, for: indexPath) as! FoodHeaderCell
+                cell.selectionStyle = .none
                 cell.setupCell(
                     imageIcon: "lunch",
                     labelText: "Lunch",
                     calorie: lunches.reduce(0.0, { $0 + $1.totalCalorie }),
                     sugar: lunches.reduce(0.0, { $0 + $1.totalSugar }),
-                    satFat: lunches.reduce(0.0, { $0 + $1.totalSatFat }),
-                    isHead: true)
+                    satFat: lunches.reduce(0.0, { $0 + $1.totalSatFat }))
+                return cell
             } else {
-                cell.setupCell(
-                    labelText: lunches[indexPath.row - 1].foodName,
-                    howOften: lunches[indexPath.row - 1].eatTimes,
-                    calorie: lunches[indexPath.row - 1].totalCalorie,
-                    sugar: lunches[indexPath.row - 1].totalSugar,
-                    satFat: lunches[indexPath.row - 1].totalSatFat,
-                    isHead: false)
+                let cell = tableView.dequeueReusableCell(withIdentifier: FoodHistoryCell.reuseIdentifier, for: indexPath) as! FoodHistoryCell
+                cell.selectionStyle = .none
+                cell.setupCell(history: lunches[indexPath.row - 1])
+                return cell
             }
-            return cell
         case 3:
-            let cell = tableView.dequeueReusableCell(withIdentifier: FoodHistoryCell.reuseIdentifier) as! FoodHistoryCell
-            cell.selectionStyle = .none
+            
             if indexPath.row == 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: FoodHeaderCell.reuseIdentifier, for: indexPath) as! FoodHeaderCell
+                cell.selectionStyle = .none
                 cell.setupCell(
                     imageIcon: "dinner",
                     labelText: "Dinner",
                     calorie: dinners.reduce(0.0, { $0 + $1.totalCalorie }),
                     sugar: dinners.reduce(0.0, { $0 + $1.totalSugar }),
-                    satFat: dinners.reduce(0.0, { $0 + $1.totalSatFat }),
-                    isHead: true)
+                    satFat: dinners.reduce(0.0, { $0 + $1.totalSatFat }))
+                return cell
             } else {
-                cell.setupCell(
-                    labelText: dinners[indexPath.row - 1].foodName,
-                    howOften: dinners[indexPath.row - 1].eatTimes,
-                    calorie: dinners[indexPath.row - 1].totalCalorie,
-                    sugar: dinners[indexPath.row - 1].totalSugar,
-                    satFat: dinners[indexPath.row - 1].totalSatFat,
-                    isHead: false)
+                let cell = tableView.dequeueReusableCell(withIdentifier: FoodHistoryCell.reuseIdentifier) as! FoodHistoryCell
+                cell.selectionStyle = .none
+                cell.setupCell(history: dinners[indexPath.row - 1])
+                return cell
             }
-            return cell
         case 4:
-            let cell = tableView.dequeueReusableCell(withIdentifier: FoodHistoryCell.reuseIdentifier) as! FoodHistoryCell
-            cell.selectionStyle = .none
             if indexPath.row == 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: FoodHeaderCell.reuseIdentifier, for: indexPath) as! FoodHeaderCell
+                cell.selectionStyle = .none
                 cell.setupCell(
                     imageIcon: "snacks",
                     labelText: "Snacks",
                     calorie: snacks.reduce(0.0, { $0 + $1.totalCalorie }),
                     sugar: snacks.reduce(0.0, { $0 + $1.totalSugar }),
-                    satFat: snacks.reduce(0.0, { $0 + $1.totalSatFat }),
-                    isHead: true)
+                    satFat: snacks.reduce(0.0, { $0 + $1.totalSatFat }))
+                return cell
             } else {
-                cell.setupCell(
-                    labelText: snacks[indexPath.row - 1].foodName,
-                    howOften: snacks[indexPath.row - 1].eatTimes,
-                    calorie: snacks[indexPath.row - 1].totalCalorie,
-                    sugar: snacks[indexPath.row - 1].totalSugar,
-                    satFat: snacks[indexPath.row - 1].totalSatFat,
-                    isHead: false)
+                let cell = tableView.dequeueReusableCell(withIdentifier: FoodHistoryCell.reuseIdentifier) as! FoodHistoryCell
+                cell.selectionStyle = .none
+                cell.setupCell(history: snacks[indexPath.row - 1])
+                return cell
             }
-            return cell
         default:
-            break
+            return UITableViewCell()
         }
-        return UITableViewCell()
+    }
+    
+    @objc private func handleDismiss() {
+        view.endEditing(true)
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -238,7 +219,14 @@ class HistoryTableViewController: UITableViewController {
 
 extension HistoryTableViewController: ChartSeletedDelegate {
     
+    func selectedChart(week: Int) {
+        fetchConsupmtionPerWeek(month: selectedMonth, week: week + 1)
+        progressView?.chartView.lineChartView.highlightValue(x: Double(week), dataSetIndex: -1, callDelegate: true)
+    }
     
+    func sendDate(date: (Int, Int)) {
+        selectedMonth = date.0
+        fetchConsupmtionPerWeek(month: date.0, week: 1)
+    }
     
 }
-

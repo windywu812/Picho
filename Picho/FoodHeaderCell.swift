@@ -1,33 +1,36 @@
 //
-//  FoodHistoryCell.swift
+//  FoodHeaderCell.swift
 //  Picho
 //
-//  Created by Windy on 13/11/20.
+//  Created by Windy on 25/11/20.
 //
 
 import UIKit
 
-class FoodHistoryCell: UITableViewCell {
+class FoodHeaderCell: UITableViewCell {
     
-    static let reuseIdentifier = "FoodHistoryCell"
+    static let reuseIdentifier = "FoodHeaderCell"
     
+    private var icon: UIImageView!
     private var foodNameLabel: UILabel!
     private var calorieLabel: UILabel!
     private var satFatLabel: UILabel!
     private var sugarLabel: UILabel!
     private var howOftenLabel: UILabel!
     
-    func setupCell(history: History) {
-        foodNameLabel.text = history.foodName
-        calorieLabel.text = "\(history.totalCalorie) cal"
-        sugarLabel.text = "Sugar - \(history.totalSugar) g"
-        satFatLabel.text = "Saturated Fat - \(history.totalSatFat) g"
-        howOftenLabel.text = "\(history.eatTimes) times"
+    func setupCell(imageIcon: String = "", labelText: String = "", calorie: Double = 0.0, sugar: Double = 0.0, satFat: Double = 0.0) {
+
+        icon.image = UIImage(named: imageIcon)
+        foodNameLabel.setFont(text: labelText, weight: .bold)
+        calorieLabel.setFont(text: "\(calorie) cal", weight: .bold)
+        sugarLabel.setFont(text: "Sugar - \(sugar) g", weight: .bold, color: .secondaryLabel)
+        satFatLabel.setFont(text: "Saturated Fat - \(satFat) g", weight: .bold, color: .secondaryLabel)
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        icon = UIImageView()
         foodNameLabel = UILabel()
         calorieLabel = UILabel()
         howOftenLabel = UILabel()
@@ -49,7 +52,11 @@ class FoodHistoryCell: UITableViewCell {
             bottomAnchor: bottomAnchor, bottomAnchorConstant: -8,
             trailingAnchor: layoutMarginsGuide.trailingAnchor)
         
-        let leftStack = UIStackView(arrangedSubviews: [foodNameLabel, howOftenLabel])
+        let titleStack = UIStackView(arrangedSubviews: [icon, foodNameLabel].compactMap({ $0 }))
+        titleStack.spacing = 4
+        icon?.setConstraint(heighAnchorConstant: 22, widthAnchorConstant: 22)
+        
+        let leftStack = UIStackView(arrangedSubviews: [titleStack, howOftenLabel])
         leftStack.alignment = .leading
         leftStack.distribution = .equalCentering
         leftStack.axis = .vertical

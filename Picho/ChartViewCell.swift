@@ -13,7 +13,6 @@ class ChartViewCell: UIView {
     
     let chartView = ChartView()
     var timeLabel: UILabel!
-    
     var viewModel: HistoryViewModel?
     
     func setupChart(month: Int = Date().month, week: Int = Date().weekOfMonth) {
@@ -24,9 +23,8 @@ class ChartViewCell: UIView {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd MMM"
         
-        let firstDateOfWeek = formatter.string(from: viewModel.getDataWeekofMonth(in: month)[week + 1]?.first?.date ?? Date())
-        let lastDataOfWeek = formatter.string(from: viewModel.getDataWeekofMonth(in: month)[week + 1]?.last?.date ?? Date())
-        
+        let firstDateOfWeek = formatter.string(from: viewModel.getDataWeekofMonth(in: month)[week]?.first?.date ?? Date())
+        let lastDataOfWeek = formatter.string(from: viewModel.getDataWeekofMonth(in: month)[week]?.last?.date ?? Date())
         
         timeLabel.text = "\(firstDateOfWeek) - \(lastDataOfWeek)"
     }
