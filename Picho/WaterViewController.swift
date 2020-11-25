@@ -29,6 +29,8 @@ class WaterViewController: UIViewController {
     private var waterCollectionView: UICollectionView!
     private var totalWater: Int = 0
     
+    private var waters: [WaterIntake] = []
+    
     var delegate: WaterDelegate?
     
     override func viewDidLoad() {
@@ -50,6 +52,10 @@ class WaterViewController: UIViewController {
                     self.infoLabel.setFont(text: "Good", weight: .bold, color: Color.green)
                 }
             }
+        }
+        CoreDataService.shared.getWater { (totalWtr) in
+            self.waters = totalWtr
+           
         }
         
         if HealthKitService.shared.checkAuthorization() {
@@ -165,20 +171,34 @@ extension WaterViewController: UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) as? WaterCell {
             if cell.image == UIImage(named: "glass_fill") {
-                cell.isUserInteractionEnabled = false
+                cell.image = UIImage(named: "glass_empty")
+                let water = waters[indexPath.row]
+                
+               
+                
+                guard let idCoreData = water.id else { return }
+                guard let idWater = water.idWater else { return }
+                
+                print(idWater)
+//                CoreDataService.shared.deleteWater(idCoreData)
+                HealthKitService.shared.deleteHealthData(id: idWater, type: .dietaryWater, unit: .cupUS())
+                
+                totalWater -= 1
+                waterAmount.text = "\(totalWater) Cups"
+                waterProgress.setProgress(progress: totalWater)
+                
             } else {
                 let water = HealthKitService.shared.addData(amount: 1, date: Date(), type: .dietaryWater, unit: HKUnit.cupUS())
-                print(water)
+                print("Air:\(water)")
                 
-                CoreDataService.shared.addWater(id: UUID())
-              
+                CoreDataService.shared.addWater(id: UUID(),waterId:water)
                 cell.image = UIImage(named: "glass_fill")
                 totalWater += 1
                 waterAmount.text = "\(totalWater) Cups"
                 waterProgress.setProgress(progress: totalWater)
-                
-                
+            
             }
+           
         }
     }
     

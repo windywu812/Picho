@@ -19,6 +19,7 @@ extension WaterIntake {
     @NSManaged public var id: UUID?
     @NSManaged public var amount: Double
     @NSManaged public var date: Date?
+    @NSManaged public var idWater: UUID?
 
 }
 
