@@ -9,7 +9,7 @@ import UIKit
 import Charts
 
 protocol ChartSeletedDelegate {
-    func selectedChart(month: Int, week: Int)
+    func selectedChart(week: Int)
     func sendDate(date: (Int, Int))
 }
 
@@ -20,16 +20,13 @@ class ChartView: UIView, ChartViewDelegate {
     var timeRangeLabel: UITextField!
     var dataWeekPerMonth: [Int?: [DailyIntake]] = [:]
     var delegate: ChartSeletedDelegate?
-    
-    private var selectedMonth = Date().month
 
-    func setupChartData() {
+    func setupChartData(dataWeekPerMonth: [Int?: [DailyIntake]]) {
         
         guard let greatest = dataWeekPerMonth.keys.max(by: { ($0 ?? 0) < ($1 ?? 0) }) else { return }
         guard let max = greatest else { return }
         
         let sugarEntry = (0..<max).map { (week) -> ChartDataEntry in
-
             return ChartDataEntry(
                 x: Double(week),
                 y: Double(dataWeekPerMonth[week + 1]?.getAverage(of: .sugar) ?? 0))
@@ -132,12 +129,12 @@ class ChartView: UIView, ChartViewDelegate {
         timeRangeLabel.text = "\(data.0) \(data.1)"
         delegate?.sendDate(date: (data.0.convertIntToMonth(), data.1))
         
-        selectedMonth = data.0.convertIntToMonth()
+//        selectedMonth = data.0.convertIntToMonth()
     }
     
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
 
-        delegate?.selectedChart(month: selectedMonth, week: Int(entry.x))
+        delegate?.selectedChart(week: Int(entry.x))
     }
     
     required init?(coder: NSCoder) {

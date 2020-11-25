@@ -36,7 +36,7 @@ class TabBarController: UITabBarController {
     }
    
     private func setupHistoryVC() {
-        historyViewController = UINavigationController(rootViewController: HistoryViewController())
+        historyViewController = UINavigationController(rootViewController: HistoryTableViewController(style: .grouped))
         historyViewController.navigationBar.prefersLargeTitles = true
         historyViewController.tabBarItem = UITabBarItem(
             title: "Progress",

@@ -9,7 +9,7 @@ import UIKit
 
 class HistoryViewModel {
     
-    var allHistoryData: [Int: [DailyIntake]] = [:]
+    private var allHistoryData: [Int: [DailyIntake]] = [:]
     
     init() {
         fetchData()
@@ -27,6 +27,7 @@ class HistoryViewModel {
         let dataByMonth = allHistoryData[month]
         /// Get data in all weeks in one month
         let groupMyWeek = Dictionary(grouping: dataByMonth ?? [], by: { $0.date?.weekOfMonth })
+        
         return groupMyWeek
     }
     

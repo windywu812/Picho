@@ -15,6 +15,7 @@
 		23414A0A255CDE4800E1F48D /* HorizontalProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23414A09255CDE4800E1F48D /* HorizontalProgressView.swift */; };
 		2344568F255E4BB0001497DD /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2344568E255E4BB0001497DD /* ChartView.swift */; };
 		23445693255E4BD5001497DD /* LegendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23445692255E4BD5001497DD /* LegendView.swift */; };
+		235EEF3A256E559A004C3A99 /* ChartViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235EEF39256E559A004C3A99 /* ChartViewCell.swift */; };
 		23645F23255C2D5400DA5697 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23645F22255C2D5400DA5697 /* ActivityViewController.swift */; };
 		236D9C7A255D3EB500B252B5 /* InfoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236D9C79255D3EB500B252B5 /* InfoDetailViewController.swift */; };
 		2381F76E255C03D5008004DE /* FormScreen1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2381F76D255C03D5008004DE /* FormScreen1.swift */; };
@@ -114,6 +115,7 @@
 		23414A09255CDE4800E1F48D /* HorizontalProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalProgressView.swift; sourceTree = "<group>"; };
 		2344568E255E4BB0001497DD /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		23445692255E4BD5001497DD /* LegendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegendView.swift; sourceTree = "<group>"; };
+		235EEF39256E559A004C3A99 /* ChartViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewCell.swift; sourceTree = "<group>"; };
 		23645F22255C2D5400DA5697 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		236D9C79255D3EB500B252B5 /* InfoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoDetailViewController.swift; sourceTree = "<group>"; };
 		2381F76D255C03D5008004DE /* FormScreen1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormScreen1.swift; sourceTree = "<group>"; };
@@ -223,16 +225,25 @@
 		2344568D255E4BA3001497DD /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				235EEF39256E559A004C3A99 /* ChartViewCell.swift */,
 				2344568E255E4BB0001497DD /* ChartView.swift */,
 				23445692255E4BD5001497DD /* LegendView.swift */,
-				2339FBEB255E998F00D0ABB3 /* SummaryView.swift */,
-				2339FBEE255E99AE00D0ABB3 /* HorizontalRowView.swift */,
 				2339FBF1255E99C300D0ABB3 /* IndicatorLabelView.swift */,
-				23DC2B3D255EB73600025434 /* FoodHistoryTableView.swift */,
 				23DC2B3A255EB70A00025434 /* FoodHistoryCell.swift */,
-				23DC2B40255EB75700025434 /* HeaderView.swift */,
+				235EEF37256E5070004C3A99 /* Unused */,
 			);
 			name = Components;
+			sourceTree = "<group>";
+		};
+		235EEF37256E5070004C3A99 /* Unused */ = {
+			isa = PBXGroup;
+			children = (
+				23DC2B3D255EB73600025434 /* FoodHistoryTableView.swift */,
+				23DC2B40255EB75700025434 /* HeaderView.swift */,
+				2339FBEB255E998F00D0ABB3 /* SummaryView.swift */,
+				2339FBEE255E99AE00D0ABB3 /* HorizontalRowView.swift */,
+			);
+			name = Unused;
 			sourceTree = "<group>";
 		};
 		23645F21255C2D3400DA5697 /* DetailViews */ = {
@@ -469,9 +480,9 @@
 		23FEBA4A255BDD06001EA146 /* HistoryScreen */ = {
 			isa = PBXGroup;
 			children = (
+				26E42A7D2562614A000E239C /* HistoryModel.swift */,
 				23A8C535256233D400D06F5D /* HistoryViewModel.swift */,
 				23FEBA55255BDD75001EA146 /* HistoryViewController.swift */,
-				26E42A7D2562614A000E239C /* HistoryModel.swift */,
 				2344568D255E4BA3001497DD /* Components */,
 			);
 			name = HistoryScreen;
@@ -754,6 +765,7 @@
 				2381F772255C03DB008004DE /* FormScreen2.swift in Sources */,
 				23FEBA3B255BDCA6001EA146 /* CircularProgressView.swift in Sources */,
 				23FEBA56255BDD75001EA146 /* HistoryViewController.swift in Sources */,
+				235EEF3A256E559A004C3A99 /* ChartViewCell.swift in Sources */,
 				23843BEA2561147600D17A44 /* String+Extensions.swift in Sources */,
 				23FEB9E2255BDA79001EA146 /* FatSecretError.swift in Sources */,
 				2344568F255E4BB0001497DD /* ChartView.swift in Sources */,
