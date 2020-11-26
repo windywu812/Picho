@@ -21,6 +21,7 @@ class HistoryTableViewController: UITableViewController {
     private var progressView: ChartViewCell?
     private var selectedMonth = Date().month
     private var selectedWeek = Date().weekOfMonth
+    private var selectedYear = Date().year
     
     override init(style: UITableView.Style) {
         super.init(style: .grouped)
@@ -65,7 +66,8 @@ class HistoryTableViewController: UITableViewController {
         
         selectedMonth = month
         selectedWeek = week
-        
+        selectedYear = year
+                
         progressView?.setupChart(month: selectedMonth, week: selectedWeek)
         progressView?.chartView.lineChartView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
         progressView?.viewModel = viewModel
@@ -102,9 +104,9 @@ class HistoryTableViewController: UITableViewController {
             if indexPath.row == 0 {
                 cell.setupView(type: .calorie, amount: dataWeekOfMonth.getAverage(of: .calorie))
             } else if indexPath.row == 1 {
-                cell.setupView(type: .saturatedFat, amount: dataWeekOfMonth.getAverage(of: .calorie))
+                cell.setupView(type: .saturatedFat, amount: dataWeekOfMonth.getAverage(of: .satFat))
             } else if indexPath.row == 2 {
-                cell.setupView(type: .sugar, amount: dataWeekOfMonth.getAverage(of: .calorie))
+                cell.setupView(type: .sugar, amount: dataWeekOfMonth.getAverage(of: .sugar))
             }
             return cell
         case 1:
@@ -142,7 +144,6 @@ class HistoryTableViewController: UITableViewController {
                 return cell
             }
         case 3:
-            
             if indexPath.row == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: FoodHeaderCell.reuseIdentifier, for: indexPath) as! FoodHeaderCell
                 cell.selectionStyle = .none
@@ -226,7 +227,8 @@ extension HistoryTableViewController: ChartSeletedDelegate {
     
     func sendDate(date: (Int, Int)) {
         selectedMonth = date.0
-        fetchConsupmtionPerWeek(month: date.0, week: 1)
+        selectedYear = date.1
+        fetchConsupmtionPerWeek(month: date.0, week: 1, year: date.1)
     }
     
 }
