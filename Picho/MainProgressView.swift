@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class MainProgressView: UIView {
     
     private let satFatLabel: UILabel
@@ -187,5 +186,3 @@ class MainProgressView: UIView {
     }
     
 }
-
-

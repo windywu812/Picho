@@ -40,6 +40,7 @@
 		23DB9FA52566A2FA00373874 /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DB9FA42566A2FA00373874 /* NotificationViewModel.swift */; };
 		23DC2B3B255EB70A00025434 /* FoodHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC2B3A255EB70A00025434 /* FoodHistoryCell.swift */; };
 		23EC0D91256149010084154F /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23EC0D90256149010084154F /* ProfileEditViewController.swift */; };
+		23EFD6F8256FCD6800C4186B /* WaterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23EFD6F7256FCD6800C4186B /* WaterCell.swift */; };
 		23F0DA20256EAEAA006B54AB /* FoodHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F0DA1F256EAEAA006B54AB /* FoodHeaderCell.swift */; };
 		23F0DA25256EB23E006B54AB /* CustomDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F0DA24256EB23E006B54AB /* CustomDatePicker.swift */; };
 		23FEB9D2255BDA40001EA146 /* FatSecretClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9D1255BDA40001EA146 /* FatSecretClient.swift */; };
@@ -138,6 +139,7 @@
 		23DB9FA42566A2FA00373874 /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
 		23DC2B3A255EB70A00025434 /* FoodHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodHistoryCell.swift; sourceTree = "<group>"; };
 		23EC0D90256149010084154F /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
+		23EFD6F7256FCD6800C4186B /* WaterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterCell.swift; sourceTree = "<group>"; };
 		23F0DA1F256EAEAA006B54AB /* FoodHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodHeaderCell.swift; sourceTree = "<group>"; };
 		23F0DA24256EB23E006B54AB /* CustomDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePicker.swift; sourceTree = "<group>"; };
 		23FEB9D1255BDA40001EA146 /* FatSecretClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FatSecretClient.swift; sourceTree = "<group>"; };
@@ -448,6 +450,7 @@
 				23FEBA3E255BDCAE001EA146 /* SmallCircularProgressView.swift */,
 				23FEBA45255BDCBC001EA146 /* PichoCardView.swift */,
 				23FEBA68255BE00C001EA146 /* MealCellView.swift */,
+				23EFD6F7256FCD6800C4186B /* WaterCell.swift */,
 			);
 			name = ReusableViews;
 			sourceTree = "<group>";
@@ -756,6 +759,7 @@
 				23FEBA5F255BDDE6001EA146 /* NSAttributedString+Extensions.swift in Sources */,
 				2381F772255C03DB008004DE /* FormScreen2.swift in Sources */,
 				23FEBA3B255BDCA6001EA146 /* CircularProgressView.swift in Sources */,
+				23EFD6F8256FCD6800C4186B /* WaterCell.swift in Sources */,
 				23FEBA56255BDD75001EA146 /* HistoryViewController.swift in Sources */,
 				235EEF3A256E559A004C3A99 /* ChartViewCell.swift in Sources */,
 				23843BEA2561147600D17A44 /* String+Extensions.swift in Sources */,
