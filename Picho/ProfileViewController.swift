@@ -77,7 +77,7 @@ class ProfileViewController: UIViewController {
     
     private func setupTableView() {
         tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.register(Value1Cell.self, forCellReuseIdentifier: Value1Cell.reuseIdentifier)
+        tableView.register(ProfileCell.self, forCellReuseIdentifier: ProfileCell.reuseIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.isScrollEnabled = false
@@ -124,7 +124,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Value1Cell.reuseIdentifier) as! Value1Cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: ProfileCell.reuseIdentifier) as! ProfileCell
         cell.selectionStyle = .none
         
         switch indexPath.section {

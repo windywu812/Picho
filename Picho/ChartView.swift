@@ -83,6 +83,7 @@ class ChartView: UIView, ChartViewDelegate {
         timeRangeLabel.layer.borderColor = Color.green.cgColor
         timeRangeLabel.textAlignment = .center
         timeRangeLabel.layer.cornerRadius = 8
+        timeRangeLabel.tintColor = .clear
         
         let datePicker = CustomDatePicker()
         timeRangeLabel.inputView = datePicker
