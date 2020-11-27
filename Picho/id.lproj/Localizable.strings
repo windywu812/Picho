@@ -1,0 +1,37 @@
+/* 
+  Localizable.strings
+  Picho
+
+  Created by Muhammad Rasyid khaikal on 27/11/20.
+  
+*/
+"Hi there!!" = "Haii !";
+"I’m Picho, a pistachio. And I contain  ‘good’ cholesterol for your body!\n\nBut! Do you know that ‘bad’ cholesterol also exist?" = "Aku Picho, si pistachio. Aku adalah sumber kolesterol ‘baik’ yang dibutuhkan tubuhmu!\n\nTapi, apakah kamu tau kolesterol ‘jahat’ juga ada?" ;
+"Health requires healthy\nfood" = "Untuk sehat perlu\nmakanan yang sehat";
+"We get the ‘good’ cholesterol (HDL) from healthy and balanced diet.\n\nAnd the ‘bad’ (LDL) ones from unhealthy and unbalanced diet." = "Kamu akan memperoleh kolesterol\n‘baik’ (HDL) dari makan makanan yang\nsehat dan seimbang.\n\nDan memperoleh kolesterol ‘jahat’\njika melakukan sebaliknya";
+"Too much ‘bad’\nCholesterol in your body..." = "Terlalu banyak kolesterol\n‘jahat’ dalam tubuhmu...";
+"can form plaque on the arteries, making the passage smaller, leading to high blood pressure (HBP), heart diseases and stroke." = "dapat membentuk plak di arteri, dan\nmenyumbat pembuluh darah. Hal ini akan\nmenyebabkan tekanan darah\ntinggi, penyakit jantung dan stroke.";
+"Enjoy what you eat\nEat what you enjoy!" = "Nikmati apa yang kamu ingin makan dan Makan lah apa yang kamu suka!";
+"Picho is help you to eat what you love while being aware of your food consumption and cholesterol." = "Picho membantu Anda makan apa yang Anda sukai sambil tetap waspada terhadap konsumsi makanan dan kolesterol Anda.";
+"Get Started" = "Mulaii!";
+"Picho is here to help!" = "Picho hadir untuk\nmembantu!";
+"Picho needs the following information to help you with your recommended daily intake of calorie, saturated fat and sugar." = "Picho butuh informasi berikut untuk membantu kamu dengan memberikan saran konsumsi kalori, lemak jenuh dan gula harian.";
+"Alrighty!" = "Oke!";
+"Nice to meet you!" = "Senang bertemu denganmu!";
+"Picho will be your buddy throughout this journey, tell him your name so you can get to know each other!" = "Picho akan menjadi temanmu melewati ini semua. Beritahu namamu agar kita kenal satu sama lain!";
+"Your Name" = "Nama Kamu";
+"Continue" = "Selanjutnya";
+"I want to know more about you." = "Saya mau lebih lagi mengenal kamu.";
+"Different age and gender have different calories needs, also fat and sugar intake. Tell Picho yours so he can help you calculate!" = "Berbeda usia dan jenis kelamin tentu berbeda pula kebutuhan kalori, lemak dan gula hariannya. Beritahu tentang mu, dan Picho akan menghitungnya.";
+"Gender" = "Jenis Kelamin";
+"Age" = "Umur";
+"Can you tell me about your current weight and height?" = "Boleh beritahu saya tinggi dan berat badanmu?";
+"To get better estimation for you calorie needs, Picho also need your weight and height..." = "Untuk memperoleh estimasi yang lebih baik tentang kebutuhan kalorimu, Picho juga butuh informasi tinggi dan berat badanmu.";
+"Weight (kg)" = "Berat Badan (kg)";
+"Weight" = "Berat Badan";
+"Height (cm)" = "Tinggi Badan (cm)";
+"Height" = "Tinggi Badan";
+"Awesome!" = "Wow!!";
+"Before we proceed further, Picho wanted to remind you..." = "Sebelum kita mulai, Picho ingin memberitahumu sesuatu...";
+"The information contained in this mobile app should not be used to diagnose or treat any illness. All information is intended for your general knowledge only and is not a substitute for medical advice or treatment for specific medical conditions." = "Informasi yang terdapat pada mobile app ini tidak boleh digunakan untuk mendiagnosa atau mengobati penyakit apapun. Semua informasi hanya sebatas pengetahuan umum Anda saja dan bukan merupakan pengganti nasihat medis atau perawatan untuk kondisi medis tertentu.";
+"I have read and I agreed with that." = "Saya sudah membaca dan\nsetuju dengan pernyataan diatas.";

@@ -38,7 +38,7 @@ class FormScreen2: UIViewController {
                 heighAnchorConstant: 115, widthAnchorConstant: 95)
         }
         
-        titleLabel.text = "Nice to meet you!"
+        titleLabel.text = NSLocalizedString("Nice to meet you!", comment: "")
         titleLabel.font = UIFont.boldSystemFont(ofSize: 24.0)
         titleLabel.textAlignment = .center
         view.addSubview(titleLabel)
@@ -48,7 +48,7 @@ class FormScreen2: UIViewController {
             leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
             trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
         
-        descLabel.text = "Picho will be your buddy throughout this journey, tell him your name so you can get to know each other!"
+        descLabel.text = NSLocalizedString("Picho will be your buddy throughout this journey, tell him your name so you can get to know each other!", comment: "")
         descLabel.numberOfLines = 0
         descLabel.textAlignment = .center
         view.addSubview(descLabel)
@@ -62,7 +62,7 @@ class FormScreen2: UIViewController {
         nameTextField.layer.borderColor = Color.green.cgColor
         nameTextField.layer.borderWidth = 2.0
         nameTextField.addPadding(padding: .equalSpacing(10))
-        nameTextField.placeholder = "Your Name"
+        nameTextField.placeholder = NSLocalizedString("Your Name", comment: "")
         nameTextField.delegate = self
         view.addSubview(nameTextField)
         
@@ -72,7 +72,7 @@ class FormScreen2: UIViewController {
             trailingAnchor: view.layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: -16,
             heighAnchorConstant: 50)
         
-        getStartedBtn.setTitle("Continue", for: .normal)
+        getStartedBtn.setTitle( NSLocalizedString("Continue", comment: "") , for: .normal)
         getStartedBtn.titleLabel?.font = .boldSystemFont(ofSize: 16)
         getStartedBtn.layer.cornerRadius =  10
         getStartedBtn.backgroundColor = Color.lightGreen

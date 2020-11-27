@@ -34,7 +34,7 @@ class FormScreen1: UIViewController {
         }
         
         let titleLabel = UILabel()
-        titleLabel.text = "Picho is here to help!"
+        titleLabel.text = NSLocalizedString("Picho is here to help!", comment: "")
         titleLabel.textAlignment = .center
         titleLabel.font = UIFont.boldSystemFont(ofSize: 24.0)
         view.addSubview(titleLabel)
@@ -45,7 +45,7 @@ class FormScreen1: UIViewController {
             trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
         
         let descLabel = UILabel()
-        descLabel.text = "Picho needs the following information to help you with your recommended daily intake of calorie, saturated fat and sugar."
+        descLabel.text = NSLocalizedString("Picho needs the following information to help you with your recommended daily intake of calorie, saturated fat and sugar.", comment: "")
         descLabel.numberOfLines = 0
         descLabel.textAlignment = .center
         view.addSubview(descLabel)
@@ -57,7 +57,7 @@ class FormScreen1: UIViewController {
             trailingAnchor: view.layoutMarginsGuide.trailingAnchor,trailingAnchorConstant: -16)
 
         let getStartedBtn = UIButton()
-        getStartedBtn.setTitle("Alrighty!", for: .normal)
+        getStartedBtn.setTitle( NSLocalizedString("Alrighty!", comment: "") , for: .normal)
         getStartedBtn.titleLabel?.font = .boldSystemFont(ofSize: 16)
         getStartedBtn.layer.cornerRadius =  10
         getStartedBtn.backgroundColor = Color.green

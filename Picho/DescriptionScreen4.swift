@@ -29,7 +29,7 @@ class DescriptionScreen4: UIViewController {
         imageview.heightAnchor.constraint(equalToConstant: phoneWidth).isActive = true
         
         let label1 = UILabel()
-        label1.text = "Enjoy what you eat\nEat what you enjoy!"
+        label1.text = NSLocalizedString("Enjoy what you eat\nEat what you enjoy!", comment: "")
         label1.textAlignment = .center
         label1.numberOfLines = 0
         label1.font = UIFont.boldSystemFont(ofSize: 25.0)
@@ -41,7 +41,7 @@ class DescriptionScreen4: UIViewController {
                                 trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
         
         let label2 = UILabel()
-        label2.text = "Picho is help you to eat what you love while being aware of your food consumption and cholesterol."
+        label2.text = NSLocalizedString("Picho is help you to eat what you love while being aware of your food consumption and cholesterol.", comment: "")
         label2.textAlignment = .center
         label2.numberOfLines = 0
         label2.font = UIFont.systemFont(ofSize: 17)
@@ -52,7 +52,7 @@ class DescriptionScreen4: UIViewController {
         
         
         let getStartedBtn = UIButton()
-        getStartedBtn.setTitle("Get Started", for: .normal)
+        getStartedBtn.setTitle(NSLocalizedString("Get Started", comment: ""), for: .normal)
         getStartedBtn.titleLabel?.font = .boldSystemFont(ofSize: 16)
         getStartedBtn.layer.cornerRadius =  10
         getStartedBtn.backgroundColor = Color.green

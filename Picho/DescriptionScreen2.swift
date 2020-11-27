@@ -29,7 +29,7 @@ class DescriptionScreen2: UIViewController {
         imageview.heightAnchor.constraint(equalToConstant: phoneWidth).isActive = true
         
         let label1 = UILabel()
-        label1.text = "Health requires healthy\nfood"
+        label1.text = NSLocalizedString("Health requires healthy\nfood",comment: "")
         label1.textAlignment = .center
         label1.numberOfLines = 0
         label1.font = UIFont.boldSystemFont(ofSize: 25.0)
@@ -41,7 +41,7 @@ class DescriptionScreen2: UIViewController {
                                 trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
         
         let label2 = UILabel()
-        label2.text = "We get the ‘good’ cholesterol (HDL) from healthy and balanced diet.\n\nAnd the ‘bad’ (LDL) ones from unhealthy and unbalanced diet."
+        label2.text = NSLocalizedString("We get the ‘good’ cholesterol (HDL) from healthy and balanced diet.\n\nAnd the ‘bad’ (LDL) ones from unhealthy and unbalanced diet.", comment: "") 
         label2.textAlignment = .center
         label2.numberOfLines = 0
         label2.font = UIFont.systemFont(ofSize: 17)

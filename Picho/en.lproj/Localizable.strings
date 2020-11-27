@@ -1,0 +1,37 @@
+/* 
+  Localizable.strings
+  Picho
+
+  Created by Muhammad Rasyid khaikal on 27/11/20.
+  
+*/
+"Hi there!!" = "Hi there!!";
+"I’m Picho, a pistachio. And I contain  ‘good’ cholesterol for your body!\n\nBut! Do you know that ‘bad’ cholesterol also exist?" = "I’m Picho, a pistachio. And I contain  ‘good’ cholesterol for your body!\n\nBut! Do you know that ‘bad’ cholesterol also exist?";
+"Health requires healthy\nfood" = "Health requires healthy\nfood";
+"We get the ‘good’ cholesterol (HDL) from healthy and balanced diet.\n\nAnd the ‘bad’ (LDL) ones from unhealthy and unbalanced diet." = "We get the ‘good’ cholesterol (HDL) from healthy and balanced diet.\n\nAnd the ‘bad’ (LDL) ones from unhealthy and unbalanced diet.";
+"Too much ‘bad’\nCholesterol in your body..." = "Too much ‘bad’\nCholesterol in your body...";
+"can form plaque on the arteries, making the passage smaller, leading to high blood pressure (HBP), heart diseases and stroke." = "can form plaque on the arteries, making the passage smaller, leading to high blood pressure (HBP), heart diseases and stroke.";
+"Enjoy what you eat\nEat what you enjoy!" = "Enjoy what you eat\nEat what you enjoy!";
+"Picho is help you to eat what you love while being aware of your food consumption and cholesterol." = "Picho is help you to eat what you love while being aware of your food consumption and cholesterol.";
+"Get Started" = "Get Started";
+"Picho is here to help!" = "Picho is here to help!";
+"Picho needs the following information to help you with your recommended daily intake of calorie, saturated fat and sugar." = "Picho needs the following information to help you with your recommended daily intake of calorie, saturated fat and sugar.";
+"Alrighty!" = "Alrighty!";
+"Nice to meet you!" = "Nice to meet you!";
+"Picho will be your buddy throughout this journey, tell him your name so you can get to know each other!" = "Picho will be your buddy throughout this journey, tell him your name so you can get to know each other!";
+"Your Name" = "Your Name";
+"Continue" = "Continue";
+"I want to know more about you." = "I want to know more about you.";
+"Different age and gender have different calories needs, also fat and sugar intake. Tell Picho yours so he can help you calculate!" = "Different age and gender have different calories needs, also fat and sugar intake. Tell Picho yours so he can help you calculate!";
+"Gender" = "Gender";
+"Age" = "Age";
+"Can you tell me about your current weight and height?" = "Can you tell me about your current weight and height?";
+"To get better estimation for you calorie needs, Picho also need your weight and height..." = "To get better estimation for you calorie needs, Picho also need your weight and height...";
+"Weight (kg)" = "Weight (kg)";
+"Weight" = "Weight";
+"Height (cm)" = "Height (cm)";
+"Height" = "Height";
+"Awesome!" = "Awesome!";
+"Before we proceed further, Picho wanted to remind you..." = "Before we proceed further, Picho wanted to remind you...";
+"The information contained in this mobile app should not be used to diagnose or treat any illness. All information is intended for your general knowledge only and is not a substitute for medical advice or treatment for specific medical conditions." = "The information contained in this mobile app should not be used to diagnose or treat any illness. All information is intended for your general knowledge only and is not a substitute for medical advice or treatment for specific medical conditions.";
+"I have read and I agreed with that." = "I have read and I agreed with that.";
