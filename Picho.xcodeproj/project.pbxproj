@@ -8,13 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		230F95062568D871006484C6 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230F95052568D871006484C6 /* NotificationCell.swift */; };
-		2339FBEC255E998F00D0ABB3 /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2339FBEB255E998F00D0ABB3 /* SummaryView.swift */; };
-		2339FBEF255E99AE00D0ABB3 /* HorizontalRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2339FBEE255E99AE00D0ABB3 /* HorizontalRowView.swift */; };
 		2339FBF2255E99C300D0ABB3 /* IndicatorLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2339FBF1255E99C300D0ABB3 /* IndicatorLabelView.swift */; };
 		23414A07255CD36A00E1F48D /* WaterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23414A06255CD36A00E1F48D /* WaterViewController.swift */; };
 		23414A0A255CDE4800E1F48D /* HorizontalProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23414A09255CDE4800E1F48D /* HorizontalProgressView.swift */; };
 		2344568F255E4BB0001497DD /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2344568E255E4BB0001497DD /* ChartView.swift */; };
 		23445693255E4BD5001497DD /* LegendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23445692255E4BD5001497DD /* LegendView.swift */; };
+		235EEF3A256E559A004C3A99 /* ChartViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235EEF39256E559A004C3A99 /* ChartViewCell.swift */; };
 		23645F23255C2D5400DA5697 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23645F22255C2D5400DA5697 /* ActivityViewController.swift */; };
 		236D9C7A255D3EB500B252B5 /* InfoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236D9C79255D3EB500B252B5 /* InfoDetailViewController.swift */; };
 		2381F76E255C03D5008004DE /* FormScreen1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2381F76D255C03D5008004DE /* FormScreen1.swift */; };
@@ -32,6 +31,7 @@
 		23843BEA2561147600D17A44 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23843BE92561147600D17A44 /* String+Extensions.swift */; };
 		23843BED256116BA00D17A44 /* NotificationCenterServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23843BEC256116BA00D17A44 /* NotificationCenterServices.swift */; };
 		2386AC07256623F5004D6FE9 /* JournalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2386AC06256623F5004D6FE9 /* JournalViewModel.swift */; };
+		23883DA7256FFBC20047118B /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23883DA6256FFBC20047118B /* ProfileCell.swift */; };
 		238C9405255BEB0C00591791 /* FoodSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238C9404255BEB0C00591791 /* FoodSearchViewController.swift */; };
 		238C9409255BEB1900591791 /* FoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238C9408255BEB1900591791 /* FoodCell.swift */; };
 		238C9412255BEBAF00591791 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238C9411255BEBAF00591791 /* DetailCell.swift */; };
@@ -40,9 +40,10 @@
 		23A8C536256233D400D06F5D /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A8C535256233D400D06F5D /* HistoryViewModel.swift */; };
 		23DB9FA52566A2FA00373874 /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DB9FA42566A2FA00373874 /* NotificationViewModel.swift */; };
 		23DC2B3B255EB70A00025434 /* FoodHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC2B3A255EB70A00025434 /* FoodHistoryCell.swift */; };
-		23DC2B3E255EB73600025434 /* FoodHistoryTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC2B3D255EB73600025434 /* FoodHistoryTableView.swift */; };
-		23DC2B41255EB75700025434 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DC2B40255EB75700025434 /* HeaderView.swift */; };
 		23EC0D91256149010084154F /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23EC0D90256149010084154F /* ProfileEditViewController.swift */; };
+		23EFD6F8256FCD6800C4186B /* WaterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23EFD6F7256FCD6800C4186B /* WaterCell.swift */; };
+		23F0DA20256EAEAA006B54AB /* FoodHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F0DA1F256EAEAA006B54AB /* FoodHeaderCell.swift */; };
+		23F0DA25256EB23E006B54AB /* CustomDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F0DA24256EB23E006B54AB /* CustomDatePicker.swift */; };
 		23FEB9D2255BDA40001EA146 /* FatSecretClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9D1255BDA40001EA146 /* FatSecretClient.swift */; };
 		23FEB9D6255BDA49001EA146 /* FatSecretCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9D5255BDA49001EA146 /* FatSecretCredentials.swift */; };
 		23FEB9D9255BDA53001EA146 /* FatSecretParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9D8255BDA53001EA146 /* FatSecretParams.swift */; };
@@ -83,6 +84,8 @@
 		23FEBA62255BDF3A001EA146 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA61255BDF3A001EA146 /* NotificationViewController.swift */; };
 		23FEBA69255BE00C001EA146 /* MealCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA68255BE00C001EA146 /* MealCellView.swift */; };
 		26AF6A3E255E545A0045877C /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AF6A3D255E545A0045877C /* NotificationService.swift */; };
+		26B357C1256B5B6300CE8E88 /* WaterIntake+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B357BF256B5B6300CE8E88 /* WaterIntake+CoreDataClass.swift */; };
+		26B357C2256B5B6300CE8E88 /* WaterIntake+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B357C0256B5B6300CE8E88 /* WaterIntake+CoreDataProperties.swift */; };
 		26D0532D255D43B200D3C09A /* NotificationKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D0532C255D43B200D3C09A /* NotificationKey.swift */; };
 		26E42A7E2562614A000E239C /* HistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E42A7D2562614A000E239C /* HistoryModel.swift */; };
 		26E42AA825628EC5000E239C /* IntakesArray+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E42AA725628EC5000E239C /* IntakesArray+Extensions.swift */; };
@@ -105,13 +108,12 @@
 /* Begin PBXFileReference section */
 		047BD003AF371FA6292C078C /* Pods_Picho.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Picho.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		230F95052568D871006484C6 /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
-		2339FBEB255E998F00D0ABB3 /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
-		2339FBEE255E99AE00D0ABB3 /* HorizontalRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalRowView.swift; sourceTree = "<group>"; };
 		2339FBF1255E99C300D0ABB3 /* IndicatorLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorLabelView.swift; sourceTree = "<group>"; };
 		23414A06255CD36A00E1F48D /* WaterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterViewController.swift; sourceTree = "<group>"; };
 		23414A09255CDE4800E1F48D /* HorizontalProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalProgressView.swift; sourceTree = "<group>"; };
 		2344568E255E4BB0001497DD /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		23445692255E4BD5001497DD /* LegendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegendView.swift; sourceTree = "<group>"; };
+		235EEF39256E559A004C3A99 /* ChartViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewCell.swift; sourceTree = "<group>"; };
 		23645F22255C2D5400DA5697 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		236D9C79255D3EB500B252B5 /* InfoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoDetailViewController.swift; sourceTree = "<group>"; };
 		2381F76D255C03D5008004DE /* FormScreen1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormScreen1.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 		23843BE92561147600D17A44 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		23843BEC256116BA00D17A44 /* NotificationCenterServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterServices.swift; sourceTree = "<group>"; };
 		2386AC06256623F5004D6FE9 /* JournalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalViewModel.swift; sourceTree = "<group>"; };
+		23883DA6256FFBC20047118B /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		238C9404255BEB0C00591791 /* FoodSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSearchViewController.swift; sourceTree = "<group>"; };
 		238C9408255BEB1900591791 /* FoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCell.swift; sourceTree = "<group>"; };
 		238C9411255BEBAF00591791 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
@@ -137,9 +140,10 @@
 		23A8C535256233D400D06F5D /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
 		23DB9FA42566A2FA00373874 /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
 		23DC2B3A255EB70A00025434 /* FoodHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodHistoryCell.swift; sourceTree = "<group>"; };
-		23DC2B3D255EB73600025434 /* FoodHistoryTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodHistoryTableView.swift; sourceTree = "<group>"; };
-		23DC2B40255EB75700025434 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		23EC0D90256149010084154F /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
+		23EFD6F7256FCD6800C4186B /* WaterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterCell.swift; sourceTree = "<group>"; };
+		23F0DA1F256EAEAA006B54AB /* FoodHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodHeaderCell.swift; sourceTree = "<group>"; };
+		23F0DA24256EB23E006B54AB /* CustomDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePicker.swift; sourceTree = "<group>"; };
 		23FEB9D1255BDA40001EA146 /* FatSecretClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FatSecretClient.swift; sourceTree = "<group>"; };
 		23FEB9D5255BDA49001EA146 /* FatSecretCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FatSecretCredentials.swift; sourceTree = "<group>"; };
 		23FEB9D8255BDA53001EA146 /* FatSecretParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FatSecretParams.swift; sourceTree = "<group>"; };
@@ -180,6 +184,8 @@
 		23FEBA61255BDF3A001EA146 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		23FEBA68255BE00C001EA146 /* MealCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealCellView.swift; sourceTree = "<group>"; };
 		26AF6A3D255E545A0045877C /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		26B357BF256B5B6300CE8E88 /* WaterIntake+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WaterIntake+CoreDataClass.swift"; sourceTree = "<group>"; };
+		26B357C0256B5B6300CE8E88 /* WaterIntake+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WaterIntake+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		26D0532C255D43B200D3C09A /* NotificationKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationKey.swift; sourceTree = "<group>"; };
 		26E42A7D2562614A000E239C /* HistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryModel.swift; sourceTree = "<group>"; };
 		26E42AA725628EC5000E239C /* IntakesArray+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IntakesArray+Extensions.swift"; sourceTree = "<group>"; };
@@ -219,14 +225,11 @@
 		2344568D255E4BA3001497DD /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				235EEF39256E559A004C3A99 /* ChartViewCell.swift */,
 				2344568E255E4BB0001497DD /* ChartView.swift */,
 				23445692255E4BD5001497DD /* LegendView.swift */,
-				2339FBEB255E998F00D0ABB3 /* SummaryView.swift */,
-				2339FBEE255E99AE00D0ABB3 /* HorizontalRowView.swift */,
 				2339FBF1255E99C300D0ABB3 /* IndicatorLabelView.swift */,
-				23DC2B3D255EB73600025434 /* FoodHistoryTableView.swift */,
-				23DC2B3A255EB70A00025434 /* FoodHistoryCell.swift */,
-				23DC2B40255EB75700025434 /* HeaderView.swift */,
+				23F0DA24256EB23E006B54AB /* CustomDatePicker.swift */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -309,6 +312,16 @@
 				230F95052568D871006484C6 /* NotificationCell.swift */,
 			);
 			name = NotificationScreen;
+			sourceTree = "<group>";
+		};
+		23F0DA22256EAEBB006B54AB /* ReusableCells */ = {
+			isa = PBXGroup;
+			children = (
+				23DC2B3A255EB70A00025434 /* FoodHistoryCell.swift */,
+				23F0DA1F256EAEAA006B54AB /* FoodHeaderCell.swift */,
+				23FEBA52255BDD59001EA146 /* Value1Cell.swift */,
+			);
+			name = ReusableCells;
 			sourceTree = "<group>";
 		};
 		23FEB9D0255BDA35001EA146 /* FatSecretSwift */ = {
@@ -440,6 +453,7 @@
 				23FEBA3E255BDCAE001EA146 /* SmallCircularProgressView.swift */,
 				23FEBA45255BDCBC001EA146 /* PichoCardView.swift */,
 				23FEBA68255BE00C001EA146 /* MealCellView.swift */,
+				23EFD6F7256FCD6800C4186B /* WaterCell.swift */,
 			);
 			name = ReusableViews;
 			sourceTree = "<group>";
@@ -465,10 +479,11 @@
 		23FEBA4A255BDD06001EA146 /* HistoryScreen */ = {
 			isa = PBXGroup;
 			children = (
+				26E42A7D2562614A000E239C /* HistoryModel.swift */,
 				23A8C535256233D400D06F5D /* HistoryViewModel.swift */,
 				23FEBA55255BDD75001EA146 /* HistoryViewController.swift */,
-				26E42A7D2562614A000E239C /* HistoryModel.swift */,
 				2344568D255E4BA3001497DD /* Components */,
+				23F0DA22256EAEBB006B54AB /* ReusableCells */,
 			);
 			name = HistoryScreen;
 			sourceTree = "<group>";
@@ -479,7 +494,7 @@
 				23FEBA4C255BDD49001EA146 /* ProfileViewModel.swift */,
 				23FEBA4F255BDD51001EA146 /* ProfileViewController.swift */,
 				23EC0D90256149010084154F /* ProfileEditViewController.swift */,
-				23FEBA52255BDD59001EA146 /* Value1Cell.swift */,
+				23883DA6256FFBC20047118B /* ProfileCell.swift */,
 			);
 			name = ProfileScreen;
 			sourceTree = "<group>";
@@ -494,6 +509,8 @@
 		26F98128255ED9E000774F94 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				26B357BF256B5B6300CE8E88 /* WaterIntake+CoreDataClass.swift */,
+				26B357C0256B5B6300CE8E88 /* WaterIntake+CoreDataProperties.swift */,
 				26F98155255F0E1900774F94 /* Favorite+CoreDataClass.swift */,
 				26F98156255F0E1900774F94 /* Favorite+CoreDataProperties.swift */,
 				26F98133255EDA9E00774F94 /* DailyIntake+CoreDataClass.swift */,
@@ -673,7 +690,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				23DC2B3E255EB73600025434 /* FoodHistoryTableView.swift in Sources */,
 				23DB9FA52566A2FA00373874 /* NotificationViewModel.swift in Sources */,
 				23FEBA5C255BDDB2001EA146 /* FoodInputViewController.swift in Sources */,
 				23A8C536256233D400D06F5D /* HistoryViewModel.swift in Sources */,
@@ -684,6 +700,7 @@
 				23FEBA1D255BDBB4001EA146 /* UIView+Extensions.swift in Sources */,
 				2381F778255C03E3008004DE /* FormScreen4.swift in Sources */,
 				23FEBA21255BDBBB001EA146 /* Date+Extensions.swift in Sources */,
+				26B357C1256B5B6300CE8E88 /* WaterIntake+CoreDataClass.swift in Sources */,
 				2381F783255C0412008004DE /* DescriptionScreen1.swift in Sources */,
 				2381F77E255C03F1008004DE /* PageControlForm.swift in Sources */,
 				23FEBA62255BDF3A001EA146 /* NotificationViewController.swift in Sources */,
@@ -702,6 +719,7 @@
 				23FEBA34255BDC81001EA146 /* HorizontalView.swift in Sources */,
 				2381F790255C0428008004DE /* PageControlDescription.swift in Sources */,
 				23FEB9FE255BDAF3001EA146 /* AppCoordinator.swift in Sources */,
+				23883DA7256FFBC20047118B /* ProfileCell.swift in Sources */,
 				26F98157255F0E1900774F94 /* Favorite+CoreDataClass.swift in Sources */,
 				23FEB9DF255BDA72001EA146 /* SearchedFood.swift in Sources */,
 				26F98137255EDA9E00774F94 /* DailyIntake+CoreDataClass.swift in Sources */,
@@ -729,9 +747,9 @@
 				23DC2B3B255EB70A00025434 /* FoodHistoryCell.swift in Sources */,
 				2381F787255C0416008004DE /* DescriptionScreen2.swift in Sources */,
 				23843BED256116BA00D17A44 /* NotificationCenterServices.swift in Sources */,
+				23F0DA20256EAEAA006B54AB /* FoodHeaderCell.swift in Sources */,
 				23FEBA0C255BDB42001EA146 /* NetworkService.swift in Sources */,
 				238C9412255BEBAF00591791 /* DetailCell.swift in Sources */,
-				23DC2B41255EB75700025434 /* HeaderView.swift in Sources */,
 				23FEBA16255BDB55001EA146 /* UserDefaultService.swift in Sources */,
 				2381F78A255C0419008004DE /* DescriptionScreen3.swift in Sources */,
 				23FEBA3F255BDCAE001EA146 /* SmallCircularProgressView.swift in Sources */,
@@ -740,19 +758,21 @@
 				23645F23255C2D5400DA5697 /* ActivityViewController.swift in Sources */,
 				238C9417255BEC2D00591791 /* StringOptional+Extensions.swift in Sources */,
 				23FEB9F4255BDA9C001EA146 /* URLComponents+Utils.swift in Sources */,
-				2339FBEF255E99AE00D0ABB3 /* HorizontalRowView.swift in Sources */,
 				2339FBF2255E99C300D0ABB3 /* IndicatorLabelView.swift in Sources */,
 				A28A5B01255BD410007E66FA /* Picho.xcdatamodeld in Sources */,
 				23FEBA5F255BDDE6001EA146 /* NSAttributedString+Extensions.swift in Sources */,
 				2381F772255C03DB008004DE /* FormScreen2.swift in Sources */,
 				23FEBA3B255BDCA6001EA146 /* CircularProgressView.swift in Sources */,
+				23EFD6F8256FCD6800C4186B /* WaterCell.swift in Sources */,
 				23FEBA56255BDD75001EA146 /* HistoryViewController.swift in Sources */,
+				235EEF3A256E559A004C3A99 /* ChartViewCell.swift in Sources */,
 				23843BEA2561147600D17A44 /* String+Extensions.swift in Sources */,
 				23FEB9E2255BDA79001EA146 /* FatSecretError.swift in Sources */,
 				2344568F255E4BB0001497DD /* ChartView.swift in Sources */,
 				23FEBA4D255BDD49001EA146 /* ProfileViewModel.swift in Sources */,
 				23FEB9D9255BDA53001EA146 /* FatSecretParams.swift in Sources */,
 				23FEBA46255BDCBC001EA146 /* PichoCardView.swift in Sources */,
+				23F0DA25256EB23E006B54AB /* CustomDatePicker.swift in Sources */,
 				A28A5AF7255BD410007E66FA /* AppDelegate.swift in Sources */,
 				2381F76E255C03D5008004DE /* FormScreen1.swift in Sources */,
 				26E42AA825628EC5000E239C /* IntakesArray+Extensions.swift in Sources */,
@@ -761,7 +781,7 @@
 				26F98158255F0E1900774F94 /* Favorite+CoreDataProperties.swift in Sources */,
 				23FEB9E5255BDA7D001EA146 /* Serving.swift in Sources */,
 				A28A5AF9255BD410007E66FA /* SceneDelegate.swift in Sources */,
-				2339FBEC255E998F00D0ABB3 /* SummaryView.swift in Sources */,
+				26B357C2256B5B6300CE8E88 /* WaterIntake+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

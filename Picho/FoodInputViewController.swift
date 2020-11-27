@@ -155,16 +155,27 @@ extension FoodInputViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction(style: .destructive, title: nil) { (action, view, bool) in
             let food = self.foods[indexPath.row]
-            if let id = food.id {
-                CoreDataService.shared.deleteDailyIntake(id)
-                NotificationService.shared.post()
+            
+            guard let idCoreData = food.id else { return }
+            
+            if let idSugar = food.idSugar,
+               let idCalorie = food.idCalorie,
+               let idSatFat = food.idSatFat {
+                HealthKitService.shared.deleteHealthData(id: idSugar, type: .dietarySugar, unit: .gram())
+                HealthKitService.shared.deleteHealthData(id: idCalorie, type: .dietaryEnergyConsumed, unit: .smallCalorie())
+                HealthKitService.shared.deleteHealthData(id: idSatFat, type: .dietaryFatSaturated, unit: .gram())
             }
+            
+            CoreDataService.shared.deleteDailyIntake(idCoreData)
+            NotificationService.shared.post()
+            
             tableView.reloadData()
         }
         action.image = UIImage(systemName: "trash.fill")
         let swipe = UISwipeActionsConfiguration(actions: [action])
         return swipe
     }
+
     
 }
 

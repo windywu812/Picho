@@ -24,8 +24,10 @@ class MealCellView: UIView {
         let loggedFoods = mappedFoods.joined(separator: "\n")
         let loggedCalories = mappedCalories.reduce(0.0, +)
         
-        detaiLabel.text = loggedFoods
-        totalCalorieLabel.text = "\(Int(loggedCalories)) cal"
+        DispatchQueue.main.async {
+            self.detaiLabel.text = loggedFoods
+            self.totalCalorieLabel.text = "\(Int(loggedCalories)) cal"
+        }
     }
     
     init(frame: CGRect = .zero,

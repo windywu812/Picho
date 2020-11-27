@@ -91,9 +91,7 @@ class CoreDataService {
 //        
 //    }
     
-    func addDailyIntake(id: UUID, foodId: String, name: String, description: String, calorie: Double, saturatedFat: Double, sugars: Double, date: Date = Date(), time: EatTime) {
-        
-        print(id)
+    func addDailyIntake(id: UUID, foodId: String, name: String, description: String, calorie: Double, saturatedFat: Double, sugars: Double, date: Date = Date(), idCalorie: UUID? = nil, idSugar: UUID? = nil, idSatFat: UUID? = nil, time: EatTime) {
         
         let intake = DailyIntake(context: context)
         intake.id = id
@@ -105,6 +103,19 @@ class CoreDataService {
         intake.sugars = sugars
         intake.date = date
         intake.time = time.rawValue
+        
+        /// Save HealhKit Id
+        if let idCalorie = idCalorie {
+            intake.idCalorie = idCalorie
+        }
+        
+        if let idSugar = idSugar {
+            intake.idSugar = idSugar
+        }
+        
+        if let idSatFat = idSatFat {
+            intake.idSatFat = idSatFat
+        }
         
         saveDailyIntake(context: context)
     }
@@ -229,6 +240,54 @@ class CoreDataService {
             print(error.localizedDescription)
         }
         return false
+    }
+    
+    // MARK: - Water
+    func getWater(with request: NSFetchRequest<WaterIntake> = WaterIntake.fetchRequest(), for id: String? = nil, completion: @escaping ([WaterIntake]) -> Void) {
+        
+        if let id = id {
+            request.predicate = NSPredicate(format: "id = %@", id as CVarArg)
+        }
+        
+        do {
+            let intakes = try context.fetch(request)
+            completion(intakes)
+        } catch {
+            print(error.localizedDescription)
+            completion([])
+        }
+        
+    }
+    
+    func addWater(id: UUID, amount: Double = 1.0, date: Date = Date(),waterId:UUID) {
+        
+        let water = WaterIntake(context: context)
+        print("Success:\(waterId)")
+        water.id = id
+        water.amount = amount
+        water.date = date
+        water.idWater = waterId
+        saveWater(context: context)
+    }
+    
+    func deleteWater(with request: NSFetchRequest<WaterIntake> = WaterIntake.fetchRequest(), _ id: UUID) {
+        request.predicate = NSPredicate(format: "\(DailyIntakeConstant.id) = %@", id as CVarArg)
+        
+        saveWater(context: context, deleted: true)
+    }
+    
+    private func saveWater(with request: NSFetchRequest<WaterIntake> = WaterIntake.fetchRequest(), context: NSManagedObjectContext, deleted: Bool = false) {
+        
+        do {
+            if deleted {
+                let dataToDelete = try context.fetch(request)[0] as NSManagedObject
+                context.delete(dataToDelete)
+            }
+            try context.save()
+            
+        } catch {
+            print(error.localizedDescription)
+        }
     }
     
 }
