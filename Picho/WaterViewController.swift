@@ -197,7 +197,6 @@ extension WaterViewController: UICollectionViewDelegate, UICollectionViewDataSou
                 totalWater += 1
                 waterAmount.text = "\(totalWater) Cups"
                 waterProgress.setProgress(progress: totalWater)
-            
             }
          
         }
@@ -208,33 +207,3 @@ extension WaterViewController: UICollectionViewDelegate, UICollectionViewDataSou
     
 }
 
-class WaterCell: UICollectionViewCell {
-    
-    static let reuseIdentifier = "WaterCell"
-    
-    var image: UIImage? {
-        didSet { imageView.image = image }
-    }
-    
-    private let imageView: UIImageView
-    
-    override init(frame: CGRect) {
-        
-        imageView = UIImageView()
-        
-        super.init(frame: frame)
-        
-        imageView.contentMode = .scaleAspectFit
-        addSubview(imageView)
-        imageView.setConstraint(
-            topAnchor: topAnchor,
-            bottomAnchor: bottomAnchor,
-            leadingAnchor: leadingAnchor,
-            trailingAnchor: trailingAnchor)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-}

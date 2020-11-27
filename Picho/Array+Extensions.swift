@@ -48,17 +48,11 @@ extension Array {
         
         switch nutrition {
         case .calorie:
-            data.forEach { (daily) in
-                container += daily.calorie
-            }
+            container = data.reduce(0, { $0 + $1.calorie })
         case .sugar:
-            data.forEach { (daily) in
-                container += daily.sugars
-            }
+            container = data.reduce(0, { $0 + $1.sugars })
         case .satFat:
-            data.forEach { (daily) in
-                container += daily.saturatedFat
-            }
+            container = data.reduce(0, { $0 + $1.saturatedFat })
         }
         
         return container 
@@ -71,17 +65,11 @@ extension Array {
         
         switch nutrition {
         case .calorie:
-            data.forEach { (daily) in
-                container += daily.calorie
-            }
+            container = data.reduce(0, { $0 + $1.calorie })
         case .sugar:
-            data.forEach { (daily) in
-                container += daily.sugars
-            }
+            container = data.reduce(0, { $0 + $1.sugars })
         case .satFat:
-            data.forEach { (daily) in
-                container += daily.saturatedFat
-            }
+            container = data.reduce(0, { $0 + $1.saturatedFat })
         }
         
         return data.count > 0 ? container / Double(data.count) : 0.0

@@ -51,6 +51,7 @@ extension UITextField {
         self.layer.borderWidth = 2.0
         self.textAlignment = .center
         self.inputView = datePicker
+        self.tintColor = .clear
         self.addPadding(padding: .equalSpacing(5))
     }
     
