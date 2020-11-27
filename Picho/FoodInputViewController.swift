@@ -122,7 +122,9 @@ class FoodInputViewController: UIViewController {
         case .snacks:
             break
         }
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
     @objc private func reloadFetching(_ notification:Notification) {
