@@ -10,7 +10,6 @@ import UIKit
 class HorizontalProgressView: UIView {
     
     private var rect: CGRect?
-    private var initialProgress: Int = 0
    
     func setProgress(progress: Int) {
         
@@ -22,11 +21,10 @@ class HorizontalProgressView: UIView {
     
     private let progressLayer = CALayer()
     
-    init(frame: CGRect = .zero, progress: Int) {
+    override init(frame: CGRect) {
         super.init(frame: frame)
         layer.addSublayer(progressLayer)
         
-        self.initialProgress = progress
     }
     
     override func draw(_ rect: CGRect) {
@@ -37,8 +35,6 @@ class HorizontalProgressView: UIView {
         backgroundMask.path = UIBezierPath(roundedRect: rect, cornerRadius: rect.height * 0.25).cgPath
         layer.mask = backgroundMask
         layer.backgroundColor = #colorLiteral(red: 0.7576490045, green: 0.7528312802, blue: 0.752771914, alpha: 1)
-        
-        setProgress(progress: initialProgress)
         
         layer.addSublayer(progressLayer)
         progressLayer.backgroundColor = Color.blue.cgColor
