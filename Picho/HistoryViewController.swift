@@ -33,6 +33,7 @@ class HistoryViewController: UIViewController {
         chartView.dataWeekPerMonth = viewModel.getDataWeekofMonth(in: Date().month)
         chartView.setupChartData()
         
+        viewModel.fetchData()
         fetchConsupmtionPerWeek(week: Date().weekOfMonth)
     }
     
@@ -50,6 +51,11 @@ class HistoryViewController: UIViewController {
         foodHistory.setupConsumption(data: viewModel.getDataWeekofMonth(in: month)[week] ?? [])
     }
     
+    private func setupObservers() {
+        let name = Notification.Name(rawValue: NotificationKey.dailyIntakeKey)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadFetching(_:)), name: name, object: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -57,13 +63,25 @@ class HistoryViewController: UIViewController {
         
         setupView()
         setupLayout()
+        setupObservers()
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleDismiss))
         view.addGestureRecognizer(tap)
     }
     
+    @objc private func reloadFetching(_ notification:Notification) {
+        DispatchQueue.main.async {
+            self.chartView.setupChartData()
+            self.foodHistory.reloadData()
+        }
+    }
+    
     @objc private func handleDismiss() {
         view.endEditing(true)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
 }

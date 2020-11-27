@@ -29,6 +29,8 @@ class WaterViewController: UIViewController {
     private var waterCollectionView: UICollectionView!
     private var totalWater: Int = 0
     
+    private var waters: [WaterIntake] = []
+    
     var delegate: WaterDelegate?
     
     override func viewDidLoad() {
@@ -40,14 +42,32 @@ class WaterViewController: UIViewController {
     }
     
     func fetch() {
-        HealthKitService.shared.fetchWater { (glassIntake) in
-            self.totalWater = Int(glassIntake)
+        CoreDataService.shared.getWater { intakes in
+            self.totalWater = Int(intakes.map({ $0.amount }).reduce(0.0, +))
                         
             DispatchQueue.main.async {
                 self.waterAmount.text = "\(self.totalWater) Cups"
                 self.waterProgress.setProgress(progress: self.totalWater)
                 if self.totalWater > 5 {
                     self.infoLabel.setFont(text: "Good", weight: .bold, color: Color.green)
+                }
+            }
+        }
+        CoreDataService.shared.getWater { (totalWtr) in
+            self.waters = totalWtr
+           
+        }
+        
+        if HealthKitService.shared.checkAuthorization() {
+            HealthKitService.shared.fetchWater { (glassIntake) in
+                self.totalWater = Int(glassIntake)
+                            
+                DispatchQueue.main.async {
+                    self.waterAmount.text = "\(self.totalWater) Cups"
+                    self.waterProgress.setProgress(progress: self.totalWater)
+                    if self.totalWater > 5 {
+                        self.infoLabel.setFont(text: "Good", weight: .bold, color: Color.green)
+                    }
                 }
             }
         }
@@ -149,24 +169,37 @@ extension WaterViewController: UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? WaterCell else { return }
-        
-        let previousCell = collectionView.cellForItem(
-            at: IndexPath(row: indexPath.row == 0 ? 0 : indexPath.row - 1,
-                          section: indexPath.section)) as! WaterCell
-     
-        if previousCell.image == UIImage(named: "glass_empty") && indexPath.row != 0 {
-            return
-        }
-        
-        if cell.image == UIImage(named: "glass_fill") {
-            cell.isUserInteractionEnabled = false
-        } else {
-            HealthKitService.shared.addData(amount: 1, date: Date(), type: .dietaryWater, unit: HKUnit.cupUS())
-            cell.image = UIImage(named: "glass_fill")
-            totalWater += 1
-            waterAmount.text = "\(totalWater) Cups"
-            waterProgress.setProgress(progress: totalWater)
+
+        if let cell = collectionView.cellForItem(at: indexPath) as? WaterCell {
+            if cell.image == UIImage(named: "glass_fill") {
+                cell.image = UIImage(named: "glass_empty")
+                let water = waters[indexPath.row]
+                
+               
+                
+                guard let idCoreData = water.id else { return }
+                guard let idWater = water.idWater else { return }
+                
+                print(idWater)
+//                CoreDataService.shared.deleteWater(idCoreData)
+                HealthKitService.shared.deleteHealthData(id: idWater, type: .dietaryWater, unit: .cupUS())
+                
+                totalWater -= 1
+                waterAmount.text = "\(totalWater) Cups"
+                waterProgress.setProgress(progress: totalWater)
+                
+            } else {
+                let water = HealthKitService.shared.addData(amount: 1, date: Date(), type: .dietaryWater, unit: HKUnit.cupUS())
+                print("Air:\(water)")
+                
+                CoreDataService.shared.addWater(id: UUID(),waterId:water)
+                cell.image = UIImage(named: "glass_fill")
+                totalWater += 1
+                waterAmount.text = "\(totalWater) Cups"
+                waterProgress.setProgress(progress: totalWater)
+            
+            }
+         
         }
         
         fetch()

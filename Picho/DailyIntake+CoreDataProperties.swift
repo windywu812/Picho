@@ -25,6 +25,9 @@ extension DailyIntake {
     @NSManaged public var saturatedFat: Double
     @NSManaged public var sugars: Double
     @NSManaged public var time: String?
+    @NSManaged public var idSugar:UUID?
+    @NSManaged public var idSatFat:UUID?
+    @NSManaged public var idCalorie:UUID?
 
 }
 
