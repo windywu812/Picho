@@ -380,15 +380,19 @@ extension NotificationViewController: UITableViewDelegate {
         }
     }
     
-    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         switch section {
         case 5:
-            return "Weighing yourself at the same time weekly will give a more accurate weight result"
+            return NotificationFooterView(text: "Weighing yourself at the same time weekly will give a more accurate weight result")
         case 6:
-            return "Reflect on your progress at the same time weekly to understand your current habit and make an informed decision on changes to make for the coming week"
+            return NotificationFooterView(text: "Reflect on your progress at the same time weekly to understand your current habit and make an informed decision on changes to make for the coming week")
         default:
             return nil
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return UITableView.automaticDimension
     }
     
 }
@@ -411,6 +415,32 @@ extension NotificationViewController: UNUserNotificationCenterDelegate {
                                     UNNotification,withCompletionHandler completionHandler: @escaping
                                         (UNNotificationPresentationOptions) -> Void){
         completionHandler([.sound,.alert])
+    }
+    
+}
+
+class NotificationFooterView: UIView {
+    
+    private var titleLabel: UILabel!
+    
+    init(frame: CGRect = .zero, text: String) {
+        super.init(frame: frame)
+        
+        titleLabel = UILabel()
+        titleLabel.setFont(text: text, size: 13, color: .secondaryLabel)
+        titleLabel.numberOfLines = 0
+        titleLabel.textAlignment = .center
+        addSubview(titleLabel)
+        
+        titleLabel.setConstraint(
+            topAnchor: topAnchor, topAnchorConstant: 8,
+            bottomAnchor: bottomAnchor, bottomAnchorConstant: -8,
+            leadingAnchor: layoutMarginsGuide.leadingAnchor, leadingAnchorConstant: 12,
+            trailingAnchor: layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: -12)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
 }
