@@ -9,6 +9,43 @@ import Foundation
 
 extension Date {
     
+    func getBreakfast() -> DateComponents {
+        var dateComponent = DateComponents()
+        dateComponent.hour = 8
+        dateComponent.minute = 0
+        dateComponent.year = Date().year
+        dateComponent.month = Date().month
+        dateComponent.day = Date().day
+        dateComponent.calendar = Calendar.current
+        
+        return dateComponent
+    }
+    
+    func getLunch() -> DateComponents {
+        var dateComponent = DateComponents()
+        dateComponent.hour = 12
+        dateComponent.minute = 0
+        dateComponent.year = Date().year
+        dateComponent.month = Date().month
+        dateComponent.day = Date().day
+        
+        dateComponent.calendar = Calendar.current
+        
+        return dateComponent
+    }
+    
+    func getDinner() -> DateComponents {
+        var dateComponent = DateComponents()
+        dateComponent.hour = 19
+        dateComponent.minute = 0
+        dateComponent.year = Date().year
+        dateComponent.month = Date().month
+        dateComponent.day = Date().day
+        dateComponent.calendar = Calendar.current
+        
+        return dateComponent
+    }
+    
     func changeToString() -> String {
         let dateFormat = DateFormatter()
         dateFormat.dateFormat = "HH:mm"
@@ -30,6 +67,10 @@ extension Date {
         calendar.timeZone = NSTimeZone.local
         
         return calendar.date(byAdding: components, to: self.startOfTheDay())!
+    }
+    
+    func getComponent() -> DateComponents {
+        return Calendar.current.dateComponents([.hour, .minute], from: self)
     }
     
     func nextDate() -> Date {
@@ -58,6 +99,10 @@ extension Date {
     
     var weekOfMonth: Int {
         return Calendar.current.component(.weekOfMonth, from: self)
+    }
+    
+    var day: Int {
+        return Calendar.current.component(.day, from: self)
     }
     
     var startOfDay: Date {

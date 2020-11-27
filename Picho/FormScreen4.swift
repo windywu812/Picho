@@ -63,7 +63,7 @@ class FormScreen4: UIViewController {
             trailingAnchor: view.layoutMarginsGuide.trailingAnchor,trailingAnchorConstant: 0)
         
         let weightLabel = UILabel()
-        weightLabel.setFont(text: "Weight(KG)", size: 16, weight: .bold)
+        weightLabel.setFont(text: "Weight(kg)", size: 16, weight: .bold)
         
         weightTextField.layer.cornerRadius = 6
         weightTextField.placeholder = "Weight"
@@ -87,7 +87,7 @@ class FormScreen4: UIViewController {
         weightTextField.setConstraint(heighAnchorConstant: 50)
         
         let heightLabel = UILabel()
-        heightLabel.setFont(text: "Height(CM)", size: 16, weight: .bold, color: .black)
+        heightLabel.setFont(text: "Height(cm)", size: 16, weight: .bold, color: .black)
         
         heightTextField.addPadding(padding: .equalSpacing(10))
         heightTextField.layer.cornerRadius = 6

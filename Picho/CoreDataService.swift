@@ -259,20 +259,21 @@ class CoreDataService {
         
     }
     
-    func addWater(id: UUID, amount: Double = 1.0, date: Date = Date()) {
+    func addWater(id: UUID, amount: Double = 1.0, date: Date = Date(),waterId:UUID) {
         
         let water = WaterIntake(context: context)
+        print("Success:\(waterId)")
         water.id = id
         water.amount = amount
         water.date = date
-        
+        water.idWater = waterId
         saveWater(context: context)
     }
     
-    func deleteWater(with request: NSFetchRequest<WaterIntake> = WaterIntake.fetchRequest(), _ id: String) {
+    func deleteWater(with request: NSFetchRequest<WaterIntake> = WaterIntake.fetchRequest(), _ id: UUID) {
         request.predicate = NSPredicate(format: "\(DailyIntakeConstant.id) = %@", id as CVarArg)
         
-        saveFavorite(context: context, deleted: true)
+        saveWater(context: context, deleted: true)
     }
     
     private func saveWater(with request: NSFetchRequest<WaterIntake> = WaterIntake.fetchRequest(), context: NSManagedObjectContext, deleted: Bool = false) {

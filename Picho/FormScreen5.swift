@@ -87,7 +87,7 @@ class FormScreen5: UIViewController {
         view.addSubview(stackAgreement)
         stackAgreement.setConstraint(
             topAnchor: label3.bottomAnchor, topAnchorConstant: 24,
-            leadingAnchor: view.layoutMarginsGuide.leadingAnchor, leadingAnchorConstant: 16,
+            leadingAnchor: view.layoutMarginsGuide.leadingAnchor, leadingAnchorConstant: 40,
             trailingAnchor: view.layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: -16)
         
         getStartedBtn = UIButton()
