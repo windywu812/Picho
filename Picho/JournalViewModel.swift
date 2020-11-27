@@ -36,8 +36,8 @@ class JournalViewModel {
             HealthKitService.shared.fetchSugar { (totalSugar) in
                 self.sugarLeft = self.sugarIntake - totalSugar
             }
-            HealthKitService.shared.fetchWater { (water) in
-                self.totalWater = water
+            CoreDataService.shared.getWater { (waters) in
+                self.totalWater = Double(waters.count)
             }
             HealthKitService.shared.fetchActivity { (step) in
                 self.totalStep = step
