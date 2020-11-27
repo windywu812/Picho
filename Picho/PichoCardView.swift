@@ -21,7 +21,15 @@ class PichoCardView: UIView {
     private let detailLabel: UILabel
     private let button: UIButton
     private let rootView: UIViewController
-    private let type: PichoCardType
+    private var type: PichoCardType
+    
+    func setupPicho( mascot: String, title: String, detail: String, buttonText: String, type: PichoCardType) {
+        mascotImage.image = UIImage(named: mascot)
+        titleLabel.text = title
+        detailLabel.text = detail
+        button.setTitle(buttonText, for: .normal)
+        self.type = type
+    }
     
     init(frame: CGRect = .zero,
          mascot: String,

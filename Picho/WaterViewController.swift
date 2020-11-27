@@ -169,6 +169,7 @@ extension WaterViewController: UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
         if let cell = collectionView.cellForItem(at: indexPath) as? WaterCell {
             if cell.image == UIImage(named: "glass_fill") {
                 cell.image = UIImage(named: "glass_empty")
@@ -198,8 +199,11 @@ extension WaterViewController: UICollectionViewDelegate, UICollectionViewDataSou
                 waterProgress.setProgress(progress: totalWater)
             
             }
-           
+         
         }
+        
+        fetch()
+        
     }
     
 }
