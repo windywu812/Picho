@@ -12,6 +12,8 @@ class DescriptionScreen3: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let phoneWidth = UIScreen.main.bounds.maxX
+
         view.backgroundColor = Color.background
         
         let image = UIImage(named: "3")
@@ -22,9 +24,9 @@ class DescriptionScreen3: UIViewController {
         view.addSubview(imageview)
         imageview.translatesAutoresizingMaskIntoConstraints = false
         imageview.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        imageview.centerYAnchor.constraint(equalTo: view.centerYAnchor,constant: -100).isActive = true
-        imageview.widthAnchor.constraint(equalToConstant: 275).isActive = true
-        imageview.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        imageview.centerYAnchor.constraint(equalTo: view.centerYAnchor,constant: -124).isActive = true
+        imageview.widthAnchor.constraint(equalToConstant: phoneWidth).isActive = true
+        imageview.heightAnchor.constraint(equalToConstant: phoneWidth).isActive = true
         
         let label1 = UILabel()
         label1.text = "Too much ‘bad’\nCholesterol in your body..."

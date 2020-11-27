@@ -73,7 +73,8 @@ class FormScreen2: UIViewController {
             heighAnchorConstant: 50)
         
         getStartedBtn.setTitle("Continue", for: .normal)
-        getStartedBtn.layer.cornerRadius =  6
+        getStartedBtn.titleLabel?.font = .boldSystemFont(ofSize: 16)
+        getStartedBtn.layer.cornerRadius =  10
         getStartedBtn.backgroundColor = Color.lightGreen
         getStartedBtn.tintColor = Color.green
         getStartedBtn.isEnabled = false

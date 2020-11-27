@@ -57,8 +57,9 @@ class FormScreen1: UIViewController {
             trailingAnchor: view.layoutMarginsGuide.trailingAnchor,trailingAnchorConstant: -16)
 
         let getStartedBtn = UIButton()
-        getStartedBtn.setTitle("Hi Picho", for: .normal)
-        getStartedBtn.layer.cornerRadius =  6
+        getStartedBtn.setTitle("Alrighty!", for: .normal)
+        getStartedBtn.titleLabel?.font = .boldSystemFont(ofSize: 16)
+        getStartedBtn.layer.cornerRadius =  10
         getStartedBtn.backgroundColor = Color.green
         view.addSubview(getStartedBtn)
         
