@@ -46,12 +46,18 @@ extension Date {
         return dateComponent
     }
     
+    func getString() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy HH:mm"
+        return formatter.string(from: self)
+    }
+    
     func changeToString() -> String {
         let dateFormat = DateFormatter()
         dateFormat.dateFormat = "HH:mm"
         return dateFormat.string(from: self)
     }
-    
+     
     func startOfTheDay() -> Date {
         var calendar = Calendar.current
         calendar.timeZone = NSTimeZone(forSecondsFromGMT: 0) as TimeZone
@@ -103,18 +109,6 @@ extension Date {
     
     var day: Int {
         return Calendar.current.component(.day, from: self)
-    }
-    
-    var startOfDay: Date {
-        return Calendar.current.startOfDay(for: self)
-    }
-    
-    var endOfDay: Date {
-        var component = DateComponents()
-        component.day = 1
-        component.second = -1
-        
-        return Calendar.current.date(byAdding: component, to: Date().startOfDay)!
     }
     
     func add(_ x: Int) -> Date {

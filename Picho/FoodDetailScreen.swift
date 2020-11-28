@@ -35,8 +35,6 @@ class FoodDetailScreen: UITableViewController {
     private var nutritions: [[String]] = []
     private var amounts: [[Double]] = []
     
-    let healthStore = HKHealthStore()
-    
     var isAddShown = true
     
     var foodDescription: String = ""

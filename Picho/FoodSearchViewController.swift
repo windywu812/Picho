@@ -19,6 +19,8 @@ class FoodSearchViewController: UIViewController {
     private var favorites: [Favorite] = []
     
     var eatingTime: EatTime =  .breakfast
+    
+    private let viewModel = FoodSearchViewModel()
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -156,7 +158,6 @@ extension FoodSearchViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: FoodCell.reuseIdentifier, for: indexPath) as! FoodCell
-        
         cell.selectionStyle = .none
         
         switch segmentedControl.selectedSegmentIndex {

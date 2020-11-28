@@ -15,10 +15,7 @@ class FoodCell: UITableViewCell {
     private var calorieLabel: UILabel!
     private var fatLabel: UILabel!
     private var sugarLabel: UILabel!
-//    private var logButton: UIButton!
-    
-    var isLogged = false
-    
+
     func configureCell(foodName: String, description: String) {
         nameLabel.text = foodName
         
@@ -63,10 +60,6 @@ class FoodCell: UITableViewCell {
             bottomAnchor: bottomAnchor, bottomAnchorConstant: -16,
             leadingAnchor: layoutMarginsGuide.leadingAnchor,
             trailingAnchor: layoutMarginsGuide.trailingAnchor)
-    }
-    
-    @objc private func handleLogging() {
-        print("Logged")
     }
     
     required init?(coder: NSCoder) {
