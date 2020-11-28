@@ -33,7 +33,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
         if !UserDefaultService.currentDate.isEmpty {
             let date = UserDefaultService.currentDate
-            if Date().add(1) > date.getDate() {
+            if Date() > date.getDate() {
                 UserDefaultService.resetDay()
             }
         }
