@@ -14,8 +14,8 @@ class ProfileViewModel {
     var isSync: Bool = false
     var imageProfile: String = ""
     
-    let secondSectionLabel = ["Gender", "Age", "Height", "Weight"]
-    let thirdSectionLabel = ["Sync to HealthKit", "Notifications"]
+    let secondSectionLabel = [NSLocalizedString("Gender", comment: ""),NSLocalizedString("Age", comment: "") ,NSLocalizedString("Height", comment: ""),NSLocalizedString("Weight", comment: "") ]
+    let thirdSectionLabel = [NSLocalizedString("Sync to HealthKit", comment: ""),NSLocalizedString("Notifications", comment: "") ]
     
     init() {
         fetchUserDefault()

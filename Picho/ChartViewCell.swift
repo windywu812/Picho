@@ -41,8 +41,8 @@ class ChartViewCell: UIView {
             trailingAnchor: layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: -12,
             heighAnchorConstant: 336)
         
-        let sugarLegend = LegendView(text: "Sugar", color: Color.green)
-        let satFatLegend = LegendView(text: "Saturated Fat", color: Color.yellow)
+        let sugarLegend = LegendView(text:NSLocalizedString("Sugar", comment: "") , color: Color.green)
+        let satFatLegend = LegendView(text:NSLocalizedString("Saturated Fat", comment: "") , color: Color.yellow)
         
         addSubview(sugarLegend)
         addSubview(satFatLegend)

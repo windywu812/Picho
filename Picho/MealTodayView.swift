@@ -46,18 +46,19 @@ class MealsTodayView: UIView {
         let tapDinner = UITapGestureRecognizer(target: self, action: #selector(handleDinner(sender:)))
         let tapSnack = UITapGestureRecognizer(target: self, action: #selector(handleSnacks(sender:)))
         
-        title.setFont(text: "Meals Today", size: 22, weight: .bold)
+        title.setFont(text: NSLocalizedString("Meals Today", comment: "")
+                      , size: 22, weight: .bold)
         
-        breakFastCard = MealCellView(iconImage: "breakfast", title: EatTime.breakfast.rawValue.capitalized, buttonText: "Add Breakfast", foods: breakfasts, rootView: rootView)
+        breakFastCard = MealCellView(iconImage: "breakfast", title: EatTime.breakfast.rawValue.capitalized, buttonText: NSLocalizedString("Add Breakfast", comment: "") , foods: breakfasts, rootView: rootView)
         breakFastCard.addGestureRecognizer(tapBreakfast)
         
-        lunchCard = MealCellView(iconImage: "lunch", title: EatTime.lunch.rawValue.capitalized, buttonText: "Add Lunch", foods: lunches, rootView: rootView)
+        lunchCard = MealCellView(iconImage: "lunch", title: EatTime.lunch.rawValue.capitalized, buttonText: NSLocalizedString("Add Lunch", comment: "") , foods: lunches, rootView: rootView)
         lunchCard.addGestureRecognizer(tapLunch)
         
-        dinnerCard = MealCellView(iconImage: "dinner", title: EatTime.dinner.rawValue.capitalized, buttonText: "Add Dinner", foods: dinners,  rootView: rootView)
+        dinnerCard = MealCellView(iconImage: "dinner", title: EatTime.dinner.rawValue.capitalized, buttonText: NSLocalizedString("Add Dinner", comment: "") , foods: dinners,  rootView: rootView)
         dinnerCard.addGestureRecognizer(tapDinner)
         
-        snackCard = MealCellView(iconImage: "snacks", title: EatTime.snacks.rawValue.capitalized, buttonText: "Add Snacks", foods: snacks, rootView: rootView)
+        snackCard = MealCellView(iconImage: "snacks", title: EatTime.snacks.rawValue.capitalized, buttonText: NSLocalizedString("Add Snacks", comment: "") , foods: snacks, rootView: rootView)
         snackCard.addGestureRecognizer(tapSnack)
         
         addSubview(title)

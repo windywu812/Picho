@@ -19,12 +19,15 @@ class FoodHeaderCell: UITableViewCell {
     private var howOftenLabel: UILabel!
     
     func setupCell(imageIcon: String = "", labelText: String = "", calorie: Double = 0.0, sugar: Double = 0.0, satFat: Double = 0.0) {
-
+        let totalSgr = "\(sugar)"
+        let totalSatFat = "\(satFat)"
+      
+        
         icon.image = UIImage(named: imageIcon)
         foodNameLabel.setFont(text: labelText, weight: .bold)
         calorieLabel.setFont(text: "\(calorie) cal", weight: .bold)
-        sugarLabel.setFont(text: "Sugar - \(sugar) g", weight: .bold, color: .secondaryLabel)
-        satFatLabel.setFont(text: "Saturated Fat - \(satFat) g", weight: .bold, color: .secondaryLabel)
+        sugarLabel.setFont(text: String(format: NSLocalizedString("Sugar - %@ g", comment: ""), totalSgr), weight: .bold, color: .secondaryLabel)
+        satFatLabel.setFont(text: String(format: NSLocalizedString("Saturated Fat - %@ g", comment: ""), totalSatFat) , weight: .bold, color: .secondaryLabel)
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

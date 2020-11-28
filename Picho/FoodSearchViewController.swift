@@ -32,14 +32,14 @@ class FoodSearchViewController: UIViewController {
     
     private func setupView() {
         view.backgroundColor = Color.background
-        navigationItem.title = "Search"
+        navigationItem.title = NSLocalizedString("Search", comment: "")
         
         searchBar = UISearchBar()
-        searchBar.placeholder = "Search for a food"
+        searchBar.placeholder = NSLocalizedString( "Search for a food", comment: "")
         searchBar.searchBarStyle = .minimal
         view.addSubview(searchBar)
         
-        segmentedControl = UISegmentedControl(items: ["Recent", "Favorites"])
+        segmentedControl = UISegmentedControl(items: [NSLocalizedString("Recent", comment: "") ,NSLocalizedString("Favorites", comment: "") ])
         segmentedControl.selectedSegmentIndex = currentSegment
         segmentedControl.addTarget(self, action: #selector(handleSegmentChange), for: .valueChanged)
         view.addSubview(segmentedControl)

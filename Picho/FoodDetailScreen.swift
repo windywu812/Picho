@@ -65,12 +65,12 @@ class FoodDetailScreen: UITableViewController {
     }
     
     private func setupLabel() {
-        mainNutritions = ["Saturated Fat", "Sugars"]
-        fatNutritions = ["Fat", "Saturated Fat", "Trans Fat", "Polysaturated Fat", "Monosaturated Fat"]
-        cholesterolNutritions = ["Cholesterol"]
-        sodiumNutritions = ["Sodium"]
-        carbohydrateNutritions = ["Carbohydrate", "Fiber", "Sugars"]
-        proteinNutritions = ["Protein"]
+        mainNutritions = [NSLocalizedString("Saturated Fat", comment: "") ,NSLocalizedString("Sugars", comment: "") ]
+        fatNutritions = [NSLocalizedString("Fat", comment: "") ,NSLocalizedString("Saturated Fat", comment: "") ,NSLocalizedString("Trans Fat", comment: "") ,NSLocalizedString("Polysaturated Fat", comment: "") ,NSLocalizedString("Monosaturated Fat", comment: "")]
+        cholesterolNutritions = [NSLocalizedString("Cholesterol", comment: "")]
+        sodiumNutritions = [NSLocalizedString("Sodium", comment: "")]
+        carbohydrateNutritions = [NSLocalizedString("Carbohydrate", comment: ""),NSLocalizedString("Fiber", comment: ""),NSLocalizedString("Sugars", comment: "")]
+        proteinNutritions = [NSLocalizedString("Protein", comment: "") ]
         
         nutritions = [mainNutritions, fatNutritions, cholesterolNutritions, sodiumNutritions, carbohydrateNutritions, proteinNutritions]
     }
@@ -81,7 +81,7 @@ class FoodDetailScreen: UITableViewController {
         calorieHeader = UIView()
         
         calorieLabel = UILabel()
-        calorieLabel.text = "Calories"
+        calorieLabel.text = NSLocalizedString("Calories", comment: "")
         calorieLabel.font = .preferredFont(forTextStyle: .title2)
         calorieLabel.font = .boldSystemFont(ofSize: 24)
 
@@ -92,17 +92,17 @@ class FoodDetailScreen: UITableViewController {
         nutritionHeader = UIView()
         
         nutritionLabel = UILabel()
-        nutritionLabel.text = "Nutritional Information"
+        nutritionLabel.text = NSLocalizedString("Nutritional Information", comment: "")
         nutritionLabel.font = .systemFont(ofSize: 26, weight: .bold)
         nutritionHeader.addSubview(nutritionLabel)
         
         servingLabel = UILabel()
-        servingLabel.text = "Per serve"
+        servingLabel.text = NSLocalizedString("Per serve", comment: "")
         servingLabel.font = .systemFont(ofSize: 17, weight: .bold)
         nutritionHeader.addSubview(servingLabel)
         
         navigationItem.title = "Nasi Lemak"
-        navigationItem.rightBarButtonItem = isAddShown ? UIBarButtonItem(title: "Add", style: .done, target: self, action: #selector(handleAdd)) : nil
+        navigationItem.rightBarButtonItem = isAddShown ? UIBarButtonItem(title:NSLocalizedString("Add", comment: ""), style: .done, target: self, action: #selector(handleAdd)) : nil
         
         setupFavorite()
         

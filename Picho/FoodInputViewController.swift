@@ -54,7 +54,7 @@ class FoodInputViewController: UIViewController {
         titleLabel.numberOfLines = 0
         titleLabel.textAlignment = .center
         titleLabel.font = .systemFont(ofSize: 22, weight: .bold)
-        titleLabel.text = "Would you mind to share your \n\(eatingTime.rawValue) with me?"
+        titleLabel.text = String(format:NSLocalizedString("Would you mind to share your \n%@ with me?", comment: ""),eatingTime.rawValue)
         
         addButton = UIButton()
         addButton.backgroundColor = Color.green

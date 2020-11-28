@@ -25,19 +25,19 @@ class Value1Cell: UITableViewCell {
     func setupView(type: Type, amount: Double) {
         switch type {
         case .calorie:
-            textLabel?.text = "Average Calories"
+            textLabel?.text = NSLocalizedString("Average Calories", comment: "")
             detailTextLabel?.text = String(format: "%.2f", amount) + " cal"
             let more = amount - calorieIntake
             let percentage = more / calorieIntake * 100
             setupIndicator(percentage: percentage)
         case .saturatedFat:
-            textLabel?.text = "Average Saturated Fat"
+            textLabel?.text = NSLocalizedString("Average Saturated Fat", comment: "")
             detailTextLabel?.text = String(format: "%.2f", amount) + " g"
             let more = amount - saturatedFatIntake
             let percentage = more / saturatedFatIntake * 100
             setupIndicator(percentage: percentage)
         case .sugar:
-            textLabel?.text = "Average Sugar"
+            textLabel?.text = NSLocalizedString("Average Sugar", comment: "")
             detailTextLabel?.text = String(format: "%.2f", amount) + " g"
             let more = amount - sugarIntake
             let percentage = more / sugarIntake * 100

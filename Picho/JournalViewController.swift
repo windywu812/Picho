@@ -85,7 +85,7 @@ class JournalViewController: UIViewController {
     }
     
     private func setupScrollView() {
-        navigationItem.title = "Today"
+        navigationItem.title = NSLocalizedString("Today", comment: "")
         
         scrollView = UIScrollView()
         scrollView.backgroundColor = Color.background
@@ -115,17 +115,17 @@ class JournalViewController: UIViewController {
         if Date() < Date().getBreakfast().date! {
             pichoCardView = PichoCardView(
                 mascot: "mascot_sad",
-                title: "Morning, Fred!",
-                detail: "Hope you've had a good night's sleep",
-                buttonText: "Log Breakfast",
+                title: NSLocalizedString("Morning", comment: ""),
+                detail: NSLocalizedString("Hope you've had a good night's sleep", comment: "") ,
+                buttonText: NSLocalizedString("Log Breakfast", comment: "") ,
                 type: .breakfast, rootView: self)
         } else if Date() > Date().getBreakfast().date! && Date() < Date().getLunch().date! {
             if !UserDefaultService.hasBreakfast {
                 pichoCardView = PichoCardView(
                     mascot: "mascot_sad",
-                    title: "You haven't started!",
-                    detail: "Start by logging in what you eat today",
-                    buttonText: "Log Breakfast",
+                    title: NSLocalizedString("You haven't started!", comment: "") ,
+                    detail: NSLocalizedString("Start by logging in what you eat today", comment: "") ,
+                    buttonText: NSLocalizedString("Log Breakfast", comment: "") ,
                     type: .breakfast, rootView: self)
             } else {
                 pichoCardView = nil
@@ -134,9 +134,9 @@ class JournalViewController: UIViewController {
             if !UserDefaultService.hasLunch {
                 pichoCardView = PichoCardView(
                     mascot: "mascot_sad",
-                    title: "Lunchie!",
-                    detail: "Psst.. I heard lunch is a great place to be",
-                    buttonText: "Log Lunch",
+                    title: NSLocalizedString("Lunchie!", comment: "") ,
+                    detail: NSLocalizedString("Psst.. I heard lunch is a great place to be", comment: "") ,
+                    buttonText: NSLocalizedString("Log Lunch", comment: "") ,
                     type: .lunch, rootView: self)
             } else {
                 pichoCardView = nil
@@ -145,9 +145,9 @@ class JournalViewController: UIViewController {
             if !UserDefaultService.hasDinner {
                 pichoCardView = PichoCardView(
                     mascot: "mascot_sad",
-                    title: "Din din!",
-                    detail: "What a day it has been, don't forget to log your dinner",
-                    buttonText: "Log Dinner",
+                    title:  NSLocalizedString("Din din!", comment: "") ,
+                    detail: NSLocalizedString("What a day it has been, don't forget to log your dinner", comment: "") ,
+                    buttonText: NSLocalizedString("Log Dinner", comment: "") ,
                     type: .dinner, rootView: self)
             } else {
                 pichoCardView = nil
@@ -163,14 +163,14 @@ class JournalViewController: UIViewController {
         setupPicho()
         
         waterCardView = HorizontalView(
-            labelText: "Water",
+            labelText: NSLocalizedString("Water", comment: "") ,
             iconImage: UIImage(),
             background: Color.blue)
         let tapWater = UITapGestureRecognizer(target: self, action: #selector(handleWater(sender:)))
         waterCardView.addGestureRecognizer(tapWater)
         
         activityCardView = HorizontalView(
-            labelText: "Activity",
+            labelText: NSLocalizedString("Activity", comment: "") ,
             iconImage: UIImage(),
             background: Color.red)
         let tapActivity = UITapGestureRecognizer(target: self, action: #selector(handleActivity(sender:)))

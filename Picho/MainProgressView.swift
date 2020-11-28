@@ -34,9 +34,12 @@ class MainProgressView: UIView {
         totalSugar: Float,
         sugarLeftAmount: Float
     ) {
-        totalCalorieLabel.text = "from \(String(format: "%.00f", totalCalorie)) cal/day"
-        sugarTotalLabel.text = "from \(String(format: "%.01f", totalSugar)) g/day"
-        satFatTotalLabel.text = "from \(String(format: "%.01f", totalSatFat)) g/day"
+        let stringCal = (String(format: "%.00f", totalCalorie))
+        let stringSgr = (String(format: "%.01f", totalSugar))
+        let stringSatFat = (String(format: "%.01f", totalSatFat))
+        totalCalorieLabel.text = String(format: NSLocalizedString("from %@ cal/day", comment: ""), stringCal)
+        sugarTotalLabel.text = String(format: NSLocalizedString("from %@ g/day", comment: ""), stringSgr)
+        satFatTotalLabel.text = String(format: NSLocalizedString("from %@ g/day", comment: ""), stringSatFat)
         
         sugarLeft.text = "\(String(format: "%.01f", sugarLeftAmount))g"
         satFatLeft.text = "\(String(format: "%.01f", satFatLeftAmount))g"
@@ -90,12 +93,12 @@ class MainProgressView: UIView {
     
     private func setupCalorie() {
         calorieLabel.setFont(
-            text: "Calories",
+            text: NSLocalizedString("Calories", comment: "") ,
             size: 17,
             weight: .bold)
         
         totalCalorieLabel.setFont(
-            text: "from \(0) cal/day",
+            text: NSLocalizedString("from \(0) cal/day", comment: "") ,
             size: 13,
             color: .secondaryLabel)
         
@@ -119,17 +122,17 @@ class MainProgressView: UIView {
     
     private func setupSatFat() {
         satFatLabel.setFont(
-            text: "Saturated Fat",
+            text: NSLocalizedString("Saturated Fat", comment: ""),
             size: 17,
             weight: .bold)
         
         satFatTotalLabel.setFont(
-            text: "from \(0)/day",
+            text: NSLocalizedString("from \(0)/day", comment: "") ,
             size: 13,
             color: .secondaryLabel)
         
         satFatLeft.setFont(
-            text: "\(0)g left", size: 13)
+            text: NSLocalizedString("\(0)g left", comment: ""), size: 13)
         
         satFatStack = UIStackView(
             arrangedSubviews: [satFatLabel,
@@ -151,17 +154,18 @@ class MainProgressView: UIView {
     
     private func setupSugar() {
         sugarLabel.setFont(
-            text: "Sugar",
+            text: NSLocalizedString("Sugar", comment: "") ,
             size: 17,
             weight: .bold)
         
         sugarTotalLabel.setFont(
-            text: "from \(0)/day",
+            text: NSLocalizedString("from \(0)/day", comment: ""),
             size: 13,
             color: .secondaryLabel)
         
         sugarLeft.setFont(
-            text: "\(0)g left", size: 13)
+            text: NSLocalizedString("\(0)g left", comment: "")
+            , size: 13)
         
         let mainStack = UIStackView(
             arrangedSubviews: [sugarLabel,

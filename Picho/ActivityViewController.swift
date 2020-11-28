@@ -9,9 +9,7 @@ import UIKit
 
 class ActivityViewController: UIViewController {
     
-    let detailText = """
-    By losing fat and building muscles, you can increase your ‘good’ HDL (high-density lipoprotein) cholesterol  while decreasing your ‘bad’ LDL (low-density lipoprotein) cholesterol at the same time! That’s just killing two birds with one stone, right?  Picho can help you track your burned calories and adjust your daily intake better when linked to Health.
-    """
+    let detailText = NSLocalizedString("By losing fat and building muscles, you can increase your ‘good’ HDL (high-density lipoprotein) cholesterol  while decreasing your ‘bad’ LDL (low-density lipoprotein) cholesterol at the same time! That’s just killing two birds with one stone, right?Picho can help you track your burned calories and adjust your daily intake better when linked to Health.", comment: "")
     
     private var descriptionLabel: UILabel!
     private var cardView: PichoCardView?
@@ -22,12 +20,12 @@ class ActivityViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Activity"
+        title = NSLocalizedString("Activity", comment: "")
         
         setupView()
         setupLayout()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(handleClose))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Close", comment: "") , style: .done, target: self, action: #selector(handleClose))
     }
     
     private func setupView() {
@@ -42,14 +40,14 @@ class ActivityViewController: UIViewController {
             cardView = PichoCardView(
                 mascot: "mascot",
                 title: "Activity \"Health\"",
-                detail: "For better result, connect Picho to Apple Health",
-                buttonText: "Connect to ❤️",
+                detail: NSLocalizedString("For better result, connect Picho to Apple Health", comment: "") ,
+                buttonText: NSLocalizedString("Connect to ❤️", comment: "") ,
                 type: .syncHealhtKit,
                 rootView: self)
         }
         
         activityCard = HorizontalView(
-            labelText: "Activity",
+            labelText: NSLocalizedString("Activity", comment: "") ,
             iconImage: UIImage(),
             background: Color.red)
         activityCard.setupView(amount: Int(viewModel.totalStep), type: .activity)

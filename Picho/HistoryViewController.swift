@@ -38,7 +38,7 @@ class HistoryTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        navigationItem.title = "Progress"
+        navigationItem.title = NSLocalizedString("Progress", comment: "")
         
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 90
@@ -115,7 +115,7 @@ class HistoryTableViewController: UITableViewController {
                 cell.selectionStyle = .none
                 cell.setupCell(
                     imageIcon: "breakfast",
-                    labelText: "Breakfast",
+                    labelText: NSLocalizedString("Breakfast", comment: ""),
                     calorie: breakfasts.reduce(0.0, { $0 + $1.totalCalorie }),
                     sugar: breakfasts.reduce(0.0, { $0 + $1.totalSugar }),
                     satFat: breakfasts.reduce(0.0, { $0 + $1.totalSatFat }))
@@ -132,7 +132,7 @@ class HistoryTableViewController: UITableViewController {
                 cell.selectionStyle = .none
                 cell.setupCell(
                     imageIcon: "lunch",
-                    labelText: "Lunch",
+                    labelText: NSLocalizedString("Lunch", comment: ""),
                     calorie: lunches.reduce(0.0, { $0 + $1.totalCalorie }),
                     sugar: lunches.reduce(0.0, { $0 + $1.totalSugar }),
                     satFat: lunches.reduce(0.0, { $0 + $1.totalSatFat }))
@@ -149,7 +149,7 @@ class HistoryTableViewController: UITableViewController {
                 cell.selectionStyle = .none
                 cell.setupCell(
                     imageIcon: "dinner",
-                    labelText: "Dinner",
+                    labelText: NSLocalizedString("Dinner", comment: ""),
                     calorie: dinners.reduce(0.0, { $0 + $1.totalCalorie }),
                     sugar: dinners.reduce(0.0, { $0 + $1.totalSugar }),
                     satFat: dinners.reduce(0.0, { $0 + $1.totalSatFat }))
@@ -166,7 +166,7 @@ class HistoryTableViewController: UITableViewController {
                 cell.selectionStyle = .none
                 cell.setupCell(
                     imageIcon: "snacks",
-                    labelText: "Snacks",
+                    labelText: NSLocalizedString("Snacks", comment: ""),
                     calorie: snacks.reduce(0.0, { $0 + $1.totalCalorie }),
                     sugar: snacks.reduce(0.0, { $0 + $1.totalSugar }),
                     satFat: snacks.reduce(0.0, { $0 + $1.totalSatFat }))

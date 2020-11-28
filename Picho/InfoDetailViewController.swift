@@ -12,11 +12,7 @@ class InfoDetailViewController: UIViewController {
     private var scrollView: UIScrollView!
     private var progressView: TopProgressView!
     private var detailLabel: UILabel!
-    private let detailText = """
-    Saturated fat and sugar can trigger increase in ‘bad’ cholesterol (LDL). When sugar level is high, excess sugar gets converted to triglycerides.
-
-    High triglycerides cause hardening on the arteries' wall (atherosclerosis). Along with ‘bad’ cholesterol (LDL), they increase the risk of stroke, heart attack and heart disease.
-    """
+    private let detailText = NSLocalizedString("Saturated fat and sugar can trigger increase in ‘bad’ cholesterol (LDL). When sugar level is high, excess sugar gets converted to triglycerides.High triglycerides cause hardening on the arteries' wall (atherosclerosis). Along with ‘bad’ cholesterol (LDL), they increase the risk of stroke, heart attack and heart disease.", comment: "")
     
     var viewModel: JournalViewModel!
    
@@ -36,8 +32,8 @@ class InfoDetailViewController: UIViewController {
     }
     
     private func setupView() {
-        navigationItem.title = "Detail"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Close", style: .done, target: self, action: #selector(handleDone))
+        navigationItem.title = NSLocalizedString("Detail", comment: "")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Close", comment: "") , style: .done, target: self, action: #selector(handleDone))
         view.backgroundColor = Color.background
         
         scrollView = UIScrollView()
@@ -131,7 +127,7 @@ class TopProgressView: UIView {
         calorieProgress = CircularProgressView()
         calorieLabel = UILabel()
         calorieTotalLabel = UILabel()
-        calorieLabel.setFont(text: "CALORIES", weight: .bold)
+        calorieLabel.setFont(text: NSLocalizedString("Calories", comment: "") , weight: .bold)
         calorieTotalLabel.setFont(text: "2000 cal", size: 13)
         addSubview(calorieProgress)
         
@@ -139,7 +135,7 @@ class TopProgressView: UIView {
         satFatLabel = UILabel()
         satFatLeft = UILabel()
         satFatTotalLabel = UILabel()
-        satFatLabel.setFont(text: "SATURATED FAT", size: 13, weight: .bold)
+        satFatLabel.setFont(text: NSLocalizedString("Saturated Fat", comment: ""), size: 13, weight: .bold)
         satFatLeft.setFont(text: "15g left", size: 13, weight: .bold)
         satFatTotalLabel.setFont(text: "from 25g/day", size: 13, color: .secondaryLabel)
         addSubview(satFatProgress)
@@ -148,7 +144,7 @@ class TopProgressView: UIView {
         sugarLabel = UILabel()
         sugarLeft = UILabel()
         sugarTotalLabel = UILabel()
-        sugarLabel.setFont(text: "SUGAR", size: 13, weight: .bold)
+        sugarLabel.setFont(text: NSLocalizedString("Sugar", comment: "") , size: 13, weight: .bold)
         sugarLeft.setFont(text: "5g left", size: 13, weight: .bold)
         sugarTotalLabel.setFont(text: "from 36g/day", size: 13, color: .secondaryLabel)
         
