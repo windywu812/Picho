@@ -20,10 +20,10 @@ class FoodSearchViewModel {
     }
     
     func fetchAllFood() {
-        apiService.fetchApi(with: .getAllFood, response: FoodResponse.self) { (result) in
+        apiService.fetchApi(with: .getAllFood, response: [FoodDetail].self) { (result) in
             switch result {
             case .success(let response):
-                self.allFood = response.foods
+                self.allFood = response
             case .failure(let err):
                 print(err.localizedDescription)
                 self.allFood = []
@@ -32,10 +32,10 @@ class FoodSearchViewModel {
     }
     
     func fetchSearch(keyword: String) {
-        apiService.fetchApi(with: .searchFood(keyword), response: FoodResponse.self) { (result) in
+        apiService.fetchApi(with: .searchFood(keyword), response: [FoodDetail].self) { (result) in
             switch result {
             case .success(let response):
-                print(response.foods)
+                print(response)
             case .failure(let err):
                 print(err.localizedDescription)
             }

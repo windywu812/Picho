@@ -7,10 +7,6 @@
 
 import Foundation
 
-struct FoodResponse: Decodable {
-    let foods: [FoodDetail]
-}
-
 struct FoodDetail: Decodable {
     let foodId: Int
     let nameId: String
@@ -33,7 +29,7 @@ struct FoodDetail: Decodable {
     let iron: Double
     
     private enum CodingKeys: String, CodingKey {
-        case foodId
+        case foodId = "id"
         case nameId = "name_id"
         case nameEn = "name_en"
         case calorieFromFat = "calorie_from_fat"

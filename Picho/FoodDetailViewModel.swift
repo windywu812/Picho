@@ -11,6 +11,12 @@ class FoodDetailViewModel {
     
     var food: FoodDetail?
     
+    let sectionOneLabels = ["Calories", "Saturated Fat", "Sugars"]
+    let sectionTwoLabels = ["Serving Size"]
+    let sectionThreeLabels = ["Fat", "Calorie From Fat", "TransFat", "Cholesterol"]
+    let sectionFourLabels = ["Carbohydrate", "Protein", "Fiber", "Sodium", "Calcium", "Iron"]
+    let sectionSevenLabels = ["Vitamin A", "Vitamin B"]
+    
     private let apiService: APIService
     
     init(apiService: APIService = APIService(), idFood: Int) {

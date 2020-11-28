@@ -8,8 +8,8 @@
 import Foundation
 
 struct BaseAPI {
-    static let baseURL = ""
-    static let apiKey = ""
+    static let baseURL = "http://test.universalis.web.id/"
+    static let apiKey = "YhQJTCpuwI27JSlcSTZ7pNBiOT2MC7GJ"
 }
 
 enum Endpoints {
@@ -21,11 +21,11 @@ enum Endpoints {
     var url: String {
         switch self {
         case .getAllFood:
-            return "\(BaseAPI.baseURL)"
+            return "\(BaseAPI.baseURL)/\(BaseAPI.apiKey)"
         case .getDetail(let idFood):
-            return "\(BaseAPI.baseURL)\(idFood)"
+            return "\(BaseAPI.baseURL)/\(BaseAPI.apiKey)/\(idFood)/food"
         case .searchFood(let keyword):
-            return "\(BaseAPI.baseURL)\(keyword)"
+            return "\(BaseAPI.baseURL)/\(BaseAPI.apiKey)/search?q=\(keyword)"
         }
     }
 }
