@@ -16,19 +16,11 @@ class FoodCell: UITableViewCell {
     private var fatLabel: UILabel!
     private var sugarLabel: UILabel!
 
-    func configureCell(foodName: String, description: String) {
+    func configureCell(foodName: String, calorie: Double, fat: Double, sugar: Double) {
         nameLabel.text = foodName
-        
-        let components = description.split(separator: "|")
-        let calories = components[0]
-        var fat = components[1]
-        fat.removeFirst()
-        var sugar = components[3]
-        sugar.removeFirst()
-
-        fatLabel.text = String(fat)
-        calorieLabel.text = String(calories)
-        sugarLabel.text = String(sugar)
+        fatLabel.text = "Fat: \(String(fat))g"
+        calorieLabel.text = "Calories: \(String(calorie))cal"
+        sugarLabel.text = "Sugar: \(String(sugar))g"
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

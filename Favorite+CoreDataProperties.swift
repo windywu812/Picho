@@ -19,6 +19,9 @@ extension Favorite {
     @NSManaged public var desc: String?
     @NSManaged public var id: String?
     @NSManaged public var name: String?
+    @NSManaged public var satFat: String?
+    @NSManaged public var calorie: String?
+    @NSManaged public var sugar: String?
 
 }
 

@@ -10,7 +10,7 @@ import Foundation
 
 class APIService {
     
-    func fetchApi<T: Decodable>(with endpoint: Endpoints, response: T.Type, completion: @escaping (Result<T, Error>) -> ()) {
+    static func fetchApi<T: Decodable>(with endpoint: Endpoints, response: T.Type, completion: @escaping (Result<T, Error>) -> ()) {
         
         guard let urlString = URL(string: endpoint.url) else { return }
         

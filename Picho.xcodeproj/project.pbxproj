@@ -20,6 +20,8 @@
 		23445693255E4BD5001497DD /* LegendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23445692255E4BD5001497DD /* LegendView.swift */; };
 		235EEF3A256E559A004C3A99 /* ChartViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235EEF39256E559A004C3A99 /* ChartViewCell.swift */; };
 		23645F23255C2D5400DA5697 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23645F22255C2D5400DA5697 /* ActivityViewController.swift */; };
+		236A06172573941E00024232 /* FoodNameHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236A06162573941E00024232 /* FoodNameHeader.swift */; };
+		236A061A2573942F00024232 /* NutrionalHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236A06192573942F00024232 /* NutrionalHeader.swift */; };
 		236D9C7A255D3EB500B252B5 /* InfoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236D9C79255D3EB500B252B5 /* InfoDetailViewController.swift */; };
 		2381F76E255C03D5008004DE /* FormScreen1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2381F76D255C03D5008004DE /* FormScreen1.swift */; };
 		2381F772255C03DB008004DE /* FormScreen2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2381F771255C03DB008004DE /* FormScreen2.swift */; };
@@ -125,6 +127,8 @@
 		23445692255E4BD5001497DD /* LegendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegendView.swift; sourceTree = "<group>"; };
 		235EEF39256E559A004C3A99 /* ChartViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewCell.swift; sourceTree = "<group>"; };
 		23645F22255C2D5400DA5697 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
+		236A06162573941E00024232 /* FoodNameHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodNameHeader.swift; sourceTree = "<group>"; };
+		236A06192573942F00024232 /* NutrionalHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutrionalHeader.swift; sourceTree = "<group>"; };
 		236D9C79255D3EB500B252B5 /* InfoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoDetailViewController.swift; sourceTree = "<group>"; };
 		2381F76D255C03D5008004DE /* FormScreen1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormScreen1.swift; sourceTree = "<group>"; };
 		2381F771255C03DB008004DE /* FormScreen2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormScreen2.swift; sourceTree = "<group>"; };
@@ -321,6 +325,8 @@
 			isa = PBXGroup;
 			children = (
 				238C9411255BEBAF00591791 /* DetailCell.swift */,
+				236A06162573941E00024232 /* FoodNameHeader.swift */,
+				236A06192573942F00024232 /* NutrionalHeader.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -732,6 +738,7 @@
 				238C9409255BEB1900591791 /* FoodCell.swift in Sources */,
 				236D9C7A255D3EB500B252B5 /* InfoDetailViewController.swift in Sources */,
 				23FEB9EB255BDA85001EA146 /* Search.swift in Sources */,
+				236A061A2573942F00024232 /* NutrionalHeader.swift in Sources */,
 				23FEB9D6255BDA49001EA146 /* FatSecretCredentials.swift in Sources */,
 				A28A5B41255CE519007E66FA /* DetailSugarNSatFat.swift in Sources */,
 				23FEBA31255BDC7A001EA146 /* MainProgressView.swift in Sources */,
@@ -794,6 +801,7 @@
 				23843BEA2561147600D17A44 /* String+Extensions.swift in Sources */,
 				23FEB9E2255BDA79001EA146 /* FatSecretError.swift in Sources */,
 				2344568F255E4BB0001497DD /* ChartView.swift in Sources */,
+				236A06172573941E00024232 /* FoodNameHeader.swift in Sources */,
 				23FEBA4D255BDD49001EA146 /* ProfileViewModel.swift in Sources */,
 				23FEB9D9255BDA53001EA146 /* FatSecretParams.swift in Sources */,
 				23FEBA46255BDCBC001EA146 /* PichoCardView.swift in Sources */,

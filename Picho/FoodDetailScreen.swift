@@ -10,33 +10,7 @@ import HealthKit
 
 class FoodDetailScreen: UITableViewController {
     
-    private var calorieHeader: UIView!
-    private var nutritionHeader: UIView!
-    private var nutritionLabel: UILabel!
-    private var servingLabel: UILabel!
-    private var calorieLabel: UILabel!
-    private var calorieAmount: UILabel!
-    
-    private var calorieNutrition = 0.0
-    private var mainNutritions: [String] = []
-    private var fatNutritions: [String] = []
-    private var cholesterolNutritions: [String] = []
-    private var sodiumNutritions: [String] = []
-    private var carbohydrateNutritions: [String] = []
-    private var proteinNutritions: [String] = []
-    
-    private var mainAmounts: [Double] = []
-    private var fatAmounts: [Double] = []
-    private var cholesterolAmounts: [Double] = []
-    private var sodiumAmounts: [Double] = []
-    private var carbohydrateAmounts: [Double] = []
-    private var proteinAmounts: [Double] = []
-
-    private var nutritions: [[String]] = []
-    private var amounts: [[Double]] = []
-    
     var isAddShown = true
-    
     var foodDescription: String = ""
     var foodName: String = ""
     var foodId: String = "" {
@@ -44,91 +18,31 @@ class FoodDetailScreen: UITableViewController {
             fetchingFood()
         }
     }
-    
     var eatingTime: EatTime = .breakfast
-    
     var isFavorite: Bool = false
     
-    override init(style: UITableView.Style = .grouped) {
-        super.init(style: style)
-    }
+    private var food: FoodDetail?
+    private var viewModel = FoodDetailViewModel()
+    private var headerName: FoodNameHeader?
+    private var nutritionAmount: [[Double]] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupLabel()
         setupView()
-        setupLayout()
+        setupFavorite()
         fetchingFavorite()
     }
     
-    private func setupLabel() {
-        mainNutritions = ["Saturated Fat", "Sugars"]
-        fatNutritions = ["Fat", "Saturated Fat", "Trans Fat", "Polysaturated Fat", "Monosaturated Fat"]
-        cholesterolNutritions = ["Cholesterol"]
-        sodiumNutritions = ["Sodium"]
-        carbohydrateNutritions = ["Carbohydrate", "Fiber", "Sugars"]
-        proteinNutritions = ["Protein"]
-        
-        nutritions = [mainNutritions, fatNutritions, cholesterolNutritions, sodiumNutritions, carbohydrateNutritions, proteinNutritions]
-    }
-
     private func setupView() {
         view.backgroundColor = Color.background
         
-        calorieHeader = UIView()
-        
-        calorieLabel = UILabel()
-        calorieLabel.text = "Calories"
-        calorieLabel.font = .preferredFont(forTextStyle: .title2)
-        calorieLabel.font = .boldSystemFont(ofSize: 24)
-
-        calorieAmount = UILabel()
-        calorieAmount.text = "324"
-        calorieAmount.font = .systemFont(ofSize: 34, weight: .bold)
-        
-        nutritionHeader = UIView()
-        
-        nutritionLabel = UILabel()
-        nutritionLabel.text = "Nutritional Information"
-        nutritionLabel.font = .systemFont(ofSize: 26, weight: .bold)
-        nutritionHeader.addSubview(nutritionLabel)
-        
-        servingLabel = UILabel()
-        servingLabel.text = "Per serve"
-        servingLabel.font = .systemFont(ofSize: 17, weight: .bold)
-        nutritionHeader.addSubview(servingLabel)
-        
-        navigationItem.title = "Nasi Lemak"
+        navigationItem.title = "Detail"
         navigationItem.rightBarButtonItem = isAddShown ? UIBarButtonItem(title: "Add", style: .done, target: self, action: #selector(handleAdd)) : nil
-        
-        setupFavorite()
         
         tableView.register(DetailCell.self, forCellReuseIdentifier: DetailCell.reuseIdentifier)
         tableView.allowsSelection = false
         tableView.showsVerticalScrollIndicator = false
-    }
-    
-    private func setupLayout() {
-        let calorieStack = UIStackView(arrangedSubviews: [calorieLabel, calorieAmount])
-        calorieStack.axis = .vertical
-        calorieStack.alignment = .leading
-        calorieStack.spacing = 8
-        calorieHeader.addSubview(calorieStack)
-        
-        calorieStack.setConstraint(
-            topAnchor: calorieHeader.topAnchor, topAnchorConstant: 16,
-            bottomAnchor: calorieHeader.bottomAnchor, bottomAnchorConstant: -16,
-            leadingAnchor: calorieHeader.leadingAnchor, leadingAnchorConstant: 18)
-
-        nutritionLabel.setConstraint(
-            topAnchor: nutritionHeader.layoutMarginsGuide.topAnchor,
-            leadingAnchor: nutritionHeader.layoutMarginsGuide.leadingAnchor, leadingAnchorConstant: 12)
-
-        servingLabel.setConstraint(
-            topAnchor: nutritionLabel.bottomAnchor, topAnchorConstant: 8,
-            bottomAnchor: nutritionHeader.bottomAnchor, bottomAnchorConstant: -8,
-            trailingAnchor: nutritionHeader.trailingAnchor, trailingAnchorConstant: -20)
     }
     
     private func setupFavorite() {
@@ -155,76 +69,68 @@ class FoodDetailScreen: UITableViewController {
         isFavorite.toggle()
         setupFavorite()
     }
-
+    
     @objc private func handleAdd() {
-        NetworkService.shared.getFood(id: foodId) { food in
-            switch food {
-            case .success(let food):
-                guard let servings = food.servings?.first else { return }
-
-                let idSatFat = HealthKitService.shared.addData(amount: Double(servings.saturatedFat ?? "0") ?? 0, date: Date(), type: .dietaryFatSaturated, unit: HKUnit.gram())
-                let idSugar = HealthKitService.shared.addData(amount: Double(servings.sugar ?? "0") ?? 0, date: Date(), type: .dietarySugar, unit: HKUnit.gram())
-                let idCalorie = HealthKitService.shared.addData(amount: Double(servings.calories ?? "0") ?? 0, date: Date(), type: .dietaryEnergyConsumed, unit: HKUnit.smallCalorie())
-                
-                CoreDataService.shared.addDailyIntake(id: UUID(), foodId: self.foodId, name: self.foodName, description: self.foodDescription, calorie: self.calorieNutrition, saturatedFat: self.mainAmounts[0], sugars: self.mainAmounts[1], idCalorie: idCalorie, idSugar: idSugar, idSatFat: idSatFat, time: self.eatingTime)
         
-                NotificationService.shared.post()
-                
-                print("aman")
-            case .failure(let err):
-                print(err.localizedDescription)
-            }
-        }
+        let idSatFat = HealthKitService.shared.addData(
+            amount: Double(food?.saturatedFat ?? 0),
+            date: Date(),
+            type: .dietaryFatSaturated,
+            unit: HKUnit.gram())
+        let idSugar = HealthKitService.shared.addData(
+            amount: Double(food?.sugar ?? 0),
+            date: Date(),
+            type: .dietarySugar,
+            unit: HKUnit.gram())
+        let idCalorie = HealthKitService.shared.addData(
+            amount: Double(food?.calories ?? 0),
+            date: Date(),
+            type: .dietaryEnergyConsumed,
+            unit: HKUnit.smallCalorie())
         
-        if !HealthKitService.shared.checkAuthorization() {
-            CoreDataService.shared.addDailyIntake(id: UUID(), foodId: foodId, name: foodName, description: foodDescription, calorie: calorieNutrition, saturatedFat: mainAmounts[0], sugars: mainAmounts[1], time: eatingTime)
-            
-            NotificationService.shared.post()
-        }
+        guard let food = food else { return }
+        
+        CoreDataService.shared.addDailyIntake(
+            id: UUID(),
+            foodId: String(food.foodId ),
+            name: food.nameId,
+            description: "",
+            calorie: food.calories,
+            saturatedFat: food.saturatedFat,
+            sugars: food.sugar,
+            date: Date(),
+            idCalorie: idCalorie,
+            idSugar: idSugar,
+            idSatFat: idSatFat,
+            time: eatingTime)
+     
+        NotificationService.shared.post()
         
         dismiss(animated: true, completion: nil)
     }
-
+    
     private func fetchingFood() {
-        NetworkService.shared.getFood(id: foodId) { food in
-            switch food {
-            case .success(let food):
-                print(food.servings ?? [])
-                guard let servings = food.servings?.first else { return }
+        APIService.fetchApi(with: .getDetail(Int(foodId) ?? 0), response: FoodDetail.self) { (result) in
+            switch result {
+            case .success(let response):
+                self.food = response
+                
+                let section1Amount = [self.food?.calories, self.food?.saturatedFat, self.food?.sugar].compactMap({ $0 })
+                let section2Amount = [self.food?.serving].compactMap({ $0 })
+                let section3Amount = [self.food?.totalFat, self.food?.calorieFromFat, self.food?.transFat, self.food?.cholesterol].compactMap({ $0 })
+                let section4Amount = [self.food?.cholesterol, self.food?.protein, self.food?.fiber, self.food?.sodium, self.food?.calcium, self.food?.iron].compactMap({ $0 })
+                let section5Amount = [self.food?.vitaminA, self.food?.vitaminC].compactMap({ $0 })
+                
+                self.nutritionAmount = [section1Amount, section2Amount, section3Amount, section4Amount, section5Amount]
+                
                 DispatchQueue.main.async {
-                    self.navigationItem.title = self.foodName
-                    
-                    self.calorieNutrition = servings.calories.convertToDouble()
-                    self.calorieAmount.text = String(self.calorieNutrition)
-                    
-                    self.mainAmounts.append(servings.saturatedFat.convertToDouble())
-                    self.mainAmounts.append(servings.sugar.convertToDouble())
-                    
-                    self.fatAmounts.append(servings.fat.convertToDouble())
-                    self.fatAmounts.append(servings.saturatedFat.convertToDouble())
-                    self.fatAmounts.append(servings.transFat.convertToDouble())
-                    self.fatAmounts.append(servings.polyunsaturatedFat.convertToDouble())
-                    self.fatAmounts.append(servings.monounsaturatedFat.convertToDouble())
-                    
-                    self.cholesterolAmounts.append(servings.cholesterol.convertToDouble())
-                    
-                    self.sodiumAmounts.append(servings.sodium.convertToDouble())
-                    
-                    self.carbohydrateAmounts.append(servings.carbohydrate.convertToDouble())
-                    self.carbohydrateAmounts.append(servings.fiber.convertToDouble())
-                    self.carbohydrateAmounts.append(servings.sugar.convertToDouble())
-                    
-                    self.proteinAmounts.append(servings.protein.convertToDouble())
-                    
-                    self.amounts = [self.mainAmounts, self.fatAmounts, self.cholesterolAmounts, self.sodiumAmounts, self.carbohydrateAmounts, self.proteinAmounts]
-                    
                     self.tableView.reloadData()
                 }
-        
             case .failure(let err):
                 print(err.localizedDescription)
             }
         }
+        
     }
     
     private func fetchingFavorite() {
@@ -235,37 +141,44 @@ class FoodDetailScreen: UITableViewController {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return nutritions.count
+        return viewModel.labels.count
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
         case 0:
-            return calorieHeader
+            headerName = FoodNameHeader()
+            headerName?.nameLabel.text = food?.nameId
+            return headerName
         case 2:
-            return nutritionHeader
+            return NutrionalHeader()
         default:
             return nil
         }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return nutritions[section].count
+        return viewModel.labels[section].count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DetailCell.reuseIdentifier, for: indexPath) as! DetailCell
         
-        let nutrition = nutritions[indexPath.section][indexPath.row]
-        var amount = 0.0
+        if nutritionAmount.isEmpty { return cell }
         
-        if !amounts.isEmpty {
-            amount = amounts[indexPath.section][indexPath.row]
-        }
-        
-        cell.configureCell(label: nutrition, value: amount)
+        cell.configureCell(
+            label: viewModel.labels[indexPath.section][indexPath.row],
+            value: nutritionAmount[indexPath.section][indexPath.row])
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+    override init(style: UITableView.Style = .grouped) {
+        super.init(style: style)
     }
     
     required init?(coder: NSCoder) {
@@ -273,3 +186,4 @@ class FoodDetailScreen: UITableViewController {
     }
     
 }
+

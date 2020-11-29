@@ -176,8 +176,6 @@ extension WaterViewController: UICollectionViewDelegate, UICollectionViewDataSou
                 let water = waters[indexPath.row]
                 
                
-                
-                guard let idCoreData = water.id else { return }
                 guard let idWater = water.idWater else { return }
                 
                 print(idWater)

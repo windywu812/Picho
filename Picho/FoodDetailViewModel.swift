@@ -9,30 +9,20 @@ import Foundation
 
 class FoodDetailViewModel {
     
-    var food: FoodDetail?
+    var labels: [[String]] = []
     
-    let sectionOneLabels = ["Calories", "Saturated Fat", "Sugars"]
-    let sectionTwoLabels = ["Serving Size"]
-    let sectionThreeLabels = ["Fat", "Calorie From Fat", "TransFat", "Cholesterol"]
-    let sectionFourLabels = ["Carbohydrate", "Protein", "Fiber", "Sodium", "Calcium", "Iron"]
-    let sectionSevenLabels = ["Vitamin A", "Vitamin B"]
-    
-    private let apiService: APIService
-    
-    init(apiService: APIService = APIService(), idFood: Int) {
-        self.apiService = apiService
-        fetchDetail(idFood: idFood)
+    init() {
+        setupLabel()
     }
-    
-    func fetchDetail(idFood: Int) {
-        apiService.fetchApi(with: .getDetail(idFood), response: FoodDetail.self) { (result) in
-            switch result {
-            case .success(let response):
-                self.food = response
-            case .failure(let err):
-                print(err.localizedDescription)
-            }
-        }
+   
+    private func setupLabel() {
+        let sectionOneLabels = ["Calories", "Saturated Fat", "Sugars"]
+        let sectionTwoLabels = ["Serving Size"]
+        let sectionThreeLabels = ["Fat", "Calorie From Fat", "TransFat", "Cholesterol"]
+        let sectionFourLabels = ["Carbohydrate", "Protein", "Fiber", "Sodium", "Calcium", "Iron"]
+        let sectionFiveLabels = ["Vitamin A", "Vitamin B"]
+        
+        labels = [sectionOneLabels, sectionTwoLabels, sectionThreeLabels, sectionFourLabels, sectionFiveLabels]
     }
     
 }
