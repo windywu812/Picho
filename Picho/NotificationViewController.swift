@@ -63,8 +63,8 @@ class NotificationViewController: UIViewController {
             let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: timeBreakfast ?? ("08:00").changeToDate())
             viewModel.addNotification(
                 id: "Breakfast",
-                title: "Good morning!",
-                body: "Start your day with a breakfast, and don’t forget to log it! 😉",
+                title: NSLocalizedString("Good morning!", comment: "") ,
+                body: NSLocalizedString("Start your day with a breakfast, and don’t forget to log it! 😉", comment: "") ,
                 time: dateComponent,
                 isOn: sender.isOn,
                 timeLabel: timeBreakfast?.changeToString() ?? "08:00")
@@ -72,8 +72,8 @@ class NotificationViewController: UIViewController {
             let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: timeLunch ?? ("12:00").changeToDate())
             viewModel.addNotification(
                 id: "Lunch",
-                title: "It's past midday!",
-                body: "What did you have for lunch today?",
+                title: NSLocalizedString("It's past midday!", comment: ""),
+                body: NSLocalizedString("What did you have for lunch today?", comment: ""),
                 time: dateComponent,
                 isOn: sender.isOn,
                 timeLabel: timeLunch?.changeToString() ?? "12:00")
@@ -81,8 +81,8 @@ class NotificationViewController: UIViewController {
             let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: timeDinner ?? ("19:00").changeToDate())
             viewModel.addNotification(
                 id: "Dinner",
-                title: "Evening is here!",
-                body: "Have you had your dinner? Don’t forget to log it!",
+                title: NSLocalizedString("Evening is here!", comment: "") ,
+                body: NSLocalizedString("Have you had your dinner? Don’t forget to log it!", comment: "") ,
                 time: dateComponent,
                 isOn: sender.isOn,
                 timeLabel: timeDinner?.changeToString() ?? "19:00")
@@ -90,8 +90,8 @@ class NotificationViewController: UIViewController {
             let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: timeSnacks ?? ("16:00").changeToDate())
             viewModel.addNotification(
                 id: "Snacks",
-                title: "Now is the best time for snacks.",
-                body: "Picho loves snack time. What about you?",
+                title: NSLocalizedString("Now is the best time for snacks.", comment: "") ,
+                body: NSLocalizedString("Picho loves snack time. What about you?", comment: ""),
                 time: dateComponent,
                 isOn: sender.isOn,
                 timeLabel: timeSnacks?.changeToString() ?? "16:00")
@@ -99,8 +99,8 @@ class NotificationViewController: UIViewController {
             let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: timeWater ?? ("12:00").changeToDate())
             viewModel.addNotification(
                 id: "Water",
-                title: "*Gulp* *gulp* *gulp*",
-                body: "Eight glasses of water a day, keeps dehydration away!",
+                title: NSLocalizedString("*Gulp* *gulp* *gulp*", comment: "") ,
+                body: NSLocalizedString("Eight glasses of water a day, keeps dehydration away!", comment: ""),
                 time: dateComponent,
                 isOn: sender.isOn,
                 timeLabel: timeSnacks?.changeToString() ?? "12:00")
@@ -108,8 +108,8 @@ class NotificationViewController: UIViewController {
             let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: timeWight ?? ("12:00").changeToDate())
             viewModel.addNotification(
                 id: "Weight In",
-                title: "Weight In",
-                body: "Have you checked your weight?",
+                title: NSLocalizedString("Weight In", comment: ""),
+                body: NSLocalizedString("Have you checked your weight?", comment: "") ,
                 time: dateComponent,
                 isOn: sender.isOn,
                 timeLabel: timeSnacks?.changeToString() ?? "12:00")
@@ -117,8 +117,8 @@ class NotificationViewController: UIViewController {
             let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: timeReflection ?? ("20:00").changeToDate())
             viewModel.addNotification(
                 id: "Reflection",
-                title: "Reflection",
-                body: "Check your progress",
+                title:  NSLocalizedString("Reflection", comment: "") ,
+                body: NSLocalizedString("Check your progress", comment: ""),
                 time: dateComponent,
                 isOn: sender.isOn,
                 timeLabel: timeSnacks?.changeToString() ?? "20:00")
@@ -139,8 +139,8 @@ class NotificationViewController: UIViewController {
             let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: timeBreakfast ?? ("08:00").changeToDate())
             viewModel.addNotification(
                 id: "Breakfast",
-                title: "Good morning!",
-                body: "Start your day with a breakfast, and don’t forget to log it! 😉",
+                title: NSLocalizedString("Good morning!", comment: ""),
+                body: NSLocalizedString("Start your day with a breakfast, and don’t forget to log it! 😉", comment: ""),
                 time: dateComponent,
                 isOn: viewModel.notifications[0].isOn,
                 timeLabel: timeBreakfast?.changeToString() ?? "08:00")
@@ -150,8 +150,8 @@ class NotificationViewController: UIViewController {
             let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: timeLunch ?? ("12:00").changeToDate())
             viewModel.addNotification(
                 id: "Lunch",
-                title: "It's past midday!",
-                body: "What did you have for lunch today?",
+                title: NSLocalizedString("It's past midday!", comment: ""),
+                body: NSLocalizedString("What did you have for lunch today?", comment: ""),
                 time: dateComponent,
                 isOn: viewModel.notifications[1].isOn,
                 timeLabel: timeLunch?.changeToString() ?? "12:00")
@@ -161,8 +161,8 @@ class NotificationViewController: UIViewController {
             let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: timeDinner ?? ("19:00").changeToDate())
             viewModel.addNotification(
                 id: "Dinner",
-                title: "Evening is here!",
-                body: "Have you had your dinner? Don’t forget to log it!",
+                title: NSLocalizedString("Evening is here!", comment: ""),
+                body: NSLocalizedString("Have you had your dinner? Don’t forget to log it!", comment: ""),
                 time: dateComponent,
                 isOn: viewModel.notifications[2].isOn,
                 timeLabel: timeDinner?.changeToString() ?? "19:00")
@@ -172,8 +172,8 @@ class NotificationViewController: UIViewController {
             let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: timeSnacks ?? ("16:00").changeToDate())
             viewModel.addNotification(
                 id: "Snacks",
-                title: "Now is the best time for snacks.",
-                body: "Picho loves snack time. What about you?",
+                title: NSLocalizedString("Now is the best time for snacks.", comment: ""),
+                body: NSLocalizedString("Picho loves snack time. What about you?", comment: ""),
                 time: dateComponent,
                 isOn: viewModel.notifications[3].isOn,
                 timeLabel: timeSnacks?.changeToString() ?? "16:00")
@@ -183,8 +183,8 @@ class NotificationViewController: UIViewController {
             let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: timeWater ?? ("12:00").changeToDate())
             viewModel.addNotification(
                 id: "Water",
-                title: "*Gulp* *gulp* *gulp*",
-                body: "Eight glasses of water a day, keeps dehydration away!",
+                title: NSLocalizedString("*Gulp* *gulp* *gulp*", comment: ""),
+                body: NSLocalizedString("Eight glasses of water a day, keeps dehydration away!", comment: ""),
                 time: dateComponent,
                 isOn: viewModel.notifications[4].isOn,
                 timeLabel: timeSnacks?.changeToString() ?? "12:00")
@@ -194,8 +194,8 @@ class NotificationViewController: UIViewController {
             let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: timeWight ?? ("12:00").changeToDate())
             viewModel.addNotification(
                 id: "Weight In",
-                title: "Weight In",
-                body: "Have you checked your weight?",
+                title: NSLocalizedString("Weight In", comment: ""),
+                body: NSLocalizedString("Have you checked your weight?", comment: ""),
                 time: dateComponent,
                 isOn: viewModel.notifications[5].isOn,
                 timeLabel: timeSnacks?.changeToString() ?? "12:00")
@@ -205,8 +205,8 @@ class NotificationViewController: UIViewController {
             let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: timeReflection ?? ("20:00").changeToDate())
             viewModel.addNotification(
                 id: "Reflection",
-                title: "Reflection",
-                body: "Check your progress",
+                title: NSLocalizedString("Reflection", comment: ""),
+                body: NSLocalizedString("Check your progress", comment: ""),
                 time: dateComponent,
                 isOn: viewModel.notifications[6].isOn,
                 timeLabel: timeSnacks?.changeToString() ?? "20:00")
@@ -374,7 +374,7 @@ extension NotificationViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "Remind me to log at"
+            return NSLocalizedString("Remind me to log at", comment: "")
         default:
             return nil
         }
@@ -383,9 +383,9 @@ extension NotificationViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
         case 5:
-            return "Weighing yourself at the same time weekly will give a more accurate weight result"
+            return NSLocalizedString("Weighing yourself at the same time weekly will give a more accurate weight result", comment: "")
         case 6:
-            return "Reflect on your progress at the same time weekly to understand your current habit and make an informed decision on changes to make for the coming week"
+            return NSLocalizedString("Reflect on your progress at the same time weekly to understand your current habit and make an informed decision on changes to make for the coming week", comment: "") 
         default:
             return nil
         }
