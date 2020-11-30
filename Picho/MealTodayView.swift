@@ -32,7 +32,6 @@ class MealsTodayView: UIView {
         setupObservers()
         setupView()
         setupLayout()
-        print(EatTime.breakfast.rawValue)
     }
     
     deinit {
