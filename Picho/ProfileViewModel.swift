@@ -46,18 +46,19 @@ class ProfileViewModel {
         isSync = UserDefaultService.isSyncHealthKit
     }
     
-    func savePic(image: UIImage, key: String) {
+    func savePic(image: UIImage?, key: String) {
+        guard let image = image else { return }
         if let pngRepresentation = image.pngData() {
             UserDefaults.standard.set(pngRepresentation, forKey: key)
         }
     }
     
-    func getPic(forKey key: String) -> UIImage? {
+    func getPic(forKey key: String) -> UIImage {
         if let imageData = UserDefaults.standard.object(forKey: key) as? Data,
             let image = UIImage(data: imageData) {
             return image
         }
-        return nil
+        return UIImage(systemName: "person.circle")!
     }
     
     
