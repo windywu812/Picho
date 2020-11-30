@@ -186,7 +186,8 @@ class FoodDetailScreen: UITableViewController {
         
         cell.configureCell(
             label: viewModel.labels[indexPath.section][indexPath.row],
-            value: nutritionAmount[indexPath.section][indexPath.row])
+            value: nutritionAmount[indexPath.section][indexPath.row],
+            unit: viewModel.units[indexPath.section][indexPath.row])
         
         if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: ServingCell.reuseIdentifier, for: indexPath) as! ServingCell

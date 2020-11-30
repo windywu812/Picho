@@ -10,9 +10,11 @@ import Foundation
 class FoodDetailViewModel {
     
     var labels: [[String]] = []
+    var units: [[String]] = []
     
     init() {
         setupLabel()
+        setupUnit()
     }
    
     private func setupLabel() {
@@ -23,6 +25,16 @@ class FoodDetailViewModel {
         let sectionFiveLabels = ["Vitamin A", "Vitamin B"]
         
         labels = [sectionOneLabels, sectionTwoLabels, sectionThreeLabels, sectionFourLabels, sectionFiveLabels]
+    }
+    
+    private func setupUnit() {
+        let sectionOneUnits = ["kCal", "g", "g"]
+        let sectionTwoUnits = ["g"]
+        let sectionThreeUnits = ["g", "kCal", "g", "mg"]
+        let sectionFourUnits = ["g", "g", "g", "mg", "%", "%"]
+        let sectionFiveUnits = ["%", "%"]
+        
+        units = [sectionOneUnits, sectionTwoUnits, sectionThreeUnits, sectionFourUnits, sectionFiveUnits]
     }
     
 }
