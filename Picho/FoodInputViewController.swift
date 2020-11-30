@@ -161,8 +161,6 @@ extension FoodInputViewController: UITableViewDelegate {
         let foodVC = FoodDetailScreen()
         let food = foods[indexPath.row]
         foodVC.foodId = food.foodId ?? ""
-        foodVC.foodDescription = food.description
-        foodVC.foodName = food.name ?? ""
         foodVC.isAddShown = false
         
         let vc = UINavigationController(rootViewController: foodVC)
@@ -205,7 +203,11 @@ extension FoodInputViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FoodCell.reuseIdentifier, for: indexPath) as! FoodCell
-        cell.configureCell(foodName: foods[indexPath.row].name ?? "", description: foods[indexPath.row].desc ?? "")
+        cell.configureCell(
+            foodName: foods[indexPath.row].name ?? "",
+            calorie: foods[indexPath.row].calorie,
+            fat: foods[indexPath.row].saturatedFat,
+            sugar: foods[indexPath.row].sugars)
         cell.selectionStyle = .none
         return cell
     }

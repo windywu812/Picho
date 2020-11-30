@@ -12,6 +12,9 @@ enum PichoCardType {
     case breakfast
     case lunch
     case dinner
+    case snack
+    case detail
+    case water
 }
 
 class PichoCardView: UIView {
@@ -92,6 +95,16 @@ class PichoCardView: UIView {
             let vc = FoodInputViewController()
             vc.eatingTime = .dinner
             rootView.navigationController?.pushViewController(vc, animated: true)
+        case .snack:
+            let vc = FoodInputViewController()
+            vc.eatingTime = .snacks
+            rootView.navigationController?.pushViewController(vc, animated: true)
+        case .detail:
+            let vc = DetailSugarNSatFat()
+            rootView.present(vc, animated: true, completion: nil)
+        case .water:
+            let vc = WaterViewController()
+            rootView.present(vc, animated: true, completion: nil)
         case .syncHealhtKit:
             HealthKitService.shared.authorization()
         }

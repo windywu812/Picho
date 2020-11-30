@@ -10,7 +10,7 @@ import Combine
 
 class FoodSearchViewController: UIViewController {
     
-    @Published private var foods: [SearchedFood] = []
+    @Published private var foods: [FoodDetail] = []
     private var searchBar: UISearchBar!
     private var tableView: UITableView!
     private var segmentedControl: UISegmentedControl!
@@ -19,6 +19,8 @@ class FoodSearchViewController: UIViewController {
     private var favorites: [Favorite] = []
     
     var eatingTime: EatTime =  .breakfast
+    
+    private let viewModel = FoodSearchViewModel()
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,8 +28,9 @@ class FoodSearchViewController: UIViewController {
         setupView()
         setupTableView()
         setupLayout()
-        setupSearchBar()
+        setupBinding()
         setupObservers()
+        fetchAllData()
     }
     
     private func setupView() {
@@ -53,7 +56,6 @@ class FoodSearchViewController: UIViewController {
         tableView.backgroundColor = Color.background
         tableView.rowHeight = 130
         tableView.showsVerticalScrollIndicator = false
-        
         view.addSubview(tableView)
     }
     
@@ -77,23 +79,24 @@ class FoodSearchViewController: UIViewController {
             trailingAnchor: view.trailingAnchor)
     }
     
-    private func setupSearchBar() {
-        
+    private func setupBinding() {
         NotificationCenter.default.publisher(for: UISearchTextField.textDidChangeNotification, object: searchBar.searchTextField)
             .map({ ($0.object as! UISearchTextField).text })
             .debounce(for: .milliseconds(400), scheduler: RunLoop.main)
-            .filter({ !$0!.isEmpty })
             .sink { text in
-                guard let text = text else { return }
-                NetworkService.shared.searchFood(keyword: text) { (result) in
-                    switch result {
-                    case .success(let foods):
-//                        print(foods.first?.servings)
-                        self.foods = foods
-                    case .failure(let err):
-                        self.foods = []
-                        print(err.localizedDescription)
+                if text?.count != 0 {
+                    APIService.fetchApi(with: .searchFood(text!), response: [FoodDetail].self) { (result) in
+                        switch result {
+                        case .success(let foods):
+                            print(foods.count)
+                            self.foods = foods
+                        case .failure(let err):
+                            self.foods = []
+                            print(err.localizedDescription)
+                        }
                     }
+                } else {
+                    self.fetchAllData()
                 }
             }
             .store(in: &cancelable)
@@ -104,6 +107,19 @@ class FoodSearchViewController: UIViewController {
                     self.tableView.reloadData()
                 }
             }.store(in: &cancelable)
+    }
+    
+    private func fetchAllData() {
+        APIService.fetchApi(with: .getAllFood, response: [FoodDetail].self) {  (result) in
+            switch result {
+            case .success(let foods):
+                print(foods.count)
+                self.foods = foods
+            case .failure(let err):
+                self.foods = []
+                print(err.localizedDescription)
+            }
+        }
     }
     
     private func fetchFavorite() {
@@ -125,7 +141,7 @@ class FoodSearchViewController: UIViewController {
     @objc private func handleSegmentChange() {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-            setupSearchBar()
+            setupBinding()
         case 1:
             fetchFavorite()
         default:
@@ -156,14 +172,21 @@ extension FoodSearchViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: FoodCell.reuseIdentifier, for: indexPath) as! FoodCell
-        
         cell.selectionStyle = .none
         
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-            cell.configureCell(foodName: foods[indexPath.row].name, description: foods[indexPath.row].description)
+            cell.configureCell(
+                foodName: foods[indexPath.row].nameId,
+                calorie: foods[indexPath.row].calories,
+                fat: foods[indexPath.row].saturatedFat,
+                sugar: foods[indexPath.row].sugar)
         case 1:
-            cell.configureCell(foodName: favorites[indexPath.row].name ?? "", description: favorites[indexPath.row].desc ?? "")
+            cell.configureCell(
+                foodName: favorites[indexPath.row].name ?? "No Name",
+                calorie: favorites[indexPath.row].calorie,
+                fat: favorites[indexPath.row].satFat,
+                sugar: favorites[indexPath.row].sugar)
         default:
             break
         }
@@ -177,16 +200,11 @@ extension FoodSearchViewController: UITableViewDataSource, UITableViewDelegate {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
             let food = foods[indexPath.row]
-            foodVC.foodId = food.id
-            foodVC.foodName = food.name
-            foodVC.foodDescription = food.description
+            foodVC.foodId = String(food.foodId)
             foodVC.eatingTime = eatingTime
         case 1:
             let food = favorites[indexPath.row]
-            foodVC.foodId = food.id ?? ""
-            foodVC.foodName = food.name ?? ""
-            foodVC.foodDescription = food.desc ?? ""
-            foodVC.isFavorite = true
+            foodVC.foodId = String(food.id ?? "0")
             foodVC.eatingTime = eatingTime
         default:
             break
@@ -197,3 +215,4 @@ extension FoodSearchViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
 }
+

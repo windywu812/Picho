@@ -130,18 +130,40 @@ class JournalViewController: UIViewController {
             } else {
                 pichoCardView = nil
             }
-        } else if Date() > Date().getLunch().date! && Date() < Date().getDinner().date!  {
+        }else if Date() > Date().beforeLunch().date! && Date() < Date().getLunch().date!  {
             if !UserDefaultService.hasLunch {
                 pichoCardView = PichoCardView(
-                    mascot: "mascot_sad",
-                    title: NSLocalizedString("Lunchie!", comment: "") ,
-                    detail: NSLocalizedString("Psst.. I heard lunch is a great place to be", comment: "") ,
-                    buttonText: NSLocalizedString("Log Lunch", comment: "") ,
+                    mascot: "mascot_detail",
+                    title: "Did you know...",
+                    detail: "That there are three different kind of fats?",
+                    buttonText: "Read More",
+                    type: .detail, rootView: self)
+            } else {
+                pichoCardView = nil
+            }
+        }  else if Date() > Date().getLunch().date! && Date() < Date().getWater().date!  {
+            if !UserDefaultService.hasLunch {
+                pichoCardView = PichoCardView(
+                    mascot: "mascot_lunch",
+                    title: "Lunchie!",
+                    detail: "Psst.. I heard lunch is a great place to be",
+                    buttonText: "Log Lunch",
                     type: .lunch, rootView: self)
             } else {
                 pichoCardView = nil
             }
-        } else if Date() > Date().getDinner().date! {
+        }else if Date() > Date().getDinner().date! {
+            if !UserDefaultService.hasLunch {
+                pichoCardView = PichoCardView(
+                    mascot: "mascot_water",
+                    title: "Gulp gulp",
+                    detail: "Our body in average is made up of 60% water. So drink up!",
+                    buttonText: "Log Water",
+                    type: .water, rootView: self)
+            } else {
+                pichoCardView = nil
+            }
+        }  else if Date() > Date().getDinner().date! {
             if !UserDefaultService.hasDinner {
                 pichoCardView = PichoCardView(
                     mascot: "mascot_sad",
@@ -152,7 +174,30 @@ class JournalViewController: UIViewController {
             } else {
                 pichoCardView = nil
             }
+        } else if Date() > Date().getSnack().date! && Date() < Date().getDinner().date!  {
+            if !UserDefaultService.hasLunch {
+                pichoCardView = PichoCardView(
+                    mascot: "mascot_snack",
+                    title: "*Crunch*",
+                    detail: "Healthy snacks keep the doctors away!",
+                    buttonText: "Log Snack",
+                    type: .snack, rootView: self)
+            } else {
+                pichoCardView = nil
+            }
+        } else if Date() > Date().getSleep().date! && Date() < Date().getBreakfast().date!  {
+            if !UserDefaultService.hasDinner {
+                pichoCardView = PichoCardView(
+                    mascot: "mascot_sleep",
+                    title: "*Yawns*",
+                    detail: "Time to turn off the lights and prepare for tomorrow!",
+                    buttonText: "",
+                    type: .snack, rootView: self)
+            } else {
+                pichoCardView = nil
+            }
         }
+        
         
     }
     

@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		230F95062568D871006484C6 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230F95052568D871006484C6 /* NotificationCell.swift */; };
+		23287CED2571480100694209 /* FoodResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23287CEC2571480100694209 /* FoodResponse.swift */; };
+		23287CF225714CCC00694209 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23287CF125714CCC00694209 /* APIService.swift */; };
+		23287CF6257151CF00694209 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23287CF5257151CF00694209 /* Endpoints.swift */; };
+		23287CFA257151F300694209 /* FoodSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23287CF9257151F200694209 /* FoodSearchViewModel.swift */; };
+		23287CFE2571521C00694209 /* FoodDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23287CFD2571521C00694209 /* FoodDetailViewModel.swift */; };
 		2339FBF2255E99C300D0ABB3 /* IndicatorLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2339FBF1255E99C300D0ABB3 /* IndicatorLabelView.swift */; };
 		23414A07255CD36A00E1F48D /* WaterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23414A06255CD36A00E1F48D /* WaterViewController.swift */; };
 		23414A0A255CDE4800E1F48D /* HorizontalProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23414A09255CDE4800E1F48D /* HorizontalProgressView.swift */; };
@@ -15,6 +20,8 @@
 		23445693255E4BD5001497DD /* LegendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23445692255E4BD5001497DD /* LegendView.swift */; };
 		235EEF3A256E559A004C3A99 /* ChartViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235EEF39256E559A004C3A99 /* ChartViewCell.swift */; };
 		23645F23255C2D5400DA5697 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23645F22255C2D5400DA5697 /* ActivityViewController.swift */; };
+		236A06172573941E00024232 /* FoodNameHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236A06162573941E00024232 /* FoodNameHeader.swift */; };
+		236A061A2573942F00024232 /* NutrionalHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236A06192573942F00024232 /* NutrionalHeader.swift */; };
 		236D9C7A255D3EB500B252B5 /* InfoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236D9C79255D3EB500B252B5 /* InfoDetailViewController.swift */; };
 		2381F76E255C03D5008004DE /* FormScreen1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2381F76D255C03D5008004DE /* FormScreen1.swift */; };
 		2381F772255C03DB008004DE /* FormScreen2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2381F771255C03DB008004DE /* FormScreen2.swift */; };
@@ -109,6 +116,11 @@
 /* Begin PBXFileReference section */
 		047BD003AF371FA6292C078C /* Pods_Picho.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Picho.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		230F95052568D871006484C6 /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
+		23287CEC2571480100694209 /* FoodResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodResponse.swift; sourceTree = "<group>"; };
+		23287CF125714CCC00694209 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		23287CF5257151CF00694209 /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
+		23287CF9257151F200694209 /* FoodSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSearchViewModel.swift; sourceTree = "<group>"; };
+		23287CFD2571521C00694209 /* FoodDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetailViewModel.swift; sourceTree = "<group>"; };
 		2339FBF1255E99C300D0ABB3 /* IndicatorLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorLabelView.swift; sourceTree = "<group>"; };
 		23414A06255CD36A00E1F48D /* WaterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterViewController.swift; sourceTree = "<group>"; };
 		23414A09255CDE4800E1F48D /* HorizontalProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalProgressView.swift; sourceTree = "<group>"; };
@@ -116,6 +128,8 @@
 		23445692255E4BD5001497DD /* LegendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegendView.swift; sourceTree = "<group>"; };
 		235EEF39256E559A004C3A99 /* ChartViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewCell.swift; sourceTree = "<group>"; };
 		23645F22255C2D5400DA5697 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
+		236A06162573941E00024232 /* FoodNameHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodNameHeader.swift; sourceTree = "<group>"; };
+		236A06192573942F00024232 /* NutrionalHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutrionalHeader.swift; sourceTree = "<group>"; };
 		236D9C79255D3EB500B252B5 /* InfoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoDetailViewController.swift; sourceTree = "<group>"; };
 		2381F76D255C03D5008004DE /* FormScreen1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormScreen1.swift; sourceTree = "<group>"; };
 		2381F771255C03DB008004DE /* FormScreen2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormScreen2.swift; sourceTree = "<group>"; };
@@ -226,6 +240,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		23287CF4257151B800694209 /* FoodAPI */ = {
+			isa = PBXGroup;
+			children = (
+				23287CEC2571480100694209 /* FoodResponse.swift */,
+				23287CF125714CCC00694209 /* APIService.swift */,
+				23287CF5257151CF00694209 /* Endpoints.swift */,
+			);
+			name = FoodAPI;
+			sourceTree = "<group>";
+		};
 		2344568D255E4BA3001497DD /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -286,6 +310,7 @@
 		238C9403255BEAF700591791 /* FoodSearchScreen */ = {
 			isa = PBXGroup;
 			children = (
+				23287CF9257151F200694209 /* FoodSearchViewModel.swift */,
 				238C9404255BEB0C00591791 /* FoodSearchViewController.swift */,
 				238C940B255BEB1D00591791 /* ReusableViews */,
 			);
@@ -304,6 +329,8 @@
 			isa = PBXGroup;
 			children = (
 				238C9411255BEBAF00591791 /* DetailCell.swift */,
+				236A06162573941E00024232 /* FoodNameHeader.swift */,
+				236A06192573942F00024232 /* NutrionalHeader.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -473,6 +500,7 @@
 		23FEBA49255BDCFE001EA146 /* FoodDetailScreen */ = {
 			isa = PBXGroup;
 			children = (
+				23287CFD2571521C00694209 /* FoodDetailViewModel.swift */,
 				23FEBA58255BDD90001EA146 /* FoodDetailScreen.swift */,
 				A28A5B40255CE519007E66FA /* DetailSugarNSatFat.swift */,
 				238C9414255BEBB500591791 /* Cells */,
@@ -552,6 +580,7 @@
 				23FEB9FC255BDAED001EA146 /* Base */,
 				23FEBA07255BDB16001EA146 /* Constants */,
 				23FEBA09255BDB2D001EA146 /* Services */,
+				23287CF4257151B800694209 /* FoodAPI */,
 				23FEBA1B255BDBA9001EA146 /* Extensions */,
 				2381F76C255C03C3008004DE /* Onboarding */,
 				23FEBA29255BDBF2001EA146 /* ViewControllers */,
@@ -711,10 +740,12 @@
 				2381F783255C0412008004DE /* DescriptionScreen1.swift in Sources */,
 				2381F77E255C03F1008004DE /* PageControlForm.swift in Sources */,
 				23FEBA62255BDF3A001EA146 /* NotificationViewController.swift in Sources */,
+				23287CF6257151CF00694209 /* Endpoints.swift in Sources */,
 				23FEBA05255BDB10001EA146 /* EatingTime.swift in Sources */,
 				238C9409255BEB1900591791 /* FoodCell.swift in Sources */,
 				236D9C7A255D3EB500B252B5 /* InfoDetailViewController.swift in Sources */,
 				23FEB9EB255BDA85001EA146 /* Search.swift in Sources */,
+				236A061A2573942F00024232 /* NutrionalHeader.swift in Sources */,
 				23FEB9D6255BDA49001EA146 /* FatSecretCredentials.swift in Sources */,
 				A28A5B41255CE519007E66FA /* DetailSugarNSatFat.swift in Sources */,
 				23FEBA31255BDC7A001EA146 /* MainProgressView.swift in Sources */,
@@ -766,6 +797,7 @@
 				238C9417255BEC2D00591791 /* StringOptional+Extensions.swift in Sources */,
 				23FEB9F4255BDA9C001EA146 /* URLComponents+Utils.swift in Sources */,
 				2339FBF2255E99C300D0ABB3 /* IndicatorLabelView.swift in Sources */,
+				23287CFE2571521C00694209 /* FoodDetailViewModel.swift in Sources */,
 				A28A5B01255BD410007E66FA /* Picho.xcdatamodeld in Sources */,
 				23FEBA5F255BDDE6001EA146 /* NSAttributedString+Extensions.swift in Sources */,
 				2381F772255C03DB008004DE /* FormScreen2.swift in Sources */,
@@ -776,6 +808,7 @@
 				23843BEA2561147600D17A44 /* String+Extensions.swift in Sources */,
 				23FEB9E2255BDA79001EA146 /* FatSecretError.swift in Sources */,
 				2344568F255E4BB0001497DD /* ChartView.swift in Sources */,
+				236A06172573941E00024232 /* FoodNameHeader.swift in Sources */,
 				23FEBA4D255BDD49001EA146 /* ProfileViewModel.swift in Sources */,
 				23FEB9D9255BDA53001EA146 /* FatSecretParams.swift in Sources */,
 				23FEBA46255BDCBC001EA146 /* PichoCardView.swift in Sources */,
@@ -785,9 +818,12 @@
 				26E42AA825628EC5000E239C /* IntakesArray+Extensions.swift in Sources */,
 				23FEBA50255BDD51001EA146 /* ProfileViewController.swift in Sources */,
 				26F98138255EDA9E00774F94 /* DailyIntake+CoreDataProperties.swift in Sources */,
+				23287CF225714CCC00694209 /* APIService.swift in Sources */,
 				26F98158255F0E1900774F94 /* Favorite+CoreDataProperties.swift in Sources */,
 				23FEB9E5255BDA7D001EA146 /* Serving.swift in Sources */,
+				23287CED2571480100694209 /* FoodResponse.swift in Sources */,
 				A28A5AF9255BD410007E66FA /* SceneDelegate.swift in Sources */,
+				23287CFA257151F300694209 /* FoodSearchViewModel.swift in Sources */,
 				26B357C2256B5B6300CE8E88 /* WaterIntake+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

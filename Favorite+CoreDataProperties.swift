@@ -16,9 +16,11 @@ extension Favorite {
         return NSFetchRequest<Favorite>(entityName: "Favorite")
     }
 
-    @NSManaged public var desc: String?
     @NSManaged public var id: String?
     @NSManaged public var name: String?
+    @NSManaged public var satFat: Double
+    @NSManaged public var calorie: Double
+    @NSManaged public var sugar: Double
 
 }
 
