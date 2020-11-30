@@ -175,10 +175,14 @@ extension ProfileEditViewController {
         
         imageProfile = UIImageView()
         imageProfile.image = viewModel.getPic(forKey: UserDefaultService.photoProfileKey)
-        imageProfile.layer.cornerRadius = 60
-        imageProfile.layer.borderWidth = 2
-        imageProfile.layer.borderColor = Color.green.cgColor
-        imageProfile.layer.masksToBounds = true
+        
+        if imageProfile.image != UIImage(systemName: "person.circle") {
+            imageProfile.layer.cornerRadius = 60
+            imageProfile.layer.borderWidth = 2
+            imageProfile.layer.borderColor = Color.green.cgColor
+            imageProfile.layer.masksToBounds = true
+        }
+        
         scrollView.addSubview(imageProfile)
         
         imageProfile.setConstraint(
