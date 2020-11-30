@@ -8,6 +8,7 @@
 import Foundation
 
 extension Date {
+
     
     func getBreakfast() -> DateComponents {
         var dateComponent = DateComponents()
@@ -20,7 +21,17 @@ extension Date {
         
         return dateComponent
     }
-    
+    func beforeLunch() -> DateComponents {
+        var dateComponent = DateComponents()
+        dateComponent.hour = 10
+        dateComponent.minute = 0
+        dateComponent.year = Date().year
+        dateComponent.month = Date().month
+        dateComponent.day = Date().day
+        dateComponent.calendar = Calendar.current
+        
+        return dateComponent
+    }
     func getLunch() -> DateComponents {
         var dateComponent = DateComponents()
         dateComponent.hour = 12
@@ -33,7 +44,17 @@ extension Date {
         
         return dateComponent
     }
-    
+    func getWater() -> DateComponents {
+        var dateComponent = DateComponents()
+        dateComponent.hour = 14
+        dateComponent.minute = 0
+        dateComponent.year = Date().year
+        dateComponent.month = Date().month
+        dateComponent.day = Date().day
+        dateComponent.calendar = Calendar.current
+        
+        return dateComponent
+    }
     func getDinner() -> DateComponents {
         var dateComponent = DateComponents()
         dateComponent.hour = 19
@@ -45,6 +66,29 @@ extension Date {
         
         return dateComponent
     }
+    func getSnack() -> DateComponents {
+        var dateComponent = DateComponents()
+        dateComponent.hour = 15
+        dateComponent.minute = 30
+        dateComponent.year = Date().year
+        dateComponent.month = Date().month
+        dateComponent.day = Date().day
+        dateComponent.calendar = Calendar.current
+        
+        return dateComponent
+    }
+    func getSleep() -> DateComponents {
+        var dateComponent = DateComponents()
+        dateComponent.hour = 22
+        dateComponent.minute = 0
+        dateComponent.year = Date().year
+        dateComponent.month = Date().month
+        dateComponent.day = Date().day
+        dateComponent.calendar = Calendar.current
+        
+        return dateComponent
+    }
+
     
     func changeToString() -> String {
         let dateFormat = DateFormatter()
