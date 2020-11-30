@@ -142,11 +142,13 @@ class TopProfile: UIView {
     private var nameLabel: UILabel!
     
     func setupView(name: String, image: UIImage) {
+        if image != UIImage(systemName: "person.circle") {
+            imageProfile.layer.cornerRadius = 60
+            imageProfile.layer.borderWidth = 2
+            imageProfile.layer.borderColor = Color.green.cgColor
+            imageProfile.layer.masksToBounds = true
+        }
         imageProfile.image = image
-        imageProfile.layer.cornerRadius = 60
-        imageProfile.layer.borderWidth = 2
-        imageProfile.layer.borderColor = Color.green.cgColor
-        imageProfile.layer.masksToBounds = true
         nameLabel.setFont(text: name, size: 24, weight: .bold)
     }
     
