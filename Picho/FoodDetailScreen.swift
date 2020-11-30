@@ -43,8 +43,32 @@ class FoodDetailScreen: UITableViewController {
     private func setupView() {
         view.backgroundColor = Color.background
         
-        navigationItem.title = "Detail"
-        navigationItem.rightBarButtonItem = isAddShown ? UIBarButtonItem(title: "Add", style: .done, target: self, action: #selector(handleAdd)) : nil
+        calorieHeader = UIView()
+        
+        calorieLabel = UILabel()
+        calorieLabel.text = NSLocalizedString("Calories", comment: "")
+        calorieLabel.font = .preferredFont(forTextStyle: .title2)
+        calorieLabel.font = .boldSystemFont(ofSize: 24)
+
+        calorieAmount = UILabel()
+        calorieAmount.text = "324"
+        calorieAmount.font = .systemFont(ofSize: 34, weight: .bold)
+        
+        nutritionHeader = UIView()
+        
+        nutritionLabel = UILabel()
+        nutritionLabel.text = NSLocalizedString("Nutritional Information", comment: "")
+        nutritionLabel.font = .systemFont(ofSize: 26, weight: .bold)
+        nutritionHeader.addSubview(nutritionLabel)
+        
+        servingLabel = UILabel()
+        servingLabel.text = NSLocalizedString("Per serve", comment: "")
+        servingLabel.font = .systemFont(ofSize: 17, weight: .bold)
+        nutritionHeader.addSubview(servingLabel)
+        
+        navigationItem.title = "Nasi Lemak"
+        navigationItem.rightBarButtonItem = isAddShown ? UIBarButtonItem(title:NSLocalizedString("Add", comment: ""), style: .done, target: self, action: #selector(handleAdd)) : nil
+
         
         tableView.register(DetailCell.self, forCellReuseIdentifier: DetailCell.reuseIdentifier)
         tableView.register(ServingCell.self, forCellReuseIdentifier: ServingCell.reuseIdentifier)

@@ -16,7 +16,7 @@ class FoodInputViewController: UIViewController {
     private var tableView: UITableView!
     
     var eatingTime: EatTime = .breakfast
-    
+    var eatTime = "breakfast"
 //    private let foods = [
 //        SearchedFood(id: "5873608", name: "Nasi Goreng", description: "Per 1122g - Calories: 1850kcal | Fat: 65.44g | Carbs: 240.17g | Protein: 69.07g", brand: nil, type: "Generic", url: "https://www.fatsecret.com/calories-nutrition/generic/nasi-goreng"),
 //        SearchedFood(id: "5873608", name: "Nasi Goreng", description: "Per 1122g - Calories: 1850kcal | Fat: 65.44g | Carbs: 240.17g | Protein: 69.07g", brand: nil, type: "Generic", url: "https://www.fatsecret.com/calories-nutrition/generic/nasi-goreng")
@@ -30,16 +30,15 @@ class FoodInputViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        localize()
         setupView()
         setupTable()
         setupLayout()
         fetchData()
-        
         setupObservers()
-        
+
         navigationItem.largeTitleDisplayMode = .never
-        title = eatingTime.rawValue.capitalized
+        title = eatTime.capitalized
     }
     
     private func setupView() {
@@ -54,17 +53,34 @@ class FoodInputViewController: UIViewController {
         titleLabel.numberOfLines = 0
         titleLabel.textAlignment = .center
         titleLabel.font = .systemFont(ofSize: 22, weight: .bold)
-        titleLabel.text = "Would you mind to share your \n\(eatingTime.rawValue) with me?"
+     
+     
+        
+        
+        titleLabel.text = String(format:NSLocalizedString("Would you mind to share your \n%@ with me?", comment: ""),eatTime)
         
         addButton = UIButton()
         addButton.backgroundColor = Color.green
         addButton.layer.cornerRadius = 8
         addButton.contentEdgeInsets = UIEdgeInsets(top: 12, left: view.safeAreaInsets.left, bottom: 12, right: view.safeAreaInsets.right)
-        addButton.setTitle("Add \(eatingTime.rawValue.capitalized)", for: .normal)
+        addButton.setTitle("Add \(eatTime.capitalized)", for: .normal)
         addButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
         addButton.addTarget(self, action: #selector(handleAdd), for: .touchUpInside)
     }
-    
+    private func localize(){
+        if eatingTime.rawValue == "breakfast"{
+             eatTime = NSLocalizedString("breakfast", comment: "")
+        }
+        if eatingTime.rawValue == "lunch" {
+            eatTime = NSLocalizedString("lunch", comment: "")
+        }
+        if eatingTime.rawValue == "dinner" {
+            eatTime = NSLocalizedString("dinner", comment: "")
+        }
+        if eatingTime.rawValue == "snacks" {
+            eatTime = NSLocalizedString("snacks", comment: "")
+        }
+    }
     private func setupTable() {
         tableView = UITableView()
         tableView.delegate = self

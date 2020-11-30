@@ -15,11 +15,7 @@ protocol WaterDelegate {
 
 class WaterViewController: UIViewController {
     
-    let detail = """
-    Dehydration cause the buildup of ‘bad’ LDL (low-density lipoprotein) cholesterol in our blood stream and also damage cell walls of arteries.
-
-    Drinking enough water makes it easier for your blood to move in your body. And this will help our body to clear the ‘bad’ cholesterol more quickly!
-    """
+    let detail = NSLocalizedString("Dehydration cause the buildup of ‘bad’ LDL (low-density lipoprotein) cholesterol in our blood stream and also damage cell walls of arteries.Drinking enough water makes it easier for your blood to move in your body. And this will help our body to clear the ‘bad’ cholesterol more quickly!", comment: "")
     
     private var detailLabel: UILabel!
     private var waterLabel: UILabel!
@@ -46,9 +42,9 @@ class WaterViewController: UIViewController {
                 self.waterAmount.setFont(text: "\(waters.count) Cups", size: 34, weight: .bold)
                 self.waterProgress.setProgress(progress: waters.count)
                 if waters.count > 5 {
-                    self.infoLabel.setFont(text: "Good", weight: .bold, color: Color.green)
+                    self.infoLabel.setFont(text:NSLocalizedString("Good", comment: ""), weight: .bold, color: Color.green)
                 } else {
-                    self.infoLabel.setFont(text: "Need more water", weight: .bold, color: Color.red)
+                    self.infoLabel.setFont(text: NSLocalizedString("Need more water", comment: "") , weight: .bold, color: Color.red)
                 }
             }
         }
@@ -59,7 +55,7 @@ class WaterViewController: UIViewController {
     private func setupView() {
         
         navigationItem.title = "Water"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(handleDone))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done", comment: "") , style: .done, target: self, action: #selector(handleDone))
         view.backgroundColor = Color.background
         
         detailLabel = UILabel()
@@ -68,7 +64,7 @@ class WaterViewController: UIViewController {
         view.addSubview(detailLabel)
         
         waterLabel = UILabel()
-        waterLabel.setFont(text: "Water Intake", weight: .bold)
+        waterLabel.setFont(text: NSLocalizedString("Water Intake", comment: "") , weight: .bold)
         view.addSubview(waterLabel)
         
         waterAmount = UILabel()
@@ -78,7 +74,7 @@ class WaterViewController: UIViewController {
         view.addSubview(waterProgress)
         
         infoLabel = UILabel()
-        infoLabel.setFont(text: "Need more water", weight: .bold, color: Color.red)
+        infoLabel.setFont(text: NSLocalizedString("Need more water", comment: "") , weight: .bold, color: Color.red)
         view.addSubview(infoLabel)
         
         let layout = UICollectionViewFlowLayout()

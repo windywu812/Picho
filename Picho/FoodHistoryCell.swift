@@ -18,11 +18,15 @@ class FoodHistoryCell: UITableViewCell {
     private var howOftenLabel: UILabel!
     
     func setupCell(history: History) {
+        let totalSgr = "\(history.totalSugar)"
+        let totalSatFat = "\(history.totalSatFat)"
+        let totalEat = "\(history.eatTimes)"
+        
         foodNameLabel.text = history.foodName
         calorieLabel.text = "\(history.totalCalorie) cal"
-        sugarLabel.text = "Sugar - \(history.totalSugar) g"
-        satFatLabel.text = "Saturated Fat - \(history.totalSatFat) g"
-        howOftenLabel.text = "\(history.eatTimes) times"
+        sugarLabel.text = String(format: NSLocalizedString("Sugar - %@ g", comment: ""), totalSgr)
+        satFatLabel.text = String(format: NSLocalizedString("Saturated Fat - %@ g", comment: ""), totalSatFat)
+        howOftenLabel.text = String(format: NSLocalizedString("%@ Times", comment: ""), totalEat)
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

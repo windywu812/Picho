@@ -21,7 +21,7 @@ class HorizontalView: UIView {
     func setupView(amount: Int, type: Activity) {
         if type == .water {
             let remaining = 14 - amount
-            self.detail.text = "💧 \(remaining) cups remaining"
+            self.detail.text = String(format: NSLocalizedString("💧 %@ cups remaining", comment: ""), String (remaining)) 
         } else {
             self.detail.text = "🔥 \(amount) Step"
         }

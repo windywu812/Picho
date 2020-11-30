@@ -29,7 +29,7 @@ class DescriptionScreen3: UIViewController {
         imageview.heightAnchor.constraint(equalToConstant: phoneWidth).isActive = true
         
         let label1 = UILabel()
-        label1.text = "Too much ‘bad’\nCholesterol in your body..."
+        label1.text = NSLocalizedString("Too much ‘bad’\nCholesterol in your body...", comment: "")
         label1.textAlignment = .center
         label1.numberOfLines = 0
         label1.font = UIFont.boldSystemFont(ofSize: 25.0)
@@ -41,7 +41,7 @@ class DescriptionScreen3: UIViewController {
                                 trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
         
         let label2 = UILabel()
-        label2.text = "can form plaque on the arteries, making the passage smaller, leading to high blood pressure (HBP), heart diseases and stroke."
+        label2.text = NSLocalizedString("can form plaque on the arteries, making the passage smaller, leading to high blood pressure (HBP), heart diseases and stroke.", comment: "")
         label2.textAlignment = .center
         label2.numberOfLines = 0
         label2.font = UIFont.systemFont(ofSize: 17)

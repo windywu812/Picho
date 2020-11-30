@@ -94,10 +94,7 @@ class ProfileViewController: UITableViewController {
         case 1:
             cell.textLabel?.text = viewModel.thirdSectionLabel[indexPath.row]
             if indexPath.row == 0 {
-                let control = UISwitch()
-                control.isOn = viewModel.isSync
-                control.addTarget(self, action: #selector(handleSwitch(sender:)), for: .valueChanged)
-                cell.accessoryView = control
+               
             } else {
                 cell.accessoryType = .disclosureIndicator
             }
@@ -113,6 +110,22 @@ class ProfileViewController: UITableViewController {
             if indexPath.row == 1 {
                 let vc = NotificationViewController()
                 navigationController?.pushViewController(vc, animated: true)
+            }
+            if indexPath.row == 0 {
+                if HealthKitService.shared.checkAuthorization(){
+                    let alert = UIAlertController(title: "Turn Off HealhKit", message: "Go to setting -> Health -> Data accsess & Devices -> Picho -> Turn All Categories Off ", preferredStyle: UIAlertController.Style.alert)
+                    alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: { action in
+
+                    }))
+                    alert.addAction(UIAlertAction(title: "Turn off", style: UIAlertAction.Style.default, handler: { action in
+                        UIApplication.shared.open(URL(string: "App-prefs:Health")!)
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                }else{
+                    let alert = UIAlertController(title: "Connect to HealhKit", message: "Turn All Categories On ", preferredStyle: UIAlertController.Style.alert)
+                    alert.addAction(UIAlertAction(title: "Connect", style: UIAlertAction.Style.default, handler: nil))
+                    HealthKitService.shared.authorization()
+                }
             }
         }
     }

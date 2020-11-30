@@ -25,9 +25,7 @@
 	<key>NSHealthShareUsageDescription</key>
 	<string>Allow Picho to track calories burned from Health database. This is used to give better estimation of daily calories intake.</string>
 	<key>NSHealthUpdateUsageDescription</key>
-	<string>Allow meal data entered in Picho to be stored in Health database. 
-Allow meal data entered in Picho to be stored in Health database. 
-</string>
+	<string>Allow meal data entered in Picho to be stored in Health database. </string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
