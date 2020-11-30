@@ -18,6 +18,7 @@ enum EatTime: String {
     case snacks = "snacks"
     
     func localizedString() -> String {
+        print(self.rawValue)
         return NSLocalizedString(self.rawValue, comment: "")
     }
 }

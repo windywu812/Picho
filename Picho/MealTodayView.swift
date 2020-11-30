@@ -21,7 +21,6 @@ class MealsTodayView: UIView {
     var lunchCard: MealCellView!
     var dinnerCard: MealCellView!
     var snackCard: MealCellView!
-    
     init(frame: CGRect = .zero, rootView: UIViewController) {
         
         title = UILabel()
@@ -33,12 +32,13 @@ class MealsTodayView: UIView {
         setupObservers()
         setupView()
         setupLayout()
+        print(EatTime.breakfast.rawValue)
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
+  
     private func setupView() {
         
         let tapBreakfast = UITapGestureRecognizer(target: self, action: #selector(handleBreakfast(sender:)))
@@ -49,16 +49,16 @@ class MealsTodayView: UIView {
         title.setFont(text: NSLocalizedString("Meals Today", comment: "")
                       , size: 22, weight: .bold)
         
-        breakFastCard = MealCellView(iconImage: "breakfast", title: EatTime.breakfast.rawValue.capitalized, buttonText: NSLocalizedString("Add Breakfast", comment: "") , foods: breakfasts, rootView: rootView)
+        breakFastCard = MealCellView(iconImage: "breakfast", title: NSLocalizedString("Breakfast", comment: ""), buttonText: NSLocalizedString("Add Breakfast", comment: "") , foods: breakfasts, rootView: rootView)
         breakFastCard.addGestureRecognizer(tapBreakfast)
         
-        lunchCard = MealCellView(iconImage: "lunch", title: EatTime.lunch.rawValue.capitalized, buttonText: NSLocalizedString("Add Lunch", comment: "") , foods: lunches, rootView: rootView)
+        lunchCard = MealCellView(iconImage: "lunch", title: NSLocalizedString("Lunch", comment: ""), buttonText: NSLocalizedString("Add Lunch", comment: "") , foods: lunches, rootView: rootView)
         lunchCard.addGestureRecognizer(tapLunch)
         
-        dinnerCard = MealCellView(iconImage: "dinner", title: EatTime.dinner.rawValue.capitalized, buttonText: NSLocalizedString("Add Dinner", comment: "") , foods: dinners,  rootView: rootView)
+        dinnerCard = MealCellView(iconImage: "dinner", title: NSLocalizedString("Dinner", comment: ""), buttonText: NSLocalizedString("Add Dinner", comment: "") , foods: dinners,  rootView: rootView)
         dinnerCard.addGestureRecognizer(tapDinner)
         
-        snackCard = MealCellView(iconImage: "snacks", title: EatTime.snacks.rawValue.capitalized, buttonText: NSLocalizedString("Add Snacks", comment: "") , foods: snacks, rootView: rootView)
+        snackCard = MealCellView(iconImage: "snacks", title: NSLocalizedString("Snacks", comment: ""), buttonText: NSLocalizedString("Add Snacks", comment: "") , foods: snacks, rootView: rootView)
         snackCard.addGestureRecognizer(tapSnack)
         
         addSubview(title)
