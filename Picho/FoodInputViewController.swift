@@ -145,8 +145,6 @@ extension FoodInputViewController: UITableViewDelegate {
         let foodVC = FoodDetailScreen()
         let food = foods[indexPath.row]
         foodVC.foodId = food.foodId ?? ""
-        foodVC.foodDescription = food.description
-        foodVC.foodName = food.name ?? ""
         foodVC.isAddShown = false
         
         let vc = UINavigationController(rootViewController: foodVC)

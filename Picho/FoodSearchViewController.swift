@@ -184,9 +184,9 @@ extension FoodSearchViewController: UITableViewDataSource, UITableViewDelegate {
         case 1:
             cell.configureCell(
                 foodName: favorites[indexPath.row].name ?? "No Name",
-                calorie: 123,
-                fat: 123,
-                sugar: 123)
+                calorie: favorites[indexPath.row].calorie,
+                fat: favorites[indexPath.row].satFat,
+                sugar: favorites[indexPath.row].sugar)
         default:
             break
         }

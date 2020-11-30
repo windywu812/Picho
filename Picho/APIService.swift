@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 class APIService {
     
     static func fetchApi<T: Decodable>(with endpoint: Endpoints, response: T.Type, completion: @escaping (Result<T, Error>) -> ()) {

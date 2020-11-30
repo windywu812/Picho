@@ -6,13 +6,12 @@
 //
 
 import UIKit
+import Combine
 import HealthKit
 
 class FoodDetailScreen: UITableViewController {
     
     var isAddShown = true
-    var foodDescription: String = ""
-    var foodName: String = ""
     var foodId: String = "" {
         didSet {
             fetchingFood()
@@ -25,6 +24,8 @@ class FoodDetailScreen: UITableViewController {
     private var viewModel = FoodDetailViewModel()
     private var headerName: FoodNameHeader?
     private var nutritionAmount: [[Double]] = []
+    private var servingTextfield: UITextField!
+    private var cancelable = Set<AnyCancellable>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +33,10 @@ class FoodDetailScreen: UITableViewController {
         setupView()
         setupFavorite()
         fetchingFavorite()
+        setupTextfield()
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleDismiss))
+        view.addGestureRecognizer(tap)
     }
     
     private func setupView() {
@@ -57,7 +62,12 @@ class FoodDetailScreen: UITableViewController {
     
     private func checkFavorite () {
         if !isFavorite {
-            CoreDataService.shared.addFavorite(id: foodId, name: foodName, description: foodDescription)
+            CoreDataService.shared.addFavorite(
+                id: foodId,
+                name: food?.nameId ?? "",
+                sugar: food?.sugar ?? 0,
+                calorie: food?.calories ?? 0,
+                satFat: food?.saturatedFat ?? 0)
         } else {
             CoreDataService.shared.deleteFavorite(foodId)
         }
@@ -92,9 +102,8 @@ class FoodDetailScreen: UITableViewController {
         
         CoreDataService.shared.addDailyIntake(
             id: UUID(),
-            foodId: String(food.foodId ),
+            foodId: String(food.foodId),
             name: food.nameId,
-            description: "",
             calorie: food.calories,
             saturatedFat: food.saturatedFat,
             sugars: food.sugar,
@@ -114,15 +123,12 @@ class FoodDetailScreen: UITableViewController {
             switch result {
             case .success(let response):
                 self.food = response
-                
                 let section1Amount = [self.food?.calories, self.food?.saturatedFat, self.food?.sugar].compactMap({ $0 })
                 let section2Amount = [self.food?.serving].compactMap({ $0 })
                 let section3Amount = [self.food?.totalFat, self.food?.calorieFromFat, self.food?.transFat, self.food?.cholesterol].compactMap({ $0 })
                 let section4Amount = [self.food?.cholesterol, self.food?.protein, self.food?.fiber, self.food?.sodium, self.food?.calcium, self.food?.iron].compactMap({ $0 })
                 let section5Amount = [self.food?.vitaminA, self.food?.vitaminC].compactMap({ $0 })
-                
                 self.nutritionAmount = [section1Amount, section2Amount, section3Amount, section4Amount, section5Amount]
-                
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
@@ -130,7 +136,6 @@ class FoodDetailScreen: UITableViewController {
                 print(err.localizedDescription)
             }
         }
-        
     }
     
     private func fetchingFavorite() {
@@ -157,6 +162,13 @@ class FoodDetailScreen: UITableViewController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if section == 4 {
+            return SourceFooter()
+        }
+        return nil
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.labels[section].count
     }
@@ -170,7 +182,43 @@ class FoodDetailScreen: UITableViewController {
             label: viewModel.labels[indexPath.section][indexPath.row],
             value: nutritionAmount[indexPath.section][indexPath.row])
         
+        if indexPath.section == 1 {
+            servingTextfield?.removeBorder(tag: 0, text: "\(Int(nutritionAmount[indexPath.section][indexPath.row])) g")
+            cell.accessoryView = servingTextfield
+            cell.textLabel?.text = "Serving Size"
+            cell.accessoryType = .disclosureIndicator
+            cell.detailTextLabel?.text = ""
+        }
+        
         return cell
+    }
+    
+    private func setupTextfield() {
+        
+        servingTextfield = UITextField(frame: CGRect(origin: .zero, size: CGSize(width: 100, height: 30)))
+        servingTextfield?.textColor = .secondaryLabel
+        
+        NotificationCenter.default.publisher(for: UITextField.textDidChangeNotification, object: servingTextfield)
+            .map({ (($0.object as! UITextField).text ?? "") })
+            .filter({ !$0.isEmpty })
+            .sink { text in
+                print(text)
+                self.food?.changeServiceSize(servingSize: Double(text) ?? 0)
+//                DispatchQueue.main.async {
+//                    self.tableView.reloadData()
+                
+//                self.tableView.reloadRows(at: [IndexPath.init(row: 0, section: 0)], with: .automatic)
+                self.tableView.reloadSections(IndexSet(arrayLiteral: 0, 2), with: .automatic)
+//                }
+            }
+            .store(in: &cancelable)
+//
+//        $food
+//            .sink { (_) in
+//                DispatchQueue.main.async {
+//                    self.tableView.reloadData()
+//                }
+//            }.store(in: &cancelable)
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -183,6 +231,10 @@ class FoodDetailScreen: UITableViewController {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc private func handleDismiss() {
+        view.endEditing(true)
     }
     
 }

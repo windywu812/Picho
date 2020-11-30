@@ -11,22 +11,22 @@ struct FoodDetail: Decodable {
     let foodId: Int
     let nameId: String
     let nameEn: String
-    let serving: Double
-    let calories: Double
-    let calorieFromFat: Double
-    let totalFat: Double
-    let saturatedFat: Double
-    let transFat: Double
-    let cholesterol: Double
-    let sodium: Double
-    let totalCarbs: Double
-    let fiber: Double
-    let sugar: Double
-    let protein: Double
-    let vitaminA: Double
-    let calcium: Double
-    let vitaminC: Double
-    let iron: Double
+    var serving: Double
+    var calories: Double
+    var calorieFromFat: Double
+    var totalFat: Double
+    var saturatedFat: Double
+    var transFat: Double
+    var cholesterol: Double
+    var sodium: Double
+    var totalCarbs: Double
+    var fiber: Double
+    var sugar: Double
+    var protein: Double
+    var vitaminA: Double
+    var calcium: Double
+    var vitaminC: Double
+    var iron: Double
     
     private enum CodingKeys: String, CodingKey {
         case foodId = "id"
@@ -43,4 +43,24 @@ struct FoodDetail: Decodable {
              sodium, fiber, sugar,
              protein, calcium, iron
     }
+    
+    mutating func changeServiceSize(servingSize: Double) {
+        serving = servingSize / 100
+        calories = calories * serving
+        calorieFromFat = calorieFromFat * serving
+        totalFat = totalFat * serving
+        saturatedFat = saturatedFat * serving
+        transFat = transFat * serving
+        cholesterol = cholesterol * serving
+        sodium = sodium * serving
+        totalCarbs = totalCarbs * serving
+        fiber = fiber * serving
+        sugar = sugar * serving
+        protein = protein * serving
+        vitaminA = vitaminA * serving
+        calcium = calcium * serving
+        vitaminC = vitaminC * serving
+        iron = iron * serving
+    }
+    
 }

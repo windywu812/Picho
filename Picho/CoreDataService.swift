@@ -51,52 +51,13 @@ class CoreDataService {
         }
         
     }
+
     
-//    func getMaxDailyIntake(with request: NSFetchRequest<DailyIntake> = DailyIntake.fetchRequest(), completion: @escaping ([DailyIntake]) -> Void) {
-////        request.predicate = NSPredicate(format: "@count")
-////        request.propertiesToGroupBy = ["foodId"]
-//
-//        do {
-//            let intakes = try context.fetch(request)
-//            completion(intakes)
-//        } catch {
-//            print(error.localizedDescription)
-//            completion([])
-//        }
-//    }
-    
-//    func getMaxDailyIntake(request: NSFetchRequest<NSDictionary> = NSFetchRequest<NSDictionary>(entityName: DailyIntakeConstant.entityName), time eatingTime: EatTime, completion: @escaping ([NSDictionary]) -> Void) {
-//        let groupArgument = NSExpression(forKeyPath: "foodId")
-//        let expression = NSExpression(forFunction: "count:", arguments: [groupArgument])
-//        
-//        let countDesc = NSExpressionDescription()
-//        countDesc.expression = expression
-//        countDesc.name = "count"
-//        countDesc.expressionResultType = .integer64AttributeType
-//        
-//        request.returnsObjectsAsFaults = false
-//        request.propertiesToGroupBy = ["foodId"]
-//        request.propertiesToFetch = ["foodId", countDesc]
-//        request.resultType = .dictionaryResultType
-//        
-//        request.havingPredicate = NSPredicate(format: "\(DailyIntakeConstant.time) = %@", eatingTime.rawValue)
-//        
-//        do {
-//            let intakes = try context.fetch(request)
-//            completion(intakes)
-//        } catch {
-//            print(error.localizedDescription)
-//            completion([])
-//        }
-//        
-//    }
-    
-    func addDailyIntake(id: UUID, foodId: String, name: String, description: String, calorie: Double, saturatedFat: Double, sugars: Double, date: Date = Date(), idCalorie: UUID? = nil, idSugar: UUID? = nil, idSatFat: UUID? = nil, time: EatTime) {
+    func addDailyIntake(id: UUID, foodId: String, name: String, calorie: Double, saturatedFat: Double, sugars: Double, date: Date = Date(), idCalorie: UUID? = nil, idSugar: UUID? = nil, idSatFat: UUID? = nil, time: EatTime) {
         
         let intake = DailyIntake(context: context)
         intake.id = id
         intake.foodId = foodId
-        intake.desc = description
         intake.name = name
         intake.calorie = calorie
         intake.saturatedFat = saturatedFat
@@ -160,12 +121,14 @@ class CoreDataService {
         
     }
     
-    func addFavorite(id: String, name: String, description: String) {
+    func addFavorite(id: String, name: String, sugar: Double, calorie: Double, satFat: Double) {
         
         let favorite = Favorite(context: context)
         favorite.id = id
         favorite.name = name
-        favorite.desc = description
+        favorite.sugar = sugar
+        favorite.calorie = calorie
+        favorite.satFat = satFat
         
         saveFavorite(context: context)
     }
