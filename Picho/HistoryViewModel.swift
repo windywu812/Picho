@@ -43,10 +43,10 @@ class HistoryViewModel {
             let random2 = foodNames.randomElement()!
             let random3 = foodNames.randomElement()!
             let random4 = foodNames.randomElement()!
-            CoreDataService.shared.addDailyIntake(id: UUID(), foodId: random1, name: random1, description: "FoodDescription", calorie: Double(Int.random(in: 0...113)), saturatedFat: Double(Int.random(in: 0...353)), sugars: Double(Int.random(in: 0...512)), date: Date().add(i), time: .breakfast)
-            CoreDataService.shared.addDailyIntake(id: UUID(), foodId: random2, name: random2, description: "FoodDescription", calorie: Double(Int.random(in: 0...541)), saturatedFat: Double(Int.random(in: 0...500)), sugars: Double(Int.random(in: 0...643)), date: Date().add(i), time: .lunch)
-            CoreDataService.shared.addDailyIntake(id: UUID(), foodId: random3, name: random3, description: "FoodDescription", calorie: Double(Int.random(in: 0...842)), saturatedFat: Double(Int.random(in: 0...500)), sugars: Double(Int.random(in: 0...533)), date: Date().add(i), time: .dinner)
-            CoreDataService.shared.addDailyIntake(id: UUID(), foodId: random4, name: random4, description: "FoodDescription", calorie: Double(Int.random(in: 0...200)), saturatedFat: Double(Int.random(in: 0...500)), sugars: Double(Int.random(in: 0...321)), date: Date().add(i), time: .snacks)
+            CoreDataService.shared.addDailyIntake(id: UUID(), foodId: random1, name: random1, calorie: Double(Int.random(in: 0...113)), saturatedFat: Double(Int.random(in: 0...353)), sugars: Double(Int.random(in: 0...512)), date: Date().add(i), time: .breakfast)
+            CoreDataService.shared.addDailyIntake(id: UUID(), foodId: random2, name: random2, calorie: Double(Int.random(in: 0...541)), saturatedFat: Double(Int.random(in: 0...500)), sugars: Double(Int.random(in: 0...643)), date: Date().add(i), time: .lunch)
+            CoreDataService.shared.addDailyIntake(id: UUID(), foodId: random3, name: random3, calorie: Double(Int.random(in: 0...842)), saturatedFat: Double(Int.random(in: 0...500)), sugars: Double(Int.random(in: 0...533)), date: Date().add(i), time: .dinner)
+            CoreDataService.shared.addDailyIntake(id: UUID(), foodId: random4, name: random4, calorie: Double(Int.random(in: 0...200)), saturatedFat: Double(Int.random(in: 0...500)), sugars: Double(Int.random(in: 0...321)), date: Date().add(i), time: .snacks)
         }
     }
     

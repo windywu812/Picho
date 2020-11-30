@@ -51,13 +51,12 @@ class CoreDataService {
         }
         
     }
- 
-    func addDailyIntake(id: UUID, foodId: String, name: String, description: String, calorie: Double, saturatedFat: Double, sugars: Double, date: Date = Date(), idCalorie: UUID? = nil, idSugar: UUID? = nil, idSatFat: UUID? = nil, time: EatTime) {
-        
+
+    func addDailyIntake(id: UUID, foodId: String, name: String, calorie: Double, saturatedFat: Double, sugars: Double, date: Date = Date(), idCalorie: UUID? = nil, idSugar: UUID? = nil, idSatFat: UUID? = nil, time: EatTime) {
+
         let intake = DailyIntake(context: context)
         intake.id = id
         intake.foodId = foodId
-        intake.desc = description
         intake.name = name
         intake.calorie = calorie
         intake.saturatedFat = saturatedFat
@@ -121,12 +120,14 @@ class CoreDataService {
         
     }
     
-    func addFavorite(id: String, name: String, description: String) {
+    func addFavorite(id: String, name: String, sugar: Double, calorie: Double, satFat: Double) {
         
         let favorite = Favorite(context: context)
         favorite.id = id
         favorite.name = name
-        favorite.desc = description
+        favorite.sugar = sugar
+        favorite.calorie = calorie
+        favorite.satFat = satFat
         
         saveFavorite(context: context)
     }

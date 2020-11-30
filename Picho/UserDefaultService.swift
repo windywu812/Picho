@@ -19,6 +19,7 @@ class UserDefaultService {
     static private let hasBreakfastKey = "hasBreakfastKey"
     static private let hasLunchKey = "hasLunchKey"
     static private let hasDinnerKey = "hasDinnerKey"
+    static private let currentDateKey = "currentDateKey"
     static let photoProfileKey = "photoKey"
  
     static var hasLaunched: Bool {
@@ -109,6 +110,21 @@ class UserDefaultService {
         set {
             UserDefaults.standard.set(newValue, forKey: hasDinnerKey)
         }
+    }
+    
+    static var currentDate: String {
+        get {
+            return UserDefaults.standard.string(forKey: currentDateKey) ?? ""
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: currentDateKey)
+        }
+    }
+    
+    static func resetDay() {
+        UserDefaultService.hasBreakfast = false
+        UserDefaultService.hasLunch = false
+        UserDefaultService.hasDinner = false
     }
     
     static func synchronize() {
