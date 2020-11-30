@@ -18,10 +18,10 @@ class FoodDetailViewModel {
     }
    
     private func setupLabel() {
-        let sectionOneLabels = ["Calories", "Saturated Fat", "Sugars"]
-        let sectionTwoLabels = ["Serving Size"]
-        let sectionThreeLabels = ["Fat", "Calorie From Fat", "TransFat", "Cholesterol"]
-        let sectionFourLabels = ["Carbohydrate", "Protein", "Fiber", "Sodium", "Calcium", "Iron"]
+        let sectionOneLabels = [NSLocalizedString("Calories", comment: ""),NSLocalizedString("Saturated Fat", comment: "") ,NSLocalizedString("Sugars", comment: "") ]
+        let sectionTwoLabels = [NSLocalizedString("Serving Size", comment: "")]
+        let sectionThreeLabels = [NSLocalizedString("Fat", comment: ""),NSLocalizedString("Calorie From Fat", comment: ""),NSLocalizedString("Trans Fat", comment: "") ,NSLocalizedString("Cholesterol", comment: "") ]
+        let sectionFourLabels = [NSLocalizedString("Carbohydrate", comment: ""),NSLocalizedString("Protein", comment: "") ,NSLocalizedString("Fiber", comment: "") ,NSLocalizedString( "Sodium", comment: ""),NSLocalizedString("Calcium", comment: "") ,NSLocalizedString("Iron", comment: "") ]
         let sectionFiveLabels = ["Vitamin A", "Vitamin B"]
         
         labels = [sectionOneLabels, sectionTwoLabels, sectionThreeLabels, sectionFourLabels, sectionFiveLabels]

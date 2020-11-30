@@ -49,7 +49,7 @@
         <image name="Launch" width="287" height="270"/>
         <image name="LaunchBG" width="375" height="812"/>
         <namedColor name="MainGreen">
-            <color red="0.086000002920627594" green="0.62699997425079346" blue="0.52499997615814209" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.086000002920627594" green="0.62699997425079346" blue="0.52499997615814209" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
     </resources>
 </document>

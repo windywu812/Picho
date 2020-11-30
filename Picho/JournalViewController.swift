@@ -134,9 +134,9 @@ class JournalViewController: UIViewController {
             if !UserDefaultService.hasLunch {
                 pichoCardView = PichoCardView(
                     mascot: "mascot_detail",
-                    title: "Did you know...",
-                    detail: "That there are three different kind of fats?",
-                    buttonText: "Read More",
+                    title: NSLocalizedString("Did you know...", comment: ""),
+                    detail: NSLocalizedString("That there are three different kind of fats?", comment: "") ,
+                    buttonText:NSLocalizedString("Read More",comment: ""),
                     type: .detail, rootView: self)
             } else {
                 pichoCardView = nil
@@ -145,9 +145,9 @@ class JournalViewController: UIViewController {
             if !UserDefaultService.hasLunch {
                 pichoCardView = PichoCardView(
                     mascot: "mascot_lunch",
-                    title: "Lunchie!",
-                    detail: "Psst.. I heard lunch is a great place to be",
-                    buttonText: "Log Lunch",
+                    title: NSLocalizedString("Lunchie!", comment: ""),
+                    detail: NSLocalizedString("Psst.. I heard lunch is a great place to be", comment: "") ,
+                    buttonText: NSLocalizedString("Log Lunch", comment: ""),
                     type: .lunch, rootView: self)
             } else {
                 pichoCardView = nil
@@ -157,8 +157,8 @@ class JournalViewController: UIViewController {
                 pichoCardView = PichoCardView(
                     mascot: "mascot_water",
                     title: "Gulp gulp",
-                    detail: "Our body in average is made up of 60% water. So drink up!",
-                    buttonText: "Log Water",
+                    detail: NSLocalizedString("Our body in average is made up of 60% water. So drink up!", comment: ""),
+                    buttonText: NSLocalizedString("Log Water", comment: ""),
                     type: .water, rootView: self)
             } else {
                 pichoCardView = nil
@@ -179,8 +179,8 @@ class JournalViewController: UIViewController {
                 pichoCardView = PichoCardView(
                     mascot: "mascot_snack",
                     title: "*Crunch*",
-                    detail: "Healthy snacks keep the doctors away!",
-                    buttonText: "Log Snack",
+                    detail: NSLocalizedString("Healthy snacks keep the doctors away!", comment: "") ,
+                    buttonText: NSLocalizedString("Log Snack", comment: "") ,
                     type: .snack, rootView: self)
             } else {
                 pichoCardView = nil
@@ -190,7 +190,7 @@ class JournalViewController: UIViewController {
                 pichoCardView = PichoCardView(
                     mascot: "mascot_sleep",
                     title: "*Yawns*",
-                    detail: "Time to turn off the lights and prepare for tomorrow!",
+                    detail: NSLocalizedString("Time to turn off the lights and prepare for tomorrow!", comment: ""),
                     buttonText: "",
                     type: .snack, rootView: self)
             } else {

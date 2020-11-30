@@ -16,14 +16,14 @@ class NutrionalHeader: UIView {
         super.init(frame: frame)
         
         nutritionLabel = UILabel()
-        nutritionLabel.setFont(text: "Nutrional Information", size: 28, weight: .bold)
+        nutritionLabel.setFont(text:NSLocalizedString("Nutritional Information", comment: "") , size: 28, weight: .bold)
         addSubview(nutritionLabel)
         nutritionLabel.setConstraint(
             topAnchor: topAnchor, topAnchorConstant: 16,
             leadingAnchor: layoutMarginsGuide.leadingAnchor, leadingAnchorConstant: 10)
 
         serveLabel = UILabel()
-        serveLabel.setFont(text: "Per serve", weight: .bold)
+        serveLabel.setFont(text: NSLocalizedString("Per serve", comment: ""), weight: .bold)
         addSubview(serveLabel)
         serveLabel.setConstraint(
             topAnchor: nutritionLabel.bottomAnchor, topAnchorConstant: 16,

@@ -31,7 +31,7 @@ class NotificationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Notifications"
+        title = NSLocalizedString("Notifications", comment: "")
         setupTableView()
         
         viewModel.requestPermission()
@@ -62,7 +62,7 @@ class NotificationViewController: UIViewController {
         case 0:
             let dateComponent = Calendar.current.dateComponents([.hour, .minute], from: timeBreakfast ?? ("08:00").changeToDate())
             viewModel.addNotification(
-                id: "Breakfast",
+                id: NSLocalizedString("Breakfast", comment: "") ,
                 title: NSLocalizedString("Good morning!", comment: "") ,
                 body: NSLocalizedString("Start your day with a breakfast, and don’t forget to log it! 😉", comment: "") ,
                 time: dateComponent,
@@ -231,7 +231,7 @@ extension NotificationViewController: UITableViewDelegate {
         switch indexPath.section {
         case 0:
             if indexPath.row == 0 {
-                cell.title.setFont(text: viewModel.notifications[0].id ?? "", weight: .bold)
+                cell.title.setFont(text: NSLocalizedString("Breakfast", comment: ""), weight: .bold)
                 let control = UISwitch()
                 control.tag = 0
                 control.addTarget(self, action: #selector(handleSwitch(sender:)), for: .valueChanged)
@@ -251,7 +251,7 @@ extension NotificationViewController: UITableViewDelegate {
             }
         case 1:
             if indexPath.row == 0 {
-                cell.title.setFont(text: viewModel.notifications[1].id ?? "", weight: .bold)
+                cell.title.setFont(text: NSLocalizedString("Lunch", comment: ""), weight: .bold)
                 let control = UISwitch()
                 control.tag = 1
                 control.addTarget(self, action: #selector(handleSwitch(sender:)), for: .valueChanged)
@@ -270,7 +270,7 @@ extension NotificationViewController: UITableViewDelegate {
             }
         case 2:
             if indexPath.row == 0 {
-                cell.title.setFont(text: viewModel.notifications[2].id ?? "", weight: .bold)
+                cell.title.setFont(text: NSLocalizedString("Dinner", comment: ""), weight: .bold)
                 let control = UISwitch()
                 control.tag = 2
                 control.addTarget(self, action: #selector(handleSwitch(sender:)), for: .valueChanged)
@@ -289,7 +289,7 @@ extension NotificationViewController: UITableViewDelegate {
             }
         case 3:
             if indexPath.row == 0 {
-                cell.title.setFont(text: viewModel.notifications[3].id ?? "", weight: .bold)
+                cell.title.setFont(text: NSLocalizedString("Snacks", comment: ""), weight: .bold)
                 let control = UISwitch()
                 control.tag = 3
                 control.addTarget(self, action: #selector(handleSwitch(sender:)), for: .valueChanged)
@@ -308,7 +308,7 @@ extension NotificationViewController: UITableViewDelegate {
             }
         case 4:
             if indexPath.row == 0 {
-                cell.title.setFont(text: viewModel.notifications[4].id ?? "", weight: .bold)
+                cell.title.setFont(text: NSLocalizedString("Water", comment: ""), weight: .bold)
                 let control = UISwitch()
                 control.tag = 4
                 control.addTarget(self, action: #selector(handleSwitch(sender:)), for: .valueChanged)
@@ -328,7 +328,7 @@ extension NotificationViewController: UITableViewDelegate {
             }
         case 5:
             if indexPath.row == 0 {
-                cell.title.setFont(text: viewModel.notifications[5].id ?? "", weight: .bold)
+                cell.title.setFont(text: NSLocalizedString("Weight In", comment: ""), weight: .bold)
                 let control = UISwitch()
                 control.tag = 5
                 control.addTarget(self, action: #selector(handleSwitch(sender:)), for: .valueChanged)
@@ -347,7 +347,7 @@ extension NotificationViewController: UITableViewDelegate {
             }
         case 6:
             if indexPath.row == 0 {
-                cell.title.setFont(text: viewModel.notifications[6].id ?? "", weight: .bold)
+                cell.title.setFont(text: NSLocalizedString("Reflection", comment: ""), weight: .bold)
                 let control = UISwitch()
                 control.tag = 6
                 control.addTarget(self, action: #selector(handleSwitch(sender:)), for: .valueChanged)
@@ -383,9 +383,9 @@ extension NotificationViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         switch section {
         case 5:
-            return NotificationFooterView(text: "Weighing yourself at the same time weekly will give a more accurate weight result")
+            return NotificationFooterView(text: NSLocalizedString("Weighing yourself at the same time weekly will give a more accurate weight result", comment: "") )
         case 6:
-            return NotificationFooterView(text: "Reflect on your progress at the same time weekly to understand your current habit and make an informed decision on changes to make for the coming week")
+            return NotificationFooterView(text:NSLocalizedString("Reflect on your progress at the same time weekly to understand your current habit and make an informed decision on changes to make for the coming week", comment: "") )
         default:
             return nil
         }

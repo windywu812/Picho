@@ -63,7 +63,7 @@ class FoodInputViewController: UIViewController {
         addButton.backgroundColor = Color.green
         addButton.layer.cornerRadius = 8
         addButton.contentEdgeInsets = UIEdgeInsets(top: 12, left: view.safeAreaInsets.left, bottom: 12, right: view.safeAreaInsets.right)
-        addButton.setTitle("Add \(eatTime.capitalized)", for: .normal)
+        addButton.setTitle(String(format: NSLocalizedString("Add %@", comment: ""), eatTime.capitalized), for: .normal)
         addButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
         addButton.addTarget(self, action: #selector(handleAdd), for: .touchUpInside)
     }
