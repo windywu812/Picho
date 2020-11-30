@@ -11,6 +11,8 @@ class WaterCell: UICollectionViewCell {
     
     static let reuseIdentifier = "WaterCell"
     
+    var idCoreData: UUID?
+    var idHealthKit: UUID?
     var image: UIImage? {
         didSet { imageView.image = image }
     }

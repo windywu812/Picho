@@ -24,8 +24,7 @@ class HealthKitService {
         HKQuantityType.quantityType(forIdentifier: .dietaryFatSaturated)!,
         HKQuantityType.quantityType(forIdentifier: .dietarySugar)!,
         HKQuantityType.quantityType(forIdentifier: .dietaryEnergyConsumed)!,
-        HKQuantityType.quantityType(forIdentifier: .dietaryWater)!,
-        HKObjectType.quantityType(forIdentifier: .stepCount)!
+        HKQuantityType.quantityType(forIdentifier: .dietaryWater)!
     ]
     
     func authorization() {
@@ -224,12 +223,11 @@ class HealthKitService {
                 guard let unwrappedFetchedObject = fetchedObject else {
                     return
                 }
-                print("\n to be deleted: \(unwrappedFetchedObject) \n")
                 self.healthStore.delete(unwrappedFetchedObject, withCompletion: { (success, error) in
                     if let error = error {
                         print(error)
                     } else {
-                        print("success")
+                        print("\n to be deleted: \(unwrappedFetchedObject.uuid) \n")
                     }
                 })
             }

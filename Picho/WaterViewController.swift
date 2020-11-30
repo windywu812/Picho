@@ -27,8 +27,6 @@ class WaterViewController: UIViewController {
     private var waterProgress: HorizontalProgressView!
     private var infoLabel: UILabel!
     private var waterCollectionView: UICollectionView!
-    private var totalWater: Int = 0
-    
     private var waters: [WaterIntake] = []
     
     var delegate: WaterDelegate?
@@ -36,50 +34,30 @@ class WaterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fetch()
         setupView()
         setupLayout()
+        fetch()
     }
     
-    func fetch() {
-        CoreDataService.shared.getWater { intakes in
-            self.totalWater = Int(intakes.map({ $0.amount }).reduce(0.0, +))
-                        
+    private func fetch() {
+        CoreDataService.shared.getWater { waters in
+            self.waters = waters
             DispatchQueue.main.async {
-                self.waterAmount.text = "\(self.totalWater) Cups"
-                self.waterProgress.setProgress(progress: self.totalWater)
-                if self.totalWater > 5 {
+                self.waterAmount.setFont(text: "\(waters.count) Cups", size: 34, weight: .bold)
+                self.waterProgress.setProgress(progress: waters.count)
+                if waters.count > 5 {
                     self.infoLabel.setFont(text: "Good", weight: .bold, color: Color.green)
+                } else {
+                    self.infoLabel.setFont(text: "Need more water", weight: .bold, color: Color.red)
                 }
             }
-        }
-        CoreDataService.shared.getWater { (totalWtr) in
-            self.waters = totalWtr
-           
         }
         
-        if HealthKitService.shared.checkAuthorization() {
-            HealthKitService.shared.fetchWater { (glassIntake) in
-                self.totalWater = Int(glassIntake)
-                            
-                DispatchQueue.main.async {
-                    self.waterAmount.text = "\(self.totalWater) Cups"
-                    self.waterProgress.setProgress(progress: self.totalWater)
-                    if self.totalWater > 5 {
-                        self.infoLabel.setFont(text: "Good", weight: .bold, color: Color.green)
-                    }
-                }
-            }
-        }
-    }
-    
-    @objc private func handleDone() {
-        delegate?.sendWater(water: totalWater)
-        dismiss(animated: true, completion: nil)
+        waterCollectionView.reloadData()
     }
     
     private func setupView() {
-
+        
         navigationItem.title = "Water"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(handleDone))
         view.backgroundColor = Color.background
@@ -94,14 +72,13 @@ class WaterViewController: UIViewController {
         view.addSubview(waterLabel)
         
         waterAmount = UILabel()
-        waterAmount.setFont(text: "\(totalWater) Cups", size: 34, weight: .bold)
         view.addSubview(waterAmount)
         
-        waterProgress = HorizontalProgressView(progress: totalWater)
+        waterProgress = HorizontalProgressView()
         view.addSubview(waterProgress)
         
         infoLabel = UILabel()
-        infoLabel.setFont(text: "Need more water", size: 17, weight: .bold, color: Color.red)
+        infoLabel.setFont(text: "Need more water", weight: .bold, color: Color.red)
         view.addSubview(infoLabel)
         
         let layout = UICollectionViewFlowLayout()
@@ -148,6 +125,11 @@ class WaterViewController: UIViewController {
             trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
     }
     
+    @objc private func handleDone() {
+        delegate?.sendWater(water: waters.count)
+        dismiss(animated: true, completion: nil)
+    }
+    
 }
 
 extension WaterViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -159,48 +141,41 @@ extension WaterViewController: UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WaterCell.reuseIdentifier, for: indexPath) as! WaterCell
         
-        if indexPath.row < totalWater {
+        if indexPath.row < waters.count {
             cell.image = UIImage(named: "glass_fill")
-        } else{
+            cell.idCoreData = waters[indexPath.row].id
+            cell.idHealthKit = waters[indexPath.row].idWater
+        } else {
             cell.image = UIImage(named: "glass_empty")
+            cell.idCoreData = nil
+            cell.idHealthKit = nil
         }
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
-        if let cell = collectionView.cellForItem(at: indexPath) as? WaterCell {
-            if cell.image == UIImage(named: "glass_fill") {
-                cell.image = UIImage(named: "glass_empty")
-                let water = waters[indexPath.row]
-                
-               
-                guard let idWater = water.idWater else { return }
-                
-                print(idWater)
-//                CoreDataService.shared.deleteWater(idCoreData)
-                HealthKitService.shared.deleteHealthData(id: idWater, type: .dietaryWater, unit: .cupUS())
-                
-                totalWater -= 1
-                waterAmount.text = "\(totalWater) Cups"
-                waterProgress.setProgress(progress: totalWater)
-                
-            } else {
-                let water = HealthKitService.shared.addData(amount: 1, date: Date(), type: .dietaryWater, unit: HKUnit.cupUS())
-                print("Air:\(water)")
-                
-                CoreDataService.shared.addWater(id: UUID(),waterId:water)
-                cell.image = UIImage(named: "glass_fill")
-                totalWater += 1
-                waterAmount.text = "\(totalWater) Cups"
-                waterProgress.setProgress(progress: totalWater)
-            }
-         
+        
+        let cell = collectionView.cellForItem(at: indexPath) as! WaterCell
+        
+        if cell.image == UIImage(named: "glass_fill") {
+            
+            guard let idCoreData = waters[indexPath.row].id,
+                  let idHealhKit = waters[indexPath.row].idWater
+            else { return }
+            
+            CoreDataService.shared.deleteWater(id: idCoreData)
+            HealthKitService.shared.deleteHealthData(id: idHealhKit, type: .dietaryWater, unit: .cupUS())
+            cell.image = UIImage(named: "glass_empty")
+            
+        } else {
+            let water = HealthKitService.shared.addData(amount: 1, date: Date(), type: .dietaryWater, unit: HKUnit.cupUS())
+            
+            CoreDataService.shared.addWater(id: UUID(), waterId: water)
+            cell.image = UIImage(named: "glass_fill")
         }
         
         fetch()
-        
     }
     
 }
