@@ -12,8 +12,12 @@ struct EatingTime {
 }
 
 enum EatTime: String {
-    case breakfast = "breakfast" 
+    case breakfast = "breakfast"
     case lunch = "lunch"
     case dinner = "dinner"
     case snacks = "snacks"
+    
+    func localizedString() -> String {
+        return NSLocalizedString(self.rawValue, comment: "")
+    }
 }
