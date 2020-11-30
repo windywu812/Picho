@@ -34,7 +34,7 @@ class DetailSugarNSatFat: UIViewController {
             topAnchor: scrollView.topAnchor, topAnchorConstant: 20,
             leadingAnchor: view.layoutMarginsGuide.leadingAnchor)
         
-        labelDescription1.setFont(text: "Both saturated fat and sugar can trigger increase in ‘bad’ cholesterol (LDL). Sugar, in particular, can also cause triglycerides in our body to go up.", size: 16, weight: .regular, color: .black)
+        labelDescription1.setFont(text: NSLocalizedString("Both saturated fat and sugar can trigger increase in ‘bad’ cholesterol (LDL). Sugar, in particular, can also cause triglycerides in our body to go up.", comment: ""), size: 16, weight: .regular, color: .black)
         labelDescription1.numberOfLines = 0
         scrollView.addSubview(labelDescription1)
 

@@ -27,7 +27,7 @@ class ProfileViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = "Profile"
+        navigationItem.title = NSLocalizedString("Profile", comment: "")
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(handleEdit))
         setupTableView()
     }
@@ -113,17 +113,17 @@ class ProfileViewController: UITableViewController {
             }
             if indexPath.row == 0 {
                 if HealthKitService.shared.checkAuthorization(){
-                    let alert = UIAlertController(title: "Turn Off HealhKit", message: "Go to setting -> Health -> Data accsess & Devices -> Picho -> Turn All Categories Off ", preferredStyle: UIAlertController.Style.alert)
-                    alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: { action in
+                    let alert = UIAlertController(title: NSLocalizedString("Turn Off HealhKit", comment: ""), message:NSLocalizedString("Go to setting -> Health -> Data accsess & Devices -> Picho -> Turn All Categories Off ", comment: "") , preferredStyle: UIAlertController.Style.alert)
+                    alert.addAction(UIAlertAction(title:NSLocalizedString("Cancel", comment: ""), style: UIAlertAction.Style.default, handler: { action in
 
                     }))
-                    alert.addAction(UIAlertAction(title: "Turn off", style: UIAlertAction.Style.default, handler: { action in
+                    alert.addAction(UIAlertAction(title:NSLocalizedString("Go to Setting", comment: "") , style: UIAlertAction.Style.default, handler: { action in
                         UIApplication.shared.open(URL(string: "App-prefs:Health")!)
                     }))
                     self.present(alert, animated: true, completion: nil)
                 }else{
-                    let alert = UIAlertController(title: "Connect to HealhKit", message: "Turn All Categories On ", preferredStyle: UIAlertController.Style.alert)
-                    alert.addAction(UIAlertAction(title: "Connect", style: UIAlertAction.Style.default, handler: nil))
+                    let alert = UIAlertController(title:NSLocalizedString("Connect to Health Apps", comment: "") , message:NSLocalizedString("Turn All Categories On", comment: "") , preferredStyle: UIAlertController.Style.alert)
+                    alert.addAction(UIAlertAction(title: NSLocalizedString("Connect", comment: ""), style: UIAlertAction.Style.default, handler: nil))
                     HealthKitService.shared.authorization()
                 }
             }
