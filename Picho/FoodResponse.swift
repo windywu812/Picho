@@ -44,23 +44,23 @@ struct FoodDetail: Decodable {
              protein, calcium, iron
     }
     
-    mutating func changeServiceSize(servingSize: Double) {
-        serving = servingSize / 100
-        calories = calories * serving
-        calorieFromFat = calorieFromFat * serving
-        totalFat = totalFat * serving
-        saturatedFat = saturatedFat * serving
-        transFat = transFat * serving
-        cholesterol = cholesterol * serving
-        sodium = sodium * serving
-        totalCarbs = totalCarbs * serving
-        fiber = fiber * serving
-        sugar = sugar * serving
-        protein = protein * serving
-        vitaminA = vitaminA * serving
-        calcium = calcium * serving
-        vitaminC = vitaminC * serving
-        iron = iron * serving
+    mutating func changeData(newData: FoodDetail) {
+        serving = newData.serving
+        calories = newData.calories
+        calorieFromFat = newData.calorieFromFat
+        totalFat = newData.totalFat
+        saturatedFat = newData.saturatedFat
+        transFat = newData.transFat
+        cholesterol = newData.cholesterol
+        sodium = newData.sodium
+        totalCarbs = newData.totalCarbs
+        fiber = newData.fiber
+        sugar = newData.sugar
+        protein = newData.protein
+        vitaminA = newData.vitaminA
+        calcium = newData.calcium
+        vitaminC = newData.vitaminC
+        iron = newData.iron
     }
     
 }

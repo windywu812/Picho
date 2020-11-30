@@ -20,12 +20,14 @@ class FoodDetailScreen: UITableViewController {
     var eatingTime: EatTime = .breakfast
     var isFavorite: Bool = false
     
-    private var food: FoodDetail?
     private var viewModel = FoodDetailViewModel()
     private var headerName: FoodNameHeader?
-    private var nutritionAmount: [[Double]] = []
+    
     private var servingTextfield: UITextField!
-    private var cancelable = Set<AnyCancellable>()
+    
+    var food: FoodDetail?
+    var containerFood: FoodDetail?
+    var nutritionAmount: [[Double]] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +35,6 @@ class FoodDetailScreen: UITableViewController {
         setupView()
         setupFavorite()
         fetchingFavorite()
-        setupTextfield()
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleDismiss))
         view.addGestureRecognizer(tap)
@@ -46,6 +47,7 @@ class FoodDetailScreen: UITableViewController {
         navigationItem.rightBarButtonItem = isAddShown ? UIBarButtonItem(title: "Add", style: .done, target: self, action: #selector(handleAdd)) : nil
         
         tableView.register(DetailCell.self, forCellReuseIdentifier: DetailCell.reuseIdentifier)
+        tableView.register(ServingCell.self, forCellReuseIdentifier: ServingCell.reuseIdentifier)
         tableView.allowsSelection = false
         tableView.showsVerticalScrollIndicator = false
     }
@@ -112,7 +114,7 @@ class FoodDetailScreen: UITableViewController {
             idSugar: idSugar,
             idSatFat: idSatFat,
             time: eatingTime)
-     
+        
         NotificationService.shared.post()
         
         dismiss(animated: true, completion: nil)
@@ -123,12 +125,15 @@ class FoodDetailScreen: UITableViewController {
             switch result {
             case .success(let response):
                 self.food = response
+                self.containerFood = response
+                
                 let section1Amount = [self.food?.calories, self.food?.saturatedFat, self.food?.sugar].compactMap({ $0 })
                 let section2Amount = [self.food?.serving].compactMap({ $0 })
                 let section3Amount = [self.food?.totalFat, self.food?.calorieFromFat, self.food?.transFat, self.food?.cholesterol].compactMap({ $0 })
                 let section4Amount = [self.food?.cholesterol, self.food?.protein, self.food?.fiber, self.food?.sodium, self.food?.calcium, self.food?.iron].compactMap({ $0 })
                 let section5Amount = [self.food?.vitaminA, self.food?.vitaminC].compactMap({ $0 })
                 self.nutritionAmount = [section1Amount, section2Amount, section3Amount, section4Amount, section5Amount]
+                
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
@@ -183,42 +188,15 @@ class FoodDetailScreen: UITableViewController {
             value: nutritionAmount[indexPath.section][indexPath.row])
         
         if indexPath.section == 1 {
-            servingTextfield?.removeBorder(tag: 0, text: "\(Int(nutritionAmount[indexPath.section][indexPath.row])) g")
-            cell.accessoryView = servingTextfield
-            cell.textLabel?.text = "Serving Size"
-            cell.accessoryType = .disclosureIndicator
-            cell.detailTextLabel?.text = ""
+            let cell = tableView.dequeueReusableCell(withIdentifier: ServingCell.reuseIdentifier, for: indexPath) as! ServingCell
+            cell.servingTf.text = "\(Int(nutritionAmount[indexPath.section][indexPath.row]))"
+            cell.servingTf.isEnabled = isAddShown ? true : false
+            cell.parent = self
+            
+            return cell
         }
         
         return cell
-    }
-    
-    private func setupTextfield() {
-        
-        servingTextfield = UITextField(frame: CGRect(origin: .zero, size: CGSize(width: 100, height: 30)))
-        servingTextfield?.textColor = .secondaryLabel
-        
-        NotificationCenter.default.publisher(for: UITextField.textDidChangeNotification, object: servingTextfield)
-            .map({ (($0.object as! UITextField).text ?? "") })
-            .filter({ !$0.isEmpty })
-            .sink { text in
-                print(text)
-                self.food?.changeServiceSize(servingSize: Double(text) ?? 0)
-//                DispatchQueue.main.async {
-//                    self.tableView.reloadData()
-                
-//                self.tableView.reloadRows(at: [IndexPath.init(row: 0, section: 0)], with: .automatic)
-                self.tableView.reloadSections(IndexSet(arrayLiteral: 0, 2), with: .automatic)
-//                }
-            }
-            .store(in: &cancelable)
-//
-//        $food
-//            .sink { (_) in
-//                DispatchQueue.main.async {
-//                    self.tableView.reloadData()
-//                }
-//            }.store(in: &cancelable)
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -238,4 +216,90 @@ class FoodDetailScreen: UITableViewController {
     }
     
 }
+
+class ServingCell: UITableViewCell {
+    
+    static let reuseIdentifier = "ServingCell"
+    
+    private var cancelable = Set<AnyCancellable>()
+    var servingTf: UITextField!
+    
+    var parent: FoodDetailScreen?
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        accessoryType = .disclosureIndicator
+        
+        textLabel?.text = "Serving Size"
+        detailTextLabel?.text = ""
+        
+        let unit = UILabel()
+        unit.text = "g"
+        unit.textColor = .secondaryLabel
+        
+        servingTf = UITextField()
+        servingTf.textAlignment = .right
+        servingTf.textColor = .secondaryLabel
+        servingTf.keyboardType = .numberPad
+        
+        let mainStack = UIStackView(arrangedSubviews: [servingTf, unit])
+        mainStack.spacing = 4
+        addSubview(mainStack)
+        
+        mainStack.setConstraint(
+            trailingAnchor: layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: -16,
+            centerYAnchor: centerYAnchor,
+            heighAnchorConstant: 30,
+            widthAnchorConstant: 100)
+        
+        NotificationCenter.default.publisher(for: UITextField.textDidChangeNotification, object: servingTf)
+            .map({ (($0.object as! UITextField).text ?? "") })
+            .filter({ !$0.isEmpty })
+            .sink { text in
+                if !text.isEmpty {
+                    let serving = (Double(text) ?? 100) / 100
+                    
+                    guard let food = self.parent?.containerFood else { return }
+                    
+                    let newData = FoodDetail(
+                        foodId: food.foodId,
+                        nameId: food.nameId,
+                        nameEn: food.nameEn,
+                        serving: serving,
+                        calories: food.calories * serving,
+                        calorieFromFat: food.calorieFromFat * serving,
+                        totalFat: food.totalFat * serving,
+                        saturatedFat: food.saturatedFat * serving,
+                        transFat: food.transFat * serving,
+                        cholesterol: food.cholesterol * serving,
+                        sodium: food.sodium * serving,
+                        totalCarbs: food.totalCarbs * serving,
+                        fiber: food.fiber * serving,
+                        sugar: food.sugar * serving,
+                        protein: food.protein * serving,
+                        vitaminA: food.vitaminA * serving,
+                        calcium: food.calcium * serving,
+                        vitaminC: food.vitaminC * serving,
+                        iron: food.iron * serving)
+                    self.parent?.food = newData
+                    
+                    let section1Amount = [newData.calories, newData.saturatedFat, newData.sugar]
+                    let section2Amount = [newData.serving]
+                    let section3Amount = [newData.totalFat, newData.calorieFromFat, newData.transFat, newData.cholesterol]
+                    let section4Amount = [newData.cholesterol, newData.protein, newData.fiber, newData.sodium, newData.calcium, newData.iron]
+                    let section5Amount = [newData.vitaminA, newData.vitaminC]
+                    self.parent?.nutritionAmount = [section1Amount, section2Amount, section3Amount, section4Amount, section5Amount]
+                    
+                    self.parent?.tableView.reloadSections(IndexSet(arrayLiteral: 0, 2, 3, 4), with: .automatic)
+                }
+            }
+            .store(in: &cancelable)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
 
