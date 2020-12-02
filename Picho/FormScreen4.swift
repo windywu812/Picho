@@ -40,7 +40,7 @@ class FormScreen4: UIViewController {
         }
         
         let titleLabel = UILabel()
-        titleLabel.text = "Can you tell me about your current weight and height?"
+        titleLabel.text = NSLocalizedString("Can you tell me about your current weight and height?", comment: "")
         titleLabel.numberOfLines = 0
         titleLabel.textAlignment = .center
         titleLabel.font = UIFont.boldSystemFont(ofSize: 24.0)
@@ -52,7 +52,7 @@ class FormScreen4: UIViewController {
             trailingAnchor: view.layoutMarginsGuide.trailingAnchor,trailingAnchorConstant: 0)
         
         let descLabel = UILabel()
-        descLabel.text = "To get better estimation for you calorie needs, Picho also need your weight and height..."
+        descLabel.text = NSLocalizedString("To get better estimation for you calorie needs, Picho also need your weight and height...", comment: "") 
         descLabel.numberOfLines = 0
         descLabel.textAlignment = .center
         view.addSubview(descLabel)
@@ -63,10 +63,10 @@ class FormScreen4: UIViewController {
             trailingAnchor: view.layoutMarginsGuide.trailingAnchor,trailingAnchorConstant: 0)
         
         let weightLabel = UILabel()
-        weightLabel.setFont(text: "Weight(KG)", size: 16, weight: .bold)
+        weightLabel.setFont(text: NSLocalizedString("Weight (kg)", comment: "") , size: 16, weight: .bold)
         
         weightTextField.layer.cornerRadius = 6
-        weightTextField.placeholder = "Weight"
+        weightTextField.placeholder = NSLocalizedString("Weight", comment: "")
         weightTextField.layer.borderColor = Color.green.cgColor
         weightTextField.layer.borderWidth = 2.0
         weightTextField.setConstraint(heighAnchorConstant: 50)
@@ -87,13 +87,13 @@ class FormScreen4: UIViewController {
         weightTextField.setConstraint(heighAnchorConstant: 50)
         
         let heightLabel = UILabel()
-        heightLabel.setFont(text: "Height(CM)", size: 16, weight: .bold, color: .black)
+        heightLabel.setFont(text: NSLocalizedString("Height (cm)", comment: "") , size: 16, weight: .bold, color: .black)
         
         heightTextField.addPadding(padding: .equalSpacing(10))
         heightTextField.layer.cornerRadius = 6
         heightTextField.layer.borderColor = Color.green.cgColor
         heightTextField.layer.borderWidth = 2.0
-        heightTextField.placeholder = "Height"
+        heightTextField.placeholder = NSLocalizedString("Height", comment: "")
         heightTextField.delegate = self
         heightTextField.tag = 1
         heightTextField.keyboardType = .numberPad
@@ -112,8 +112,9 @@ class FormScreen4: UIViewController {
         heightTextField.setConstraint(heighAnchorConstant: 50)
         
         getStartedBtn = UIButton()
-        getStartedBtn.setTitle("Continue", for: .normal)
-        getStartedBtn.layer.cornerRadius =  6
+        getStartedBtn.setTitle( NSLocalizedString("Continue", comment: ""), for: .normal)
+        getStartedBtn.titleLabel?.font = .boldSystemFont(ofSize: 16)
+        getStartedBtn.layer.cornerRadius =  10
         getStartedBtn.backgroundColor = Color.lightGreen
         getStartedBtn.tintColor = Color.green
         getStartedBtn.isEnabled = false
@@ -187,7 +188,7 @@ extension FormScreen4: UITextFieldDelegate {
         self.activeTextField = textField
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
         
         if textField.tag == 0 {
             weight = textField.text ?? ""

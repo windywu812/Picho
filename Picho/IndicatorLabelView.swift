@@ -30,13 +30,13 @@ class IndicatorLabelView: UIView {
         redIcon.image = UIImage(named: "red_indicator")
         
         greenLabel = UILabel()
-        greenLabel.setFont(text: "Within ±10% of allowance", size: 13, color: .secondaryLabel)
+        greenLabel.setFont(text: NSLocalizedString("Within ±10% of allowance", comment: "") , size: 13, color: .secondaryLabel)
         
         yellowLabel = UILabel()
-        yellowLabel.setFont(text: "Within ±10% of allowance", size: 13, color: .secondaryLabel)
+        yellowLabel.setFont(text:NSLocalizedString("Within ±20% of allowance", comment: "") , size: 13, color: .secondaryLabel)
         
         redLabel = UILabel()
-        redLabel.setFont(text: "Within ±30% of allowance", size: 13, color: .secondaryLabel)
+        redLabel.setFont(text:NSLocalizedString("Within ±30% of allowance", comment: "") , size: 13, color: .secondaryLabel)
         
         let greenIndicatorStack = UIStackView(arrangedSubviews: [greenIcon, greenLabel])
         greenIndicatorStack.axis = .horizontal
@@ -44,7 +44,7 @@ class IndicatorLabelView: UIView {
         addSubview(greenIndicatorStack)
         
         greenIndicatorStack.setConstraint(
-            topAnchor: topAnchor,
+            topAnchor: topAnchor, topAnchorConstant: 16,
             centerXAnchor: centerXAnchor)
         
         greenIcon.setConstraint(

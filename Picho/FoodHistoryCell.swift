@@ -11,65 +11,36 @@ class FoodHistoryCell: UITableViewCell {
     
     static let reuseIdentifier = "FoodHistoryCell"
     
-    private var icon: UIImageView!
     private var foodNameLabel: UILabel!
     private var calorieLabel: UILabel!
     private var satFatLabel: UILabel!
     private var sugarLabel: UILabel!
     private var howOftenLabel: UILabel!
     
-    func setupCell(imageIcon: String = "", labelText: String, howOften: Int = 0, calorie: Double, sugar: Double, satFat: Double, isHead: Bool) {
+    func setupCell(history: History) {
+        let totalSgr = "\(history.totalSugar)"
+        let totalSatFat = "\(history.totalSatFat)"
+        let totalEat = "\(history.eatTimes)"
         
-        if isHead {
-            icon.image = UIImage(named: imageIcon)
-            foodNameLabel.setFont(text: labelText, weight: .bold)
-            calorieLabel.setFont(text: "\(calorie) cal", weight: .bold)
-            sugarLabel.setFont(text: "Sugar - \(sugar) g", weight: .bold, color: .secondaryLabel)
-            satFatLabel.setFont(text: "Saturated Fat - \(satFat) g", weight: .bold, color: .secondaryLabel)
-            howOftenLabel.text = ""
-        } else {
-            icon.removeFromSuperview()
-            foodNameLabel.text = labelText
-            calorieLabel.text = "\(calorie) cal"
-            sugarLabel.text = "Sugar - \(sugar) g"
-            satFatLabel.text = "Saturated Fat - \(satFat) g"
-            howOftenLabel.text = "\(howOften) times"
-        }
-        
+        foodNameLabel.text = history.foodName
+        calorieLabel.text = "\(history.totalCalorie) cal"
+        sugarLabel.text = String(format: NSLocalizedString("Sugar - %@ g", comment: ""), totalSgr)
+        satFatLabel.text = String(format: NSLocalizedString("Saturated Fat - %@ g", comment: ""), totalSatFat)
+        howOftenLabel.text = String(format: NSLocalizedString("%@ Times", comment: ""), totalEat)
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        icon = UIImageView()
-        
         foodNameLabel = UILabel()
-        
         calorieLabel = UILabel()
+        howOftenLabel = UILabel()
         
         satFatLabel = UILabel()
         satFatLabel.textColor = .secondaryLabel
         
         sugarLabel = UILabel()
         sugarLabel.textColor = .secondaryLabel
-        
-        howOftenLabel = UILabel()
-        
-        let titleStack = UIStackView(arrangedSubviews: [icon, foodNameLabel])
-        titleStack.spacing = 4
-        icon.setConstraint(
-            heighAnchorConstant: 22, widthAnchorConstant: 22)
-        
-        let leftStack = UIStackView(arrangedSubviews: [titleStack, howOftenLabel])
-        leftStack.alignment = .leading
-        leftStack.distribution = .equalCentering
-        leftStack.axis = .vertical
-        addSubview(leftStack)
-        
-        leftStack.setConstraint(
-            topAnchor: topAnchor, topAnchorConstant: 8,
-            bottomAnchor: bottomAnchor, bottomAnchorConstant: -8,
-            leadingAnchor: layoutMarginsGuide.leadingAnchor)
         
         let rightStack = UIStackView(arrangedSubviews: [calorieLabel, satFatLabel, sugarLabel])
         rightStack.alignment = .trailing
@@ -81,6 +52,17 @@ class FoodHistoryCell: UITableViewCell {
             topAnchor: topAnchor, topAnchorConstant: 8,
             bottomAnchor: bottomAnchor, bottomAnchorConstant: -8,
             trailingAnchor: layoutMarginsGuide.trailingAnchor)
+        
+        let leftStack = UIStackView(arrangedSubviews: [foodNameLabel, howOftenLabel])
+        leftStack.alignment = .leading
+        leftStack.distribution = .equalCentering
+        leftStack.axis = .vertical
+        addSubview(leftStack)
+        
+        leftStack.setConstraint(
+            topAnchor: topAnchor, topAnchorConstant: 8,
+            bottomAnchor: bottomAnchor, bottomAnchorConstant: -8,
+            leadingAnchor: layoutMarginsGuide.leadingAnchor)
     }
     
     required init?(coder: NSCoder) {

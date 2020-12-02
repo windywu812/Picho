@@ -7,6 +7,16 @@
 
 import UIKit
 
+enum PichoCardType {
+    case syncHealhtKit
+    case breakfast
+    case lunch
+    case dinner
+    case snack
+    case detail
+    case water
+}
+
 class PichoCardView: UIView {
     
     private let mascotImage: UIImageView
@@ -14,12 +24,22 @@ class PichoCardView: UIView {
     private let detailLabel: UILabel
     private let button: UIButton
     private let rootView: UIViewController
+    private var type: PichoCardType
+    
+    func setupPicho( mascot: String, title: String, detail: String, buttonText: String, type: PichoCardType) {
+        mascotImage.image = UIImage(named: mascot)
+        titleLabel.text = title
+        detailLabel.text = detail
+        button.setTitle(buttonText, for: .normal)
+        self.type = type
+    }
     
     init(frame: CGRect = .zero,
          mascot: String,
          title: String,
          detail: String,
          buttonText: String,
+         type: PichoCardType,
          rootView: UIViewController
     ) {
         
@@ -27,6 +47,7 @@ class PichoCardView: UIView {
         titleLabel = UILabel()
         detailLabel = UILabel()
         button = UIButton(type: .system)
+        self.type = type
         self.rootView = rootView
         
         super.init(frame: frame)
@@ -48,7 +69,6 @@ class PichoCardView: UIView {
         
         detailLabel.setFont(
             text: detail,
-            size: 17,
             color: .white)
         detailLabel.numberOfLines = 0
         
@@ -62,8 +82,33 @@ class PichoCardView: UIView {
     }
     
     @objc private func handleTap(sender: UIButton) {
-        let modalVC = DetailSugarNSatFat()
-        rootView.present(modalVC, animated: true, completion: nil)
+        switch type {
+        case .breakfast:
+            let vc = FoodInputViewController()
+            vc.eatingTime = .breakfast
+            rootView.navigationController?.pushViewController(vc, animated: true)
+        case .lunch:
+            let vc = FoodInputViewController()
+            vc.eatingTime = .lunch
+            rootView.navigationController?.pushViewController(vc, animated: true)
+        case .dinner:
+            let vc = FoodInputViewController()
+            vc.eatingTime = .dinner
+            rootView.navigationController?.pushViewController(vc, animated: true)
+        case .snack:
+            let vc = FoodInputViewController()
+            vc.eatingTime = .snacks
+            rootView.navigationController?.pushViewController(vc, animated: true)
+        case .detail:
+            let vc = DetailSugarNSatFat()
+            rootView.present(vc, animated: true, completion: nil)
+        case .water:
+            let vc = WaterViewController()
+            rootView.present(vc, animated: true, completion: nil)
+        case .syncHealhtKit:
+            HealthKitService.shared.authorization()
+        }
+        
     }
     
     private func setupLayout() {
@@ -72,6 +117,8 @@ class PichoCardView: UIView {
         mainStack.spacing = 4
         addSubview(mainStack)
 
+        setConstraint(heighAnchorConstant: 130)
+        
         mascotImage.setConstraint(
             topAnchor: topAnchor, topAnchorConstant: 16,
             bottomAnchor: bottomAnchor, bottomAnchorConstant: -8,

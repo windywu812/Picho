@@ -15,23 +15,12 @@ class FoodCell: UITableViewCell {
     private var calorieLabel: UILabel!
     private var fatLabel: UILabel!
     private var sugarLabel: UILabel!
-//    private var logButton: UIButton!
-    
-    var isLogged = false
-    
-    func configureCell(foodName: String, description: String) {
-        nameLabel.text = foodName
-        
-        let components = description.split(separator: "|")
-        let calories = components[0]
-        var fat = components[1]
-        fat.removeFirst()
-        var sugar = components[3]
-        sugar.removeFirst()
 
-        fatLabel.text = String(fat)
-        calorieLabel.text = String(calories)
-        sugarLabel.text = String(sugar)
+    func configureCell(foodName: String, calorie: Double, fat: Double, sugar: Double) {
+        nameLabel.text = foodName
+        fatLabel.text = "Fat: \(String(fat))g"
+        calorieLabel.text = "Calories: \(String(calorie))cal"
+        sugarLabel.text = "Sugar: \(String(sugar))g"
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -63,10 +52,6 @@ class FoodCell: UITableViewCell {
             bottomAnchor: bottomAnchor, bottomAnchorConstant: -16,
             leadingAnchor: layoutMarginsGuide.leadingAnchor,
             trailingAnchor: layoutMarginsGuide.trailingAnchor)
-    }
-    
-    @objc private func handleLogging() {
-        print("Logged")
     }
     
     required init?(coder: NSCoder) {

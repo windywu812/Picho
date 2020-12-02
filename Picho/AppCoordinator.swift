@@ -17,7 +17,7 @@ class AppCoordinator {
     }
     
     func start() {
-        
+     
         FatSecretCredentials.setConsumerKey(APIKey.apiKey)
         FatSecretCredentials.setSharedSecret(APIKey.apiSecret)
         

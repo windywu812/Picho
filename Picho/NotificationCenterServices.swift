@@ -34,6 +34,8 @@ class NotificationCenterServices {
         let request = UNNotificationRequest(identifier: uuid, content: notificationContent, trigger: trigger)
         
         if isOn {
+            center.removeDeliveredNotifications(withIdentifiers: [uuid])
+            center.removePendingNotificationRequests(withIdentifiers: [uuid])
             center.add(request) { error in
                 guard let error = error else {
                     print("Added")

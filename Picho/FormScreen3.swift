@@ -53,7 +53,7 @@ class FormScreen3: UIViewController {
         }
         
         let titleLabel = UILabel()
-        titleLabel.text = "I want to know more about you."
+        titleLabel.text = NSLocalizedString("I want to know more about you.", comment: "")
         titleLabel.font = UIFont.boldSystemFont(ofSize: 24.0)
         titleLabel.textAlignment = .center
         titleLabel.numberOfLines = 0
@@ -65,7 +65,7 @@ class FormScreen3: UIViewController {
             trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
         
         let descLabel = UILabel()
-        descLabel.text = "Different age and gender have different calories needs, also fat and sugar intake. Tell Picho yours so he can help you calculate!"
+        descLabel.text = NSLocalizedString("Different age and gender have different calories needs, also fat and sugar intake. Tell Picho yours so he can help you calculate!", comment: "")
         descLabel.numberOfLines = 0
         descLabel.textAlignment = .center
         view.addSubview(descLabel)
@@ -76,7 +76,7 @@ class FormScreen3: UIViewController {
             trailingAnchor: view.layoutMarginsGuide.trailingAnchor,trailingAnchorConstant: -16)
         
         genderTextField.layer.cornerRadius = 6
-        genderTextField.placeholder = "Gender"
+        genderTextField.placeholder = NSLocalizedString("Gender", comment: "") 
         genderTextField.layer.borderColor = Color.green.cgColor
         genderTextField.layer.borderWidth = 2.0
         genderTextField.addPadding(padding: .equalSpacing(10))
@@ -94,7 +94,7 @@ class FormScreen3: UIViewController {
         ageTextField.layer.cornerRadius = 6
         ageTextField.layer.borderColor = Color.green.cgColor
         ageTextField.layer.borderWidth = 2.0
-        ageTextField.placeholder = "Age"
+        ageTextField.placeholder = NSLocalizedString("Age", comment: "")
         ageTextField.delegate = self
         ageTextField.keyboardType = .numberPad
         ageTextField.tag = 1
@@ -107,8 +107,9 @@ class FormScreen3: UIViewController {
             heighAnchorConstant: 50)
         
         getStartedBtn = UIButton()
-        getStartedBtn.setTitle("Continue", for: .normal)
-        getStartedBtn.layer.cornerRadius =  5
+        getStartedBtn.setTitle(NSLocalizedString("Continue", comment: "") , for: .normal)
+        getStartedBtn.titleLabel?.font = .boldSystemFont(ofSize: 16)
+        getStartedBtn.layer.cornerRadius =  10
         getStartedBtn.backgroundColor = Color.lightGreen
         getStartedBtn.tintColor = Color.green
         getStartedBtn.isEnabled = false
@@ -198,7 +199,7 @@ extension FormScreen3: UITextFieldDelegate {
         self.activeTextField = textField
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
         
         if textField.tag == 0 {
             gender = textField.text ?? ""

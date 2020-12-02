@@ -21,7 +21,7 @@ class ProfileEditViewController: UIViewController, UINavigationControllerDelegat
     private var heightTextField: UITextField!
     private var weightTextField: UITextField!
     
-    let viewModel = ProfileViewModel()
+    var viewModel: ProfileViewModel!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -49,7 +49,11 @@ class ProfileEditViewController: UIViewController, UINavigationControllerDelegat
         UserDefaultService.age = ageTextField.text ?? ""
         UserDefaultService.height = heightTextField.text ?? ""
         UserDefaultService.weight = weightTextField.text ?? ""
-        viewModel.savePic(image: (imageProfile.image ?? UIImage(systemName: "person.circle"))!, key: UserDefaultService.photoProfileKey)
+        
+        if imageProfile.image != UIImage(systemName: "person.circle") {
+            viewModel.savePic(image: imageProfile.image, key: UserDefaultService.photoProfileKey)
+        }
+        
         UserDefaultService.synchronize()
         self.navigationController?.popViewController(animated: true)
     }
@@ -170,11 +174,15 @@ extension ProfileEditViewController {
             trailingAnchor: view.safeAreaLayoutGuide.trailingAnchor)
         
         imageProfile = UIImageView()
-        if viewModel.getPic(forKey: UserDefaultService.photoProfileKey) == nil {
-            imageProfile.image = UIImage(systemName: "person.circle")
-        } else {
-            imageProfile.image = viewModel.getPic(forKey: UserDefaultService.photoProfileKey)
+        imageProfile.image = viewModel.getPic(forKey: UserDefaultService.photoProfileKey)
+        
+        if imageProfile.image != UIImage(systemName: "person.circle") {
+            imageProfile.layer.cornerRadius = 60
+            imageProfile.layer.borderWidth = 2
+            imageProfile.layer.borderColor = Color.green.cgColor
+            imageProfile.layer.masksToBounds = true
         }
+        
         scrollView.addSubview(imageProfile)
         
         imageProfile.setConstraint(
@@ -198,7 +206,7 @@ extension ProfileEditViewController {
     @objc private func handleButton() {
         
         let imagePicker = UIImagePickerController()
-        imagePicker.allowsEditing = true
+        imagePicker.allowsEditing = false
         imagePicker.sourceType = .photoLibrary
         imagePicker.delegate = self
         

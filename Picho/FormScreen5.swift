@@ -34,7 +34,7 @@ class FormScreen5: UIViewController {
         }
        
         let label1 = UILabel()
-        label1.text = "Great!"
+        label1.text = NSLocalizedString("Awesome!", comment: "")
         label1.font = UIFont.boldSystemFont(ofSize: 24.0)
         label1.textAlignment = .center
         view.addSubview(label1)
@@ -45,7 +45,7 @@ class FormScreen5: UIViewController {
             trailingAnchor: view.layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: -16)
         
         let label2 = UILabel()
-        label2.text = "Before we proceed further, Picho wanted to remind you..."
+        label2.text = NSLocalizedString("Before we proceed further, Picho wanted to remind you...", comment: "")
         label2.numberOfLines = 0
         label2.textAlignment = .center
         label2.font = UIFont.systemFont(ofSize: 20)
@@ -59,7 +59,7 @@ class FormScreen5: UIViewController {
         let label3 = UILabel()
         label3.numberOfLines = 0
         label3.textAlignment = .center
-        let attr = NSMutableAttributedString(string: "The information contained in this mobile app should not be used to diagnose or treat any illness. All information is intended for your general knowledge only and is not a substitute for medical advice or treatment for specific medical conditions.")
+        let attr = NSMutableAttributedString(string: NSLocalizedString("The information contained in this mobile app should not be used to diagnose or treat any illness. All information is intended for your general knowledge only and is not a substitute for medical advice or treatment for specific medical conditions.", comment: ""))
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 6
         paragraphStyle.alignment = .center
@@ -73,7 +73,7 @@ class FormScreen5: UIViewController {
             trailingAnchor: view.layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: -16)
         
         let agreementLabel = UILabel()
-        agreementLabel.setFont(text: "I have read and I agreed with that.", size: 16)
+        agreementLabel.setFont(text: NSLocalizedString("I have read and I agreed with that.", comment: "") , size: 16)
         agreementLabel.numberOfLines = 0
         
         let checkBox = UIButton()
@@ -82,18 +82,21 @@ class FormScreen5: UIViewController {
         checkBox.addTarget(self, action: #selector(self.handleCheckBox(sender:)), for: .touchUpInside)
         
         let stackAgreement = UIStackView(arrangedSubviews: [checkBox, agreementLabel])
+    
         stackAgreement.spacing = 4
         
         view.addSubview(stackAgreement)
         stackAgreement.setConstraint(
             topAnchor: label3.bottomAnchor, topAnchorConstant: 24,
-            leadingAnchor: view.layoutMarginsGuide.leadingAnchor, leadingAnchorConstant: 16,
-            trailingAnchor: view.layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: -16)
+            leadingAnchor: view.layoutMarginsGuide.leadingAnchor, leadingAnchorConstant: 40,
+            trailingAnchor: view.layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: -16,
+            heighAnchorConstant: 60)
         
         getStartedBtn = UIButton()
-        getStartedBtn.setTitle("LET’S DO THIS!", for: .normal)
+        getStartedBtn.setTitle("Continue", for: .normal)
+        getStartedBtn.titleLabel?.font = .boldSystemFont(ofSize: 16)
         getStartedBtn.isEnabled = false
-        getStartedBtn.layer.cornerRadius =  6
+        getStartedBtn.layer.cornerRadius =  10
         getStartedBtn.backgroundColor = Color.lightGreen
         getStartedBtn.tintColor = Color.green
         getStartedBtn.addTarget(self, action: #selector(handleSave), for: .touchUpInside)

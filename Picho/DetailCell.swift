@@ -11,9 +11,9 @@ class DetailCell: UITableViewCell {
     
     static let reuseIdentifier = "DetailCell"
     
-    func configureCell(label: String, value: Double, header: Bool = false) {
+    func configureCell(label: String, value: Double, header: Bool = false, unit: String = "g") {
         textLabel?.text = label
-        detailTextLabel?.text = String("\(value)g")
+        detailTextLabel?.text = String("\(value)\(unit)")
         
         if header {
             textLabel?.font = .systemFont(ofSize: 17, weight: .heavy)

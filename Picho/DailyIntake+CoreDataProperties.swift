@@ -18,13 +18,15 @@ extension DailyIntake {
 
     @NSManaged public var calorie: Double
     @NSManaged public var date: Date?
-    @NSManaged public var desc: String?
     @NSManaged public var foodId: String?
     @NSManaged public var id: UUID?
     @NSManaged public var name: String?
     @NSManaged public var saturatedFat: Double
     @NSManaged public var sugars: Double
     @NSManaged public var time: String?
+    @NSManaged public var idSugar:UUID?
+    @NSManaged public var idSatFat:UUID?
+    @NSManaged public var idCalorie:UUID?
 
 }
 

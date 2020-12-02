@@ -8,13 +8,100 @@
 import Foundation
 
 extension Date {
+
+    
+    func getBreakfast() -> DateComponents {
+        var dateComponent = DateComponents()
+        dateComponent.hour = 8
+        dateComponent.minute = 0
+        dateComponent.year = Date().year
+        dateComponent.month = Date().month
+        dateComponent.day = Date().day
+        dateComponent.calendar = Calendar.current
+        
+        return dateComponent
+    }
+    func beforeLunch() -> DateComponents {
+        var dateComponent = DateComponents()
+        dateComponent.hour = 10
+        dateComponent.minute = 0
+        dateComponent.year = Date().year
+        dateComponent.month = Date().month
+        dateComponent.day = Date().day
+        dateComponent.calendar = Calendar.current
+        
+        return dateComponent
+    }
+    func getLunch() -> DateComponents {
+        var dateComponent = DateComponents()
+        dateComponent.hour = 12
+        dateComponent.minute = 0
+        dateComponent.year = Date().year
+        dateComponent.month = Date().month
+        dateComponent.day = Date().day
+        
+        dateComponent.calendar = Calendar.current
+        
+        return dateComponent
+    }
+    func getWater() -> DateComponents {
+        var dateComponent = DateComponents()
+        dateComponent.hour = 14
+        dateComponent.minute = 0
+        dateComponent.year = Date().year
+        dateComponent.month = Date().month
+        dateComponent.day = Date().day
+        dateComponent.calendar = Calendar.current
+        
+        return dateComponent
+    }
+    func getDinner() -> DateComponents {
+        var dateComponent = DateComponents()
+        dateComponent.hour = 19
+        dateComponent.minute = 0
+        dateComponent.year = Date().year
+        dateComponent.month = Date().month
+        dateComponent.day = Date().day
+        dateComponent.calendar = Calendar.current
+        
+        return dateComponent
+    }
+    func getSnack() -> DateComponents {
+        var dateComponent = DateComponents()
+        dateComponent.hour = 15
+        dateComponent.minute = 30
+        dateComponent.year = Date().year
+        dateComponent.month = Date().month
+        dateComponent.day = Date().day
+        dateComponent.calendar = Calendar.current
+        
+        return dateComponent
+    }
+    func getSleep() -> DateComponents {
+        var dateComponent = DateComponents()
+        dateComponent.hour = 22
+        dateComponent.minute = 0
+        dateComponent.year = Date().year
+        dateComponent.month = Date().month
+        dateComponent.day = Date().day
+        dateComponent.calendar = Calendar.current
+        
+        return dateComponent
+    }
+
+    
+    func getString() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy HH:mm"
+        return formatter.string(from: self)
+    }
     
     func changeToString() -> String {
         let dateFormat = DateFormatter()
         dateFormat.dateFormat = "HH:mm"
         return dateFormat.string(from: self)
     }
-    
+     
     func startOfTheDay() -> Date {
         var calendar = Calendar.current
         calendar.timeZone = NSTimeZone(forSecondsFromGMT: 0) as TimeZone
@@ -30,6 +117,10 @@ extension Date {
         calendar.timeZone = NSTimeZone.local
         
         return calendar.date(byAdding: components, to: self.startOfTheDay())!
+    }
+    
+    func getComponent() -> DateComponents {
+        return Calendar.current.dateComponents([.hour, .minute], from: self)
     }
     
     func nextDate() -> Date {
@@ -60,16 +151,8 @@ extension Date {
         return Calendar.current.component(.weekOfMonth, from: self)
     }
     
-    var startOfDay: Date {
-        return Calendar.current.startOfDay(for: self)
-    }
-    
-    var endOfDay: Date {
-        var component = DateComponents()
-        component.day = 1
-        component.second = -1
-        
-        return Calendar.current.date(byAdding: component, to: Date().startOfDay)!
+    var day: Int {
+        return Calendar.current.component(.day, from: self)
     }
     
     func add(_ x: Int) -> Date {

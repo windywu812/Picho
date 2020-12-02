@@ -14,8 +14,8 @@ class ProfileViewModel {
     var isSync: Bool = false
     var imageProfile: String = ""
     
-    let secondSectionLabel = ["Gender", "Age", "Height", "Weight"]
-    let thirdSectionLabel = ["Sync to HealthKit", "Notifications"]
+    let secondSectionLabel = [NSLocalizedString("Gender", comment: ""),NSLocalizedString("Age", comment: "") ,NSLocalizedString("Height", comment: ""),NSLocalizedString("Weight", comment: "") ]
+    let thirdSectionLabel = [NSLocalizedString("Sync to HealthKit", comment: ""),NSLocalizedString("Notifications", comment: "") ]
     
     init() {
         fetchUserDefault()
@@ -27,7 +27,10 @@ class ProfileViewModel {
         if value {
             UserDefaultService.isSyncHealthKit = isSync
             HealthKitService.shared.authorization()
+        } else {
+            
         }
+        
     }
     
     func fetchUserDefault() {
@@ -35,26 +38,27 @@ class ProfileViewModel {
         
         secondSection = [
             UserDefaultService.gender,
-            UserDefaultService.age,
-            UserDefaultService.height,
-            UserDefaultService.weight
+            UserDefaultService.age ?? String(0),
+            UserDefaultService.height ?? String(0),
+            UserDefaultService.weight ?? String(0)
         ]
         
         isSync = UserDefaultService.isSyncHealthKit
     }
     
-    func savePic(image: UIImage, key: String) {
+    func savePic(image: UIImage?, key: String) {
+        guard let image = image else { return }
         if let pngRepresentation = image.pngData() {
             UserDefaults.standard.set(pngRepresentation, forKey: key)
         }
     }
     
-    func getPic(forKey key: String) -> UIImage? {
+    func getPic(forKey key: String) -> UIImage {
         if let imageData = UserDefaults.standard.object(forKey: key) as? Data,
             let image = UIImage(data: imageData) {
             return image
         }
-        return nil
+        return UIImage(systemName: "person.circle")!
     }
     
     

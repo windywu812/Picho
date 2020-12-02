@@ -38,7 +38,7 @@ class FormScreen2: UIViewController {
                 heighAnchorConstant: 115, widthAnchorConstant: 95)
         }
         
-        titleLabel.text = "Nice to meet you!"
+        titleLabel.text = NSLocalizedString("Nice to meet you!", comment: "")
         titleLabel.font = UIFont.boldSystemFont(ofSize: 24.0)
         titleLabel.textAlignment = .center
         view.addSubview(titleLabel)
@@ -48,7 +48,7 @@ class FormScreen2: UIViewController {
             leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
             trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
         
-        descLabel.text = "Picho will be your buddy throughout this journey, tell him your name so you can get to know each other!"
+        descLabel.text = NSLocalizedString("Picho will be your buddy throughout this journey, tell him your name so you can get to know each other!", comment: "")
         descLabel.numberOfLines = 0
         descLabel.textAlignment = .center
         view.addSubview(descLabel)
@@ -62,7 +62,7 @@ class FormScreen2: UIViewController {
         nameTextField.layer.borderColor = Color.green.cgColor
         nameTextField.layer.borderWidth = 2.0
         nameTextField.addPadding(padding: .equalSpacing(10))
-        nameTextField.placeholder = "Your Name"
+        nameTextField.placeholder = NSLocalizedString("Your Name", comment: "")
         nameTextField.delegate = self
         view.addSubview(nameTextField)
         
@@ -72,8 +72,9 @@ class FormScreen2: UIViewController {
             trailingAnchor: view.layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: -16,
             heighAnchorConstant: 50)
         
-        getStartedBtn.setTitle("Continue", for: .normal)
-        getStartedBtn.layer.cornerRadius =  6
+        getStartedBtn.setTitle( NSLocalizedString("Continue", comment: "") , for: .normal)
+        getStartedBtn.titleLabel?.font = .boldSystemFont(ofSize: 16)
+        getStartedBtn.layer.cornerRadius =  10
         getStartedBtn.backgroundColor = Color.lightGreen
         getStartedBtn.tintColor = Color.green
         getStartedBtn.isEnabled = false
@@ -136,7 +137,7 @@ extension FormScreen2: UITextFieldDelegate {
         self.activeTextField = textField
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
         guard let text = textField.text else { return }
         if text.isEmpty {
             getStartedBtn.backgroundColor = Color.lightGreen

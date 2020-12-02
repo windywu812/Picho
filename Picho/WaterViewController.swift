@@ -9,17 +9,13 @@
 import UIKit
 import HealthKit
 
-protocol GetDataDelegate {
+protocol WaterDelegate {
     func sendWater(water: Int)
 }
 
 class WaterViewController: UIViewController {
     
-    let detail = """
-    Dehydration cause the buildup of ‘bad’ LDL (low-density lipoprotein) cholesterol in our blood stream and also damage cell walls of arteries.
-
-    Drinking enough water makes it easier for your blood to move in your body. And this will help our body to clear the ‘bad’ cholesterol more quickly!
-    """
+    let detail = NSLocalizedString("Dehydration cause the buildup of ‘bad’ LDL (low-density lipoprotein) cholesterol in our blood stream and also damage cell walls of arteries.Drinking enough water makes it easier for your blood to move in your body. And this will help our body to clear the ‘bad’ cholesterol more quickly!", comment: "")
     
     private var detailLabel: UILabel!
     private var waterLabel: UILabel!
@@ -27,26 +23,39 @@ class WaterViewController: UIViewController {
     private var waterProgress: HorizontalProgressView!
     private var infoLabel: UILabel!
     private var waterCollectionView: UICollectionView!
-    var delegate : GetDataDelegate?
-    private var totalWater: Int = 0
+    private var waters: [WaterIntake] = []
+    
+    var delegate: WaterDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetch()
+        
         setupView()
         setupLayout()
-        
+        fetch()
     }
     
-    @objc private func handleDone() {
-        dismiss(animated: true, completion: nil)
+    private func fetch() {
+        CoreDataService.shared.getWater { waters in
+            self.waters = waters
+            DispatchQueue.main.async {
+                self.waterAmount.setFont(text: "\(waters.count) Cups", size: 34, weight: .bold)
+                self.waterProgress.setProgress(progress: waters.count)
+                if waters.count > 5 {
+                    self.infoLabel.setFont(text:NSLocalizedString("Good", comment: ""), weight: .bold, color: Color.green)
+                } else {
+                    self.infoLabel.setFont(text: NSLocalizedString("Need more water", comment: "") , weight: .bold, color: Color.red)
+                }
+            }
+        }
+        
+        waterCollectionView.reloadData()
     }
     
     private func setupView() {
         
-        
         navigationItem.title = "Water"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(handleDone))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done", comment: "") , style: .done, target: self, action: #selector(handleDone))
         view.backgroundColor = Color.background
         
         detailLabel = UILabel()
@@ -55,23 +64,17 @@ class WaterViewController: UIViewController {
         view.addSubview(detailLabel)
         
         waterLabel = UILabel()
-        waterLabel.setFont(text: "Water Intake", weight: .bold)
+        waterLabel.setFont(text: NSLocalizedString("Water Intake", comment: "") , weight: .bold)
         view.addSubview(waterLabel)
         
         waterAmount = UILabel()
-        
-        
-        waterAmount.setFont(text: "\(totalWater) Cups", size: 34, weight: .bold)
-        
         view.addSubview(waterAmount)
         
-        waterProgress = HorizontalProgressView(progress: totalWater)
+        waterProgress = HorizontalProgressView()
         view.addSubview(waterProgress)
         
         infoLabel = UILabel()
-        
-        infoLabel.setFont(text: "Need more water", size: 17, weight: .bold, color: Color.red)
-        
+        infoLabel.setFont(text: NSLocalizedString("Need more water", comment: "") , weight: .bold, color: Color.red)
         view.addSubview(infoLabel)
         
         let layout = UICollectionViewFlowLayout()
@@ -116,27 +119,16 @@ class WaterViewController: UIViewController {
             bottomAnchor: view.safeAreaLayoutGuide.bottomAnchor, bottomAnchorConstant: -32,
             leadingAnchor: view.layoutMarginsGuide.leadingAnchor,
             trailingAnchor: view.layoutMarginsGuide.trailingAnchor)
-        
     }
-    func fetch(){
-        HealthKitService.shared.fetchWater { (glassIntake) in
-            self.totalWater = Int(glassIntake)
-            
-            self.delegate?.sendWater(water: Int(glassIntake))
-            
-            DispatchQueue.main.async { [self] in
-                self.waterAmount.text = "\(totalWater) Cups"
-                self.waterProgress.setProgress(progress: totalWater)
-                if totalWater > 5 {
-                    self.infoLabel.setFont(text: "Good", size: 17, weight: .bold, color: Color.green)
-                }
-            }
-        }
+    
+    @objc private func handleDone() {
+        delegate?.sendWater(water: waters.count)
+        dismiss(animated: true, completion: nil)
     }
+    
 }
 
 extension WaterViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 14
@@ -145,62 +137,42 @@ extension WaterViewController: UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WaterCell.reuseIdentifier, for: indexPath) as! WaterCell
         
-        
-        if indexPath.row < totalWater {
+        if indexPath.row < waters.count {
             cell.image = UIImage(named: "glass_fill")
-        }else{
+            cell.idCoreData = waters[indexPath.row].id
+            cell.idHealthKit = waters[indexPath.row].idWater
+        } else {
             cell.image = UIImage(named: "glass_empty")
-            
+            cell.idCoreData = nil
+            cell.idHealthKit = nil
         }
-        
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) as? WaterCell {
-            if cell.image == UIImage(named: "glass_fill") {
-                cell.isUserInteractionEnabled = false
-                
-            } else {
-                HealthKitService.shared.addData(sugar: Double(1) , date: Date(), type: .dietaryWater, unit: HKUnit.cupUS())
-                cell.image = UIImage(named: "glass_fill")
-                totalWater += 1
-                waterAmount.text = "\(totalWater) Cups"
-                waterProgress.setProgress(progress: totalWater)
-            }
+        
+        let cell = collectionView.cellForItem(at: indexPath) as! WaterCell
+        
+        if cell.image == UIImage(named: "glass_fill") {
+            
+            guard let idCoreData = waters[indexPath.row].id,
+                  let idHealhKit = waters[indexPath.row].idWater
+            else { return }
+            
+            CoreDataService.shared.deleteWater(id: idCoreData)
+            HealthKitService.shared.deleteHealthData(id: idHealhKit, type: .dietaryWater, unit: .cupUS())
+            cell.image = UIImage(named: "glass_empty")
+            
+        } else {
+            let water = HealthKitService.shared.addData(amount: 1, date: Date(), type: .dietaryWater, unit: HKUnit.cupUS())
+            
+            CoreDataService.shared.addWater(id: UUID(), waterId: water)
+            cell.image = UIImage(named: "glass_fill")
         }
+        
+        fetch()
     }
     
 }
 
-class WaterCell: UICollectionViewCell {
-    
-    static let reuseIdentifier = "WaterCell"
-    
-    var image: UIImage? {
-        didSet { imageView.image = image }
-    }
-    
-    private let imageView: UIImageView
-    
-    override init(frame: CGRect) {
-        
-        imageView = UIImageView()
-        
-        super.init(frame: frame)
-        
-        imageView.contentMode = .scaleAspectFit
-        addSubview(imageView)
-        imageView.setConstraint(
-            topAnchor: topAnchor,
-            bottomAnchor: bottomAnchor,
-            leadingAnchor: leadingAnchor,
-            trailingAnchor: trailingAnchor)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-}

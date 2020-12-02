@@ -9,23 +9,23 @@ import UIKit
 import Charts
 
 protocol ChartSeletedDelegate {
-    func selectedChart(month: Int, week: Int)
+    func selectedChart(week: Int)
     func sendDate(date: (Int, Int))
 }
 
 class ChartView: UIView, ChartViewDelegate {
     
-    var viewModel: HistoryViewModel?
     var lineChartView: LineChartView!
     var timeRangeLabel: UITextField!
     var dataWeekPerMonth: [Int?: [DailyIntake]] = [:]
     var delegate: ChartSeletedDelegate?
-    
-    private var selectedMonth = Date().month
 
-    func setupChartData() {
+    func setupChartData(dataWeekPerMonth: [Int?: [DailyIntake]]) {
         
-        let sugarEntry = (0..<dataWeekPerMonth.keys.count).map { (week) -> ChartDataEntry in
+        guard let greatest = dataWeekPerMonth.keys.max(by: { ($0 ?? 0) < ($1 ?? 0) }) else { return }
+        guard let max = greatest else { return }
+        
+        let sugarEntry = (0..<max).map { (week) -> ChartDataEntry in
             return ChartDataEntry(
                 x: Double(week),
                 y: Double(dataWeekPerMonth[week + 1]?.getAverage(of: .sugar) ?? 0))
@@ -40,7 +40,7 @@ class ChartView: UIView, ChartViewDelegate {
         sugarData.drawValuesEnabled = false
         sugarData.highlightColor = Color.green
         
-        let satFatEntry = (0..<dataWeekPerMonth.keys.count).map { (week) -> ChartDataEntry in
+        let satFatEntry = (0..<max).map { (week) -> ChartDataEntry in
             return ChartDataEntry(
                 x: Double(week),
                 y: Double(dataWeekPerMonth[week + 1]?.getAverage(of: .satFat) ?? 0))
@@ -55,7 +55,7 @@ class ChartView: UIView, ChartViewDelegate {
         satFatData.drawValuesEnabled = false
         satFatData.highlightColor = Color.yellow
         
-        let axisValue = (0..<dataWeekPerMonth.keys.count).map { (week) -> String in
+        let axisValue = (0..<max).map { (week) -> String in
             return "w\(week + 1)"
         }
         
@@ -83,9 +83,13 @@ class ChartView: UIView, ChartViewDelegate {
         timeRangeLabel.layer.borderColor = Color.green.cgColor
         timeRangeLabel.textAlignment = .center
         timeRangeLabel.layer.cornerRadius = 8
+        timeRangeLabel.tintColor = .clear
         
         let datePicker = CustomDatePicker()
         timeRangeLabel.inputView = datePicker
+        datePicker.selectRow(Date().month, inComponent: 0, animated: true)
+        print(datePicker.selectedRow(inComponent: 0))
+        
         NotificationCenter.default.addObserver(self, selector: #selector(handleDate(notification:)), name: .dateChanged, object: nil)
         addSubview(timeRangeLabel)
         
@@ -127,77 +131,14 @@ class ChartView: UIView, ChartViewDelegate {
         
         timeRangeLabel.text = "\(data.0) \(data.1)"
         delegate?.sendDate(date: (data.0.convertIntToMonth(), data.1))
-        
-        selectedMonth = data.0.convertIntToMonth()
     }
     
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
-
-        delegate?.selectedChart(month: selectedMonth, week: Int(entry.x))
+        delegate?.selectedChart(week: Int(entry.x))
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-}
-
-class CustomDatePicker: UIPickerView {
-    
-    private var months: [String] = []
-    private var years: [Int] = []
-    private var date: (String, Int) = ("January", 2020)
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        delegate = self
-        dataSource = self
-        
-        months = Calendar.current.monthSymbols
-        for year in 2020...2100 {
-            years.append(year)
-        }
-        
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-}
-
-extension CustomDatePicker: UIPickerViewDelegate, UIPickerViewDataSource {
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
-        if component == 0 {
-            date.0 = months[row]
-        } else {
-            date.1 = years[row]
-        }
-        
-        NotificationCenter.default.post(name: .dateChanged, object: date)
-    }
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 2
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if component == 0 {
-            return months.count
-        } else {
-            return years.count
-        }
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if component == 0 {
-            return months[row]
-        } else {
-            return String(years[row])
-        }
     }
     
 }

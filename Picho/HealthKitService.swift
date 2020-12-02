@@ -24,8 +24,7 @@ class HealthKitService {
         HKQuantityType.quantityType(forIdentifier: .dietaryFatSaturated)!,
         HKQuantityType.quantityType(forIdentifier: .dietarySugar)!,
         HKQuantityType.quantityType(forIdentifier: .dietaryEnergyConsumed)!,
-        HKQuantityType.quantityType(forIdentifier: .dietaryWater)!,
-        HKObjectType.quantityType(forIdentifier: .stepCount)!
+        HKQuantityType.quantityType(forIdentifier: .dietaryWater)!
     ]
     
     func authorization() {
@@ -35,26 +34,27 @@ class HealthKitService {
             return
         }
         
-        healthStore.requestAuthorization(toShare: healthKitTypesToWrite, read: HealthKitTypesToRead){ (success, error) in
+        healthStore.requestAuthorization(toShare: healthKitTypesToWrite, read: HealthKitTypesToRead) { (success, error) in
             if !success {
-                print("error")
+                print(error!.localizedDescription)
             } else {
-                print("Success")
+                print(success)
             }
         }
         
     }
     
-     func addData(sugar: Double,
-                            date: Date,
-                            type: HKQuantityTypeIdentifier,
-                            unit: HKUnit) {
+    func addData(amount: Double = 0.0,
+                  date: Date,
+                  type: HKQuantityTypeIdentifier,
+                  unit: HKUnit
+    ) -> UUID {
         
         guard let dietType = HKQuantityType.quantityType(forIdentifier: type) else {
             fatalError("Error")
         }
         
-        let dietQuantity = HKQuantity(unit: unit, doubleValue: sugar)
+        let dietQuantity = HKQuantity(unit: unit, doubleValue: amount)
         let dietSample = HKQuantitySample(type: dietType, quantity: dietQuantity, start: date, end: date)
         
         HKHealthStore().save(dietSample) { (success, error) in
@@ -64,6 +64,7 @@ class HealthKitService {
                 print("Successfully saved")
             }
         }
+        return dietSample.uuid
     }
     
      func fetchCalorie(completion: @escaping (Double) -> Void) {
@@ -185,6 +186,52 @@ class HealthKitService {
         }
         
         HKHealthStore().execute(query)
+    }
+    
+    func fetchHealthKitSample(for healthSampleType: HKSampleType, withPredicate predicate: NSPredicate, completion: @escaping (HKSample?, Error?) -> Swift.Void) {
+        
+        let query = HKSampleQuery(sampleType: healthSampleType, predicate: predicate, limit: 1, sortDescriptors: nil) { (query, samples, error) in
+            
+            if let error = error {
+                // Handler error
+                completion(nil,error)
+            } else {
+                
+                guard let fetchedObject = samples?.first else {
+                    // Handler unexisting object
+                    completion(nil,nil)
+                    return
+                }
+                completion(fetchedObject,nil)
+            }
+        }
+        healthStore.execute(query)
+    }
+    
+    func deleteHealthData(id: UUID, type: HKQuantityTypeIdentifier, unit: HKUnit) {
+                
+        guard let healthType = HKQuantityType.quantityType(forIdentifier: type),
+              let id = UUID(uuidString: id.uuidString)
+        else {return}
+        
+        let predicate = HKQuery.predicateForObject(with: id)
+        
+        self.fetchHealthKitSample(for: healthType, withPredicate: predicate) { (fetchedObject, error) in
+            if let error = error {
+                print("error:\(error)")
+            } else {
+                guard let unwrappedFetchedObject = fetchedObject else {
+                    return
+                }
+                self.healthStore.delete(unwrappedFetchedObject, withCompletion: { (success, error) in
+                    if let error = error {
+                        print(error)
+                    } else {
+                        print("\n to be deleted: \(unwrappedFetchedObject.uuid) \n")
+                    }
+                })
+            }
+        }
     }
     
     func checkAuthorization() -> Bool {
