@@ -6,24 +6,19 @@
 //
 //
 
-import Foundation
 import CoreData
+import Foundation
 
-
-extension Favorite {
-
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Favorite> {
+public extension Favorite {
+    @nonobjc class func fetchRequest() -> NSFetchRequest<Favorite> {
         return NSFetchRequest<Favorite>(entityName: "Favorite")
     }
 
-    @NSManaged public var id: String?
-    @NSManaged public var name: String?
-    @NSManaged public var satFat: Double
-    @NSManaged public var calorie: Double
-    @NSManaged public var sugar: Double
-
+    @NSManaged var id: String?
+    @NSManaged var name: String?
+    @NSManaged var satFat: Double
+    @NSManaged var calorie: Double
+    @NSManaged var sugar: Double
 }
 
-extension Favorite : Identifiable {
-
-}
+extension Favorite: Identifiable {}

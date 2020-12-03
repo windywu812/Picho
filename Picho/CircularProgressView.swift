@@ -8,24 +8,24 @@
 import UIKit
 
 class CircularProgressView: UIView {
-    
     private let shapeLayer: CAShapeLayer
     private let calorieLabel: UILabel
-    
+
     func animate(value: Float, total: Float) {
-        
         if value < 0 {
             calorieLabel.setFont(
                 text: "\(-Int(value - total))", size: 28,
                 weight: .bold,
-                color: Color.green)
+                color: Color.green
+            )
         } else {
             calorieLabel.setFont(
                 text: "\(Int(value))", size: 28,
                 weight: .bold,
-                color: Color.green)
+                color: Color.green
+            )
         }
-        
+
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         animation.fromValue = 0
         animation.toValue = (total - value) / total
@@ -34,19 +34,19 @@ class CircularProgressView: UIView {
         animation.isRemovedOnCompletion = false
         shapeLayer.add(animation, forKey: "progressAnimation")
     }
-    
+
     override init(frame: CGRect) {
-        
         shapeLayer = CAShapeLayer()
         calorieLabel = UILabel()
-        
+
         super.init(frame: frame)
-         
+
         let label = UILabel()
         label.setFont(
             text: "Cal left",
-            size: 15)
-        
+            size: 15
+        )
+
         let mainStack = UIStackView(arrangedSubviews: [calorieLabel, label])
         mainStack.axis = .vertical
         mainStack.alignment = .center
@@ -54,19 +54,21 @@ class CircularProgressView: UIView {
 
         mainStack.setConstraint(
             centerXAnchor: centerXAnchor,
-            centerYAnchor: centerYAnchor)
-        
+            centerYAnchor: centerYAnchor
+        )
+
         setupLayer()
     }
-    
+
     private func setupLayer() {
         let circularPath = UIBezierPath(
             arcCenter: CGPoint(x: 50, y: 50),
             radius: 55,
             startAngle: -.pi / 2,
             endAngle: 3 * .pi / 2,
-            clockwise: true)
-        
+            clockwise: true
+        )
+
         let trackLayer = CAShapeLayer()
         trackLayer.path = circularPath.cgPath
         trackLayer.fillColor = UIColor.clear.cgColor
@@ -74,7 +76,7 @@ class CircularProgressView: UIView {
         trackLayer.strokeColor = Color.grey.cgColor
         trackLayer.lineWidth = 8
         layer.addSublayer(trackLayer)
-        
+
         shapeLayer.lineCap = .round
         shapeLayer.path = circularPath.cgPath
         shapeLayer.strokeColor = Color.green.cgColor
@@ -83,9 +85,9 @@ class CircularProgressView: UIView {
         shapeLayer.fillColor = UIColor.clear.cgColor
         layer.addSublayer(shapeLayer)
     }
-    
-    required init?(coder: NSCoder) {
+
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }

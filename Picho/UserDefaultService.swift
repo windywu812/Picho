@@ -8,20 +8,19 @@
 import Foundation
 
 class UserDefaultService {
-    
-    static private let hasLaunchKey = "hasLaunchKey"
-    static private let nameKey = "nameKey"
-    static private let genderKey = "genderKey"
-    static private let ageKey = "ageKey"
-    static private let heightKey = "heightKey"
-    static private let weightKey = "weightKey"
-    static private let isSyncHealthKitKey = "isSyncHealthKitKey"
-    static private let hasBreakfastKey = "hasBreakfastKey"
-    static private let hasLunchKey = "hasLunchKey"
-    static private let hasDinnerKey = "hasDinnerKey"
-    static private let currentDateKey = "currentDateKey"
+    private static let hasLaunchKey = "hasLaunchKey"
+    private static let nameKey = "nameKey"
+    private static let genderKey = "genderKey"
+    private static let ageKey = "ageKey"
+    private static let heightKey = "heightKey"
+    private static let weightKey = "weightKey"
+    private static let isSyncHealthKitKey = "isSyncHealthKitKey"
+    private static let hasBreakfastKey = "hasBreakfastKey"
+    private static let hasLunchKey = "hasLunchKey"
+    private static let hasDinnerKey = "hasDinnerKey"
+    private static let currentDateKey = "currentDateKey"
     static let photoProfileKey = "photoKey"
- 
+
     static var hasLaunched: Bool {
         get {
             return UserDefaults.standard.bool(forKey: hasLaunchKey)
@@ -30,7 +29,7 @@ class UserDefaultService {
             UserDefaults.standard.set(newValue, forKey: hasLaunchKey)
         }
     }
-    
+
     static var name: String {
         get {
             return UserDefaults.standard.string(forKey: nameKey) ?? ""
@@ -39,7 +38,7 @@ class UserDefaultService {
             UserDefaults.standard.set(newValue, forKey: nameKey)
         }
     }
-    
+
     static var gender: String {
         get {
             return UserDefaults.standard.string(forKey: genderKey) ?? ""
@@ -48,7 +47,7 @@ class UserDefaultService {
             UserDefaults.standard.set(newValue, forKey: genderKey)
         }
     }
-    
+
     static var age: String? {
         get {
             return UserDefaults.standard.string(forKey: ageKey) ?? "0"
@@ -57,7 +56,7 @@ class UserDefaultService {
             UserDefaults.standard.set(newValue, forKey: ageKey)
         }
     }
-    
+
     static var height: String? {
         get {
             return UserDefaults.standard.string(forKey: heightKey) ?? "0"
@@ -66,7 +65,7 @@ class UserDefaultService {
             UserDefaults.standard.set(newValue, forKey: heightKey)
         }
     }
-    
+
     static var weight: String? {
         get {
             return UserDefaults.standard.string(forKey: weightKey) ?? "0"
@@ -75,7 +74,7 @@ class UserDefaultService {
             UserDefaults.standard.set(newValue, forKey: weightKey)
         }
     }
-    
+
     static var isSyncHealthKit: Bool {
         get {
             return UserDefaults.standard.bool(forKey: isSyncHealthKitKey)
@@ -84,7 +83,7 @@ class UserDefaultService {
             UserDefaults.standard.set(newValue, forKey: isSyncHealthKitKey)
         }
     }
-    
+
     static var hasBreakfast: Bool {
         get {
             return UserDefaults.standard.bool(forKey: hasBreakfastKey)
@@ -93,7 +92,7 @@ class UserDefaultService {
             UserDefaults.standard.set(newValue, forKey: hasBreakfastKey)
         }
     }
-    
+
     static var hasLunch: Bool {
         get {
             return UserDefaults.standard.bool(forKey: hasLunchKey)
@@ -102,7 +101,7 @@ class UserDefaultService {
             UserDefaults.standard.set(newValue, forKey: hasLunchKey)
         }
     }
-    
+
     static var hasDinner: Bool {
         get {
             return UserDefaults.standard.bool(forKey: hasDinnerKey)
@@ -111,7 +110,7 @@ class UserDefaultService {
             UserDefaults.standard.set(newValue, forKey: hasDinnerKey)
         }
     }
-    
+
     static var currentDate: String {
         get {
             return UserDefaults.standard.string(forKey: currentDateKey) ?? ""
@@ -120,15 +119,14 @@ class UserDefaultService {
             UserDefaults.standard.set(newValue, forKey: currentDateKey)
         }
     }
-    
+
     static func resetDay() {
         UserDefaultService.hasBreakfast = false
         UserDefaultService.hasLunch = false
         UserDefaultService.hasDinner = false
     }
-    
+
     static func synchronize() {
         UserDefaults.standard.synchronize()
     }
-    
 }

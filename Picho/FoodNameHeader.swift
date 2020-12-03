@@ -8,12 +8,11 @@
 import UIKit
 
 class FoodNameHeader: UIView {
-    
     let nameLabel = UILabel()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         nameLabel.setFont(text: "", size: 28, weight: .bold)
         nameLabel.numberOfLines = 0
         addSubview(nameLabel)
@@ -21,20 +20,20 @@ class FoodNameHeader: UIView {
             topAnchor: topAnchor, topAnchorConstant: 16,
             bottomAnchor: bottomAnchor, bottomAnchorConstant: -16,
             leadingAnchor: layoutMarginsGuide.leadingAnchor, leadingAnchorConstant: 10,
-            trailingAnchor: layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: -10)
+            trailingAnchor: layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: -10
+        )
     }
-    
-    required init?(coder: NSCoder) {
+
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
 
 class SourceFooter: UIView {
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         let label = UILabel()
         label.setFont(text: "© IDNmedis.com", size: 15)
         label.textAlignment = .right
@@ -42,14 +41,12 @@ class SourceFooter: UIView {
         label.setConstraint(
             topAnchor: topAnchor, topAnchorConstant: 16,
             bottomAnchor: bottomAnchor, bottomAnchorConstant: -16,
-            trailingAnchor: layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: -10)
+            trailingAnchor: layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: -10
+        )
     }
-    
-    required init?(coder: NSCoder) {
+
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
-
-
-

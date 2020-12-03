@@ -8,15 +8,13 @@
 import UIKit
 
 extension UILabel {
-    
     func setFont(text: String,
                  size: CGFloat = 17,
                  weight: UIFont.Weight = .regular,
-                 color: UIColor = .label
-    ) {
-        self.font = .systemFont(ofSize: size, weight: weight)
+                 color: UIColor = .label)
+    {
+        font = .systemFont(ofSize: size, weight: weight)
         self.text = text
-        self.textColor = color
+        textColor = color
     }
-    
 }

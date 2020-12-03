@@ -6,30 +6,25 @@
 //
 //
 
-import Foundation
 import CoreData
+import Foundation
 
-
-extension DailyIntake {
-
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<DailyIntake> {
+public extension DailyIntake {
+    @nonobjc class func fetchRequest() -> NSFetchRequest<DailyIntake> {
         return NSFetchRequest<DailyIntake>(entityName: "DailyIntake")
     }
 
-    @NSManaged public var calorie: Double
-    @NSManaged public var date: Date?
-    @NSManaged public var foodId: String?
-    @NSManaged public var id: UUID?
-    @NSManaged public var name: String?
-    @NSManaged public var saturatedFat: Double
-    @NSManaged public var sugars: Double
-    @NSManaged public var time: String?
-    @NSManaged public var idSugar:UUID?
-    @NSManaged public var idSatFat:UUID?
-    @NSManaged public var idCalorie:UUID?
-
+    @NSManaged var calorie: Double
+    @NSManaged var date: Date?
+    @NSManaged var foodId: String?
+    @NSManaged var id: UUID?
+    @NSManaged var name: String?
+    @NSManaged var saturatedFat: Double
+    @NSManaged var sugars: Double
+    @NSManaged var time: String?
+    @NSManaged var idSugar: UUID?
+    @NSManaged var idSatFat: UUID?
+    @NSManaged var idCalorie: UUID?
 }
 
-extension DailyIntake : Identifiable {
-
-}
+extension DailyIntake: Identifiable {}

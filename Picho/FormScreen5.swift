@@ -8,54 +8,57 @@
 import UIKit
 
 class FormScreen5: UIViewController {
-    
     private var isChecked = false
     private var getStartedBtn: UIButton!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Color.background
-        
+
         let imageview = UIImageView()
         imageview.contentMode = .scaleToFill
         imageview.image = UIImage(named: "mascot")
         view.addSubview(imageview)
-        
+
         if UIScreen.main.bounds.height < 700 {
             imageview.setConstraint(
                 topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 16,
                 centerXAnchor: view.centerXAnchor,
-                heighAnchorConstant: 115, widthAnchorConstant: 95)
+                heighAnchorConstant: 115, widthAnchorConstant: 95
+            )
         } else {
             imageview.setConstraint(
                 topAnchor: view.safeAreaLayoutGuide.topAnchor, topAnchorConstant: 80,
                 centerXAnchor: view.centerXAnchor,
-                heighAnchorConstant: 115, widthAnchorConstant: 95)
+                heighAnchorConstant: 115, widthAnchorConstant: 95
+            )
         }
-       
+
         let label1 = UILabel()
         label1.text = NSLocalizedString("Awesome!", comment: "")
         label1.font = UIFont.boldSystemFont(ofSize: 24.0)
         label1.textAlignment = .center
         view.addSubview(label1)
-        
+
         label1.setConstraint(
             topAnchor: imageview.bottomAnchor, topAnchorConstant: 24,
             leadingAnchor: view.layoutMarginsGuide.leadingAnchor, leadingAnchorConstant: 16,
-            trailingAnchor: view.layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: -16)
-        
+            trailingAnchor: view.layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: -16
+        )
+
         let label2 = UILabel()
         label2.text = NSLocalizedString("Before we proceed further, Picho wanted to remind you...", comment: "")
         label2.numberOfLines = 0
         label2.textAlignment = .center
         label2.font = UIFont.systemFont(ofSize: 20)
         view.addSubview(label2)
-        
+
         label2.setConstraint(
             topAnchor: label1.bottomAnchor, topAnchorConstant: 24,
             leadingAnchor: view.layoutMarginsGuide.leadingAnchor, leadingAnchorConstant: 16,
-            trailingAnchor: view.layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: -16)
-        
+            trailingAnchor: view.layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: -16
+        )
+
         let label3 = UILabel()
         label3.numberOfLines = 0
         label3.textAlignment = .center
@@ -64,51 +67,54 @@ class FormScreen5: UIViewController {
         paragraphStyle.lineSpacing = 6
         paragraphStyle.alignment = .center
         attr.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attr.length))
-        label3.attributedText = attr;
-        
+        label3.attributedText = attr
+
         view.addSubview(label3)
         label3.setConstraint(
             topAnchor: label2.bottomAnchor, topAnchorConstant: 24,
             leadingAnchor: view.layoutMarginsGuide.leadingAnchor, leadingAnchorConstant: 16,
-            trailingAnchor: view.layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: -16)
-        
+            trailingAnchor: view.layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: -16
+        )
+
         let agreementLabel = UILabel()
-        agreementLabel.setFont(text: NSLocalizedString("I have read and I agreed with that.", comment: "") , size: 16)
+        agreementLabel.setFont(text: NSLocalizedString("I have read and I agreed with that.", comment: ""), size: 16)
         agreementLabel.numberOfLines = 0
-        
+
         let checkBox = UIButton()
         checkBox.setImage(UIImage(systemName: "circle"), for: .normal)
         checkBox.setConstraint(heighAnchorConstant: 21, widthAnchorConstant: 21)
-        checkBox.addTarget(self, action: #selector(self.handleCheckBox(sender:)), for: .touchUpInside)
-        
+        checkBox.addTarget(self, action: #selector(handleCheckBox(sender:)), for: .touchUpInside)
+
         let stackAgreement = UIStackView(arrangedSubviews: [checkBox, agreementLabel])
-    
+
         stackAgreement.spacing = 4
-        
+
         view.addSubview(stackAgreement)
         stackAgreement.setConstraint(
             topAnchor: label3.bottomAnchor, topAnchorConstant: 24,
             leadingAnchor: view.layoutMarginsGuide.leadingAnchor, leadingAnchorConstant: 40,
             trailingAnchor: view.layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: -16,
-            heighAnchorConstant: 60)
-        
+            heighAnchorConstant: 60
+        )
+
         getStartedBtn = UIButton()
         getStartedBtn.setTitle("Continue", for: .normal)
         getStartedBtn.titleLabel?.font = .boldSystemFont(ofSize: 16)
         getStartedBtn.isEnabled = false
-        getStartedBtn.layer.cornerRadius =  10
+        getStartedBtn.layer.cornerRadius = 10
         getStartedBtn.backgroundColor = Color.lightGreen
         getStartedBtn.tintColor = Color.green
         getStartedBtn.addTarget(self, action: #selector(handleSave), for: .touchUpInside)
-        
+
         view.addSubview(getStartedBtn)
         getStartedBtn.setConstraint(
             bottomAnchor: view.safeAreaLayoutGuide.bottomAnchor, bottomAnchorConstant: -32,
             leadingAnchor: view.layoutMarginsGuide.leadingAnchor, leadingAnchorConstant: 16,
             trailingAnchor: view.layoutMarginsGuide.trailingAnchor, trailingAnchorConstant: -16,
-            heighAnchorConstant: 50)
+            heighAnchorConstant: 50
+        )
     }
-    
+
     @objc private func handleCheckBox(sender: UIButton) {
         isChecked.toggle()
         if isChecked {
@@ -116,23 +122,19 @@ class FormScreen5: UIViewController {
             getStartedBtn.backgroundColor = Color.green
             getStartedBtn.tintColor = .white
             getStartedBtn.isEnabled = true
-        } else{
+        } else {
             sender.setImage(UIImage(systemName: "circle"), for: .normal)
             getStartedBtn.backgroundColor = Color.lightGreen
             getStartedBtn.tintColor = Color.green
             getStartedBtn.isEnabled = false
         }
     }
-    
+
     @objc private func handleSave() {
         let vc = TabBarController()
         vc.modalPresentationStyle = .fullScreen
         UserDefaultService.hasLaunched = true
         HealthKitService.shared.authorization()
         present(vc, animated: true, completion: nil)
- 
-        return
     }
-    
 }
-

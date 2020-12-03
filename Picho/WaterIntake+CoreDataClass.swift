@@ -6,10 +6,8 @@
 //
 //
 
-import Foundation
 import CoreData
+import Foundation
 
 @objc(WaterIntake)
-public class WaterIntake: NSManagedObject {
-
-}
+public class WaterIntake: NSManagedObject {}

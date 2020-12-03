@@ -13,18 +13,17 @@ struct BaseAPI {
 }
 
 enum Endpoints {
-    
     case getAllFood
     case getDetail(Int)
     case searchFood(String)
-    
+
     var url: String {
         switch self {
         case .getAllFood:
             return "\(BaseAPI.baseURL)\(BaseAPI.apiKey)"
-        case .getDetail(let idFood):
+        case let .getDetail(idFood):
             return "\(BaseAPI.baseURL)\(BaseAPI.apiKey)/\(idFood)/food"
-        case .searchFood(let keyword):
+        case let .searchFood(keyword):
             return "\(BaseAPI.baseURL)\(BaseAPI.apiKey)/search?q=\(keyword)"
         }
     }

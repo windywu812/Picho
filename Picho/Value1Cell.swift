@@ -14,14 +14,13 @@ enum Type {
 }
 
 class Value1Cell: UITableViewCell {
-    
     static let reuseIdentifier = "Value1Cell"
-    
+
     private var calorieIntake = 0.0
     private var saturatedFatIntake = 0.0
     private var sugarIntake = 0.0
     private var indicatorImage: UIImageView?
-    
+
     func setupView(type: Type, amount: Double) {
         switch type {
         case .calorie:
@@ -44,7 +43,7 @@ class Value1Cell: UITableViewCell {
             setupIndicator(percentage: percentage)
         }
     }
-    
+
     private func setupIndicator(percentage: Double) {
         if percentage > 20 {
             indicatorImage?.image = UIImage(named: "red_indicator")
@@ -54,12 +53,12 @@ class Value1Cell: UITableViewCell {
             indicatorImage?.image = UIImage(named: "green_indicator")
         }
     }
-    
+
     private func countCalorie() {
         let age = Double(UserDefaultService.age ?? "0") ?? 0.0
         let weight = Double(UserDefaultService.weight ?? "0") ?? 0.0
         let height = Double(UserDefaultService.height ?? "0") ?? 0.0
-        
+
         if UserDefaultService.gender == "Male" {
             calorieIntake = (10 * weight + 6.25 * height - 5 * age) + 5
             saturatedFatIntake = (calorieIntake / 10) / 9
@@ -71,17 +70,16 @@ class Value1Cell: UITableViewCell {
         }
     }
 
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    override init(style _: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .value1, reuseIdentifier: reuseIdentifier)
-    
+
         indicatorImage = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: 22, height: 22)))
         accessoryView = indicatorImage
         countCalorie()
-        
     }
-    
-    required init?(coder: NSCoder) {
+
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }

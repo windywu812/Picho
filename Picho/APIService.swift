@@ -8,24 +8,21 @@
 import Foundation
 
 class APIService {
-    
-    static func fetchApi<T: Decodable>(with endpoint: Endpoints, response: T.Type, completion: @escaping (Result<T, Error>) -> ()) {
-        
+    static func fetchApi<T: Decodable>(with endpoint: Endpoints, response _: T.Type, completion: @escaping (Result<T, Error>) -> Void) {
         guard let urlString = URL(string: endpoint.url) else { return }
-        
-        URLSession.shared.dataTask(with: urlString) { (data, response, error) in
-            if error != nil { print(error!.localizedDescription)}
-            
+
+        URLSession.shared.dataTask(with: urlString) { data, _, error in
+            if error != nil { print(error!.localizedDescription) }
+
             guard let data = data else { return }
-            
+
             do {
                 let response = try JSONDecoder().decode(T.self, from: data)
                 completion(.success(response))
             } catch let err {
                 completion(.failure(err))
             }
-            
+
         }.resume()
     }
-    
 }

@@ -8,65 +8,60 @@
 import UIKit
 
 extension UITextField {
-    
     enum PaddingSpace {
         case left(CGFloat)
         case right(CGFloat)
         case equalSpacing(CGFloat)
     }
-    
+
     func addPadding(padding: PaddingSpace) {
-        
-        self.leftViewMode = .always
-        self.layer.masksToBounds = true
-        
+        leftViewMode = .always
+        layer.masksToBounds = true
+
         switch padding {
-        
-        case .left(let spacing):
-            let leftPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: spacing, height: self.frame.height))
-            self.leftView = leftPaddingView
-            self.leftViewMode = .always
-            
-        case .right(let spacing):
-            let rightPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: spacing, height: self.frame.height))
-            self.rightView = rightPaddingView
-            self.rightViewMode = .always
-            
-        case .equalSpacing(let spacing):
-            let equalPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: spacing, height: self.frame.height))
+        case let .left(spacing):
+            let leftPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: spacing, height: frame.height))
+            leftView = leftPaddingView
+            leftViewMode = .always
+
+        case let .right(spacing):
+            let rightPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: spacing, height: frame.height))
+            rightView = rightPaddingView
+            rightViewMode = .always
+
+        case let .equalSpacing(spacing):
+            let equalPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: spacing, height: frame.height))
             // left
-            self.leftView = equalPaddingView
-            self.leftViewMode = .always
+            leftView = equalPaddingView
+            leftViewMode = .always
             // right
-            self.rightView = equalPaddingView
-            self.rightViewMode = .always
+            rightView = equalPaddingView
+            rightViewMode = .always
         }
     }
-    
+
     func addStyle(tag: Int, text: String, datePicker: UIDatePicker) {
         self.tag = tag
         self.text = text
-        self.layer.cornerRadius = 5.0
-        self.layer.borderColor = Color.green.cgColor
-        self.layer.borderWidth = 2.0
-        self.textAlignment = .center
-        self.inputView = datePicker
-        self.tintColor = .clear
-        self.addPadding(padding: .equalSpacing(5))
+        layer.cornerRadius = 5.0
+        layer.borderColor = Color.green.cgColor
+        layer.borderWidth = 2.0
+        textAlignment = .center
+        inputView = datePicker
+        tintColor = .clear
+        addPadding(padding: .equalSpacing(5))
     }
-    
+
     func removeBorder(tag: Int, text: String) {
         self.tag = tag
         self.text = text
-        self.textAlignment = .right
-        self.borderStyle = .none
-        self.keyboardType = .numberPad
+        textAlignment = .right
+        borderStyle = .none
+        keyboardType = .numberPad
     }
-    
 }
 
 extension UIDatePicker {
-    
     func setupStyle(tag: Int) {
         self.tag = tag
         if #available(iOS 13.4, *) {
@@ -76,5 +71,4 @@ extension UIDatePicker {
             // Fallback on earlier versions
         }
     }
-    
 }

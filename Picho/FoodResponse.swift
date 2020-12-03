@@ -27,7 +27,7 @@ struct FoodDetail: Decodable {
     var calcium: Double
     var vitaminC: Double
     var iron: Double
-    
+
     private enum CodingKeys: String, CodingKey {
         case foodId = "id"
         case nameId = "name_id"
@@ -43,7 +43,7 @@ struct FoodDetail: Decodable {
              sodium, fiber, sugar,
              protein, calcium, iron
     }
-    
+
     mutating func changeData(newData: FoodDetail) {
         serving = newData.serving
         calories = newData.calories
@@ -62,5 +62,4 @@ struct FoodDetail: Decodable {
         vitaminC = newData.vitaminC
         iron = newData.iron
     }
-    
 }

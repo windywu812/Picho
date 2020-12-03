@@ -8,10 +8,9 @@
 import UserNotifications
 
 class NotificationCenterServices {
-    
     static func requestPermission() {
         let options: UNAuthorizationOptions = [.alert, .sound, .badge]
-        UNUserNotificationCenter.current().requestAuthorization(options: options) { (granted, error) in
+        UNUserNotificationCenter.current().requestAuthorization(options: options) { granted, error in
             if let error = error {
                 print(error)
             } else {
@@ -19,20 +18,19 @@ class NotificationCenterServices {
             }
         }
     }
-    
+
     static func setupNotification(uuid: String, title: String, body: String, time: DateComponents, isOn: Bool) {
-        
         let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options: [.alert,.sound]) { (granted,error) in}
-        
+        center.requestAuthorization(options: [.alert, .sound]) { _, _ in }
+
         let notificationContent = UNMutableNotificationContent()
         notificationContent.title = title
         notificationContent.body = body
-        
+
         let trigger = UNCalendarNotificationTrigger(dateMatching: time, repeats: true)
-        
+
         let request = UNNotificationRequest(identifier: uuid, content: notificationContent, trigger: trigger)
-        
+
         if isOn {
             center.removeDeliveredNotifications(withIdentifiers: [uuid])
             center.removePendingNotificationRequests(withIdentifiers: [uuid])
@@ -48,5 +46,4 @@ class NotificationCenterServices {
             center.removePendingNotificationRequests(withIdentifiers: [uuid])
         }
     }
-    
 }

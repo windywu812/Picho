@@ -5,81 +5,80 @@
 //  Created by Windy on 07/11/20.
 //
 
-import UIKit
 import Charts
+import UIKit
 
 class HistoryTableViewController: UITableViewController {
-    
     private let viewModel = HistoryViewModel()
-    
+
     private var dataWeekOfMonth: [DailyIntake] = []
     private var breakfasts: [History] = []
     private var lunches: [History] = []
     private var dinners: [History] = []
     private var snacks: [History] = []
-    
+
     private var progressView: ChartViewCell?
     private var selectedMonth = Date().month
     private var selectedWeek = Date().weekOfMonth
     private var selectedYear = Date().year
-    
-    override init(style: UITableView.Style) {
+
+    override init(style _: UITableView.Style) {
         super.init(style: .grouped)
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
+
+    override func viewWillAppear(_: Bool) {
         super.viewWillAppear(true)
-        
+
         viewModel.fetchData()
         fetchConsupmtionPerWeek(week: Date().weekOfMonth)
         progressView?.chartView.lineChartView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+
         navigationItem.title = NSLocalizedString("Progress", comment: "")
-        
+
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 90
-        
+
         tableView.register(FoodHistoryCell.self, forCellReuseIdentifier: FoodHistoryCell.reuseIdentifier)
         tableView.register(Value1Cell.self, forCellReuseIdentifier: Value1Cell.reuseIdentifier)
         tableView.register(FoodHistoryCell.self, forCellReuseIdentifier: FoodHistoryCell.reuseIdentifier)
         tableView.register(FoodHeaderCell.self, forCellReuseIdentifier: FoodHeaderCell.reuseIdentifier)
-        
+
         view.backgroundColor = Color.background
-        
+
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleDismiss))
         view.addGestureRecognizer(tap)
     }
-    
+
     private func fetchConsupmtionPerWeek(month: Int = Date().month, week: Int, year: Int = Date().year) {
         let formatterWithoutYear = DateFormatter()
         formatterWithoutYear.dateFormat = "dd MMM"
-        
+
         dataWeekOfMonth = viewModel.getDataWeekofMonth(in: month, year: year)[week] ?? []
         breakfasts = dataWeekOfMonth.groupByTime(on: .breakfast).getHistory()
         lunches = dataWeekOfMonth.groupByTime(on: .lunch).getHistory()
         dinners = dataWeekOfMonth.groupByTime(on: .dinner).getHistory()
         snacks = dataWeekOfMonth.groupByTime(on: .snacks).getHistory()
-        
+
         selectedMonth = month
         selectedWeek = week
         selectedYear = year
-                
+
         progressView?.setupChart(month: selectedMonth, week: selectedWeek)
         progressView?.chartView.lineChartView.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
         progressView?.viewModel = viewModel
-        
+
         tableView.reloadData()
     }
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
+
+    override func numberOfSections(in _: UITableView) -> Int {
         return 5
     }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+    override func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
             return 3
@@ -95,7 +94,7 @@ class HistoryTableViewController: UITableViewController {
             return 0
         }
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
@@ -116,9 +115,10 @@ class HistoryTableViewController: UITableViewController {
                 cell.setupCell(
                     imageIcon: "breakfast",
                     labelText: NSLocalizedString("Breakfast", comment: ""),
-                    calorie: breakfasts.reduce(0.0, { $0 + $1.totalCalorie }),
-                    sugar: breakfasts.reduce(0.0, { $0 + $1.totalSugar }),
-                    satFat: breakfasts.reduce(0.0, { $0 + $1.totalSatFat }))
+                    calorie: breakfasts.reduce(0.0) { $0 + $1.totalCalorie },
+                    sugar: breakfasts.reduce(0.0) { $0 + $1.totalSugar },
+                    satFat: breakfasts.reduce(0.0) { $0 + $1.totalSatFat }
+                )
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: FoodHistoryCell.reuseIdentifier) as! FoodHistoryCell
@@ -133,9 +133,10 @@ class HistoryTableViewController: UITableViewController {
                 cell.setupCell(
                     imageIcon: "lunch",
                     labelText: NSLocalizedString("Lunch", comment: ""),
-                    calorie: lunches.reduce(0.0, { $0 + $1.totalCalorie }),
-                    sugar: lunches.reduce(0.0, { $0 + $1.totalSugar }),
-                    satFat: lunches.reduce(0.0, { $0 + $1.totalSatFat }))
+                    calorie: lunches.reduce(0.0) { $0 + $1.totalCalorie },
+                    sugar: lunches.reduce(0.0) { $0 + $1.totalSugar },
+                    satFat: lunches.reduce(0.0) { $0 + $1.totalSatFat }
+                )
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: FoodHistoryCell.reuseIdentifier, for: indexPath) as! FoodHistoryCell
@@ -150,9 +151,10 @@ class HistoryTableViewController: UITableViewController {
                 cell.setupCell(
                     imageIcon: "dinner",
                     labelText: NSLocalizedString("Dinner", comment: ""),
-                    calorie: dinners.reduce(0.0, { $0 + $1.totalCalorie }),
-                    sugar: dinners.reduce(0.0, { $0 + $1.totalSugar }),
-                    satFat: dinners.reduce(0.0, { $0 + $1.totalSatFat }))
+                    calorie: dinners.reduce(0.0) { $0 + $1.totalCalorie },
+                    sugar: dinners.reduce(0.0) { $0 + $1.totalSugar },
+                    satFat: dinners.reduce(0.0) { $0 + $1.totalSatFat }
+                )
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: FoodHistoryCell.reuseIdentifier) as! FoodHistoryCell
@@ -167,9 +169,10 @@ class HistoryTableViewController: UITableViewController {
                 cell.setupCell(
                     imageIcon: "snacks",
                     labelText: NSLocalizedString("Snacks", comment: ""),
-                    calorie: snacks.reduce(0.0, { $0 + $1.totalCalorie }),
-                    sugar: snacks.reduce(0.0, { $0 + $1.totalSugar }),
-                    satFat: snacks.reduce(0.0, { $0 + $1.totalSatFat }))
+                    calorie: snacks.reduce(0.0) { $0 + $1.totalCalorie },
+                    sugar: snacks.reduce(0.0) { $0 + $1.totalSugar },
+                    satFat: snacks.reduce(0.0) { $0 + $1.totalSatFat }
+                )
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: FoodHistoryCell.reuseIdentifier) as! FoodHistoryCell
@@ -181,12 +184,12 @@ class HistoryTableViewController: UITableViewController {
             return UITableViewCell()
         }
     }
-    
+
     @objc private func handleDismiss() {
         view.endEditing(true)
     }
-    
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+
+    override func tableView(_: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
             progressView = ChartViewCell()
             progressView?.viewModel = viewModel
@@ -196,39 +199,37 @@ class HistoryTableViewController: UITableViewController {
         }
         return nil
     }
-    
-    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+
+    override func tableView(_: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if section == 0 {
             return IndicatorLabelView()
         }
         return nil
     }
-    
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+
+    override func tableView(_: UITableView, heightForHeaderInSection _: Int) -> CGFloat {
         return UITableView.automaticDimension
     }
-    
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+
+    override func tableView(_: UITableView, heightForFooterInSection _: Int) -> CGFloat {
         return UITableView.automaticDimension
     }
-    
-    required init?(coder: NSCoder) {
+
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
 
 extension HistoryTableViewController: ChartSeletedDelegate {
-    
     func selectedChart(week: Int) {
         fetchConsupmtionPerWeek(month: selectedMonth, week: week + 1)
         progressView?.chartView.lineChartView.highlightValue(x: Double(week), dataSetIndex: -1, callDelegate: true)
     }
-    
+
     func sendDate(date: (Int, Int)) {
         selectedMonth = date.0
         selectedYear = date.1
         fetchConsupmtionPerWeek(month: date.0, week: 1, year: date.1)
     }
-    
 }

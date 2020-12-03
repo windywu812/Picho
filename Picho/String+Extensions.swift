@@ -11,9 +11,10 @@ extension String {
     func changeToDate() -> Date {
         let dateFormat = DateFormatter()
         dateFormat.dateFormat = "HH:mm"
-        
+
         return dateFormat.date(from: self)!
     }
+
     func getDate() -> Date {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM/yyyy HH:mm"

@@ -6,23 +6,18 @@
 //
 //
 
-import Foundation
 import CoreData
+import Foundation
 
-
-extension WaterIntake {
-
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<WaterIntake> {
+public extension WaterIntake {
+    @nonobjc class func fetchRequest() -> NSFetchRequest<WaterIntake> {
         return NSFetchRequest<WaterIntake>(entityName: "WaterIntake")
     }
 
-    @NSManaged public var id: UUID?
-    @NSManaged public var amount: Double
-    @NSManaged public var date: Date?
-    @NSManaged public var idWater: UUID?
-
+    @NSManaged var id: UUID?
+    @NSManaged var amount: Double
+    @NSManaged var date: Date?
+    @NSManaged var idWater: UUID?
 }
 
-extension WaterIntake : Identifiable {
-
-}
+extension WaterIntake: Identifiable {}

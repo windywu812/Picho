@@ -6,10 +6,7 @@
 //
 //
 
-import Foundation
 import CoreData
+import Foundation
 
-
-public class DailyIntake: NSManagedObject {
-
-}
+public class DailyIntake: NSManagedObject {}

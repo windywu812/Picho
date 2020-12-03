@@ -8,75 +8,72 @@
 import UIKit
 
 class ProfileEditViewController: UIViewController, UINavigationControllerDelegate {
-    
     private var imageProfile: UIImageView!
     private var editButton: UIButton!
     private var tableView: UITableView!
     private var scrollView: UIScrollView!
     private var genderPicker: UIPickerView!
-    
+
     private var nameTextField: UITextField!
     private var genderTextField: UITextField!
     private var ageTextField: UITextField!
     private var heightTextField: UITextField!
     private var weightTextField: UITextField!
-    
+
     var viewModel: ProfileViewModel!
-    
-    override func viewWillAppear(_ animated: Bool) {
+
+    override func viewWillAppear(_: Bool) {
         super.viewWillAppear(true)
-        
+
         viewModel.fetchUserDefault()
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         navigationItem.title = "Edit"
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(handleDone))
         setupView()
         setupPicker()
         setupTableView()
-        
+
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleDismiss))
         view.addGestureRecognizer(tap)
     }
-    
+
     @objc private func handleDone() {
         UserDefaultService.name = nameTextField.text ?? ""
         UserDefaultService.gender = genderTextField.text ?? ""
         UserDefaultService.age = ageTextField.text ?? ""
         UserDefaultService.height = heightTextField.text ?? ""
         UserDefaultService.weight = weightTextField.text ?? ""
-        
+
         if imageProfile.image != UIImage(systemName: "person.circle") {
             viewModel.savePic(image: imageProfile.image, key: UserDefaultService.photoProfileKey)
         }
-        
+
         UserDefaultService.synchronize()
-        self.navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
-    
+
     @objc private func handleDismiss() {
         view.endEditing(true)
     }
-    
+
     private func setupPicker() {
         genderPicker = UIPickerView()
         genderPicker.delegate = self
         genderPicker.dataSource = self
     }
-    
 }
 
 extension ProfileEditViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in _: UITableView) -> Int {
         return 2
     }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+    func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
             return 1
@@ -86,11 +83,11 @@ extension ProfileEditViewController: UITableViewDelegate, UITableViewDataSource 
             return 0
         }
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Value1Cell.reuseIdentifier) as! Value1Cell
         cell.selectionStyle = .none
-        
+
         switch indexPath.section {
         case 0:
             cell.textLabel?.text = "Name"
@@ -129,28 +126,27 @@ extension ProfileEditViewController: UITableViewDelegate, UITableViewDataSource 
 }
 
 extension ProfileEditViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in _: UIPickerView) -> Int {
         return 1
     }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+
+    func pickerView(_: UIPickerView, numberOfRowsInComponent _: Int) -> Int {
         return 2
     }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+
+    func pickerView(_: UIPickerView, titleForRow row: Int, forComponent _: Int) -> String? {
         if row == 0 {
             return "Male"
         } else {
             return "Female"
         }
     }
-    
-    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+
+    func pickerView(_: UIPickerView, rowHeightForComponent _: Int) -> CGFloat {
         return 50
     }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+
+    func pickerView(_: UIPickerView, didSelectRow row: Int, inComponent _: Int) {
         if row == 0 {
             genderTextField.text = "Male"
         } else {
@@ -160,59 +156,60 @@ extension ProfileEditViewController: UIPickerViewDelegate, UIPickerViewDataSourc
 }
 
 extension ProfileEditViewController {
-    
     private func setupView() {
         scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
         scrollView.backgroundColor = Color.background
         view.addSubview(scrollView)
-        
+
         scrollView.setConstraint(
             topAnchor: view.safeAreaLayoutGuide.topAnchor,
             bottomAnchor: view.safeAreaLayoutGuide.bottomAnchor,
             leadingAnchor: view.safeAreaLayoutGuide.leadingAnchor,
-            trailingAnchor: view.safeAreaLayoutGuide.trailingAnchor)
-        
+            trailingAnchor: view.safeAreaLayoutGuide.trailingAnchor
+        )
+
         imageProfile = UIImageView()
         imageProfile.image = viewModel.getPic(forKey: UserDefaultService.photoProfileKey)
-        
+
         if imageProfile.image != UIImage(systemName: "person.circle") {
             imageProfile.layer.cornerRadius = 60
             imageProfile.layer.borderWidth = 2
             imageProfile.layer.borderColor = Color.green.cgColor
             imageProfile.layer.masksToBounds = true
         }
-        
+
         scrollView.addSubview(imageProfile)
-        
+
         imageProfile.setConstraint(
             topAnchor: scrollView.topAnchor, topAnchorConstant: 32,
             centerXAnchor: view.centerXAnchor,
-            heighAnchorConstant: 120, widthAnchorConstant: 120)
-        
+            heighAnchorConstant: 120, widthAnchorConstant: 120
+        )
+
         editButton = UIButton(type: .system)
         editButton.setAttributedTitle(NSAttributedString.bodyFont(text: "Edit", color: Color.green), for: .normal)
         editButton.layer.cornerRadius = 8
         editButton.backgroundColor = Color.background
         editButton.addTarget(self, action: #selector(handleButton), for: .touchUpInside)
         scrollView.addSubview(editButton)
-        
+
         editButton.setConstraint(
             topAnchor: imageProfile.bottomAnchor, topAnchorConstant: 16,
             centerXAnchor: view.centerXAnchor,
-            heighAnchorConstant: 35, widthAnchorConstant: 106)
+            heighAnchorConstant: 35, widthAnchorConstant: 106
+        )
     }
-    
+
     @objc private func handleButton() {
-        
         let imagePicker = UIImagePickerController()
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .photoLibrary
         imagePicker.delegate = self
-        
-        self.present(imagePicker, animated: true)
+
+        present(imagePicker, animated: true)
     }
-    
+
     private func setupTableView() {
         tableView = UITableView(frame: .zero, style: .grouped)
         tableView.register(Value1Cell.self, forCellReuseIdentifier: Value1Cell.reuseIdentifier)
@@ -221,34 +218,30 @@ extension ProfileEditViewController {
         tableView.isScrollEnabled = false
         tableView.backgroundColor = Color.background
         scrollView.addSubview(tableView)
-        
+
         let safeArea = view.safeAreaLayoutGuide
-        
+
         var totalRow = 0
-        for section in 0..<tableView.numberOfSections {
+        for section in 0 ..< tableView.numberOfSections {
             totalRow += tableView.numberOfRows(inSection: section)
         }
         let totalHeight = 40 * tableView.numberOfSections + totalRow * 44
-                
+
         tableView.setConstraint(
             topAnchor: editButton.bottomAnchor, topAnchorConstant: 0,
             bottomAnchor: scrollView.bottomAnchor, bottomAnchorConstant: 0,
             leadingAnchor: safeArea.leadingAnchor, leadingAnchorConstant: 0,
             trailingAnchor: safeArea.trailingAnchor, trailingAnchorConstant: 0,
-            heighAnchorConstant: CGFloat(totalHeight))
+            heighAnchorConstant: CGFloat(totalHeight)
+        )
     }
-    
 }
 
 extension ProfileEditViewController: UIImagePickerControllerDelegate {
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
+    func imagePickerController(_: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let image = info[.originalImage] as? UIImage {
             imageProfile.image = image
             dismiss(animated: true, completion: nil)
         }
-        
     }
-    
 }

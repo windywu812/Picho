@@ -6,7 +6,6 @@ target 'Picho' do
   use_frameworks!
 
   # Pods for Picho
-  pod 'Charts'
-  pod 'CryptoSwift'
+  pod 'DGCharts', '5.1.0'
 
 end
