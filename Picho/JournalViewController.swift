@@ -11,15 +11,15 @@ import Combine
 class JournalViewController: UIViewController {
     
     private var scrollView: UIScrollView!
+    private var activityStack: UIStackView!
     private var mainProgressView: MainProgressView!
     private var pichoCardView: PichoCardView?
     private var waterCardView: HorizontalView!
     private var activityCardView: HorizontalView!
-    private var activityStack: UIStackView!
     private var mealTodayView: MealsTodayView!
-    private var cancellables: Set<AnyCancellable> = []
     
     private let viewModel = JournalViewModel()
+    private var cancellables: Set<AnyCancellable> = []
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)

@@ -7,6 +7,5 @@ target 'Picho' do
 
   # Pods for Picho
   pod 'Charts'
-  pod 'CryptoSwift'
 
 end

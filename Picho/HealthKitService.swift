@@ -45,9 +45,9 @@ class HealthKitService {
     }
     
     func addData(amount: Double = 0.0,
-                  date: Date,
-                  type: HKQuantityTypeIdentifier,
-                  unit: HKUnit
+                 date: Date,
+                 type: HKQuantityTypeIdentifier,
+                 unit: HKUnit
     ) -> UUID {
         
         guard let dietType = HKQuantityType.quantityType(forIdentifier: type) else {
@@ -67,13 +67,13 @@ class HealthKitService {
         return dietSample.uuid
     }
     
-     func fetchCalorie(completion: @escaping (Double) -> Void) {
+    func fetchData(type: HKQuantityTypeIdentifier, unit: HKUnit, completion: @escaping (Double) -> Void) {
         
-        guard let energyType = HKSampleType.quantityType(forIdentifier: .dietaryEnergyConsumed) else { return }
-
+        guard let type = HKSampleType.quantityType(forIdentifier: type) else { return }
+        
         let last24hPredicate = HKQuery.predicateForSamples(withStart: Date().startOfTheDay(), end: Date(), options: .strictEndDate)
         
-        let energyQuery = HKSampleQuery(sampleType: energyType,
+        let energyQuery = HKSampleQuery(sampleType: type,
                                         predicate: last24hPredicate,
                                         limit: HKObjectQueryNoLimit,
                                         sortDescriptors: nil) {
@@ -82,112 +82,14 @@ class HealthKitService {
             guard error == nil,
                   let quantitySamples = sample as? [HKQuantitySample] else { return }
             
-            let totalCalories = quantitySamples.reduce(0.0) { $0 + $1.quantity.doubleValue(for: HKUnit.smallCalorie()) }
+            let totalCalories = quantitySamples.reduce(0.0) { $0 + $1.quantity.doubleValue(for: unit) }
             
             completion(totalCalories)
         }
         
         HKHealthStore().execute(energyQuery)
     }
-    func fetchWater(completion: @escaping (Double) -> Void) {
-       
-       guard let energyType = HKSampleType.quantityType(forIdentifier: .dietaryWater) else { return }
-       
-        let last24hPredicate = HKQuery.predicateForSamples(withStart: Date().startOfTheDay(), end: Date(), options: .strictEndDate)
-       
-       let energyQuery = HKSampleQuery(sampleType: energyType,
-                                       predicate: last24hPredicate,
-                                       limit: HKObjectQueryNoLimit,
-                                       sortDescriptors: nil) {
-           (query, sample, error) in
-           
-           guard error == nil,
-                 let quantitySamples = sample as? [HKQuantitySample] else { return }
-           
-           let totalCalories = quantitySamples.reduce(0.0) { $0 + $1.quantity.doubleValue(for: HKUnit.cupUS()) }
-           
-           completion(totalCalories)
-       }
-       
-       HKHealthStore().execute(energyQuery)
-   }
-     func fetchSaturatedFat(completion: @escaping (Double) -> Void) {
-        
-        guard let energyType = HKSampleType.quantityType(forIdentifier: .dietaryFatSaturated) else {
-            print("Sample type not available")
-            return
-        }
-        
-        let last24hPredicate = HKQuery.predicateForSamples(withStart: Date().startOfTheDay(), end: Date(), options: .strictEndDate)
-        
-        let energyQuery = HKSampleQuery(sampleType: energyType,
-                                        predicate: last24hPredicate,
-                                        limit: HKObjectQueryNoLimit,
-                                        sortDescriptors: nil) {
-            (query, sample, error) in
-            
-            guard
-                error == nil,
-                let quantitySamples = sample as? [HKQuantitySample] else { return }
-            
-            let totalSaturatedFat = quantitySamples.reduce(0.0) { $0 + $1.quantity.doubleValue(for: HKUnit.gram()) }
       
-            completion(totalSaturatedFat)
-            
-        }
-        HKHealthStore().execute(energyQuery)
-    }
-    
-     func fetchSugar(completion: @escaping (Double) -> Void) {
-        
-        guard let energyType = HKSampleType.quantityType(forIdentifier: .dietarySugar) else {
-            print("Sample type not available")
-            return
-        }
-       
-        let last24hPredicate = HKQuery.predicateForSamples(withStart: Date().startOfTheDay(), end: Date(), options: .strictEndDate)
-        
-        let energyQuery = HKSampleQuery(sampleType: energyType,
-                                        predicate: last24hPredicate,
-                                        limit: HKObjectQueryNoLimit,
-                                        sortDescriptors: nil) {(query, sample, error) in
-            
-            guard error == nil,
-                  let quantitySamples = sample as? [HKQuantitySample] else { return }
-            
-            let totalSugar = quantitySamples.reduce(0.0) { $0 + $1.quantity.doubleValue(for: HKUnit.gram()) }
-          
-            completion(totalSugar)
-        }
-        
-        HKHealthStore().execute(energyQuery)
-    }
-    
-     func fetchActivity(completion: @escaping (Double) -> Void) {
-        
-        guard let dataType = HKSampleType.quantityType(forIdentifier: .stepCount) else {
-            print("Sampe type not available")
-            return
-        }
-        
-       
-        let last24Predicate = HKQuery.predicateForSamples(withStart: Date().startOfTheDay(), end: Date(), options: .strictEndDate)
-        
-        let query = HKSampleQuery(sampleType: dataType,
-                                  predicate: last24Predicate,
-                                  limit: HKObjectQueryNoLimit,
-                                  sortDescriptors: nil) { (query, sample, error) in
-            guard error == nil,
-                  let quantitySamples = sample as? [HKQuantitySample] else { return }
-            
-            let totalEneryBurned = quantitySamples.reduce(0.0) { $0 + $1.quantity.doubleValue(for: HKUnit.count()) }
-          
-            completion(totalEneryBurned)
-        }
-        
-        HKHealthStore().execute(query)
-    }
-    
     func fetchHealthKitSample(for healthSampleType: HKSampleType, withPredicate predicate: NSPredicate, completion: @escaping (HKSample?, Error?) -> Swift.Void) {
         
         let query = HKSampleQuery(sampleType: healthSampleType, predicate: predicate, limit: 1, sortDescriptors: nil) { (query, samples, error) in
@@ -209,7 +111,7 @@ class HealthKitService {
     }
     
     func deleteHealthData(id: UUID, type: HKQuantityTypeIdentifier, unit: HKUnit) {
-                
+        
         guard let healthType = HKQuantityType.quantityType(forIdentifier: type),
               let id = UUID(uuidString: id.uuidString)
         else {return}

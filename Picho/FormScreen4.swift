@@ -9,13 +9,13 @@ import UIKit
 
 class FormScreen4: UIViewController {
     
-    let weightTextField = UITextField()
-    let heightTextField = UITextField()
-    var getStartedBtn: UIButton!
-    var rootView : PageControlForm?
-    
+    private let weightTextField = UITextField()
+    private let heightTextField = UITextField()
+    private var getStartedBtn: UIButton!
     private var height = ""
     private var weight = ""
+    
+    var rootView : PageControlForm?
     
     override func viewDidLoad() {
         super.viewDidLoad()

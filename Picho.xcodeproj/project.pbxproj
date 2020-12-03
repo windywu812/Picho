@@ -52,23 +52,9 @@
 		23EFD6F8256FCD6800C4186B /* WaterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23EFD6F7256FCD6800C4186B /* WaterCell.swift */; };
 		23F0DA20256EAEAA006B54AB /* FoodHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F0DA1F256EAEAA006B54AB /* FoodHeaderCell.swift */; };
 		23F0DA25256EB23E006B54AB /* CustomDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F0DA24256EB23E006B54AB /* CustomDatePicker.swift */; };
-		23FEB9D2255BDA40001EA146 /* FatSecretClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9D1255BDA40001EA146 /* FatSecretClient.swift */; };
-		23FEB9D6255BDA49001EA146 /* FatSecretCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9D5255BDA49001EA146 /* FatSecretCredentials.swift */; };
-		23FEB9D9255BDA53001EA146 /* FatSecretParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9D8255BDA53001EA146 /* FatSecretParams.swift */; };
-		23FEB9DC255BDA6C001EA146 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9DB255BDA6C001EA146 /* APIKey.swift */; };
-		23FEB9DF255BDA72001EA146 /* SearchedFood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9DE255BDA72001EA146 /* SearchedFood.swift */; };
-		23FEB9E2255BDA79001EA146 /* FatSecretError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9E1255BDA79001EA146 /* FatSecretError.swift */; };
-		23FEB9E5255BDA7D001EA146 /* Serving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9E4255BDA7D001EA146 /* Serving.swift */; };
-		23FEB9E8255BDA81001EA146 /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9E7255BDA81001EA146 /* Food.swift */; };
-		23FEB9EB255BDA85001EA146 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9EA255BDA85001EA146 /* Search.swift */; };
-		23FEB9EE255BDA8F001EA146 /* CharacterSet+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9ED255BDA8F001EA146 /* CharacterSet+Utils.swift */; };
-		23FEB9F1255BDA94001EA146 /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9F0255BDA94001EA146 /* Array+Utils.swift */; };
-		23FEB9F4255BDA9C001EA146 /* URLComponents+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9F3255BDA9C001EA146 /* URLComponents+Utils.swift */; };
-		23FEB9F7255BDAA2001EA146 /* String+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9F6255BDAA2001EA146 /* String+Utils.swift */; };
 		23FEB9FE255BDAF3001EA146 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEB9FD255BDAF3001EA146 /* AppCoordinator.swift */; };
 		23FEBA02255BDB06001EA146 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA01255BDB06001EA146 /* Color.swift */; };
 		23FEBA05255BDB10001EA146 /* EatingTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA04255BDB10001EA146 /* EatingTime.swift */; };
-		23FEBA0C255BDB42001EA146 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA0B255BDB42001EA146 /* NetworkService.swift */; };
 		23FEBA10255BDB48001EA146 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA0F255BDB48001EA146 /* CoreDataService.swift */; };
 		23FEBA13255BDB50001EA146 /* HealthKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA12255BDB50001EA146 /* HealthKitService.swift */; };
 		23FEBA16255BDB55001EA146 /* UserDefaultService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FEBA15255BDB55001EA146 /* UserDefaultService.swift */; };
@@ -96,7 +82,6 @@
 		26B357C2256B5B6300CE8E88 /* WaterIntake+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B357C0256B5B6300CE8E88 /* WaterIntake+CoreDataProperties.swift */; };
 		26D0532D255D43B200D3C09A /* NotificationKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D0532C255D43B200D3C09A /* NotificationKey.swift */; };
 		26E42A7E2562614A000E239C /* HistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E42A7D2562614A000E239C /* HistoryModel.swift */; };
-		26E42AA825628EC5000E239C /* IntakesArray+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E42AA725628EC5000E239C /* IntakesArray+Extensions.swift */; };
 		26F98137255EDA9E00774F94 /* DailyIntake+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F98133255EDA9E00774F94 /* DailyIntake+CoreDataClass.swift */; };
 		26F98138255EDA9E00774F94 /* DailyIntake+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F98134255EDA9E00774F94 /* DailyIntake+CoreDataProperties.swift */; };
 		26F98151255EE1C400774F94 /* NotificationName+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F98150255EE1C400774F94 /* NotificationName+Extensions.swift */; };
@@ -161,23 +146,9 @@
 		23EFD6F7256FCD6800C4186B /* WaterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterCell.swift; sourceTree = "<group>"; };
 		23F0DA1F256EAEAA006B54AB /* FoodHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodHeaderCell.swift; sourceTree = "<group>"; };
 		23F0DA24256EB23E006B54AB /* CustomDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePicker.swift; sourceTree = "<group>"; };
-		23FEB9D1255BDA40001EA146 /* FatSecretClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FatSecretClient.swift; sourceTree = "<group>"; };
-		23FEB9D5255BDA49001EA146 /* FatSecretCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FatSecretCredentials.swift; sourceTree = "<group>"; };
-		23FEB9D8255BDA53001EA146 /* FatSecretParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FatSecretParams.swift; sourceTree = "<group>"; };
-		23FEB9DB255BDA6C001EA146 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
-		23FEB9DE255BDA72001EA146 /* SearchedFood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchedFood.swift; sourceTree = "<group>"; };
-		23FEB9E1255BDA79001EA146 /* FatSecretError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FatSecretError.swift; sourceTree = "<group>"; };
-		23FEB9E4255BDA7D001EA146 /* Serving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Serving.swift; sourceTree = "<group>"; };
-		23FEB9E7255BDA81001EA146 /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
-		23FEB9EA255BDA85001EA146 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
-		23FEB9ED255BDA8F001EA146 /* CharacterSet+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterSet+Utils.swift"; sourceTree = "<group>"; };
-		23FEB9F0255BDA94001EA146 /* Array+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Utils.swift"; sourceTree = "<group>"; };
-		23FEB9F3255BDA9C001EA146 /* URLComponents+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLComponents+Utils.swift"; sourceTree = "<group>"; };
-		23FEB9F6255BDAA2001EA146 /* String+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Utils.swift"; sourceTree = "<group>"; };
 		23FEB9FD255BDAF3001EA146 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		23FEBA01255BDB06001EA146 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		23FEBA04255BDB10001EA146 /* EatingTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EatingTime.swift; sourceTree = "<group>"; };
-		23FEBA0B255BDB42001EA146 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		23FEBA0F255BDB48001EA146 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		23FEBA12255BDB50001EA146 /* HealthKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitService.swift; sourceTree = "<group>"; };
 		23FEBA15255BDB55001EA146 /* UserDefaultService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultService.swift; sourceTree = "<group>"; };
@@ -205,7 +176,6 @@
 		26B357C0256B5B6300CE8E88 /* WaterIntake+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WaterIntake+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		26D0532C255D43B200D3C09A /* NotificationKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationKey.swift; sourceTree = "<group>"; };
 		26E42A7D2562614A000E239C /* HistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryModel.swift; sourceTree = "<group>"; };
-		26E42AA725628EC5000E239C /* IntakesArray+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IntakesArray+Extensions.swift"; sourceTree = "<group>"; };
 		26F98133255EDA9E00774F94 /* DailyIntake+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DailyIntake+CoreDataClass.swift"; sourceTree = "<group>"; };
 		26F98134255EDA9E00774F94 /* DailyIntake+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DailyIntake+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		26F98150255EE1C400774F94 /* NotificationName+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+Extensions.swift"; sourceTree = "<group>"; };
@@ -358,42 +328,6 @@
 			name = ReusableCells;
 			sourceTree = "<group>";
 		};
-		23FEB9D0255BDA35001EA146 /* FatSecretSwift */ = {
-			isa = PBXGroup;
-			children = (
-				23FEB9D1255BDA40001EA146 /* FatSecretClient.swift */,
-				23FEB9D5255BDA49001EA146 /* FatSecretCredentials.swift */,
-				23FEB9D8255BDA53001EA146 /* FatSecretParams.swift */,
-				23FEB9FA255BDAAE001EA146 /* Models */,
-				23FEB9F9255BDAA7001EA146 /* Extensions */,
-			);
-			name = FatSecretSwift;
-			sourceTree = "<group>";
-		};
-		23FEB9F9255BDAA7001EA146 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				23FEB9ED255BDA8F001EA146 /* CharacterSet+Utils.swift */,
-				23FEB9F0255BDA94001EA146 /* Array+Utils.swift */,
-				23FEB9F3255BDA9C001EA146 /* URLComponents+Utils.swift */,
-				23FEB9F6255BDAA2001EA146 /* String+Utils.swift */,
-			);
-			name = Extensions;
-			sourceTree = "<group>";
-		};
-		23FEB9FA255BDAAE001EA146 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				23FEB9DB255BDA6C001EA146 /* APIKey.swift */,
-				23FEB9DE255BDA72001EA146 /* SearchedFood.swift */,
-				23FEB9E1255BDA79001EA146 /* FatSecretError.swift */,
-				23FEB9E4255BDA7D001EA146 /* Serving.swift */,
-				23FEB9E7255BDA81001EA146 /* Food.swift */,
-				23FEB9EA255BDA85001EA146 /* Search.swift */,
-			);
-			name = Models;
-			sourceTree = "<group>";
-		};
 		23FEB9FC255BDAED001EA146 /* Base */ = {
 			isa = PBXGroup;
 			children = (
@@ -418,7 +352,6 @@
 		23FEBA09255BDB2D001EA146 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				23FEBA0B255BDB42001EA146 /* NetworkService.swift */,
 				23FEBA0F255BDB48001EA146 /* CoreDataService.swift */,
 				23FEBA12255BDB50001EA146 /* HealthKitService.swift */,
 				23FEBA15255BDB55001EA146 /* UserDefaultService.swift */,
@@ -576,10 +509,8 @@
 		A28A5AF5255BD410007E66FA /* Picho */ = {
 			isa = PBXGroup;
 			children = (
-				26E42AA725628EC5000E239C /* IntakesArray+Extensions.swift */,
 				A28A5B38255C29F4007E66FA /* Picho.entitlements */,
 				26F98128255ED9E000774F94 /* CoreData */,
-				23FEB9D0255BDA35001EA146 /* FatSecretSwift */,
 				23FEB9FC255BDAED001EA146 /* Base */,
 				23FEBA07255BDB16001EA146 /* Constants */,
 				23FEBA09255BDB2D001EA146 /* Services */,
@@ -733,9 +664,7 @@
 				23FEBA5C255BDDB2001EA146 /* FoodInputViewController.swift in Sources */,
 				23A8C536256233D400D06F5D /* HistoryViewModel.swift in Sources */,
 				23414A07255CD36A00E1F48D /* WaterViewController.swift in Sources */,
-				23FEB9EE255BDA8F001EA146 /* CharacterSet+Utils.swift in Sources */,
 				23445693255E4BD5001497DD /* LegendView.swift in Sources */,
-				23FEB9F7255BDAA2001EA146 /* String+Utils.swift in Sources */,
 				23FEBA1D255BDBB4001EA146 /* UIView+Extensions.swift in Sources */,
 				2381F778255C03E3008004DE /* FormScreen4.swift in Sources */,
 				23FEBA21255BDBBB001EA146 /* Date+Extensions.swift in Sources */,
@@ -747,22 +676,18 @@
 				23FEBA05255BDB10001EA146 /* EatingTime.swift in Sources */,
 				238C9409255BEB1900591791 /* FoodCell.swift in Sources */,
 				236D9C7A255D3EB500B252B5 /* InfoDetailViewController.swift in Sources */,
-				23FEB9EB255BDA85001EA146 /* Search.swift in Sources */,
 				236A061A2573942F00024232 /* NutrionalHeader.swift in Sources */,
-				23FEB9D6255BDA49001EA146 /* FatSecretCredentials.swift in Sources */,
 				A28A5B41255CE519007E66FA /* DetailSugarNSatFat.swift in Sources */,
 				23FEBA31255BDC7A001EA146 /* MainProgressView.swift in Sources */,
 				26AF6A3E255E545A0045877C /* NotificationService.swift in Sources */,
 				A28A5AFB255BD410007E66FA /* JournalViewController.swift in Sources */,
 				23FEBA10255BDB48001EA146 /* CoreDataService.swift in Sources */,
-				23FEB9F1255BDA94001EA146 /* Array+Utils.swift in Sources */,
 				23FEBA13255BDB50001EA146 /* HealthKitService.swift in Sources */,
 				23FEBA34255BDC81001EA146 /* HorizontalView.swift in Sources */,
 				2381F790255C0428008004DE /* PageControlDescription.swift in Sources */,
 				23FEB9FE255BDAF3001EA146 /* AppCoordinator.swift in Sources */,
 				23883DA7256FFBC20047118B /* ProfileCell.swift in Sources */,
 				26F98157255F0E1900774F94 /* Favorite+CoreDataClass.swift in Sources */,
-				23FEB9DF255BDA72001EA146 /* SearchedFood.swift in Sources */,
 				26F98137255EDA9E00774F94 /* DailyIntake+CoreDataClass.swift in Sources */,
 				230F95062568D871006484C6 /* NotificationCell.swift in Sources */,
 				2381F77B255C03E7008004DE /* FormScreen5.swift in Sources */,
@@ -774,9 +699,6 @@
 				23FEBA37255BDC87001EA146 /* MealTodayView.swift in Sources */,
 				23414A0A255CDE4800E1F48D /* HorizontalProgressView.swift in Sources */,
 				2381F78D255C041E008004DE /* DescriptionScreen4.swift in Sources */,
-				23FEB9DC255BDA6C001EA146 /* APIKey.swift in Sources */,
-				23FEB9D2255BDA40001EA146 /* FatSecretClient.swift in Sources */,
-				23FEB9E8255BDA81001EA146 /* Food.swift in Sources */,
 				2381F775255C03DF008004DE /* FormScreen3.swift in Sources */,
 				23FEBA59255BDD90001EA146 /* FoodDetailScreen.swift in Sources */,
 				2386AC07256623F5004D6FE9 /* JournalViewModel.swift in Sources */,
@@ -789,7 +711,6 @@
 				2381F787255C0416008004DE /* DescriptionScreen2.swift in Sources */,
 				23843BED256116BA00D17A44 /* NotificationCenterServices.swift in Sources */,
 				23F0DA20256EAEAA006B54AB /* FoodHeaderCell.swift in Sources */,
-				23FEBA0C255BDB42001EA146 /* NetworkService.swift in Sources */,
 				238C9412255BEBAF00591791 /* DetailCell.swift in Sources */,
 				23FEBA16255BDB55001EA146 /* UserDefaultService.swift in Sources */,
 				2381F78A255C0419008004DE /* DescriptionScreen3.swift in Sources */,
@@ -799,7 +720,6 @@
 				23FEBA27255BDBCA001EA146 /* UILabel+Extensions.swift in Sources */,
 				23645F23255C2D5400DA5697 /* ActivityViewController.swift in Sources */,
 				238C9417255BEC2D00591791 /* StringOptional+Extensions.swift in Sources */,
-				23FEB9F4255BDA9C001EA146 /* URLComponents+Utils.swift in Sources */,
 				2339FBF2255E99C300D0ABB3 /* IndicatorLabelView.swift in Sources */,
 				23287CFE2571521C00694209 /* FoodDetailViewModel.swift in Sources */,
 				A28A5B01255BD410007E66FA /* Picho.xcdatamodeld in Sources */,
@@ -810,21 +730,17 @@
 				23FEBA56255BDD75001EA146 /* HistoryViewController.swift in Sources */,
 				235EEF3A256E559A004C3A99 /* ChartViewCell.swift in Sources */,
 				23843BEA2561147600D17A44 /* String+Extensions.swift in Sources */,
-				23FEB9E2255BDA79001EA146 /* FatSecretError.swift in Sources */,
 				2344568F255E4BB0001497DD /* ChartView.swift in Sources */,
 				236A06172573941E00024232 /* FoodNameHeader.swift in Sources */,
 				23FEBA4D255BDD49001EA146 /* ProfileViewModel.swift in Sources */,
-				23FEB9D9255BDA53001EA146 /* FatSecretParams.swift in Sources */,
 				23FEBA46255BDCBC001EA146 /* PichoCardView.swift in Sources */,
 				23F0DA25256EB23E006B54AB /* CustomDatePicker.swift in Sources */,
 				A28A5AF7255BD410007E66FA /* AppDelegate.swift in Sources */,
 				2381F76E255C03D5008004DE /* FormScreen1.swift in Sources */,
-				26E42AA825628EC5000E239C /* IntakesArray+Extensions.swift in Sources */,
 				23FEBA50255BDD51001EA146 /* ProfileViewController.swift in Sources */,
 				26F98138255EDA9E00774F94 /* DailyIntake+CoreDataProperties.swift in Sources */,
 				23287CF225714CCC00694209 /* APIService.swift in Sources */,
 				26F98158255F0E1900774F94 /* Favorite+CoreDataProperties.swift in Sources */,
-				23FEB9E5255BDA7D001EA146 /* Serving.swift in Sources */,
 				23287CED2571480100694209 /* FoodResponse.swift in Sources */,
 				A28A5AF9255BD410007E66FA /* SceneDelegate.swift in Sources */,
 				23287CFA257151F300694209 /* FoodSearchViewModel.swift in Sources */,

@@ -9,15 +9,15 @@ import UIKit
 
 class FormScreen3: UIViewController {
     
-    let genders = ["Male", "Female"]
-    let genderTextField = UITextField()
-    let ageTextField = UITextField()
-    let pickerView = UIPickerView()
-    var getStartedBtn = UIButton()
-    var rootView : PageControlForm?
-    
+    private let genders = ["Male", "Female"]
+    private let genderTextField = UITextField()
+    private let ageTextField = UITextField()
+    private let pickerView = UIPickerView()
+    private var getStartedBtn = UIButton()
     private var gender: String = ""
     private var age: String = ""
+    
+    var rootView : PageControlForm?
     
     override func viewDidLoad() {
         super.viewDidLoad()

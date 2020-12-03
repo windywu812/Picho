@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import HealthKit
 
 class JournalViewModel {
     
@@ -27,20 +28,22 @@ class JournalViewModel {
     
     func fetchData() {
         if HealthKitService.shared.checkAuthorization() {
-            HealthKitService.shared.fetchCalorie { (totalCal) in
+            HealthKitService.shared.fetchData(
+                type: .dietaryEnergyConsumed,
+                unit: .smallCalorie()) { (totalCal) in
                 self.calorieLeft = self.calorieIntake - totalCal
             }
-            HealthKitService.shared.fetchSaturatedFat { (totalFat) in
+            HealthKitService.shared.fetchData(type: .dietaryFatSaturated, unit: .gram()) { (totalFat) in
                 self.satFatLeft = self.saturatedFatIntake - totalFat
             }
-            HealthKitService.shared.fetchSugar { (totalSugar) in
+            HealthKitService.shared.fetchData(type: .dietarySugar, unit: .gram()) { (totalSugar) in
                 self.sugarLeft = self.sugarIntake - totalSugar
+            }
+            HealthKitService.shared.fetchData(type: .stepCount, unit: .count()) { (step) in
+                self.totalStep = step
             }
             CoreDataService.shared.getWater { (waters) in
                 self.totalWater = Double(waters.count)
-            }
-            HealthKitService.shared.fetchActivity { (step) in
-                self.totalStep = step
             }
         } else {
             CoreDataService.shared.getDailyIntake { (intakes) in

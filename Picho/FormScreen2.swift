@@ -9,10 +9,11 @@ import UIKit
 
 class FormScreen2: UIViewController {
     
-    let titleLabel = UILabel()
-    let descLabel = UILabel()
-    let nameTextField = UITextField()
-    let getStartedBtn = UIButton()
+    private let titleLabel = UILabel()
+    private let descLabel = UILabel()
+    private let nameTextField = UITextField()
+    private let getStartedBtn = UIButton()
+    private var activeTextField: UITextField?
    
     var rootView: PageControlForm?
     
@@ -92,8 +93,6 @@ class FormScreen2: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification: )), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-    
-    private var activeTextField: UITextField?
     
     @objc func keyboardWillShow(notification: NSNotification) {
         

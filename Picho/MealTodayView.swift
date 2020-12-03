@@ -21,6 +21,7 @@ class MealsTodayView: UIView {
     var lunchCard: MealCellView!
     var dinnerCard: MealCellView!
     var snackCard: MealCellView!
+    
     init(frame: CGRect = .zero, rootView: UIViewController) {
         
         title = UILabel()
